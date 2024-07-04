@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BpstEducation.Models.Question>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.ActiveTabId = 2;
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> @Html.DisplayNameFor(model => model.Subject) </th>
+                        <th> @Html.DisplayNameFor(model => model.QustionText) </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td> @Html.DisplayFor(modelItem => item.Subject.Name) </td>
+                            <td> @Html.DisplayFor(modelItem => item.QustionText) </td>
+                            <td>
+                                <a asp-action="Create" asp-route-id="@item.UniqueId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

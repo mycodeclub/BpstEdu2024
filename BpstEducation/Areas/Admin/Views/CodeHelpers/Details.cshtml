@@ -1,0 +1,123 @@
+﻿@model BpstEducation.Models.CodeHelper
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+     ViewBag.ActiveTabId = 3;
+}
+
+
+@section Style
+{
+    <link href="~/RichText/css/richtext.min.css" rel="stylesheet" />
+}
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header bg-light text-bold">
+                    <a asp-action="Create" class="btn btn-danger float-right" asp-route-id="@Model.UniqueId">Edit</a>
+                    <h4><b class="text-bold">Q: </b>@Model.Topic</h4>
+                    @if (!string.IsNullOrEmpty(Model.TopicDescription))
+                    {<h5> &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; - @Model.TopicDescription</h5>
+                    }
+                </div>
+                <div class="card-body m-b-3">
+                    @if (!string.IsNullOrEmpty(Model.AnswerLine1))
+                    {<textarea readonly class="form-control">@Model.AnswerLine1</textarea>}
+                    @if (!string.IsNullOrEmpty(Model.AnswerText))
+                    {<div id="TextArea">@Model.AnswerText</div>}
+                </div>
+
+                <div class="m-b-3">
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/RichText/js/jquery.richtext.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#TextArea').richText();
+            $('.richText-toolbar').remove();
+            $('.richText > .richText-editor').attr('contenteditable', 'false');
+            $('.richText > .richText-editor').css('overflow-x', 'auto');
+            $('.richText > .richText-editor').css('overflow-y', 'auto');
+            $('.richText > .richText-editor').css('height', 'auto');
+
+        });
+
+    </script>
+}
+
+@*<h1>Details</h1>
+
+    <div>
+        <h4>CodeHelper</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Subject.UniqueId)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Topic)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Topic)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.TopicDescription)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.TopicDescription)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.AnswerLine1)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.AnswerLine1)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.AnswerText)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.AnswerText)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Tags)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Tags)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.LastUpdatedDate)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.LastUpdatedDate)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.UniqueId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

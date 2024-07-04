@@ -1,0 +1,53 @@
+﻿@model BpstEducation.Models.Question
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.ActiveTabId = 2;
+}
+
+@section Style
+{     <link href="~/RichText/css/richtext.min.css" rel="stylesheet" /> 
+}
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header bg-light text-bold">
+                    <a asp-action="Create" class="btn btn-danger float-right" asp-route-id="@Model.UniqueId">Edit</a>
+                    <h4><b class="text-bold">Q: </b>@Model.QustionText</h4>
+                    @if (!string.IsNullOrEmpty(Model.QustionDescription))
+                    {<h5> &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; - @Model.QustionDescription</h5>
+                }
+                </div>
+                <div class="card-body m-b-3">
+                    @if (!string.IsNullOrEmpty(Model.AnswerLine1)) {<h5><b class="text-bold"> Ans: </b> @Model.AnswerLine1 </h5>}
+                    @if (!string.IsNullOrEmpty(Model.AnswerLine2)) {<textarea readonly class="form-control">@Model.AnswerLine2</textarea>  }
+                    @if (!string.IsNullOrEmpty(Model.AnswerText)) {<div id="TextArea">@Model.AnswerText</div>}
+                </div> 
+
+                <div class="m-b-3"> 
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/RichText/js/jquery.richtext.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#TextArea').richText();
+            $('.richText-toolbar').remove();
+            $('.richText > .richText-editor').attr('contenteditable', 'false');
+            $('.richText > .richText-editor').css('overflow-x', 'auto');
+            $('.richText > .richText-editor').css('overflow-y', 'auto');
+            $('.richText > .richText-editor').css('height', 'auto');
+
+        });
+
+    </script>
+}

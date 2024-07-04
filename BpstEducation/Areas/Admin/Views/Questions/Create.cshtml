@@ -1,0 +1,121 @@
+﻿@model BpstEducation.Models.Question
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.ActiveTabId = 2;
+}
+@section Style
+{
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/RichText/css/site_RichText.css" rel="stylesheet" />
+    <link href="~/RichText/css/richtext.min.css" rel="stylesheet" />
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            @if (ViewBag.SavedSuccessfully != null && ViewBag.SavedSuccessfully == true)
+            {<div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Saved Successfully!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form asp-action="Create" class="form-horizontal ">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="UniqueId" />
+                        <input type="hidden" asp-for="CreatedDate" />
+                        <input type="hidden" asp-for="LastUpdatedDate" />
+
+                        <div class="card">
+                            <div class="card-header bg-light text-bold text-bold">
+                                Add Question
+                                @if (Model.UniqueId > 0)
+                                {<a asp-action="Details" class="btn btn-primary float-right" asp-route-id="@Model.UniqueId">View</a>
+                                }
+                            </div>
+                            <div class="card-body">
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label asp-for="SubjectId" class="col-sm-3 control-label"></label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.SubjectId"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label asp-for="QustionText" class="col-sm-3 control-label"></label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <input asp-for="QustionText" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label asp-for="QustionDescription" class="col-sm-3 control-label">Qustion Description <i class="small text-bold">(if any)</i></label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <textarea asp-for="QustionDescription" class="form-control"> </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label asp-for="AnswerLine1" class="col-sm-3 control-label"></label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <input asp-for="AnswerLine1" class="form-control" />
+                                                    <span asp-validation-for="AnswerLine1" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label asp-for="AnswerLine2" class="col-sm-3 control-label"></label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <textarea asp-for="AnswerLine2" class="form-control"></textarea>
+                                                    <span asp-validation-for="AnswerLine1" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="AnswerText" class="control-label"></label>
+                                            <textarea asp-for="AnswerText" id="TextArea" class="form-control"> </textarea>
+                                            <span asp-validation-for="AnswerText" class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="submit" value="Save" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/RichText/js/jquery.richtext.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#TextArea').richText();
+        });
+    </script>
+}

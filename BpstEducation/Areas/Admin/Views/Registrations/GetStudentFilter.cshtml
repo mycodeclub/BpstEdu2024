@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BpstEducation.Models.Registration>
+@{
+    Layout = null;
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherName)
+            </th>
+           
+@*             <th>
+                @Html.DisplayNameFor(model => model.Course.CourseName)
+            </th>
+ *@            <th>
+                @Html.DisplayNameFor(model => model.MobileNumber)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.RegistrationStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+           
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNumber)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

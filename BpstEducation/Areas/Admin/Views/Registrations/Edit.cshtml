@@ -1,0 +1,106 @@
+﻿@model BpstEducation.Models.Registration
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="card col-md-10">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Edit Student Details
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="UniqueId" />
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label asp-for="StatusId" class="control-label"></label>
+                                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+                                <span asp-validation-for="StatusId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="FullName" class="control-label"></label>
+                                <input asp-for="FullName" class="form-control" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="FatherName" class="control-label"></label>
+                                <input asp-for="FatherName" class="form-control" />
+                                <span asp-validation-for="FatherName" class="text-danger"></span>
+                            </div>
+                       
+                            <div class="form-group col-md-3">
+                                <label asp-for="CollegeName" class="control-label"></label>
+                                <input asp-for="CollegeName" class="form-control" />
+                                <span asp-validation-for="CollegeName" class="text-danger"></span>
+                            </div>
+                                                     <div class="form-group col-md-3">
+                                <label asp-for="Qualification" class="control-label"></label>
+                                <input asp-for="Qualification" class="form-control" />
+                                <span asp-validation-for="Qualification" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="ApplicationFor" class="control-label"></label>
+                                <select asp-for="ApplicationFor" class="form-control" asp-items="ViewBag.ApplicationFor"></select>
+                                <span asp-validation-for="ApplicationFor" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="Message" class="control-label"></label>
+                                <input asp-for="Message" class="form-control" />
+                                <span asp-validation-for="Message" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="MobileNumber" class="control-label"></label>
+                                <input asp-for="MobileNumber" class="form-control" />
+                                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="AlternateMobileNumber" class="control-label"></label>
+                                <input asp-for="AlternateMobileNumber" class="form-control" />
+                                <span asp-validation-for="AlternateMobileNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="EmailId" class="control-label"></label>
+                                <input asp-for="EmailId" class="form-control" />
+                                <span asp-validation-for="EmailId" class="text-danger"></span>
+                            </div>
+                            <div class="card-header col-12 mb-4">
+                                <h5>Fee Structure</h5>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="TotalFees" class="control-label"></label>
+                                <input asp-for="TotalFees" class="form-control" />
+                                <span asp-validation-for="TotalFees" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="Discount" class="control-label"></label>
+                                <input asp-for="Discount" class="form-control" oninput="StudentRegistration.FeeEvaluation()" />
+                                <span asp-validation-for="Discount" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="RemainingFees" class="control-label"></label>
+                                <input asp-for="RemainingFees" class="form-control" />
+                                <span asp-validation-for="RemainingFees" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="InstallmentFees" class="control-label"></label>
+                                <input asp-for="InstallmentFees" oninput="StudentRegistration.FeeEvaluation()" class="form-control" />
+                                <span asp-validation-for="InstallmentFees" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-12 text-center mt-3">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

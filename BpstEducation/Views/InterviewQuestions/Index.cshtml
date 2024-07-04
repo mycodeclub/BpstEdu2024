@@ -1,0 +1,161 @@
+﻿@model IEnumerable<IGrouping<string, BpstEducation.Models.Question>>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    ViewBag.ActiveTabName = "LearningInterQ";
+
+    int activeItemId = 1;
+    if (ViewBag.activeItemId != null)
+    { activeItemId = ViewBag.activeItemId; }
+    var activeItem = string.Empty;
+
+    List<BpstEducation.Models.Subject> Subjects = ViewBag.Subjects;
+    List<BpstEducation.Models.Question> Topics = ViewBag.Topics;
+    int counter = 0;
+    string AnswerTextAreaId = string.Empty;
+}
+@section Style
+{
+    <link href="~/AdminTemp/dist/css/style.css" rel="stylesheet" />
+    <link href="~/AdminTemp/dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/RichText/css/richtext.min.css" rel="stylesheet" />
+    <style>
+        .pre {
+            overflow-x: auto;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        .main-sidebar {
+            width: 230px;
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0px;
+            left: 0px;
+            background: #eee;
+            overflow-x: hidden;
+            padding: 8px 0;
+            background: #000000f0;
+            padding-top: 58px;
+            overflow-y: auto;
+        }
+
+            .main-sidebar a {
+                /*padding: 6px 8px 6px 16px;*/
+                text-decoration: none;
+                font-size: 25px;
+                color: #2196F3;
+                display: block;
+                border-radius: 5px;
+            }
+
+                .main-sidebar a:hover {
+                    background-color: #ddd;
+                    color: white;
+                    border-radius: 10px;
+                }
+
+        aside {
+            position: sticky;
+            top: 100px;
+        }
+
+    </style>
+}
+<aside class="main-sidebar" style="background:#000000f0">
+    <div class="sidebar" id="scroll">
+
+        
+
+            <ul class="sidebar-menu" data-widget="tree">
+                @foreach (var sub in Subjects)
+                {
+                    <li onclick="location.href='#@sub.Name.Replace(" ", "").Replace("#", "").Replace(".", "")'" class="treeview @activeItem">
+                        <a href="#@sub.Name.Replace(" ", "").Replace("#", "").Replace(".", "")">
+                            <i class="ti-email"></i> <span> @sub.Name</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                }
+            </ul>
+    </div>
+</aside>
+
+<div class="content-wrapper" style="min-height: 1341.8px;">
+    @{counter = 0;}
+    @foreach (var subGroup in Model)
+    {
+        <div class="content" id="@subGroup.Key.Replace(" ", "").Replace("#", "").Replace(".", "")">
+            <div class="card">
+                <div class="card-body">
+                    <h1>@subGroup.Key</h1>
+                    @foreach (var sub in subGroup)
+                    {
+                        counter = counter + 1;
+                        AnswerTextAreaId = "AnswerTextAreaId" + counter;
+                        <div class="card m-b-3">
+                            <div class="card-header bg-light text-bold">
+                                <h4><b class="text-bold">Q: </b>@sub.QustionText</h4>
+                                @if (!string.IsNullOrEmpty(@sub.QustionDescription))
+                                {<h5> &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; - @sub.QustionDescription</h5>
+                            }
+                            </div>
+                            <div class="card-body m-b-3">
+                                @if (!string.IsNullOrEmpty(sub.AnswerLine1))
+                                {<h6><b class="text-bold"> Ans: </b> @sub.AnswerLine1 </h6>}
+                                @if (!string.IsNullOrEmpty(sub.AnswerLine2))
+                                {<pre class="pre">@sub.AnswerLine2</pre>}
+                                @if (!string.IsNullOrEmpty(sub.AnswerText))
+                                {<div id="@AnswerTextAreaId" class="TextAreaForAnswerText">@sub.AnswerText</div>}
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    }
+    </div>
+
+    @section Scripts{
+
+        <script src="~/AdminTemp/dist/js/jquery.min.js"></script>
+        <script src="~/AdminTemp/dist/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/AdminTemp/dist/js/adminkit.js"></script>
+
+        <script src="~/RichText/js/jquery.richtext.js"></script>
+        @{counter = 0;}
+        @foreach (var subGroup in Model)
+        {@foreach (var sub in subGroup)
+            {
+                counter = counter + 1;
+                AnswerTextAreaId = "AnswerTextAreaId" + counter;
+                <script>
+                $(document).ready(function () {
+                    $('#@AnswerTextAreaId').richText();
+                });
+                </script>
+            }
+    }
+        <script>
+            $(document).ready(function () {
+                $('.richText-toolbar').remove();
+                $('.richText > .richText-editor').attr('contenteditable', 'false');
+                $('.richText > .richText-editor').css('overflow-x', 'auto');
+                $('.richText > .richText-editor').css('overflow-y', 'auto');
+                $('.richText > .richText-editor').css('height', 'auto');
+            });
+        </script>
+    }
