@@ -11,6 +11,8 @@ using BpstEducation.Data;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Diagnostics.Contracts;
 
 namespace BpstEducation.Controllers
 {
@@ -29,10 +31,8 @@ namespace BpstEducation.Controllers
             ViewBag.ActiveTabId = 1;
             return View();
         }
-        public IActionResult Contact()
-        {
-            return View();
-        }
+
+
 
         public IActionResult Courses()
         {
@@ -41,6 +41,30 @@ namespace BpstEducation.Controllers
         public IActionResult About()
         {
             return View();
+        }
+        public IActionResult Contact()
+        {
+            return View(new Contact());
+        }
+        [HttpPost]
+        public async Task<IActionResult> Contact(Contact contact)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (contact.UniqueId.Equals(0))
+                {
+                    await _context.Contacts.AddRangeAsync(contact);
+                    _context.Contacts.Add(contact);
+
+                }
+                else
+
+                    _context.Contacts.Update(contact);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(contact));
+            }
+            return View(contact);
         }
 
 
@@ -95,6 +119,11 @@ namespace BpstEducation.Controllers
         {
             return View();
         }
+
+
+
+
+
 
         public async Task<IActionResult> StudentRegistration(int Id)
         {
