@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using BpstEducation.Models;
 using System.Threading.Tasks;
 using BpstEducation.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using BpstEducation.Data;
 
 namespace BpstEducation.Controllers
 {
@@ -13,19 +15,68 @@ namespace BpstEducation.Controllers
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly AppDbContext _context;
 
         public AccountController(
             UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager
+            SignInManager<AppUser> signInManager, AppDbContext context
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
+
         }
         public IActionResult Index()
         {
             return View();
         }
+        public async Task<IActionResult> CreateMasterUser()
+        {
+            var resultStr = string.Empty;
+            try
+            {
+                var appUser = new AppUser() { UserName = "admin@bpst.com", Email = "admin@bpst.com", Password = "Admin@bpst.com", ConfirmPassword = "Admin@bpst.com", PhoneNumber = "9999999999", };
+                var result = await _userManager.CreateAsync(appUser, appUser.Password);
+                if (result.Succeeded)
+                {
+                    var userRoles = await _context.Roles.ToListAsync();
+                    foreach (var role in userRoles)
+                        await _userManager.AddToRoleAsync(appUser, role.Name).ConfigureAwait(false);
+                    resultStr = "Master User Created Successfully.";
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                        resultStr += "Some Error: " + error.Code;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                resultStr = "Some Error: " + ex.Message;
+            }
+            return RedirectToAction("AutoLogin");
+        }
+
+        public async Task<IActionResult> AutoLogin()
+        {
+            var result = await AutoAdminLogin();
+            if (result)
+                return RedirectToAction("Index", "Home", new { Area = "Admin" });
+            else
+                return RedirectToAction("CreateMasterUser");
+        }
+
+
+        private async Task<bool> AutoAdminLogin()
+        {
+            var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "Admin@bpst.com", true, lockoutOnFailure: false);
+            return result.Succeeded;
+        }
+
         [HttpGet]
         public IActionResult Register()
         {
@@ -43,7 +94,7 @@ namespace BpstEducation.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false).ConfigureAwait(false);
                     await _userManager.AddToRoleAsync(user, "Admin").ConfigureAwait(false);
-                    return RedirectToAction("Index", "Home",new { Areas="Admin"});
+                    return RedirectToAction("Index", "Home", new { Areas = "Admin" });
 
                 }
                 else
