@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BpstEducation.Models
 {
@@ -6,13 +7,17 @@ namespace BpstEducation.Models
     {
         [Key]
         public int UniqueId { get; set; }
+
         public int CourseId { get; set; }
+
+        [ForeignKey("CourseId")] 
+        public Course Course { get; set; }
         public string BatchFees { get; set; }
         public string Trainer { get; set; }
         public string CoTrainer { get; set; }
         public string batchStartDate { get; set; }
         public string batchExpectedEndDate { get; set; } = string.Empty;
-        public DateTime createdDate  { get; set; }
-        public DateTime updatedDate  { get; set; }
+        public DateTime createdDate { get; set; }
+        public DateTime updatedDate { get; set; }
     }
 }

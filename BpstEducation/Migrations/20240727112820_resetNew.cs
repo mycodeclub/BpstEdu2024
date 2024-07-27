@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BpstEducation.Migrations
 {
     /// <inheritdoc />
-    public partial class resetall : Migration
+    public partial class resetNew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,8 +18,7 @@ namespace BpstEducation.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    ProfileImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -28,7 +27,6 @@ namespace BpstEducation.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -52,6 +50,22 @@ namespace BpstEducation.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    UniqueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    yourName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    YourEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.UniqueId);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,6 +128,19 @@ namespace BpstEducation.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Enquiry", x => x.UniqueId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Qualification",
+                columns: table => new
+                {
+                    UniqueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Qualification", x => x.UniqueId);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,6 +308,9 @@ namespace BpstEducation.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CourseCategoryID = table.Column<int>(type: "int", nullable: false),
+                    CourseDuration = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CourseFees = table.Column<int>(type: "int", nullable: false),
+                    feeDiscount = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -292,6 +322,43 @@ namespace BpstEducation.Migrations
                         principalTable: "CourseCategories",
                         principalColumn: "UniqueId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RegistrationForm",
+                columns: table => new
+                {
+                    UniqueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StatusId = table.Column<int>(type: "int", nullable: true),
+                    TotalFees = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RegistrationId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CollegeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Qualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationFor = table.Column<int>(type: "int", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AlternateMobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RegistrationForm", x => x.UniqueId);
+                    table.ForeignKey(
+                        name: "FK_RegistrationForm_CourseCategories_ApplicationFor",
+                        column: x => x.ApplicationFor,
+                        principalTable: "CourseCategories",
+                        principalColumn: "UniqueId");
+                    table.ForeignKey(
+                        name: "FK_RegistrationForm_RegistrationStatusMaster_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "RegistrationStatusMaster",
+                        principalColumn: "UniqueId");
                 });
 
             migrationBuilder.CreateTable(
@@ -371,46 +438,26 @@ namespace BpstEducation.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RegistrationForm",
+                name: "Fees",
                 columns: table => new
                 {
                     UniqueId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusId = table.Column<int>(type: "int", nullable: true),
-                    TotalFees = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discount = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegistrationId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CurrentlyPursuing = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CollegeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BoardId = table.Column<int>(type: "int", nullable: true),
-                    HighestQualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationFor = table.Column<int>(type: "int", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AlternateMobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    FeeInstallment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FeeSubmittingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegistrationForm", x => x.UniqueId);
+                    table.PrimaryKey("PK_Fees", x => x.UniqueId);
                     table.ForeignKey(
-                        name: "FK_RegistrationForm_Course_ApplicationFor",
-                        column: x => x.ApplicationFor,
-                        principalTable: "Course",
-                        principalColumn: "UniqueId");
-                    table.ForeignKey(
-                        name: "FK_RegistrationForm_EducationBoardsMaster_BoardId",
-                        column: x => x.BoardId,
-                        principalTable: "EducationBoardsMaster",
-                        principalColumn: "UniqueId");
-                    table.ForeignKey(
-                        name: "FK_RegistrationForm_RegistrationStatusMaster_StatusId",
-                        column: x => x.StatusId,
-                        principalTable: "RegistrationStatusMaster",
-                        principalColumn: "UniqueId");
+                        name: "FK_Fees_RegistrationForm_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "RegistrationForm",
+                        principalColumn: "UniqueId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -450,29 +497,6 @@ namespace BpstEducation.Migrations
                         principalColumn: "UniqueId");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Fees",
-                columns: table => new
-                {
-                    UniqueId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    FeeInstallment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FeeSubmittingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fees", x => x.UniqueId);
-                    table.ForeignKey(
-                        name: "FK_Fees_RegistrationForm_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "RegistrationForm",
-                        principalColumn: "UniqueId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -480,7 +504,7 @@ namespace BpstEducation.Migrations
                 {
                     { "7fd3a789-e48b-4ba5-941a-11cbc3b47f39", "a8388c90-9c2b-4260-8cb7-f4250d503afd", "Student", "STUDENT" },
                     { "afa7a44a-e339-453a-8890-c48355bae2ae", "afa7a44a-e339-453a-8890-c48355bae2ae", "Admin", "ADMIN" },
-                    { "f7d29f7b-d49f-43b9-834e-7de644eccbcf", "f7d29f7b-d49f-43b9-834e-7de644eccbcf", "Trainer", "TRAINER" }
+                    { "f7d29f7b-d49f-43b9-834e-7de644eccbcf", "f7d29f7b-d49f-43b9-834e-7de644eccbcf", "Staff", "STAFF" }
                 });
 
             migrationBuilder.InsertData(
@@ -488,12 +512,28 @@ namespace BpstEducation.Migrations
                 columns: new[] { "UniqueId", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Basic Computer Course" },
                     { 2, "Programming Classes (for Rising Stars - IX - XII )" },
                     { 3, ".Net Internship " },
                     { 4, " Game Development" },
                     { 5, "Cyber Security" },
-                    { 6, " Others " }
+                    { 6, "Hardware/Networking" },
+                    { 7, " Software Engineering Internship - 6 months " },
+                    { 8, "Software Engineering Internship -  45 days " },
+                    { 9, "others" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Qualification",
+                columns: new[] { "UniqueId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Under Graduate " },
+                    { 2, "Polytechnic / Diploma" },
+                    { 3, "BCA" },
+                    { 4, "B.Tech" },
+                    { 5, "MCA" },
+                    { 6, "Other" },
+                    { 7, "N/A  " }
                 });
 
             migrationBuilder.InsertData(
@@ -590,11 +630,6 @@ namespace BpstEducation.Migrations
                 column: "ApplicationFor");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RegistrationForm_BoardId",
-                table: "RegistrationForm",
-                column: "BoardId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RegistrationForm_StatusId",
                 table: "RegistrationForm",
                 column: "StatusId");
@@ -630,10 +665,22 @@ namespace BpstEducation.Migrations
                 name: "CodeHelpers");
 
             migrationBuilder.DropTable(
+                name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "Course");
+
+            migrationBuilder.DropTable(
+                name: "EducationBoardsMaster");
+
+            migrationBuilder.DropTable(
                 name: "Enquiry");
 
             migrationBuilder.DropTable(
                 name: "Fees");
+
+            migrationBuilder.DropTable(
+                name: "Qualification");
 
             migrationBuilder.DropTable(
                 name: "Questions");
@@ -657,19 +704,13 @@ namespace BpstEducation.Migrations
                 name: "States");
 
             migrationBuilder.DropTable(
-                name: "Course");
-
-            migrationBuilder.DropTable(
-                name: "EducationBoardsMaster");
+                name: "CourseCategories");
 
             migrationBuilder.DropTable(
                 name: "RegistrationStatusMaster");
 
             migrationBuilder.DropTable(
                 name: "Countries");
-
-            migrationBuilder.DropTable(
-                name: "CourseCategories");
         }
     }
 }

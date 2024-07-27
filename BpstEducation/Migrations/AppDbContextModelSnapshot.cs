@@ -85,9 +85,6 @@ namespace BpstEducation.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -117,14 +114,11 @@ namespace BpstEducation.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ProfileImgUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -218,6 +212,35 @@ namespace BpstEducation.Migrations
                     b.ToTable("CodeHelpers");
                 });
 
+            modelBuilder.Entity("BpstEducation.Models.Contact", b =>
+                {
+                    b.Property<int>("UniqueId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("YourEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("yourName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UniqueId");
+
+                    b.ToTable("Contacts");
+                });
+
             modelBuilder.Entity("BpstEducation.Models.Country", b =>
                 {
                     b.Property<int>("UniqueId")
@@ -246,12 +269,22 @@ namespace BpstEducation.Migrations
                     b.Property<int>("CourseCategoryID")
                         .HasColumnType("int");
 
+                    b.Property<string>("CourseDuration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CourseFees")
+                        .HasColumnType("int");
+
                     b.Property<string>("CourseName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("feeDiscount")
+                        .HasColumnType("int");
 
                     b.HasKey("UniqueId");
 
@@ -277,11 +310,6 @@ namespace BpstEducation.Migrations
                     b.ToTable("CourseCategories");
 
                     b.HasData(
-                        new
-                        {
-                            UniqueId = 1,
-                            Name = "Basic Computer Course"
-                        },
                         new
                         {
                             UniqueId = 2,
@@ -310,7 +338,17 @@ namespace BpstEducation.Migrations
                         new
                         {
                             UniqueId = 7,
-                            Name = " Others "
+                            Name = " Software Engineering Internship - 6 months "
+                        },
+                        new
+                        {
+                            UniqueId = 8,
+                            Name = "Software Engineering Internship -  45 days "
+                        },
+                        new
+                        {
+                            UniqueId = 9,
+                            Name = "others"
                         });
                 });
 
@@ -719,8 +757,8 @@ namespace BpstEducation.Migrations
                         {
                             Id = "f7d29f7b-d49f-43b9-834e-7de644eccbcf",
                             ConcurrencyStamp = "f7d29f7b-d49f-43b9-834e-7de644eccbcf",
-                            Name = "Trainer",
-                            NormalizedName = "TRAINER"
+                            Name = "Staff",
+                            NormalizedName = "STAFF"
                         },
                         new
                         {
