@@ -20,6 +20,9 @@ namespace BpstEducation.Models
         public int CourseCategoryID { get; set; }
         [ForeignKey("CourseCategoryID")]
         public CourseCategory CourseCategory { get; set; }
+        public string CourseDuration { get; set; }
+        public int CourseFees { get; set; }
+        public int feeDiscount { get; set; }
 
         public DateTime CreateDate { get; set; }
     }
