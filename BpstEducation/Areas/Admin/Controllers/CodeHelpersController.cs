@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CodeHelpersController : Controller
     {
         private readonly AppDbContext _context;

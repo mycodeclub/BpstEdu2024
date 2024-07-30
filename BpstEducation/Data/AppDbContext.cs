@@ -30,6 +30,8 @@ namespace BpstEducation.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Batch> Batchs { get; set; }
+        public DbSet<StudentBatch> StudentBatch4 { get; set; }
         public DbSet<Qualification> Qualification { get; set; }
         public DbSet<CourseCategory> CourseCategories { get; set; }
         

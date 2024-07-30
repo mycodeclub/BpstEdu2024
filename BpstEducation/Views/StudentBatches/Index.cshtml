@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BpstEducation.Models.StudentBatch>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.ActiveTabName = "CoHelper";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="content">
+
+    <div class="card">
+        <div class="card-header">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Batch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RemainingAmt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Batch.UniqueId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.EmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RemainingAmt)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>
+</div>

@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SubjectsController : Controller
     {
         private readonly AppDbContext _context;

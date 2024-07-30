@@ -63,19 +63,14 @@ namespace BpstEducation.Controllers
 
         public async Task<IActionResult> AutoLogin()
         {
-            var result = await AutoAdminLogin();
-            if (result)
-                return RedirectToAction("Index", "Home", new { Area = "Admin" });
+            var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "Admin@bpst.com", true, lockoutOnFailure: false);
+            if (result.Succeeded)
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             else
                 return RedirectToAction("CreateMasterUser");
         }
 
 
-        private async Task<bool> AutoAdminLogin()
-        {
-            var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "Admin@bpst.com", true, lockoutOnFailure: false);
-            return result.Succeeded;
-        }
 
         [HttpGet]
         public IActionResult Register()
@@ -83,30 +78,29 @@ namespace BpstEducation.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel rvm)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new AppUser { UserName = rvm.Email, Email = rvm.Email, PhoneNumber = rvm.PhoneNumber };
-                var result = await _userManager.CreateAsync(user, rvm.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false).ConfigureAwait(false);
-                    await _userManager.AddToRoleAsync(user, "Admin").ConfigureAwait(false);
-                    return RedirectToAction("Index", "Home", new { Areas = "Admin" });
-
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
-            }
-            return View(rvm);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Register(RegisterViewModel rvm)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new AppUser { UserName = rvm.Email, Email = rvm.Email, PhoneNumber = rvm.PhoneNumber };
+        //        var result = await _userManager.CreateAsync(user, rvm.Password);
+        //        if (result.Succeeded)
+        //        {
+        //            await _signInManager.SignInAsync(user, isPersistent: false).ConfigureAwait(false);
+        //            await _userManager.AddToRoleAsync(user, "Admin").ConfigureAwait(false);
+        //            return RedirectToAction("Index", "Home", new { Areas = "Admin" }); 
+        //        }
+        //        else
+        //        {
+        //            foreach (var error in result.Errors)
+        //            {
+        //                ModelState.AddModelError(string.Empty, error.Description);
+        //            }
+        //        }
+        //    }
+        //    return View(rvm);
+        //}
 
         [HttpGet]
         public IActionResult Login()
@@ -122,6 +116,11 @@ namespace BpstEducation.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.LoginName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByNameAsync(model.LoginName);
+                    var role = await _userManager.GetRolesAsync(user); 
+                    if (role.Contains("Admin")) return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    else if (role.Contains("Student")) return RedirectToAction("Index", "Home", new { Area = "Student" });
+                    else if (role.Contains("Trainer")) return RedirectToAction("Index", "Home", new { Area = "Trainer" }); 
                     return RedirectToAction("Index", "Home");
                 }
                 else { ModelState.AddModelError("", "Invalid Email Id or Password"); }

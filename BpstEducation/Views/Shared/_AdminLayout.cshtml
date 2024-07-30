@@ -98,10 +98,21 @@
                         <ul class="treeview-menu">
                             @if (activeTabName.Equals("HelperSubjects")) { activeTab = "active"; } else { activeTab = string.Empty; }
                             <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa fa-angle-right"></i> Subjects</a></li>
+
                             @if (activeTabName.Equals("HelperQuestions")) { activeTab = "active"; } else { activeTab = string.Empty; }
                             <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa-angle-right"></i> Interview Questions </a></li>
                             @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
                             <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
+
+                            <li class="@activeTab"><a href="/Batches/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
+                            @if (activeTabName.Equals("CoHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                            <li class="@activeTab">
+                                <a href="/StudentBatches/Index"><i class="fa fa-angle-right"></i> Student Batches </a>
+
+
+                         
+
+                            
                         </ul>
                     </li>
                     @if (activeTabName.Equals("Courses")) { activeTab = "active"; } else { activeTab = string.Empty; }
