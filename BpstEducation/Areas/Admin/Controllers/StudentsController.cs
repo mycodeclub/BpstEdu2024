@@ -11,23 +11,23 @@ using BpstEducation.Models;
 namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BatcheController : Controller
+    public class StudentsController : Controller
     {
         private readonly AppDbContext _context;
 
-        public BatcheController(AppDbContext context)
+        public StudentsController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Batche
+        // GET: Admin/Students
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Batchs.Include(b => b.Course).Include(b => b.Trainer);
+            var appDbContext = _context.students.Include(s => s.CourseCategory);
             return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Admin/Batche/Details/5
+        // GET: Admin/Students/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,45 +35,42 @@ namespace BpstEducation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var batch = await _context.Batchs
-                .Include(b => b.Course)
-                .Include(b => b.Trainer)
+            var students = await _context.students
+                .Include(s => s.CourseCategory)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
-            if (batch == null)
+            if (students == null)
             {
                 return NotFound();
             }
 
-            return View(batch);
+            return View(students);
         }
 
-        // GET: Admin/Batche/Create
+        // GET: Admin/Students/Create
         public IActionResult Create()
         {
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "FullName");
+            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
             return View();
         }
 
-        // POST: Admin/Batche/Create
+        // POST: Admin/Students/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniqueId,CourseId,Title,Duration,Description,TrainerId,AssisTrainer,StartDate,LastUpdatedDate,BatchFee,CreatedBy,LastUpdatedBy")] Batch batch)
+        public async Task<IActionResult> Create([Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,AadharName,PanName,CourseCategoryID,Fees")] Students students)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(batch);
+                _context.Add(students);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
-            return View(batch);
+            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", students.CourseCategoryID);
+            return View(students);
         }
 
-        // GET: Admin/Batche/Edit/5
+        // GET: Admin/Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,24 +78,23 @@ namespace BpstEducation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var batch = await _context.Batchs.FindAsync(id);
-            if (batch == null)
+            var students = await _context.students.FindAsync(id);
+            if (students == null)
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
-            return View(batch);
+            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", students.CourseCategoryID);
+            return View(students);
         }
 
-        // POST: Admin/Batche/Edit/5
+        // POST: Admin/Students/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,CourseId,Title,Duration,Description,TrainerId,AssisTrainer,StartDate,LastUpdatedDate,BatchFee,CreatedBy,LastUpdatedBy")] Batch batch)
+        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,AadharName,PanName,CourseCategoryID,Fees")] Students students)
         {
-            if (id != batch.UniqueId)
+            if (id != students.UniqueId)
             {
                 return NotFound();
             }
@@ -107,12 +103,12 @@ namespace BpstEducation.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(batch);
+                    _context.Update(students);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BatchExists(batch.UniqueId))
+                    if (!StudentsExists(students.UniqueId))
                     {
                         return NotFound();
                     }
@@ -123,12 +119,11 @@ namespace BpstEducation.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
-            return View(batch);
+            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", students.CourseCategoryID);
+            return View(students);
         }
 
-        // GET: Admin/Batche/Delete/5
+        // GET: Admin/Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,36 +131,35 @@ namespace BpstEducation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var batch = await _context.Batchs
-                .Include(b => b.Course)
-                .Include(b => b.Trainer)
+            var students = await _context.students
+                .Include(s => s.CourseCategory)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
-            if (batch == null)
+            if (students == null)
             {
                 return NotFound();
             }
 
-            return View(batch);
+            return View(students);
         }
 
-        // POST: Admin/Batche/Delete/5
+        // POST: Admin/Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var batch = await _context.Batchs.FindAsync(id);
-            if (batch != null)
+            var students = await _context.students.FindAsync(id);
+            if (students != null)
             {
-                _context.Batchs.Remove(batch);
+                _context.students.Remove(students);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BatchExists(int id)
+        private bool StudentsExists(int id)
         {
-            return _context.Batchs.Any(e => e.UniqueId == id);
+            return _context.students.Any(e => e.UniqueId == id);
         }
     }
 }

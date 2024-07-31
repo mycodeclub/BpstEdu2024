@@ -119,10 +119,13 @@
                     <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
                    
                     @if (activeTabName.Equals("Employees")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                   <li class="@activeTab"><a href="/Admin/Employees/Index"><i class="fa fa-angle-right"></i> Add Employees </a></li>
+                   <li class="@activeTab"><a href="/Admin/Employees/Index"><i class="fa fa-angle-right"></i>Employees </a></li>
 
                     @if (activeTabName.Equals("Helper")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                   <li class="@activeTab"><a href="/Admin/Batche/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
+                   <li class="@activeTab"><a href="/Admin/Batches/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
+
+                    @if (activeTabName.Equals("Helper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/Students/Index"><i class="fa fa-angle-right"></i>Students </a></li>
                    
                     @if (activeTabName.Equals("CoHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
                    

@@ -3,31 +3,31 @@
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.ActiveTabName = "Helper";
 }
 
-<h1 class="text-center text-dark">Details of Batch</h1>
+<h1>Details</h1>
 
-
-<div class="content">
-
-    <div class="card">
-        <div class="card-header">
 <div>
-    
+    <h4>Batch</h4>
+    <hr />
     <dl class="row">
-        
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Course)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Course.Name)
+            @Html.DisplayFor(model => model.Course.UniqueId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.Trainer)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Trainer)
+            @Html.DisplayFor(model => model.Trainer.UniqueId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AssisTrainer)
@@ -47,18 +47,37 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.AssisTrainer)
         </dd>
-       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastUpdatedDate)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BatchFee)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BatchFee)
         </dd>
-       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastUpdatedBy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastUpdatedBy)
+        </dd>
     </dl>
-</div>
-</div>
-</div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.UniqueId">Edit</a> |

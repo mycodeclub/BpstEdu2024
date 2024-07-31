@@ -7,12 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class BatchesController : Controller
     {
         private readonly AppDbContext _context;
@@ -22,14 +20,14 @@ namespace BpstEducation.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Batches
+        // GET: Admin/Batche
         public async Task<IActionResult> Index()
         {
-            var appDbContext = await _context.Batchs.Include(b => b.Course).ToListAsync();
-            return View(appDbContext);
+            var appDbContext = _context.Batchs.Include(b => b.Course).Include(b => b.Trainer);
+            return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Batches/Details/5
+        // GET: Admin/Batche/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,6 +37,7 @@ namespace BpstEducation.Areas.Admin.Controllers
 
             var batch = await _context.Batchs
                 .Include(b => b.Course)
+                .Include(b => b.Trainer)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (batch == null)
             {
@@ -48,34 +47,33 @@ namespace BpstEducation.Areas.Admin.Controllers
             return View(batch);
         }
 
-        // GET: Batches/Create
+        // GET: Admin/Batche/Create
         public IActionResult Create()
         {
             ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
+            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "FullName");
             return View();
         }
 
-        // POST: Batches/Create
+        // POST: Admin/Batche/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Batch batch)
+        public async Task<IActionResult> Create([Bind("UniqueId,CourseId,Title,Duration,Description,TrainerId,AssisTrainer,StartDate,LastUpdatedDate,BatchFee,CreatedBy,LastUpdatedBy")] Batch batch)
         {
-            if (batch.CourseId <= 0)
-                ModelState.AddModelError("CourseId", "Please select a valid course");
-
             if (ModelState.IsValid)
             {
                 _context.Add(batch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", batch.CourseId); 
+            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
+            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
             return View(batch);
         }
 
-        // GET: Batches/Edit/5
+        // GET: Admin/Batche/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,16 +86,17 @@ namespace BpstEducation.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "CourseName", batch.CourseId);
+            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
+            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
             return View(batch);
         }
 
-        // POST: Batches/Edit/5
+        // POST: Admin/Batche/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Batch batch)
+        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,CourseId,Title,Duration,Description,TrainerId,AssisTrainer,StartDate,LastUpdatedDate,BatchFee,CreatedBy,LastUpdatedBy")] Batch batch)
         {
             if (id != batch.UniqueId)
             {
@@ -124,11 +123,12 @@ namespace BpstEducation.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "CourseName", batch.CourseId);
+            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
+            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
             return View(batch);
         }
 
-        // GET: Batches/Delete/5
+        // GET: Admin/Batche/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,6 +138,7 @@ namespace BpstEducation.Areas.Admin.Controllers
 
             var batch = await _context.Batchs
                 .Include(b => b.Course)
+                .Include(b => b.Trainer)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (batch == null)
             {
@@ -147,7 +148,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             return View(batch);
         }
 
-        // POST: Batches/Delete/5
+        // POST: Admin/Batche/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -31,7 +31,7 @@ namespace BpstEducation.Data
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Batch> Batchs { get; set; }
-        public DbSet<StudentBatch> StudentBatch4 { get; set; }
+        public DbSet<StudentBatch> StudentBatch { get; set; }
         public DbSet<Qualification> Qualification { get; set; }
         public DbSet<CourseCategory> CourseCategories { get; set; }
         
@@ -45,6 +45,7 @@ namespace BpstEducation.Data
         public DbSet<CodeHelper> CodeHelpers { get; set; }
         public DbSet<Fee> Fees { get; set; }
         public DbSet<Employees> employees { get; set; }
+        public DbSet<Students> students { get; set; }
 
     }
 }
