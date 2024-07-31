@@ -52,7 +52,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             return View(registration);
         }
 
-        
+
 
         // GET: Admin/Registrations/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -62,14 +62,14 @@ namespace BpstEducation.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
-            var registration = await _context.Registrations.FindAsync(id);
+            
+            var registration = await _context.Registrations
+                .Include(r => r.Course)           
+                .Where(r => r.UniqueId == id).FirstOrDefaultAsync();
             if (registration == null)
             {
                 return NotFound();
             }
-            ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "CourseName", registration.ApplicationFor);
-            ViewData["StatusId"] = new SelectList(_context.RegistrationMasters, "UniqueId", "RegistrationStatus", registration.StatusId);
             return View(registration);
         }
 
@@ -122,7 +122,6 @@ namespace BpstEducation.Areas.Admin.Controllers
 
             var registration = await _context.Registrations
                 .Include(r => r.Course)
-                .Include(r => r.Status)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (registration == null)
             {
@@ -153,12 +152,12 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> GetStudentFilter(int BoardId, int ApplicationFor, Registration registration)
         {
             ViewBag.activeTabName = "Registrations";
-             var students = await _context.Registrations
-                .Include(a => a.Status)
-                .Include(a => a.Course)
-                .Where(a => (ApplicationFor.Equals(0) || a.ApplicationFor.Equals(ApplicationFor)))
-                .ToListAsync()
-                .ConfigureAwait(false);
+            var students = await _context.Registrations
+               .Include(a => a.Status)
+               .Include(a => a.Course)
+               .Where(a => (ApplicationFor.Equals(0) || a.ApplicationFor.Equals(ApplicationFor)))
+               .ToListAsync()
+               .ConfigureAwait(false);
             ViewBag.Dem = "aa";
 
             return View(students);

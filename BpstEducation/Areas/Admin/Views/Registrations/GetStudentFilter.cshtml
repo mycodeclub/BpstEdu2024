@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BpstEducation.Models.Registration>
 @{
     Layout = null;
+
 }
 
 
@@ -16,11 +17,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.FatherName)
             </th>
-           
-@*             <th>
-                @Html.DisplayNameFor(model => model.Course.CourseName)
+
+            @*             <th>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
             </th>
- *@            <th>
+            *@
+            <th>
                 @Html.DisplayNameFor(model => model.MobileNumber)
             </th>
             <th>Actions</th>
@@ -39,17 +41,17 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FatherName)
                 </td>
-           
+
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.Course.CourseName)
-                </td>*@
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.MobileNumber)
                 </td>
                 <td>
-                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
-                    <a asp-controller="Admin" asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
-                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                    <a href="/Admin/Registrations/Edit/@item.UniqueId">Edit</a> |
+                    <a href="/Admin/Registrations/Details/@item.UniqueId">Details</a> |
+                    <a href="/Admin/Registrations/Delete/@item.UniqueId">Delete</a>
                 </td>
             </tr>
         }

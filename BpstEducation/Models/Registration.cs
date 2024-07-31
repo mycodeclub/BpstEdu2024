@@ -48,6 +48,7 @@ namespace BpstEducation.Models
 
         [Display(Name = " Qualification")]
         [Required]
+
         public string Qualification { get; set; }
 
         [Display(Name = "Application For")]
@@ -76,6 +77,10 @@ namespace BpstEducation.Models
         public string EmailId { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public bool IsReview {  get; set; }
+
+        public string? feedback {  get; set; }
 
 
     }

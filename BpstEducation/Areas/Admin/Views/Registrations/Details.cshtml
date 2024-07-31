@@ -49,9 +49,9 @@
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Course)
                         </dt>
-@*                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Course.CourseName)
-                        </dd> *@
+                       @* <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Course)
+                        </dd>  *@
                         <dt class="col-sm-2">
                             @Html.DisplayNameFor(model => model.Message)
                         </dt>
@@ -77,7 +77,7 @@
                             @Html.DisplayFor(model => model.EmailId)
                         </dd>
                     </dl>
-                    <div class="col-12 text-right"><a asp-action="Index" class="btn btn-info">Back</a></div>
+                    <div class="col-12 text-right"><a href="/Admin/Registrations/Index" class="btn btn-info">Back</a></div>
                 </div>
             </div>
         </div>

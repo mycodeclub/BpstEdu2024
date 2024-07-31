@@ -19,56 +19,70 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="UniqueId" />
                         <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="StatusId" class="control-label"></label>
                                 <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
                                 <span asp-validation-for="StatusId" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="FullName" class="control-label"></label>
-                                <input asp-for="FullName" class="form-control" />
+                                <input asp-for="FullName" class="form-control" readonly />
                                 <span asp-validation-for="FullName" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="FatherName" class="control-label"></label>
-                                <input asp-for="FatherName" class="form-control" />
+                                <input asp-for="FatherName" class="form-control" readonly />
                                 <span asp-validation-for="FatherName" class="text-danger"></span>
                             </div>
                        
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="CollegeName" class="control-label"></label>
-                                <input asp-for="CollegeName" class="form-control" />
+                                <input asp-for="CollegeName" class="form-control" readonly />
                                 <span asp-validation-for="CollegeName" class="text-danger"></span>
                             </div>
-                                                     <div class="form-group col-md-3">
+                             <div class="form-group col-md-4">
                                 <label asp-for="Qualification" class="control-label"></label>
-                                <input asp-for="Qualification" class="form-control" />
+                                <input asp-for="Qualification" class="form-control" readonly />
                                 <span asp-validation-for="Qualification" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="ApplicationFor" class="control-label"></label>
-                                <select asp-for="ApplicationFor" class="form-control" asp-items="ViewBag.ApplicationFor"></select>
+                                <input asp-for="Course.Name" class="form-control" readonly />
                                 <span asp-validation-for="ApplicationFor" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="Message" class="control-label"></label>
-                                <input asp-for="Message" class="form-control" />
+                                <input asp-for="Message" class="form-control" readonly />
                                 <span asp-validation-for="Message" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="MobileNumber" class="control-label"></label>
-                                <input asp-for="MobileNumber" class="form-control" />
+                                <input asp-for="MobileNumber" class="form-control" readonly/>
                                 <span asp-validation-for="MobileNumber" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="AlternateMobileNumber" class="control-label"></label>
-                                <input asp-for="AlternateMobileNumber" class="form-control" />
+                                <input asp-for="AlternateMobileNumber" class="form-control" readonly />
                                 <span asp-validation-for="AlternateMobileNumber" class="text-danger"></span>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label asp-for="EmailId" class="control-label"></label>
-                                <input asp-for="EmailId" class="form-control" />
+                                <input asp-for="EmailId" class="form-control" readonly/>
                                 <span asp-validation-for="EmailId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-2 mt-4">
+                                <div class="checkbox">
+
+                                    <label asp-for="IsReview">
+                                        <input asp-for="IsReview" />
+                                        @Html.DisplayNameFor(m => m.IsReview)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="feedback" class="control-label"></label>
+                                <textarea asp-for="feedback" class="form-control">Review</textarea>
+                                <span asp-validation-for="feedback" class="text-danger"></span>
                             </div>
                             <div class="card-header col-12 mb-4">
                                 <h5>Fee Structure</h5>

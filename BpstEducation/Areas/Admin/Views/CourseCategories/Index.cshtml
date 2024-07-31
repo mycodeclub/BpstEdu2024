@@ -29,9 +29,9 @@
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                                <a href="/Admin/CourseCategories/Edit/@item.UniqueId">Edit</a> |
+                                <a href="/Admin/CourseCategories/Details/@item.UniqueId">Details</a> |
+                                <a href="/Admin/CourseCategories/Delete/@item.UniqueId">Delete</a>
                             </td>
                         </tr>
                     }

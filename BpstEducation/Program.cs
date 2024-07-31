@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BpstEducation.Models;
 using Microsoft.AspNetCore.Identity;
 
-var builder = WebApplication.CreateBuilder(args); 
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConStr")));
@@ -37,19 +37,8 @@ app.UseAuthorization();
 
 
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Account}/{action=autologin}/{id?}");
-
-app.MapControllerRoute(
-    name: "area",
-    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
-
-//app.MapAreaControllerRoute(
-//    name: "default",
-//    areaName: "Area",
-//    pattern: "Area/{controller=Home}/{action=Index}"
-//);
+app.MapControllerRoute(name: "default", pattern: "{controller=Account}/{action=autologin}/{id?}");   
+app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 
 app.Run();

@@ -15,7 +15,7 @@
             
             <div class="form-group col-md-6">
                 <select asp-for="ApplicationFor" class="form-control" asp-items="ViewBag.ApplicationFor" onchange="StudentRegistration.GetStudentByCourseOrBoardName()">
-                    <option value="@ViewBag.nul">--Select Course--</option>
+                    <option value="">--Select Course--</option>
                 </select>
                 <span asp-validation-for="ApplicationFor" class="text-danger"></span>
             </div>
