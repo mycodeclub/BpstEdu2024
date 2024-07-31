@@ -26,7 +26,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         public IActionResult Index()
         {
             ViewBag.activeTabName = "Registrations";
-            ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "CourseName");
+            ViewData["ApplicationFor"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
             ViewData["BoardId"] = new SelectList(_context.Set<EducationBoardsMaster>(), "UniqueId", "Name");
             return View();
         }

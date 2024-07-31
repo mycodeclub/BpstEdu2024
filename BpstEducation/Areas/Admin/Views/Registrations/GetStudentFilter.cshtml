@@ -47,9 +47,9 @@
                     @Html.DisplayFor(modelItem => item.MobileNumber)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
+                    <a asp-controller="Admin" asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
+                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
                 </td>
             </tr>
         }

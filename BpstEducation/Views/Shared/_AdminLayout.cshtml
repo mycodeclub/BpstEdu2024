@@ -65,11 +65,11 @@
                                         <p class="text-left">  <small> @User.Identity.Name</small> </p>
                                     </li>
                                     @*<li><a href="#"><i class="icon-profile-male"></i> My Profile</a></li>
-                                        <li><a href="#"><i class="icon-wallet"></i> My Balance</a></li>
-                                        <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="icon-gears"></i> Account Setting</a></li>
-                                        <li role="separator" class="divider"></li>*@
+                                <li><a href="#"><i class="icon-wallet"></i> My Balance</a></li>
+                                <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#"><i class="icon-gears"></i> Account Setting</a></li>
+                                <li role="separator" class="divider"></li>*@
                                     <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </li>
@@ -93,31 +93,39 @@
                 <!-- sidebar menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     @if (activeTabName.Contains("Helper")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab treeview">
-                        <a href="#"><i class="fa icon-book-open"></i> <span>Helper</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                        <ul class="treeview-menu">
-                            @if (activeTabName.Equals("HelperSubjects")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa fa-angle-right"></i> Subjects</a></li>
+                    @* <li class="@activeTab treeview">
+                    <a href="#"><i class="fa icon-book-open"></i> <span>Helper</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                    <ul class="treeview-menu">
+                    @if (activeTabName.Equals("HelperSubjects")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa fa-angle-right"></i> Subjects</a></li>
 
-                            @if (activeTabName.Equals("HelperQuestions")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa-angle-right"></i> Interview Questions </a></li>
-                            @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
+                    @if (activeTabName.Equals("HelperQuestions")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa-angle-right"></i> Interview Questions </a></li>
+                    @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
 
-                            <li class="@activeTab"><a href="/Batches/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
-                            @if (activeTabName.Equals("CoHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab">
-                                <a href="/StudentBatches/Index"><i class="fa fa-angle-right"></i> Student Batches </a>
+                    <li class="@activeTab"><a href="/Batches/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
+                    @if (activeTabName.Equals("CoHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab">
+                    <a href="/StudentBatches/Index"><i class="fa fa-angle-right"></i> Student Batches </a>
+                    </ul>
+                    </li> *@
+                    @if (activeTabName.Equals("HelperSubjects")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa fa-angle-right"></i> Subjects</a></li>
 
+                    @if (activeTabName.Equals("HelperQuestions")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa-angle-right"></i> Interview Questions </a></li>
+                    @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
 
-                         
+                    <li class="@activeTab"><a href="/Batches/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
+                    @if (activeTabName.Equals("CoHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab">
+                        <a href="/StudentBatches/Index"><i class="fa fa-angle-right"></i> Student Batches </a>
 
-                            
-                        </ul>
-                    </li>
-                    @if (activeTabName.Equals("Courses")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                        @if (activeTabName.Equals("Courses")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Admin/CourseCategories/Index"><i class="fa fa-map-marker"></i> Courses  </a></li>
-                    @if (activeTabName.Equals("Registrations")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                        @if (activeTabName.Equals("Registrations")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Admin/Registrations/Index"><i class="fa fa-map-marker"></i> Registrations  </a></li>
                 </ul>
             </div>
