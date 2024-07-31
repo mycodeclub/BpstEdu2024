@@ -16,14 +16,15 @@ namespace BpstEducation.Models
         [ForeignKey("CourseId")]
         public CourseCategory? Course { get; set; }
 
-
-
         public string Title { get; set; } = string.Empty;
         public string Duration { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
-        public string Trainer { get; set; } = string.Empty;
-        public string AssisTrainer { get; set; }    
+        [ForeignKey("TrainerId")]
+        public int TrainerId { get; set; }  
+        public Employees? Trainer { get; set; }
+
+        public string AssisTrainer { get; set; } = string.Empty;   
         public DateTime StartDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public int BatchFee { get; set; }
