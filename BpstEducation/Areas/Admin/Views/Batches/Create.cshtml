@@ -1,0 +1,111 @@
+﻿@model BpstEducation.Models.Batch
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.ActiveTabName = "Helper";
+}
+
+
+<h1 class="text-center text-dark"> New Batch</h1>
+
+<div class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row"> 
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label asp-for="CourseId" class="control-label"></label>
+                            <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">
+                                <option value="0" > -- Select -- </option>
+                            </select> 
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                         <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div> 
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label asp-for="Trainer" class="control-label"></label>
+                            <input asp-for="Trainer" class="form-control" />
+                            <span asp-validation-for="Trainer" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label asp-for="AssisTrainer" class="control-label"></label>
+                            <input asp-for="AssisTrainer" class="form-control" />
+                            <span asp-validation-for="AssisTrainer" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="form-group">
+                            <label asp-for="Duration" class="control-label"></label>
+                            <input asp-for="Duration" class="form-control" />
+                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4"> 
+                        <div class="form-group">
+                            <label asp-for="BatchFee" class="control-label"></label>
+                            <input asp-for="BatchFee" class="form-control" />
+                            <span asp-validation-for="BatchFee" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+
+                </div>
+               
+            </form>
+
+           
+
+        </div>
+    </div>
+</div>
+
+    
+   
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

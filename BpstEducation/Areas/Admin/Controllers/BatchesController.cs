@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace BpstEducation.Controllers
+namespace BpstEducation.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class BatchesController : Controller
     {
         private readonly AppDbContext _context;
@@ -57,15 +60,18 @@ namespace BpstEducation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Batch batch)
+        public async Task<IActionResult> Create(Batch batch)
         {
+            if (batch.CourseId <= 0)
+                ModelState.AddModelError("CourseId", "Please select a valid course");
+
             if (ModelState.IsValid)
             {
                 _context.Add(batch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "CourseName", batch.CourseId);
+            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", batch.CourseId); 
             return View(batch);
         }
 

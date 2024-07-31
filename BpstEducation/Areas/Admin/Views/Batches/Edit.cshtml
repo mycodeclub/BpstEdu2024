@@ -6,62 +6,71 @@
     ViewBag.ActiveTabName = "Helper";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center text-dark">Edit Batch</h1>
 
-<h4>Batch</h4>
-<hr />
+
+
 <div class="content">
 
     <div class="card">
         <div class="card-header">
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UniqueId" />
-            <div class="form-group">
-                <label asp-for="BatchId" class="control-label"></label>
-                <input asp-for="BatchId" class="form-control" />
-                <span asp-validation-for="BatchId" class="text-danger"></span>
-            </div>
+                <div class="row">
+                    <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="CourseId" class="control-label"></label>
                 <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId"></select>
                 <span asp-validation-for="CourseId" class="text-danger"></span>
             </div>
+            </div>
+                    <div class="col-md-4">
+
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+            </div>
+                    <div class="col-md-4">
+
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            </div>
+                    <div class="col-md-4">
+
             <div class="form-group">
                 <label asp-for="Trainer" class="control-label"></label>
                 <input asp-for="Trainer" class="form-control" />
                 <span asp-validation-for="Trainer" class="text-danger"></span>
             </div>
+            </div>
+                    <div class="col-md-4">
+
             <div class="form-group">
                 <label asp-for="AssisTrainer" class="control-label"></label>
                 <input asp-for="AssisTrainer" class="form-control" />
                 <span asp-validation-for="AssisTrainer" class="text-danger"></span>
+            </div> 
             </div>
-           
-            <div class="form-group">
+                </div>
+
+               <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+                    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+
+               </div>
         </form>
-    </div>
+    
+
 </div>
 </div>
 </div>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

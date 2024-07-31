@@ -117,9 +117,12 @@
                     <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa-angle-right"></i> Interview Questions </a></li>
                     @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
-
-                    <li class="@activeTab"><a href="/Batches/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
+                   
+                    @if (activeTabName.Equals("Helper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                   <li class="@activeTab"><a href="/Admin/Batches/Index"><i class="fa fa-angle-right"></i> Batches </a></li>
+                   
                     @if (activeTabName.Equals("CoHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                   
                     <li class="@activeTab">
                         <a href="/StudentBatches/Index"><i class="fa fa-angle-right"></i> Student Batches </a>
 
