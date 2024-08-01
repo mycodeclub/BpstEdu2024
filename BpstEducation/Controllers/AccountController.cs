@@ -39,7 +39,7 @@ namespace BpstEducation.Controllers
                 var appUser = new AppUser() { UserName = "admin@bpst.com", Email = "admin@bpst.com", Password = "Admin@bpst.com", ConfirmPassword = "Admin@bpst.com", PhoneNumber = "9999999999", };
                 var result = await _userManager.CreateAsync(appUser, appUser.Password);
                 if (result.Succeeded)
-                {
+                { 
                     var userRoles = await _context.Roles.ToListAsync();
                     foreach (var role in userRoles)
                         await _userManager.AddToRoleAsync(appUser, role.Name).ConfigureAwait(false);
