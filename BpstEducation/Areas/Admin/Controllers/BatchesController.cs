@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
@@ -38,6 +34,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             var batch = await _context.Batchs
                 .Include(b => b.Course)
                 .Include(b => b.Trainer)
+                // .Include(b => b.Students)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (batch == null)
             {
@@ -48,11 +45,15 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
 
         // GET: Admin/Batche/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int id)
         {
+            var batch = await _context.Batchs.FindAsync(id);
+            if (batch == null)
+                batch = new Batch() { };
+
             ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
             ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "FullName");
-            return View();
+            return View(batch);
         }
 
         // POST: Admin/Batche/Create
@@ -60,7 +61,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniqueId,CourseId,Title,Duration,Description,TrainerId,AssisTrainer,StartDate,LastUpdatedDate,BatchFee,CreatedBy,LastUpdatedBy")] Batch batch)
+        public async Task<IActionResult> Create(Batch batch)
         {
             if (ModelState.IsValid)
             {

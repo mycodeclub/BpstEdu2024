@@ -50,7 +50,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: StudentBatches/Create
         public IActionResult Create()
         {
-            ViewData["BatchId"] = new SelectList(_context.Batchs, "UniqueId", "UniqueId");
+            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b=>b.Course), "UniqueId", "Course.Name");
             ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId");
             return View();
         }
@@ -60,7 +60,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(StudentBatch studentBatch)
+        public async Task<IActionResult> Create(BatchStudent studentBatch)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, StudentBatch studentBatch)
+        public async Task<IActionResult> Edit(int id, BatchStudent studentBatch)
         {
             if (id != studentBatch.UniqueId)
             {

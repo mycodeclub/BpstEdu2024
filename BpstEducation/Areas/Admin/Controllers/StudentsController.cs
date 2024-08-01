@@ -50,7 +50,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
-            return View();
+            return View(new Students() { DateOfBirth = DateTime.Now.AddYears(-18) });
         }
 
         // POST: Admin/Students/Create
@@ -58,7 +58,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,Aadhar,Pan,CourseCategoryID,Fees")] Students students)
+        public async Task<IActionResult> Create(Students students)
         {
 
             if (ModelState.IsValid)

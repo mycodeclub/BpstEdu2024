@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BpstEducation.Models
 {
-    public class StudentBatch
+    public class BatchStudent
     {
 
         [Key]
