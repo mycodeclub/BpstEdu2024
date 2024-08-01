@@ -58,19 +58,25 @@ namespace BpstEducation.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,AadharName,PanName,CourseCategoryID,Fees")] Students students)
+        public async Task<IActionResult> Create([Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,Aadhar,Pan,CourseCategoryID,Fees")] Students students)
         {
+
             if (ModelState.IsValid)
             {
+                var (aadhaarImagePath, panImagePath) = await UploadAadhaarAndPanImagesAsync(students.Aadhar, students.Pan);
+
+                students.AadharName = aadhaarImagePath;
+                students.PanName = panImagePath;
+
                 _context.Add(students);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", students.CourseCategoryID);
             return View(students);
         }
 
-        // GET: Admin/Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -161,5 +167,40 @@ namespace BpstEducation.Areas.Admin.Controllers
         {
             return _context.students.Any(e => e.UniqueId == id);
         }
+        private async Task<(string? AadhaarImagePath, string? PanImagePath)> UploadAadhaarAndPanImagesAsync(IFormFile? aadhaarFile, IFormFile? panFile)
+        {
+            string? aadhaarImagePath = null;
+            string? panImagePath = null;
+
+            if (aadhaarFile != null && aadhaarFile.Length > 0)
+            {
+                var aadhaarFileName = Path.GetFileName(aadhaarFile.FileName);
+                var aadhaarFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", aadhaarFileName);
+
+                using (var stream = new FileStream(aadhaarFilePath, FileMode.Create))
+                {
+                    await aadhaarFile.CopyToAsync(stream);
+                }
+
+                aadhaarImagePath = "/images/" + aadhaarFileName;
+            }
+
+            if (panFile != null && panFile.Length > 0)
+            {
+                var panFileName = Path.GetFileName(panFile.FileName);
+                var panFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", panFileName);
+
+                using (var stream = new FileStream(panFilePath, FileMode.Create))
+                {
+                    await panFile.CopyToAsync(stream);
+                }
+
+                panImagePath = "/images/" + panFileName;
+            }
+
+            return (aadhaarImagePath, panImagePath);
+        }
+
+
     }
 }

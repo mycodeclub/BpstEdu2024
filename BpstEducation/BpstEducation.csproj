@@ -752,6 +752,7 @@
     <Folder Include="Areas\Staff\Views\" />
     <Folder Include="Areas\Student\Data\" />
     <Folder Include="Areas\Student\Models\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

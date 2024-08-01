@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form asp-action="Create" class="needs-validation" novalidate>
+            <form asp-action="Create" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                 @* Form Fields *@
@@ -57,16 +57,22 @@
                     <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" />
                     <span asp-validation-for="PanNumber" class="text-danger"></span>
                 </div>
+
+                @* Aadhaar and PAN Image Upload *@
                 <div class="form-group mb-3">
-                    <label asp-for="AadharName" class="form-label"></label>
-                    <input asp-for="AadharName" class="form-control" placeholder="Enter Aadhar Name" />
-                    <span asp-validation-for="AadharName" class="text-danger"></span>
+                    <label asp-for="Aadhar" class="form-label"></label>
+                    <input asp-for="Aadhar" type="file" class="form-control" />
+                    <span asp-validation-for="Aadhar" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label asp-for="PanName" class="form-label"></label>
-                    <input asp-for="PanName" class="form-control" placeholder="Enter PAN Name" />
-                    <span asp-validation-for="PanName" class="text-danger"></span>
+                    <label asp-for="Pan" class="form-label"></label>
+                    <input asp-for="Pan" type="file" class="form-control" />
+                    <span asp-validation-for="Pan" class="text-danger"></span>
                 </div>
+
+                <input type="text" value="@Model.AadhaarNumber" name="AadhaarNumber"></input>
+                <input type="text" value="@Model.AadhaarNumber" name="PanNumber"></input>
+               
                 <div class="form-group mb-3">
                     <label asp-for="CourseCategoryID" class="form-label"></label>
                     <select asp-for="CourseCategoryID" class="form-select" asp-items="ViewBag.CourseCategoryID">
