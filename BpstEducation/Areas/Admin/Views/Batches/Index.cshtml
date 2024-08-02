@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int sno = 0;
 }
 
 <div class="content">
@@ -18,6 +19,7 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
+                                <th>S. No.</th>
                                 @* <th>@Html.DisplayNameFor(model => model.Course.UniqueId)</th>
     *@                          <th>@Html.DisplayNameFor(model => model.Title)</th>
                                 <th>@Html.DisplayNameFor(model => model.Duration)</th>
@@ -29,7 +31,9 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
+                                sno++;
                                 <tr>
+                                    <td>@sno .</td>
                                    @*  <td>@Html.DisplayFor(modelItem => item.Course.UniqueId)</td> *@
                                     <td>@Html.DisplayFor(modelItem => item.Title)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Duration)</td>
