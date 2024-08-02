@@ -175,12 +175,19 @@ namespace BpstEducation.Areas.Admin.Controllers
             if (aadhaarFile != null && aadhaarFile.Length > 0)
             {
                 var aadhaarFileName = Path.GetFileName(aadhaarFile.FileName);
-                var aadhaarFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", aadhaarFileName);
 
-                using (var stream = new FileStream(aadhaarFilePath, FileMode.Create))
+
+                var aadhaarFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
+                if (!Directory.Exists(aadhaarFilePath))
+                {
+                    Directory.CreateDirectory(aadhaarFilePath);
+                }
+
+                using (var stream = new FileStream(aadhaarFilePath + aadhaarFileName, FileMode.Create))
                 {
                     await aadhaarFile.CopyToAsync(stream);
                 }
+               
 
                 aadhaarImagePath = "/images/" + aadhaarFileName;
             }
