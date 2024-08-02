@@ -4,85 +4,83 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h1 class="text-center mt-4">Add New Employee</h1>
-
-<h4 class="text-muted text-center">Employees</h4>
-<hr />
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <form asp-action="Create" class="p-4 border rounded shadow-sm bg-light">
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <h5>Employees</h5>
+            <hr />
+            <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label asp-for="FullName" class="form-label"></label>
-                            <input asp-for="FullName" class="form-control" />
-                            <span asp-validation-for="FullName" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
+                        <label asp-for="FullName" class="form-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label asp-for="JobRole" class="form-label"></label>
-                            <input asp-for="JobRole" class="form-control" />
-                            <span asp-validation-for="JobRole" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
+                        <label asp-for="JobRole" class="form-label"></label>
+                        <input asp-for="JobRole" class="form-control" />
+                        <span asp-validation-for="JobRole" class="text-danger"></span>
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label asp-for="DateOfBirth" class="form-label"></label>
-                            <input asp-for="DateOfBirth" class="form-control" />
-                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
+                        <label asp-for="DateOfBirth" class="form-label"></label>
+                        <input asp-for="DateOfBirth" class="form-control" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label asp-for="PhoneNumber" class="form-label"></label>
-                            <input asp-for="PhoneNumber" class="form-control" />
-                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
+                        <label asp-for="PhoneNumber" class="form-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label asp-for="Experience" class="form-label"></label>
-                            <input asp-for="Experience" class="form-control" />
-                            <span asp-validation-for="Experience" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
+                        <label asp-for="Experience" class="form-label"></label>
+                        <input asp-for="Experience" class="form-control" />
+                        <span asp-validation-for="Experience" class="text-danger"></span>
+
                     </div>
 
-                    <div class="col-md-12 mb-3">
-                        <div class="form-group">
-                            <label asp-for="Address" class="form-label"></label>
-                            <input asp-for="Address" class="form-control" />
-                            <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
+                        <label asp-for="Address" class="form-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4 mb-2">
                         <input type="submit" value="Create" class="btn btn-primary w-75" />
                     </div>
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-4 mb-2">
                         <a asp-action="Index" class="btn btn-secondary w-75">Back to List</a>
                     </div>
+                    <div class="col-md-2"></div>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

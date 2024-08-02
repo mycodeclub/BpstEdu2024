@@ -740,6 +740,7 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
     <None Include="wwwroot\RichText\js\jquery.richtext.js" />
+    <None Include="wwwroot\UiTemplate\ScannerUI\font\.DS_Store" />
   </ItemGroup>
 
   <ItemGroup>
