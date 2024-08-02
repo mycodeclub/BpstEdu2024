@@ -5,96 +5,104 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1 class="mb-4">Create Student</h1>
-
-<h4 class="mb-3">Student Details</h4>
-<hr />
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <h5>Student</h5>
+            <hr />
             <form asp-action="Create" enctype="multipart/form-data" class="needs-validation" novalidate>
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                 @* Form Fields *@
-                <div class="form-group mb-3">
-                    <label asp-for="FirstName" class="form-label"></label>
-                    <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="LastName" class="form-label"></label>
-                    <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email" class="form-control" placeholder="Enter Email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="DateOfBirth" class="form-label"></label>
-                    <input asp-for="DateOfBirth" class="form-control" type="date" />
-                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="PhoneNumber" class="form-label"></label>
-                    <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Address" class="form-label"></label>
-                    <input asp-for="Address" class="form-control" placeholder="Enter Address" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="AadhaarNumber" class="form-label"></label>
-                    <input asp-for="AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" />
-                    <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="PanNumber" class="form-label"></label>
-                    <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" />
-                    <span asp-validation-for="PanNumber" class="text-danger"></span>
-                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="FirstName" class="form-label"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="LastName" class="form-label"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="DateOfBirth" class="form-label"></label>
+                        <input asp-for="DateOfBirth" class="form-control" type="date" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="PhoneNumber" class="form-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="Address" class="form-label"></label>
+                        <input asp-for="Address" class="form-control" placeholder="Enter Address" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="AadhaarNumber" class="form-label"></label>
+                        <input asp-for="AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" />
+                        <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="PanNumber" class="form-label"></label>
+                        <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" />
+                        <span asp-validation-for="PanNumber" class="text-danger"></span>
+                    </div>
 
-                @* Aadhaar and PAN Image Upload *@
-                <div class="form-group mb-3">
-                    <label asp-for="Aadhar" class="form-label"></label>
-                    <input asp-for="Aadhar" type="file" class="form-control" />
-                    <span asp-validation-for="Aadhar" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Pan" class="form-label"></label>
-                    <input asp-for="Pan" type="file" class="form-control" />
-                    <span asp-validation-for="Pan" class="text-danger"></span>
-                </div>
+                    @* Aadhaar and PAN Image Upload *@
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="Aadhar" class="form-label"></label>
+                        <input asp-for="Aadhar" type="file" class="form-control" />
+                        <span asp-validation-for="Aadhar" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="Pan" class="form-label"></label>
+                        <input asp-for="Pan" type="file" class="form-control" />
+                        <span asp-validation-for="Pan" class="text-danger"></span>
+                    </div>
+                    @*   <div class="col-md-3 mb-1">
+                    <div class="form-group">
+                    @if (Model != null)
+                    {
 
-                <input type="text" value="@Model.AadhaarNumber" name="AadhaarNumber"></input>
-                <input type="text" value="@Model.AadhaarNumber" name="PanNumber"></input>
-               
-                <div class="form-group mb-3">
-                    <label asp-for="CourseCategoryID" class="form-label"></label>
-                    <select asp-for="CourseCategoryID" class="form-select" asp-items="ViewBag.CourseCategoryID">
-                        <option value="">Select Course Category</option>
-                    </select>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="MyTrainingFee" class="form-label"></label>
+                    <input type="text" value="@Model.AadhaarNumber" name="AadhaarNumber" />
+                    <input type="text" value="@Model.AadhaarNumber" name="PanNumber" />
+                    }
+                    </div>
+                    </div> *@
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="CourseCategoryID" class="form-label"></label>
+                        <select asp-for="CourseCategoryID" class="form-control" asp-items="ViewBag.CourseCategoryID">
+                            <option value="">Select Course Category</option>
+                        </select>
+                    </div>
+                    @* <div class="col-md-3 mb-1">
+                    <div class="form-group">
                     <input asp-for="MyTrainingFee" class="form-control" placeholder="Enter Fees" />
                     <span asp-validation-for="MyTrainingFee" class="text-danger"></span>
+                    </div>
+                    </div> *@
                 </div>
-
-                <div class="form-group mb-3">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4 mb-2">
+                        <input type="submit" value="Create" class="btn btn-primary w-75" />
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a asp-action="Index" class="btn btn-secondary w-75">Back to List</a>
+                    </div>
+                    <div class="col-md-2"></div>
                 </div>
             </form>
         </div>
     </div>
-</div>
-
-<div class="mt-4">
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
 @section Scripts {

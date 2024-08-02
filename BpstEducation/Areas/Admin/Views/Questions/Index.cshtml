@@ -9,32 +9,37 @@
 <div class="content">
     <div class="card">
         <div class="card-body">
-            <p>
-                <a asp-action="Create">Create New</a>
-            </p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th> @Html.DisplayNameFor(model => model.Subject) </th>
-                        <th> @Html.DisplayNameFor(model => model.QustionText) </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td> @Html.DisplayFor(modelItem => item.Subject.Name) </td>
-                            <td> @Html.DisplayFor(modelItem => item.QustionText) </td>
-                            <td>
-                                <a asp-action="Create" asp-route-id="@item.UniqueId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="h3">Question List</h1>
+                    <a asp-action="Create" class="btn btn-primary">Create New Question</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th> @Html.DisplayNameFor(model => model.Subject) </th>
+                                <th> @Html.DisplayNameFor(model => model.QustionText) </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => item.Subject.Name) </td>
+                                    <td> @Html.DisplayFor(modelItem => item.QustionText) </td>
+                                    <td>
+                                        <a asp-action="Create" asp-route-id="@item.UniqueId">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
