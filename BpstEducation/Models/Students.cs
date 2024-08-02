@@ -43,6 +43,10 @@ namespace BpstEducation.Models
             get; set;
         }
         [NotMapped]
+
+        [DataType(DataType.Upload)]
+        //[MaxFileSize(3 * 1024 * 1024)] // 3 MB
+        //[AllowedExtensions(new string[] { ".pdf",".image"})]
         [Display(Name = "Upload Aadhar")]
         public IFormFile? Aadhar { get; set; }
 
@@ -58,7 +62,20 @@ namespace BpstEducation.Models
         public int CourseCategoryID { get; set; }
         [ForeignKey("CourseCategoryID")]
         public CourseCategory? CourseCategory { get; set; }
-        public int Fees { get; set; }
+        public int MyTrainingFee { get; set; }
+        public int MyDiscount { get; set; }
+        public List<StudentFee>? MySubmittedFeeTillNow { get; set; }
+        //--------------------------------------------------------------
+        public int MyRemainingFee
+        {
+            get
+            {
+                int _remainingFee = MyTrainingFee - MyDiscount;
+                if (MySubmittedFeeTillNow != null && MySubmittedFeeTillNow.Count > 0)
+                    _remainingFee = MySubmittedFeeTillNow.Sum(f => f.SubmittedFee) - MyDiscount;
+                return _remainingFee;
+            }
+        } 
 
     }
 }

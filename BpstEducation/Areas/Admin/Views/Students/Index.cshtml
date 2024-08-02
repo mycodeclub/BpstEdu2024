@@ -46,9 +46,9 @@
                 @Html.DisplayNameFor(model => model.CourseCategory)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fees)
+                @Html.DisplayNameFor(model => model.MyTrainingFee)
             </th>
-            <th></th>
+            <th> Action</th>
         </tr>
     </thead>
     <tbody>
@@ -83,17 +83,18 @@
                 @Html.DisplayFor(modelItem => item.CourseCategory.UniqueId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fees)
+                @Html.DisplayFor(modelItem => item.MyTrainingFee)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                                <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.UniqueId" >Detail</a> |
+                                <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a> |
+                <a asp-action="Index" asp-controller="StudentFee" asp-route-id="@item.UniqueId">Fee</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-<</div>
-<</div>
-<</div>
+</div>
+</div>
+</div>

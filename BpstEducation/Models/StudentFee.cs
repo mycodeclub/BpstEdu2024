@@ -7,16 +7,21 @@ using System.Threading.Tasks;
 
 namespace BpstEducation.Models
 {
-    public class Fee
+    public class StudentFee
     {
         [Key]
         public int UniqueId { get; set; }
 
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
-        public Registration Registration { get; set; }
+        public Students Students { get; set; }
 
-        public string FeeInstallment { get; set; }
+
+        // public Registration Registration { get; set; }
+        public int? TotalFee { get; set; }
+
+        public int SubmittedFee { get; set; }
+        public int? RemainingFee { get; set; }
         public DateTime FeeSubmittingDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }

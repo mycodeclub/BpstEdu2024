@@ -1,0 +1,75 @@
+﻿@model BpstEducation.Models.Students
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var stuId = ViewBag.StudentId;
+}
+
+
+<h1 class="text-center">Student Fee </h1>
+
+<div class="content">
+    <div class="Container">
+        <p class="text-right">
+            <a asp-action="Create" asp-route-id="@Model.UniqueId" class=" btn btn-primary">Create New</a>
+        <p>
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-header">
+                            @if (Model.MySubmittedFeeTillNow != null)
+                            {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+
+                                        <th>
+                                            Total Fee
+                                        </th>
+                                        <th>
+                                            Submitted Fee Amount
+
+                                        </th>
+                                        <th>
+                                            Fee  Submition Date
+
+                                        </th>
+                                        <th>
+                                            Remaining Fee
+                                        </th>
+                                        <th> Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach (var item in Model.MySubmittedFeeTillNow)
+                                        {
+                                        <tr>
+
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.TotalFee)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.SubmittedFee)
+                                            </td>
+                                             <td>
+                                                    @Html.DisplayFor(modelItem => item.RemainingFee)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.FeeSubmittingDate)
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
+                                                
+                                            </td>
+                                        </tr>
+                                        }
+                                </tbody>
+                            </table>
+                            }
+                    </div>
+
+                </div>
+            </div>
+    </div>
+</div>
