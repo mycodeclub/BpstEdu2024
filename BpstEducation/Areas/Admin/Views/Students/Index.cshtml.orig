@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.ActiveTabName = "Students";
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 }
 
 <div class="content">
@@ -44,15 +49,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.CourseCategory)
                                 </th>
-<<<<<<< Updated upstream
-                                <th>
-                                    @Html.DisplayNameFor(model => model.MyTrainingFee)
-                                </th>
-=======
                        @*          <th>
                                     @Html.DisplayNameFor(model => model.)
                                 </th> *@
->>>>>>> Stashed changes
                                 <th>Action</th>
                             </tr>
                         </thead>

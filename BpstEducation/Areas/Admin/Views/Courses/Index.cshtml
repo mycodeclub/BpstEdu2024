@@ -4,45 +4,64 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseCategory.UniqueId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
-            </td>
-        </tr>
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="h3">Course List</h1>
+                    <a asp-action="Create" class="btn btn-primary btn-sm">Create New Course</a>
+                </div>
+                <table class="table" id="example1">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CourseName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CourseCategory)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreateDate)
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseCategory.UniqueId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreateDate)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.UniqueId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.UniqueId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <!-- DataTable -->
+    <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
+    <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example1').DataTable();
+        });
+    </script>
 }
-    </tbody>
-</table>

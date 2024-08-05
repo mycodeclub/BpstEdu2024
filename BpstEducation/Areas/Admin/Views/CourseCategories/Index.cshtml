@@ -6,6 +6,7 @@
     int sno = 0;
 }
 
+<link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
 <div class="content">
     <div class="card">
         <div class="card-body">
@@ -14,7 +15,7 @@
                     <a asp-action="Create" class="btn btn-primary btn-sm">Create New Course</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="example1">
                         <thead class="thead-light">
                             <tr>
                                 <th>S. No.</th>
@@ -47,4 +48,18 @@
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
 
+=======
+</div>
+@section Scripts {
+    <!-- DataTable -->
+    <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
+    <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example1').DataTable();
+        });
+    </script>
+}
+>>>>>>> Stashed changes

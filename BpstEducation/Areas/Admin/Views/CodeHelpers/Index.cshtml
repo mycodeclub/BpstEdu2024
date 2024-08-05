@@ -6,6 +6,7 @@
     ViewBag.ActiveTabId = 3;
 }
 
+<link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
 <div class="content">
     <div class="card">
         <div class="card-body">
@@ -16,7 +17,7 @@
                 </div>
              
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="example1">
                         <thead>
                             <tr>
                                 <th>
@@ -56,12 +57,11 @@
 </div>
 @section Scripts {
     <!-- DataTable -->
-    <script src="~/uitemplate/admintemp/dist/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/uitemplate/admintemp/dist/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
+    <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#tblGuestList').DataTable()
-
+            $('#example1').DataTable();
         });
     </script>
 }

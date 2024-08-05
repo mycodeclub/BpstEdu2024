@@ -49,9 +49,9 @@
                     @Html.DisplayFor(modelItem => item.MobileNumber)
                 </td>
                 <td>
-                    <a href="/Admin/Registrations/Edit/@item.UniqueId">Edit</a> |
-                    <a href="/Admin/Registrations/Details/@item.UniqueId">Details</a> |
-                    <a href="/Admin/Registrations/Delete/@item.UniqueId">Delete</a>
+                    <a href="/Admin/Registrations/Edit/@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+                    <a href="/Admin/Registrations/Details/@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+                    <a href="/Admin/Registrations/Delete/@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>
                 </td>
             </tr>
         }

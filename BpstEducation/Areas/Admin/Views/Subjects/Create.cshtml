@@ -5,38 +5,34 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.ActiveTabId = 1;
 }
-<div class="container">
-    <div class="card mt-5">
+<div class="content">
+    <div class="card">
         <div class="card-body">
             <h5>Subject</h5>
             <hr />
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form asp-action="Create" asp-controller="Subjects" asp-area="Admin">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label asp-for="Name" class="control-label"></label>
-                                <input asp-for="Name" class="form-control" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label asp-for="Description" class="control-label"></label>
-                                <textarea asp-for="Description" class="form-control" ></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6 text-center">
-                                <input type="submit" value="Create" class="btn btn-primary" />
-                            </div>
-                            <div class="form-group col-md-6 text-center back-to-list">
-                                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-                            </div>
-                        </div>
-                    </form>
+            <form asp-action="Create" asp-controller="Subjects" asp-area="Admin">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="form-group col-md-6 text-center">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group col-md-6 text-center back-to-list">
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

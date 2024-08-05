@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.ActiveTabId = 1;
 }
+<link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
 
 <div class="content">
     <div class="card">
@@ -17,7 +18,7 @@
                 </div>
                 <div class="table-responsive">
 
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="example1">
                         <thead>
                             <tr class="text-center">
                                 <th>
@@ -26,7 +27,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Description)
                                 </th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,3 +55,14 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <!-- DataTable -->
+    <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
+    <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example1').DataTable();
+        });
+    </script>
+}
