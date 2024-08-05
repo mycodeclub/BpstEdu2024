@@ -5,64 +5,75 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.ActiveTabName = "BatchStudent";
 }
-
+<link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
 <div class="content">
     <div class="card">
         <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="h3">StudentBatch List</h1>
-                    <a asp-action="Create" class="btn btn-primary">Create New StudentBatch</a>
-                </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="h3">StudentBatch List</h1>
+                <a asp-action="Create" class="btn btn-primary">Create New StudentBatch</a>
+            </div>
 
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Batch)
-                                </th>
-                              
-                                <th>
-                                    @Html.DisplayNameFor(model => model.DiscountFee)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TotalAmt)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.RemainingAmt)
-                                </th>
+            <div class="table-responsive">
+                <table class="table table-hover" id="example1">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Batch)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.DiscountFee)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalAmt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RemainingAmt)
+                            </th>
                             <th>Actions</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Batch.UniqueId)
-                                    </td>
-                                  
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DiscountFee)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TotalAmt)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.RemainingAmt)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
-                                        <a asp-action="Details" asp-route-id="@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
-                                        <a asp-action="Delete" asp-route-id="@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Batch.UniqueId)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiscountFee)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalAmt)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RemainingAmt)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+                                    <a asp-action="Details" asp-route-id="@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+@section Scripts {
+    <!-- DataTable -->
+    <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
+    <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example1').DataTable();
+        });
+    </script>
+
+}
 
 
