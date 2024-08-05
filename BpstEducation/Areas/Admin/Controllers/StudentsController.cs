@@ -47,9 +47,12 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
 
         // GET: Admin/Students/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int id)
         {
+            var stu = await _context.students.FindAsync(id);
+            stu ??= new Students() { RegistrationDate = DateTime.Now };
             ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
+            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c=>c.Course), "UniqueId", "Course.Name");
             return View(new Students() { DateOfBirth = DateTime.Now.AddYears(-18) });
         }
 
@@ -58,24 +61,34 @@ namespace BpstEducation.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Students students)
+        public async Task<IActionResult> Create(Students student)
         {
 
             if (ModelState.IsValid)
             {
-                var (aadhaarImagePath, panImagePath) = await UploadAadhaarAndPanImagesAsync(students.Aadhar, students.Pan);
+                var (aadhaarImagePath, panImagePath) = await UploadAadhaarAndPanImagesAsync(student.Aadhar, student.Pan);
+                student.AadharName = aadhaarImagePath;
+                student.PanName = panImagePath;
 
-                students.AadharName = aadhaarImagePath;
-                students.PanName = panImagePath;
+                if (student.UniqueId == 0)
+                {
+                    student.CreatedDate = DateTime.UtcNow;
+                    _context.Add(student);
+                }
+                else
+                {
+                    student.LastUpdatedDate = DateTime.UtcNow;
+                    _context.Update(student);
+                }
+                ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", student.CourseCategoryID);
+                return View(student);
 
-                _context.Add(students);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-
-            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", students.CourseCategoryID);
-            return View(students);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -187,7 +200,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 {
                     await aadhaarFile.CopyToAsync(stream);
                 }
-               
+
 
                 aadhaarImagePath = "/images/" + aadhaarFileName;
             }

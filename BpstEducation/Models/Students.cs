@@ -75,7 +75,13 @@ namespace BpstEducation.Models
                     _remainingFee = MySubmittedFeeTillNow.Sum(f => f.SubmittedFee) - MyDiscount;
                 return _remainingFee;
             }
-        } 
+        }
 
+        public DateTime RegistrationDate { get; internal set; }
+        public DateTime CreatedDate { get; internal set; }
+        public DateTime LastUpdatedDate { get; internal set; }
+
+
+        public int BatchId { get; internal set; }  
     }
 }
