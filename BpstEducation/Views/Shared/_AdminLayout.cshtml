@@ -98,10 +98,10 @@
                         <a href="#"><i class="fa icon-book-open"></i> <span>Interview Preparation</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
                             @if (activeTabName.Equals("HelperSubjects")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa fa-angle-right"></i> Subjects</a></li>
+                            <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa icon-book-open""></i> Subjects</a></li>
 
                             @if (activeTabName.Equals("HelperQuestions")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa-angle-right"></i> Interview Questions </a></li>
+                            <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa icon-book-open"></i> Interview Questions </a></li>
 
                             @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
                             <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
@@ -126,7 +126,7 @@
 >>>>>>> Stashed changes
                      
                     @if (activeTabName.Equals("Courses")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Admin/CourseCategories/Index"><i class="fa fa-map-marker"></i> Courses  </a></li>
+                    <li class="@activeTab"><a href="/Admin/CourseCategories/Index"><i class="fa fa-registered"></i> Courses  </a></li>
                     @if (activeTabName.Equals("Registrations")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Admin/Registrations/Index"><i class="fa fa-registered"></i> Registrations  </a></li>
 
