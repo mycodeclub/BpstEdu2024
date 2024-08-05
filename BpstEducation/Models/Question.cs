@@ -15,7 +15,7 @@ namespace BpstEducation.Models
         public int UniqueId { get; set; }
         public int SubjectId { get; set; }
         [ForeignKey("SubjectId")]
-        public Subject Subject { get; set; }
+        public Subject? Subject { get; set; }
 
         [Display(Name = "Qustion")]
         public string QustionText { get; set; }
@@ -28,13 +28,13 @@ namespace BpstEducation.Models
         public string AnswerLine2 { get; set; }
         [Display(Name = "Detail Answer and Description")]
         public string AnswerText { get; set; }
-        public string AnswerObjectJson { get; set; }
-        public string Tags { get; set; }
+        public string ?AnswerObjectJson { get; set; }
+        public string ?Tags { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public bool IsActive { get; set; }
 
         [NotMapped]
-        public AnswerViewModel AnswerVMs { get; set; }
+        public AnswerViewModel? AnswerVMs { get; set; }
     }
 }
