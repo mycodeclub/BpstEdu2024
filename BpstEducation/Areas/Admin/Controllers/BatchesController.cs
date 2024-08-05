@@ -19,8 +19,9 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: Admin/Batche
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Batchs.Include(b => b.Course).Include(b => b.Trainer);
-            return View(await appDbContext.ToListAsync());
+            var batchs = await _context.Batchs.Include(b => b.Course).Include(b => b.Trainer).ToListAsync();
+            //    var batchesGroup = batchs.GroupBy(b => b.StartDate > System.DateTime.Now.AddDays(-5));
+            return View(batchs);
         }
 
         // GET: Admin/Batche/Details/5
@@ -44,28 +45,34 @@ namespace BpstEducation.Areas.Admin.Controllers
             return View(batch);
         }
 
+
         // GET: Admin/Batche/Create
         public async Task<IActionResult> Create(int id)
         {
             var batch = await _context.Batchs.FindAsync(id);
-            if (batch == null)
-                batch = new Batch() { };
+            batch ??= new Batch() { StartDate = DateTime.Now.AddMonths(2) };
 
             ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
             ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "FullName");
             return View(batch);
         }
 
-        // POST: Admin/Batche/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Batch batch)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(batch);
+                if (batch.UniqueId == 0)
+                {
+                    batch.CreatedDate = DateTime.UtcNow;
+                    _context.Add(batch);
+                }
+                else
+                {
+                    batch.LastUpdatedDate = DateTime.UtcNow;
+                    _context.Update(batch);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -74,23 +81,6 @@ namespace BpstEducation.Areas.Admin.Controllers
             return View(batch);
         }
 
-        // GET: Admin/Batche/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var batch = await _context.Batchs.FindAsync(id);
-            if (batch == null)
-            {
-                return NotFound();
-            }
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
-            return View(batch);
-        }
 
         // POST: Admin/Batche/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -108,7 +98,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(batch);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

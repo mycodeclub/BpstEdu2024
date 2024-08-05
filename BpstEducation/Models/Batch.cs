@@ -23,11 +23,10 @@ namespace BpstEducation.Models
         public int TrainerId { get; set; }
         public Employees? Trainer { get; set; } 
         public string AssisTrainer { get; set; } = string.Empty;
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } 
         public DateTime LastUpdatedDate { get; set; }
         public int BatchFee { get; set; }
-        public DateTime CreatedBy { get; set; } 
-        public DateTime LastUpdatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }  
         public List<BatchStudent>? Students { get; set; }
     }
 }
