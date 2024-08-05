@@ -52,7 +52,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             var stu = await _context.students.FindAsync(id);
             stu ??= new Students() { RegistrationDate = DateTime.UtcNow };
             ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
-            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c=>c.Course), "UniqueId", "Course.Name");
+            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate"); 
             return View(new Students() { DateOfBirth = DateTime.Now.AddYears(-18) });
         }
 
@@ -73,7 +73,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 if (student.UniqueId == 0)
                 {
                     student.CreatedDate = DateTime.UtcNow;
-                     _context.Add(student);
+                    _context.Add(student);
                 }
                 else
                 {
