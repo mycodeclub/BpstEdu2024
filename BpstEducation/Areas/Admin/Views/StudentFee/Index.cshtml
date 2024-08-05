@@ -52,11 +52,12 @@
                                             <td>
                                                     @Html.DisplayFor(modelItem => item.SubmittedFee)
                                             </td>
-                                             <td>
-                                                    @Html.DisplayFor(modelItem => item.RemainingFee)
-                                            </td>
+                                            
                                             <td>
                                                     @Html.DisplayFor(modelItem => item.FeeSubmittingDate)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.RemainingFee)
                                             </td>
                                             <td>
                                                 <a asp-action="Edit" asp-route-id="@item.UniqueId">Edit</a> |

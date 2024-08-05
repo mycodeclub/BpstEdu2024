@@ -17,14 +17,25 @@ namespace BpstEducation.Models
         public CourseCategory? Course { get; set; } 
         public string Title { get; set; } = string.Empty;
         public string Duration { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty; 
+        public string Description { get; set; } = string.Empty;
+        
+        [Display(Name = "Trainer Id")]
 
         [ForeignKey("TrainerId")]
         public int TrainerId { get; set; }
-        public Employees? Trainer { get; set; } 
+        public Employees? Trainer { get; set; }
+
+        [Display(Name = "Assis Trainer")]
+
         public string AssisTrainer { get; set; } = string.Empty;
+         
+        [Display(Name = "Start Date")]
+
         public DateTime StartDate { get; set; } 
         public DateTime LastUpdatedDate { get; set; }
+
+        [Display(Name = "Batch Fee")]
+
         public int BatchFee { get; set; }
         public DateTime CreatedDate { get; set; }  
         public List<BatchStudent>? Students { get; set; }

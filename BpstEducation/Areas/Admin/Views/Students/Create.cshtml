@@ -16,24 +16,15 @@
                 @* Form Fields *@
                 <div class="row">
 
-                    
-                    <div class="form-group col-md-4 col-sm-6">
-                        <label asp-for="RegistrationDate" class="form-label"></label>
-                        <input asp-for="RegistrationDate" type="date" class="form-control" placeholder="Enter First Name" />
-                        <span asp-validation-for="RegistrationDate" class="text-danger"></span>
-                    </div>
+                     
 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
                         <label asp-for="RegistrationDate" class="form-label"></label>
-                        <input asp-for="RegistrationDate" type="date" class="form-control" placeholder="Enter First Name" />
+                        <input asp-for="RegistrationDate"   class="form-control" placeholder="Enter First Name" />
                         <span asp-validation-for="RegistrationDate" class="text-danger"></span>
                     </div>
                     
-                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                        <label asp-for="FirstName" class="form-label"></label>
-                        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
+                  
                     
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
                         <label asp-for="FirstName" class="form-label"></label>
@@ -103,6 +94,13 @@
                             <option value="">Select Course Category</option>
                         </select>
                     </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="BatchId" class="control-label"></label>
+                        <select asp-for="BatchId" class="form-control" asp-items="ViewBag.BatchId">
+                            <option value="">Select Batch</option>
+                        </select>
+
+                    </div>
                     @* <div class="col-md-3 mb-1">
                     <div class="form-group">
                     <input asp-for="MyTrainingFee" class="form-control" placeholder="Enter Fees" />
@@ -111,14 +109,13 @@
                     </div> *@
                 </div>
                 <div class="row">
-                    <div class="col-md-2"></div>
                     <div class="col-md-4 mb-2">
-                        <input type="submit" value="Create" class="btn btn-primary w-75" />
+                        <input type="submit" value="Save" class="btn btn-primary " />
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <a asp-action="Index" class="btn btn-secondary w-75">Back to List</a>
-                    </div>
-                    <div class="col-md-2"></div>
+                   
+                </div>
+                <div class="col-md-4 mb-2">
+                    <a asp-action="Index" >Back to List</a>
                 </div>
             </form>
         </div>

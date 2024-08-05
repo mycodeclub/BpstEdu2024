@@ -9,7 +9,6 @@
 <div class="content">
     <div class="card">
         <div class="card-body">
-            <div class="container">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h1 class="h3">StudentBatch List</h1>
                     <a asp-action="Create" class="btn btn-primary">Create New StudentBatch</a>
@@ -22,9 +21,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Batch)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Registration)
-                                </th>
+                              
                                 <th>
                                     @Html.DisplayNameFor(model => model.DiscountFee)
                                 </th>
@@ -34,8 +31,8 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.RemainingAmt)
                                 </th>
-                                <th></th>
-                            </tr>
+                            <th>Actions</th>
+                        </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
@@ -44,9 +41,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Batch.UniqueId)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Registration.EmailId)
-                                    </td>
+                                  
                                     <td>
                                         @Html.DisplayFor(modelItem => item.DiscountFee)
                                     </td>
@@ -69,5 +64,5 @@
             </div>
         </div>
     </div>
-</div>
+
 

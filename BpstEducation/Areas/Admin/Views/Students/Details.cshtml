@@ -5,11 +5,13 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+
 
 <div>
-    <h4>Students</h4>
-    <hr />
+    <h2>Students Details</h2>
+    <div class="content">
+        <div class="card">
+            <div class="card-body">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
@@ -85,7 +87,11 @@
         </dd>
     </dl>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.UniqueId">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
+        </div>
+    </div>
 </div>
