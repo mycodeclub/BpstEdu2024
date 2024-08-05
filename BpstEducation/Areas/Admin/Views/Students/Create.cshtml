@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.ActiveTabName = "Students";
+
 }
 
 <div class="content">
@@ -11,20 +13,15 @@
             <h5>Student</h5>
             <hr />
             <form asp-action="Create" enctype="multipart/form-data" class="needs-validation" novalidate>
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
 
                 @* Form Fields *@
-                <div class="row">
-
-                     
-
+                <div class="row"> 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
                         <label asp-for="RegistrationDate" class="form-label"></label>
                         <input asp-for="RegistrationDate"   class="form-control" placeholder="Enter First Name" />
                         <span asp-validation-for="RegistrationDate" class="text-danger"></span>
-                    </div>
-                    
-                  
+                    </div> 
                     
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
                         <label asp-for="FirstName" class="form-label"></label>

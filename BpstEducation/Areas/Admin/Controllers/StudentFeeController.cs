@@ -18,18 +18,15 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
-            var stu = await _context.students.FindAsync(id);
-            if (stu != null)
-            {
-                stu.MySubmittedFeeTillNow = await _context.Fees.Where(f => f.StudentId == id).ToListAsync();
-            }
-            else stu = new Students() { UniqueId = id };
+            var stu = await _context.students.Include(f => f.MySubmittedFeeTillNow).Where(s => s.UniqueId == id).FirstOrDefaultAsync();
+            if (stu == null)
+                stu = new Students() { UniqueId = id };
             ViewBag.StudentId = id;
             return View(stu);
         }
         public IActionResult Create(int id)
         {
-            StudentFee studentfee = new StudentFee() { StudentId = id, CreatedDate = DateTime.UtcNow,FeeSubmittingDate=DateTime.Now }; 
+            StudentFee studentfee = new StudentFee() { StudentId = id, CreatedDate = DateTime.UtcNow, FeeSubmittingDate = DateTime.Now };
             return View(studentfee);
 
         }
@@ -41,7 +38,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             {
                 _context.Add(studentfee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { id=studentfee.StudentId});
+                return RedirectToAction(nameof(Index), new { id = studentfee.StudentId });
             }
 
             return View(studentfee);
