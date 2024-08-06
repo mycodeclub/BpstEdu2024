@@ -23,7 +23,6 @@ namespace BpstEducation.Models
         public string CourseDuration { get; set; }
         public int CourseFees { get; set; }
         public int feeDiscount { get; set; }
-
         public DateTime CreateDate { get; set; }
     }
 }

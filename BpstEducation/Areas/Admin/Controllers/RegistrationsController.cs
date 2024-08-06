@@ -62,9 +62,9 @@ namespace BpstEducation.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            
+
             var registration = await _context.Registrations
-                .Include(r => r.Course)           
+                .Include(r => r.Course)
                 .Where(r => r.UniqueId == id).FirstOrDefaultAsync();
             if (registration == null)
             {
@@ -78,14 +78,9 @@ namespace BpstEducation.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,StatusId,FullName,FatherName,CurrentlyPursuing,CollegeName,BoardId,HighestQualification,ApplicationFor,Message,MobileNumber,AlternateMobileNumber,EmailId,CreateDate")] Registration registration)
+        public async Task<IActionResult> Edit(Registration registration)
         {
-            ViewBag.activeTabName = "Registrations";
-            if (id != registration.UniqueId)
-            {
-                return NotFound();
-            }
-
+            ViewBag.activeTabName = "Registrations"; 
             if (ModelState.IsValid)
             {
                 try
@@ -106,7 +101,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "CourseName", registration.ApplicationFor);
+            //   ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "CourseName", registration.ApplicationFor);
             ViewData["StatusId"] = new SelectList(_context.RegistrationMasters, "UniqueId", "RegistrationStatus", registration.StatusId);
             return View(registration);
         }

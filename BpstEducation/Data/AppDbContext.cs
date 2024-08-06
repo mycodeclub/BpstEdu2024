@@ -29,7 +29,6 @@ namespace BpstEducation.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Course> Courses { get; set; }
         public DbSet<Batch> Batchs { get; set; }
         public DbSet<BatchStudent> StudentBatch { get; set; }
         public DbSet<Qualification> Qualification { get; set; }
