@@ -15,6 +15,7 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
+                    <input type="hidden" asp-for="UniqueId" />
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
                             <label asp-for="CourseId" class="control-label">Course</label>
                             <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">

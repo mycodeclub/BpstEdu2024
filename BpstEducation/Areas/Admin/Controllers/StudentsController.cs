@@ -80,14 +80,14 @@ namespace BpstEducation.Areas.Admin.Controllers
                     student.LastUpdatedDate = DateTime.UtcNow;
                     _context.Update(student);
                 }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
                 ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name");
 
                 ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", student.CourseCategoryID);
                 return View(student);
-
-            }
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+          
         }
 
 

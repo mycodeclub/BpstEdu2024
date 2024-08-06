@@ -1,8 +1,6 @@
-﻿using BpstEducation.Data;
-using BpstEducation.Migrations;
+﻿using BpstEducation.Data; 
 using BpstEducation.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc; 
 using Microsoft.EntityFrameworkCore;
 
 namespace BpstEducation.Areas.Admin.Controllers
@@ -19,16 +17,15 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var stu = await _context.students.Include(f => f.MySubmittedFeeTillNow).Where(s => s.UniqueId == id).FirstOrDefaultAsync();
-            if (stu == null)
-                stu = new Students() { UniqueId = id };
+            stu ??= new Students() { UniqueId = id };
             ViewBag.StudentId = id;
             return View(stu);
-        }
+        } 
+
         public IActionResult Create(int id)
         {
             StudentFee studentfee = new StudentFee() { StudentId = id, CreatedDate = DateTime.UtcNow, FeeSubmittingDate = DateTime.Now };
             return View(studentfee);
-
         }
 
         [HttpPost]
@@ -36,7 +33,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(studentfee);
+                _context.Fees.Add(studentfee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = studentfee.StudentId });
             }

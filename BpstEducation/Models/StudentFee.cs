@@ -14,14 +14,11 @@ namespace BpstEducation.Models
 
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
-        public Students Students { get; set; }
+        public Students? Students { get; set; }
 
-
-        // public Registration Registration { get; set; }
-        public int? TotalFee { get; set; }
-
-        public int SubmittedFee { get; set; }
-        public int? RemainingFee { get; set; }
+        public int BatchId { get; set; }
+ 
+        public int SubmittedFee { get; set; }     
         
 
             

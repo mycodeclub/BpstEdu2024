@@ -80,45 +80,9 @@ namespace BpstEducation.Areas.Admin.Controllers
             ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
             return View(batch);
         }
-
-
-        // POST: Admin/Batche/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,CourseId,Title,Duration,Description,TrainerId,AssisTrainer,StartDate,LastUpdatedDate,BatchFee,CreatedBy,LastUpdatedBy")] Batch batch)
-        {
-            if (id != batch.UniqueId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BatchExists(batch.UniqueId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
-            return View(batch);
-        }
-
+       
         // GET: Admin/Batche/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

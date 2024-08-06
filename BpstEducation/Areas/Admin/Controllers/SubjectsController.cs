@@ -46,10 +46,12 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
 
         // GET: Admin/Subjects/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int id)
         {
             ViewBag.activeTabName = "HelperSubjects";
-            return View();
+            var subject = await _context.Subjects.FindAsync(id);
+            subject ??= new Subject();
+            return View(subject);
         }
 
         // POST: Admin/Subjects/Create
@@ -62,66 +64,24 @@ namespace BpstEducation.Areas.Admin.Controllers
             ViewBag.activeTabName = "HelperSubjects";
             if (ModelState.IsValid)
             {
-                _context.Add(subject);
+                if(subject.UniqueId == 0)
+                {
+                    _context.Add(subject);
+                }
+                else
+                {
+                    _context.Update(subject);
+                }
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(subject);
         }
 
-        // GET: Admin/Subjects/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            ViewBag.activeTabName = "HelperSubjects";
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var subject = await _context.Subjects.FindAsync(id);
-            if (subject == null)
-            {
-                return NotFound();
-            }
-            return View(subject);
-        }
-
-        // POST: Admin/Subjects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,Name,Description")] Subject subject)
-        {
-            ViewBag.activeTabName = "HelperSubjects";
-            if (id != subject.UniqueId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(subject);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SubjectExists(subject.UniqueId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(subject);
-        }
-
+       
         // GET: Admin/Subjects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

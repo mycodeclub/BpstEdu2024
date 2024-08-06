@@ -10,11 +10,11 @@
         <div class="card-body">
             <h5>CourseCategory</h5>
             <hr />
-            <div class="row justify-content-center">
-                <div class="col-md-8">
+           
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
+                            <input type="hidden" asp-for="UniqueId"/>
                             <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Name" class="control-label"></label>
@@ -32,8 +32,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
+                
 
 
         </div>
