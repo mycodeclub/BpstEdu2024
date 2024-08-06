@@ -16,12 +16,9 @@ namespace BpstEducation.Models
         [ForeignKey("StudentId")]
         public Students Students { get; set; }
 
-
-        // public Registration Registration { get; set; }
-        public int? TotalFee { get; set; }
-
-        public int SubmittedFee { get; set; }
-        public int? RemainingFee { get; set; }
+        public int BatchId { get; set; }
+ 
+        public int SubmittedFee { get; set; } 
         public DateTime FeeSubmittingDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
