@@ -24,6 +24,12 @@ namespace BpstEducation.Models
 
         public string LastName { get; set; }
 
+
+        [NotMapped]
+        public string FullName { get; set; }
+
+
+
         [DataType(DataType.EmailAddress)]
         [RegularExpression(@"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$", ErrorMessage = "Email is not in proper format")]
         [DisplayName("Email-Id")]

@@ -22,6 +22,10 @@ namespace BpstEducation.Models
 
         public int SubmittedFee { get; set; }
         public int? RemainingFee { get; set; }
+        
+
+            
+       
         public DateTime FeeSubmittingDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }

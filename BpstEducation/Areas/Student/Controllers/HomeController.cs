@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BpstEducation.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BpstEducation.Areas.Student.Controllers
 {
@@ -7,9 +9,31 @@ namespace BpstEducation.Areas.Student.Controllers
     [Authorize(Roles = "Student")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly AppDbContext _context;
+        private readonly int  StudentId;
+        public HomeController(AppDbContext context)
         {
-            return View();
+            _context = context;
+            StudentId = 1;
+          // @ToDo will be replaced by login user id-------------------------------------------------
+        }
+        public  async Task<IActionResult> Index()
+        {
+            var stu = await _context.students.Where(s => s.UniqueId == StudentId).FirstOrDefaultAsync();
+
+            return View(stu);
+        }
+        public async Task<IActionResult> Course()
+        {
+            var stu = await _context.Courses.Where(s => s.UniqueId == StudentId).FirstOrDefaultAsync();
+
+            return View(stu);
+        }
+        public async Task<IActionResult>Fees()
+        {
+            var stu = await _context.Fees.Where(s => s.UniqueId == StudentId).FirstOrDefaultAsync();
+
+            return View(stu);
         }
     }
 }

@@ -1,0 +1,45 @@
+﻿@model BpstEducation.Models.Course
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_StuLayout.cshtml";
+    ViewBag.ActiveTabName = "Helpercourse";
+}
+
+<h2>Course</h2>
+
+
+<div class="content">
+    <div class="card">
+
+    <div class="card-body ">
+
+        <dl class="row">
+            <dt class="col-md-4 col-sm-6 col-lg-3">
+                @Html.DisplayNameFor(model => model.CourseName)
+            </dt>
+            <dt class="col-sm-10">
+                @Html.DisplayFor(model => model.CourseName)
+                </dd>
+            <dt class="col-md-4 col-sm-6 col-lg-3-sm-2">
+                    @Html.DisplayNameFor(model => model.CourseCategory)
+            </dt>
+            <dt class="col-sm-10">
+                    @Html.DisplayFor(model => model.CourseCategory.UniqueId)
+                </dd>
+            <dt class="col-md-4 col-sm-6 col-lg-3">
+                        @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+            <dt class="col-sm-10">
+                        @Html.DisplayFor(model => model.CreateDate)
+                </dd>
+        </dl>
+
+
+
+
+
+    </div>
+    </div>
+</div>
+
