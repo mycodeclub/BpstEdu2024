@@ -50,10 +50,10 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var stu = await _context.students.FindAsync(id);
-            stu ??= new Students() { RegistrationDate = DateTime.UtcNow };
+            stu ??= new Students() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
             ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
             ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate"); 
-            return View(new Students() { DateOfBirth = DateTime.Now.AddYears(-18) });
+            return View(stu);
         }
 
         // POST: Admin/Students/Create
@@ -83,7 +83,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-                ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name");
+                ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
 
                 ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", student.CourseCategoryID);
                 return View(student);

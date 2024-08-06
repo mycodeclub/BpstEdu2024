@@ -16,8 +16,13 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
-            var stu = await _context.students.Include(f => f.MySubmittedFeeTillNow).Where(s => s.UniqueId == id).FirstOrDefaultAsync();
-            stu ??= new Students() { UniqueId = id };
+            // var stu = await _context.students.Include(f => f.MySubmittedFeeTillNow).Where(s => s.UniqueId == id).FirstOrDefaultAsync();
+            var stu = await _context.students
+                .Include(f => f.MySubmittedFeeTillNow)
+                .Include(f => f.Batch)
+                .Include(f => f.CourseCategory)
+                .Where(s => s.UniqueId == id).FirstOrDefaultAsync();
+            stu ??= new Students() { UniqueId = id};
             ViewBag.StudentId = id;
             return View(stu);
         } 

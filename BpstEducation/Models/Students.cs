@@ -108,6 +108,9 @@ namespace BpstEducation.Models
         public DateTime LastUpdatedDate { get; internal set; }
 
 
-        public int BatchId { get; internal set; }
+        public int BatchId { get; set; }
+        [ForeignKey("BatchId")]
+
+        public Batch? Batch { get; set; }
     }
 }
