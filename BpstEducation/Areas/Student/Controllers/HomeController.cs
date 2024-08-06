@@ -25,7 +25,10 @@ namespace BpstEducation.Areas.Student.Controllers
         }
         public async Task<IActionResult> Course()
         {
-            var stu = await _context.Courses.Where(s => s.UniqueId == StudentId).FirstOrDefaultAsync();
+            var stu = await _context.students
+                .Include(s=>s.CourseCategory)
+                .Include(s=>s.Batch)
+                .Where(s => s.UniqueId == StudentId).FirstOrDefaultAsync();
 
             return View(stu);
         }
