@@ -119,8 +119,9 @@ namespace BpstEducation.Controllers
                     var user = await _userManager.FindByNameAsync(model.LoginName);
                     var role = await _userManager.GetRolesAsync(user); 
                     if (role.Contains("Admin")) return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    else if (role.Contains("Staff")) return RedirectToAction("Index", "Home", new { Area = "Staff" });
                     else if (role.Contains("Student")) return RedirectToAction("Index", "Home", new { Area = "Student" });
-                    else if (role.Contains("Staff")) return RedirectToAction("Index", "Home", new { Area = "Staff" }); 
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else { ModelState.AddModelError("", "Invalid Email Id or Password"); }
