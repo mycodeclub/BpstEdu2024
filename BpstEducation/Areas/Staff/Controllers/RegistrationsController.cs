@@ -9,10 +9,10 @@ using BpstEducation.Data;
 using BpstEducation.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace BpstEducation.Areas.Admin.Controllers
+namespace BpstEducation.Areas.Staff.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area("Staff")]
+    [Authorize(Roles = "Staff,Admin")]
     public class RegistrationsController : Controller
     {
         private readonly AppDbContext _context;
@@ -80,7 +80,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Registration registration)
         {
-            ViewBag.activeTabName = "Registrations"; 
+            ViewBag.activeTabName = "Registrations";
             if (ModelState.IsValid)
             {
                 try
@@ -150,7 +150,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             var students = await _context.Registrations
                .Include(a => a.Status)
                .Include(a => a.Course)
-               .Where(a => (ApplicationFor.Equals(0) || a.ApplicationFor.Equals(ApplicationFor)))
+               .Where(a => ApplicationFor.Equals(0) || a.ApplicationFor.Equals(ApplicationFor))
                .ToListAsync()
                .ConfigureAwait(false);
             ViewBag.Dem = "aa";

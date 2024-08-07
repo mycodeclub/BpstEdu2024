@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =" Admin,Staff,Student")]
     public class EmployeesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public EmployeesController(AppDbContext context)
+        public EmployeesController(
+            UserManager<AppUser> userManager,
+             AppDbContext context
+            )
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -45,7 +48,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
 
         // GET: Admin/Employees/Create
-        public async Task<IActionResult> Create( int id)
+        public async Task<IActionResult> Create(int id)
         {
             var employee = await _context.employees.FindAsync(id);
             employee ??= new Employees();
@@ -57,29 +60,32 @@ namespace BpstEducation.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniqueId,FullName,JobRole,Email,DateOfBirth,PhoneNumber,Experience,Address")] Employees employees)
+        public async Task<IActionResult> Create(Employees employees)
         {
             if (ModelState.IsValid)
             {
-                if(employees.UniqueId == 0)
+                if (employees.UniqueId == 0)
                 {
                     _context.Add(employees);
+                    var result = await AddLoginDetails(employees);
+                    if (!result.Succeeded)
+                        ModelState.AddModelError("Login Creation Error", string.Join(",", result.Errors.Select(e => { return e.Code + " : " + e.Description; }).ToList()));
                 }
                 else
-                {
                     _context.Update(employees);
-                }
-                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(employees);
+            else
+            {
+                return View(employees);
+            }
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
-        
+
+
         // GET: Admin/Employees/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -116,6 +122,30 @@ namespace BpstEducation.Areas.Admin.Controllers
         private bool EmployeesExists(int id)
         {
             return _context.employees.Any(e => e.UniqueId == id);
+        }
+
+        private async Task<IdentityResult> AddLoginDetails(Employees emp)
+        {
+            var appUser = new AppUser()
+            {
+                UserName = emp.Email,
+                Email = emp.Email,
+                Password = "Bpst@" + emp.FullName,
+                ConfirmPassword = emp.Email,
+                PhoneNumber = emp.PhoneNumber
+            };
+            var result = await _userManager.CreateAsync(appUser, appUser.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(appUser, "Staff").ConfigureAwait(false);
+                await _userManager.AddToRoleAsync(appUser, "Student").ConfigureAwait(false);
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return result;
         }
     }
 }

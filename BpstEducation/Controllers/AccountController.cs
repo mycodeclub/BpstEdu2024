@@ -65,7 +65,7 @@ namespace BpstEducation.Controllers
         {
             var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "Admin@bpst.com", true, lockoutOnFailure: false);
             if (result.Succeeded)
-                return RedirectToAction("DashBoard", "Home", new { area = "Student" });
+                return RedirectToAction("Index", "Students", new { area = "Admin" });
             else
                 return RedirectToAction("CreateMasterUser");
         }
@@ -120,7 +120,7 @@ namespace BpstEducation.Controllers
                     var role = await _userManager.GetRolesAsync(user); 
                     if (role.Contains("Admin")) return RedirectToAction("Index", "Home", new { Area = "Admin" });
                     else if (role.Contains("Student")) return RedirectToAction("Index", "Home", new { Area = "Student" });
-                    else if (role.Contains("Trainer")) return RedirectToAction("Index", "Home", new { Area = "Trainer" }); 
+                    else if (role.Contains("Staff")) return RedirectToAction("Index", "Home", new { Area = "Staff" }); 
                     return RedirectToAction("Index", "Home");
                 }
                 else { ModelState.AddModelError("", "Invalid Email Id or Password"); }

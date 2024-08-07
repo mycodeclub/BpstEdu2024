@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BpstEducation.Areas.Student.Controllers
 {
     [Area("Student")]
-    [Authorize(Roles = "Student")]
+    [Authorize(Roles = "Student,Admin,Staff")]
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
@@ -17,6 +17,10 @@ namespace BpstEducation.Areas.Student.Controllers
             _context = context;
         }
         public IActionResult DashBoard()
+        {
+            return View();
+        }
+        public IActionResult Index()
         {
             return View();
         }

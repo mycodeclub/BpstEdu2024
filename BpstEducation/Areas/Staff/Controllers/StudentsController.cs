@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace BpstEducation.Areas.Admin.Controllers
+namespace BpstEducation.Areas.Staff.Controllers
 {
-    [Area("Admin")]
+    [Area("Staff")]
+    [Authorize(Roles = "Staff,Admin")]
     public class StudentsController : Controller
     {
         private readonly AppDbContext _context;
 
-        public StudentsController(AppDbContext context)
-        {
-            _context = context;
-        }
+        public StudentsController(AppDbContext context) => _context = context;
 
         // GET: Admin/Students
         public async Task<IActionResult> Index()
@@ -31,18 +26,13 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var students = await _context.students
                 .Include(s => s.CourseCategory)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
-            {
                 return NotFound();
-            }
-
             return View(students);
         }
 
@@ -52,7 +42,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             var stu = await _context.students.FindAsync(id);
             stu ??= new Students() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
             ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
-            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate"); 
+            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate");
             return View(stu);
         }
 
@@ -83,11 +73,11 @@ namespace BpstEducation.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-                ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
+            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
 
-                ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", student.CourseCategoryID);
-                return View(student);
-          
+            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", student.CourseCategoryID);
+            return View(student);
+
         }
 
 

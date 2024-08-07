@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace BpstEducation.Areas.Admin.Controllers
+namespace BpstEducation.Areas.Staff.Controllers
 {
-    [Area("Admin")]
+    [Area("Staff")]
+    [Authorize(Roles = "Staff,Admin")]
     public class StudentBatchesController : Controller
     {
         private readonly AppDbContext _context;
@@ -50,7 +52,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: StudentBatches/Create
         public IActionResult Create()
         {
-            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b=>b.Course), "UniqueId", "Course.Name");
+            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name");
             ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId");
             return View();
         }

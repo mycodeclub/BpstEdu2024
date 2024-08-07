@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BpstEducation.Areas.Faculty.Controllers
 {
     [Area("Staff")]
-    [Authorize(Roles = "Staff")]
+    [Authorize(Roles = "Staff,Admin")]
     public class HomeController : Controller
     {
         public IActionResult Index()

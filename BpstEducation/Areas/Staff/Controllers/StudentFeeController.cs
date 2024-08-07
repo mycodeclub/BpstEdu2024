@@ -1,11 +1,13 @@
-﻿using BpstEducation.Data; 
+﻿using BpstEducation.Data;
 using BpstEducation.Models;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace BpstEducation.Areas.Admin.Controllers
+namespace BpstEducation.Areas.Staff.Controllers
 {
-    [Area("Admin")]
+    [Area("Staff")]
+    [Authorize(Roles = "Staff,Admin")]
 
     public class StudentFeeController : Controller
     {
@@ -16,16 +18,16 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
-            // var stu = await _context.students.Include(f => f.MySubmittedFeeTillNow).Where(s => s.UniqueId == id).FirstOrDefaultAsync();
+            var stu3 = await _context.students.Where(s => s.UniqueId == id).FirstOrDefaultAsync();
             var stu = await _context.students
                 .Include(f => f.MySubmittedFeeTillNow)
                 .Include(f => f.Batch)
                 .Include(f => f.CourseCategory)
                 .Where(s => s.UniqueId == id).FirstOrDefaultAsync();
-            stu ??= new Students() { UniqueId = id};
+            stu ??= new Students() { UniqueId = id };
             ViewBag.StudentId = id;
             return View(stu);
-        } 
+        }
 
         public IActionResult Create(int id)
         {
