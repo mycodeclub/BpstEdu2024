@@ -17,6 +17,7 @@ namespace BpstEducation.Models
         public Students? Students { get; set; }
 
         public int BatchId { get; set; }
+
  
         public int SubmittedFee { get; set; }     
         

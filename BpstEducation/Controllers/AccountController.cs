@@ -65,7 +65,7 @@ namespace BpstEducation.Controllers
         {
             var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "Admin@bpst.com", true, lockoutOnFailure: false);
             if (result.Succeeded)
-                return RedirectToAction("Index", "Students", new { area = "Admin" });
+                return RedirectToAction("DashBoard", "Students", new { area = "Admin" });
             else
                 return RedirectToAction("CreateMasterUser");
         }
