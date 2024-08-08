@@ -1,6 +1,8 @@
 ﻿using BpstEducation.Data;
 using BpstEducation.Models;
+using BpstEducation.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,16 +11,17 @@ namespace BpstEducation.Areas.Staff.Controllers
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
 
-    public class StudentFeeController : Controller
+    public class StudentFeeController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL loginService) : Controller
     {
-        private readonly AppDbContext _context;
-        public StudentFeeController(AppDbContext context)
-        {
-            _context = context;
-        }
+        private readonly AppDbContext _context = context;
+        private readonly UserManager<AppUser> _userManager = userManager;
+        private readonly IUserServiceBAL _loggedInUser = loginService;
+
         public async Task<IActionResult> Index(int id)
         {
             var stu3 = await _context.students.Where(s => s.UniqueId == id).FirstOrDefaultAsync();
+            ViewBag.Layout = await _loggedInUser.GetLayout();
+
             var stu = await _context.students
                 .Include(f => f.MySubmittedFeeTillNow)
                 .Include(f => f.Batch)

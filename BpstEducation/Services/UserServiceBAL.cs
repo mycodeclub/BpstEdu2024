@@ -13,6 +13,11 @@ namespace BpstEducation.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
         private readonly UserManager<AppUser> _userManager;
+        private readonly object ModelState;
+        private object modelState;
+
+        //  private readonly AppUser user;
+
         public UserServiceBAL(AppDbContext dbContext, IHttpContextAccessor httpContextAccessor, ITempDataDictionaryFactory tempDataDictionaryFactory, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _dbContext = dbContext;
@@ -52,14 +57,46 @@ namespace BpstEducation.Services
             return user != null;     
         }
 
-        public Task<IdentityResult> AddUser(AppUser user, string? role)
+        public async Task<IdentityResult> AddUser(AppUser user, string role)
         {
-            throw new NotImplementedException();
+            var appUser = new AppUser()
+            {
+                UserName = user.Email,
+                Email = user.Email,
+                Password = "123Bpst@" + user.UserName,
+                ConfirmPassword = user.Email,
+                PhoneNumber = user.PhoneNumber
+            };
+
+            var result = await _userManager.CreateAsync(appUser, appUser.Password);
+
+            if (result.Succeeded && string.IsNullOrWhiteSpace(role))
+            {
+                await _userManager.AddToRoleAsync(appUser, role).ConfigureAwait(false);
+            }
+            return result;
         }
 
-        public Task<IdentityResult> UpldateLoggedInUserEmail(string oldEmail, string newEmail)
+        public async Task<IdentityResult> UpldateLoggedInUserEmail(string oldEmail, string newEmail)
         {
-            throw new NotImplementedException();
+            // Fetch the user from the database
+            var user = await _userManager.FindByEmailAsync(oldEmail);
+
+            // Check if the user is found
+            if (user == null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+            }
+
+            // Update the user's email
+            user.Email = newEmail;
+            user.UserName = newEmail; // Uncomment this if you want to update the username as well
+
+            // Save the changes to the database
+            var emailUpdateResult = await _userManager.UpdateAsync(user);
+
+            // Return the result of the email update
+            return emailUpdateResult;
         }
 
         public async Task<IdentityResult> UpldateLoggedInUserPassword(string newEmail, string oldPassword, string newPassword)
@@ -80,7 +117,7 @@ namespace BpstEducation.Services
 
             // Update the user's email
             user.Email = newEmail;
-            user.UserName = newEmail;
+           // user.UserName = newEmail;
             var emailUpdateResult = await _userManager.UpdateAsync(user);
             if (!emailUpdateResult.Succeeded)
             {
@@ -99,5 +136,7 @@ namespace BpstEducation.Services
 
             return IdentityResult.Success;
         }
+
+       
     }
 }

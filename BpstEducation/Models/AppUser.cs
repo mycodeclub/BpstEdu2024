@@ -21,5 +21,6 @@ namespace BpstEducation.Models
         [RegularExpression(@"^(\d{10})$", ErrorMessage = "The phone number must be exactly 10 digits and contain only numbers.")]
         public override string PhoneNumber { get => base.PhoneNumber; set => base.PhoneNumber = value; }
 
+      
     }
 }

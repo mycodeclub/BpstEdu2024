@@ -8,24 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Models;
 using Microsoft.AspNetCore.Authorization;
+using BpstEducation.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace BpstEducation.Areas.Staff.Controllers
 {
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
-    public class StudentBatchesController : Controller
+    public class StudentBatchesController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL loginService) : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _context = context;
+        private readonly UserManager<AppUser> _userManager = userManager;
+        private readonly IUserServiceBAL _loggedInUser = loginService;
 
-        public StudentBatchesController(AppDbContext context)
-        {
-            _context = context;
-        }
 
         // GET: StudentBatches
         public async Task<IActionResult> Index()
         {
             var appDbContext = await _context.StudentBatch.Include(s => s.Batch).Include(s => s.Registration).ToListAsync();
+
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(appDbContext);
         }
 
