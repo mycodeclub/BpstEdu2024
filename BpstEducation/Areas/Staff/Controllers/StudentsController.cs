@@ -11,11 +11,11 @@ namespace BpstEducation.Areas.Staff.Controllers
 {
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
-    public class StudentsController(UserManager<AppUser> userManager, AppDbContext context, ILoginUserService loginService) : Controller
+    public class StudentsController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL loginService) : Controller
     {
         private readonly AppDbContext _context = context;
         private readonly UserManager<AppUser> _userManager = userManager;
-        private readonly ILoginUserService _loggedInUser = loginService;
+        private readonly IUserServiceBAL _loggedInUser = loginService;
 
         // GET: Admin/Students
         public async Task<IActionResult> Index()

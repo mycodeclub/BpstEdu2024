@@ -7,7 +7,7 @@ using BpstEducation.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-builder.Services.AddScoped<ILoginUserService, LoginUserService>();
+builder.Services.AddScoped<IUserServiceBAL, UserServiceBAL>();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConStr")));
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
@@ -31,6 +31,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -45,3 +46,4 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Inde
 
 
 app.Run();
+

@@ -14,13 +14,13 @@ namespace BpstEducation.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly ILoginUserService _loginManager;
+        private readonly IUserServiceBAL _loginManager;
 
 
 
 
 
-        public HomeController(AppDbContext context, ILoginUserService user)
+        public HomeController(AppDbContext context, IUserServiceBAL user)
         {
             _context = context;
             _loginManager = user;
