@@ -2,10 +2,13 @@ using BpstEducation.Data;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Models;
 using Microsoft.AspNetCore.Identity;
+using BpstEducation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddScoped<ILoginUserService, LoginUserService>();
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConStr")));
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {

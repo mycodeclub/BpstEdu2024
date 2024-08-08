@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles =" Admin,Staff")]
+    [Authorize(Roles =" Admin")]
     public class EmployeesController : Controller
     {
         private readonly AppDbContext _context;

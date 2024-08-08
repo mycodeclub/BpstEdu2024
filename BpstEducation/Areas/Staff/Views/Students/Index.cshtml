@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = ViewBag.Layout;
     ViewBag.ActiveTabName = "Students";
 
 }
@@ -22,7 +22,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstName)
                             </th>
-                            
+
                             <th>
                                 @Html.DisplayNameFor(model => model.Email)
                             </th>
@@ -89,9 +89,9 @@
 @section Scripts {
     <!-- DataTable -->
     <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
-     
+
     <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
-     
+
     <script>
         $(document).ready(function () {
             $('#example1').DataTable();

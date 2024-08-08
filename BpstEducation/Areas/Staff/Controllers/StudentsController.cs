@@ -6,31 +6,27 @@ using BpstEducation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using BpstEducation.Services;
 namespace BpstEducation.Areas.Staff.Controllers
 {
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
-    public class StudentsController(UserManager<AppUser> userManager, AppDbContext context) : Controller
+    public class StudentsController(UserManager<AppUser> userManager, AppDbContext context, ILoginUserService loginService) : Controller
     {
         private readonly AppDbContext _context = context;
         private readonly UserManager<AppUser> _userManager = userManager;
+        private readonly ILoginUserService _loggedInUser = loginService;
 
         // GET: Admin/Students
         public async Task<IActionResult> Index()
         {
 
-            var appDbContext = _context.students.Include(s => s.CourseCategory); 
-            GetLayout();
+            var appDbContext = _context.students.Include(s => s.CourseCategory);
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(await appDbContext.ToListAsync());
         }
 
-        private async void GetLayout()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userManager.FindByIdAsync(userId);
-            var roles = await _userManager.GetRolesAsync(user);
-            ViewBag.Layout = roles.Contains("Admin") ? "~/Views/Shared/_AdminLayout.cshtml" : "~/Views/Shared/_StaffLayout.cshtml";
-        }
+
 
         // GET: Admin/Students/Details/5
         public async Task<IActionResult> Details(int? id)
