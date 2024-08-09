@@ -82,11 +82,11 @@ namespace BpstEducation.Controllers
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByNameAsync(model.LoginName);
-                    var role = await _userManager.GetRolesAsync(user); 
+                    var role = await _userManager.GetRolesAsync(user);
                     if (role.Contains("Admin")) return RedirectToAction("Index", "Home", new { Area = "Admin" });
                     else if (role.Contains("Staff")) return RedirectToAction("Index", "Home", new { Area = "Staff" });
                     else if (role.Contains("Student")) return RedirectToAction("Index", "Home", new { Area = "Student" });
-                    
+
                     return RedirectToAction("Index", "Home");
                 }
                 else { ModelState.AddModelError("", "Invalid Email Id or Password"); }
@@ -100,7 +100,7 @@ namespace BpstEducation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(Login model)
+        public async Task<IActionResult> ChangePassword(UpdatePassword model)
         {
             if (ModelState.IsValid)
             {
@@ -137,21 +137,12 @@ namespace BpstEducation.Controllers
             try
             {
                 var appUser = new AppUser() { UserName = "admin@bpst.com", Email = "admin@bpst.com", Password = "Admin@bpst.com", ConfirmPassword = "Admin@bpst.com", PhoneNumber = "9999999999", };
-                var result = await _userManager.CreateAsync(appUser, appUser.Password);
-                if (result.Succeeded)
+                var userRoles = await _context.Roles.Select(r => r.Name).ToListAsync();
+                var result = await _userService.AddUser(appUser, userRoles);
+                foreach (var error in result.Errors)
                 {
-                    var userRoles = await _context.Roles.ToListAsync();
-                    foreach (var role in userRoles)
-                        await _userManager.AddToRoleAsync(appUser, role.Name).ConfigureAwait(false);
-                    resultStr = "Master User Created Successfully.";
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                        resultStr += "Some Error: " + error.Code;
-                    }
+                    ModelState.AddModelError(string.Empty, error.Description);
+                    resultStr += "Some Error: " + error.Code;
                 }
             }
             catch (Exception ex)

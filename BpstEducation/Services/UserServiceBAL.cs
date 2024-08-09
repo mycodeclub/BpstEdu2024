@@ -47,17 +47,17 @@ namespace BpstEducation.Services
 
         public async Task<string> GetLayout()
         {
-             var roles = GetLoggedInUserRoles();
-             return roles.Contains("Admin") ? "~/Views/Shared/_AdminLayout.cshtml" : "~/Views/Shared/_StaffLayout.cshtml";
+            var roles = GetLoggedInUserRoles();
+            return roles.Contains("Admin") ? "~/Views/Shared/_AdminLayout.cshtml" : "~/Views/Shared/_StaffLayout.cshtml";
         }
 
         public async Task<bool> IsUserExist(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            return user != null;     
+            return user != null;
         }
 
-        public async Task<IdentityResult> AddUser(AppUser user, string role)
+        public async Task<IdentityResult> AddUser(AppUser user, List<string> role)
         {
             var appUser = new AppUser()
             {
@@ -70,9 +70,9 @@ namespace BpstEducation.Services
 
             var result = await _userManager.CreateAsync(appUser, appUser.Password);
 
-            if (result.Succeeded && string.IsNullOrWhiteSpace(role))
+            if (result.Succeeded && role != null && role.Any())
             {
-                await _userManager.AddToRoleAsync(appUser, role).ConfigureAwait(false);
+                await _userManager.AddToRolesAsync(appUser, role).ConfigureAwait(false);
             }
             return result;
         }
@@ -117,7 +117,7 @@ namespace BpstEducation.Services
 
             // Update the user's email
             user.Email = newEmail;
-           // user.UserName = newEmail;
+            // user.UserName = newEmail;
             var emailUpdateResult = await _userManager.UpdateAsync(user);
             if (!emailUpdateResult.Succeeded)
             {
@@ -137,6 +137,6 @@ namespace BpstEducation.Services
             return IdentityResult.Success;
         }
 
-       
+
     }
 }

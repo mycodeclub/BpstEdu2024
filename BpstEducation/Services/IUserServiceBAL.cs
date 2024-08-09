@@ -12,7 +12,7 @@ namespace BpstEducation.Services
         public Task<string> GetLayout();
 
         public Task<bool> IsUserExist(string email);
-        public Task<IdentityResult> AddUser(AppUser user, string? role);
+        public Task<IdentityResult> AddUser(AppUser user, List<string> role);
         public Task<IdentityResult> UpldateLoggedInUserEmail(string oldEmail, string newEmail);
         public Task<IdentityResult> UpldateLoggedInUserPassword(string Email, string oldPassword, string newPassword);
     }
