@@ -14,7 +14,7 @@ namespace BpstEducation.Models
         [Display(Name = "Course")]
         public int CourseId { get; set; }
 
-        [NotMapped]
+        [NotMapped] 
         [Obsolete]
         public CourseCategory? Course { get; set; }
         public string Title { get; set; } = string.Empty;
