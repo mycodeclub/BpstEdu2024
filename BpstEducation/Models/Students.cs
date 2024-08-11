@@ -109,7 +109,7 @@ namespace BpstEducation.Models
 
 
         public int BatchId { get; set; }
-        [ForeignKey("BatchId")]
+      //  [ForeignKey("BatchId")]
 
         public Batch? Batch { get; set; }
     }

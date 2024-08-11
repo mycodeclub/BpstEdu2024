@@ -24,7 +24,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             var stu = await _context.students
                 .Include(f => f.MySubmittedFeeTillNow)
-                .Include(f => f.Batch)
+              //  .Include(f => f.Batch)
                 .Include(f => f.CourseCategory)
                 .Where(s => s.UniqueId == id).FirstOrDefaultAsync();
             stu ??= new Students() { UniqueId = id };

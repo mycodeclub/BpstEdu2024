@@ -80,7 +80,6 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
-
             ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", student.CourseCategoryID);
             return View(student);
 

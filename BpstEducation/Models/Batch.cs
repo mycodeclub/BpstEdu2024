@@ -13,7 +13,9 @@ namespace BpstEducation.Models
         [Required(ErrorMessage = "Please select Valid Course")]
         [Display(Name = "Course")]
         public int CourseId { get; set; }
-        [ForeignKey("CourseId")]
+
+        [NotMapped]
+        [Obsolete]
         public CourseCategory? Course { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Duration { get; set; } = string.Empty;

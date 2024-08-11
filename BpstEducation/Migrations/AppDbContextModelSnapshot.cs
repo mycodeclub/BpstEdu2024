@@ -96,10 +96,6 @@ namespace BpstEducation.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -190,8 +186,6 @@ namespace BpstEducation.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UniqueId");
-
-                    b.HasIndex("CourseId");
 
                     b.HasIndex("TrainerId");
 
@@ -1075,19 +1069,11 @@ namespace BpstEducation.Migrations
 
             modelBuilder.Entity("BpstEducation.Models.Batch", b =>
                 {
-                    b.HasOne("BpstEducation.Models.CourseCategory", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BpstEducation.Models.Employees", "Trainer")
                         .WithMany()
                         .HasForeignKey("TrainerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
 
                     b.Navigation("Trainer");
                 });

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BpstEducation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240805053127_MakeSomePorpsNullableForQuestions")]
-    partial class MakeSomePorpsNullableForQuestions
+    [Migration("20240811103055_reset")]
+    partial class reset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,7 +164,7 @@ namespace BpstEducation.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedBy")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -174,9 +174,6 @@ namespace BpstEducation.Migrations
                     b.Property<string>("Duration")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastUpdatedBy")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
@@ -192,8 +189,6 @@ namespace BpstEducation.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UniqueId");
-
-                    b.HasIndex("CourseId");
 
                     b.HasIndex("TrainerId");
 
@@ -345,41 +340,6 @@ namespace BpstEducation.Migrations
                     b.HasKey("UniqueId");
 
                     b.ToTable("Countries");
-                });
-
-            modelBuilder.Entity("BpstEducation.Models.Course", b =>
-                {
-                    b.Property<int>("UniqueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
-
-                    b.Property<int>("CourseCategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CourseDuration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CourseFees")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CourseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("feeDiscount")
-                        .HasColumnType("int");
-
-                    b.HasKey("UniqueId");
-
-                    b.HasIndex("CourseCategoryID");
-
-                    b.ToTable("Course");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.CourseCategory", b =>
@@ -798,6 +758,9 @@ namespace BpstEducation.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
 
+                    b.Property<int>("BatchId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -807,16 +770,10 @@ namespace BpstEducation.Migrations
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("RemainingFee")
-                        .HasColumnType("int");
-
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubmittedFee")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TotalFee")
                         .HasColumnType("int");
 
                     b.HasKey("UniqueId");
@@ -845,8 +802,17 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BatchId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CourseCategoryID")
                         .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -865,6 +831,9 @@ namespace BpstEducation.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MyDiscount")
                         .HasColumnType("int");
 
@@ -882,7 +851,12 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("UniqueId");
+
+                    b.HasIndex("BatchId");
 
                     b.HasIndex("CourseCategoryID");
 
@@ -1098,19 +1072,11 @@ namespace BpstEducation.Migrations
 
             modelBuilder.Entity("BpstEducation.Models.Batch", b =>
                 {
-                    b.HasOne("BpstEducation.Models.CourseCategory", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BpstEducation.Models.Employees", "Trainer")
                         .WithMany()
                         .HasForeignKey("TrainerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
 
                     b.Navigation("Trainer");
                 });
@@ -1154,17 +1120,6 @@ namespace BpstEducation.Migrations
                         .IsRequired();
 
                     b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("BpstEducation.Models.Course", b =>
-                {
-                    b.HasOne("BpstEducation.Models.CourseCategory", "CourseCategory")
-                        .WithMany()
-                        .HasForeignKey("CourseCategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CourseCategory");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Question", b =>
@@ -1217,11 +1172,19 @@ namespace BpstEducation.Migrations
 
             modelBuilder.Entity("BpstEducation.Models.Students", b =>
                 {
+                    b.HasOne("BpstEducation.Models.Batch", "Batch")
+                        .WithMany()
+                        .HasForeignKey("BatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BpstEducation.Models.CourseCategory", "CourseCategory")
                         .WithMany()
                         .HasForeignKey("CourseCategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Batch");
 
                     b.Navigation("CourseCategory");
                 });

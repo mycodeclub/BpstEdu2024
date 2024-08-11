@@ -179,11 +179,7 @@ namespace BpstEducation.Areas.Student.Controllers
 
         private async Task<Students> GetLoggedInUser()
         {
-            var stu = await _context.students.Where(s => s.CourseCategoryID > 0 && s.BatchId > 0)
-                .Include(s => s.CourseCategory)
-                .Include(s => s.Batch)
-                .FirstOrDefaultAsync();
-            return stu;
+            return null; 
         }
     }
 }

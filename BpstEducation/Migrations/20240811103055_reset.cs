@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BpstEducation.Migrations
 {
     /// <inheritdoc />
-    public partial class _merge : Migration
+    public partial class reset : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -320,60 +320,6 @@ namespace BpstEducation.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Course",
-                columns: table => new
-                {
-                    UniqueId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseCategoryID = table.Column<int>(type: "int", nullable: false),
-                    CourseDuration = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseFees = table.Column<int>(type: "int", nullable: false),
-                    feeDiscount = table.Column<int>(type: "int", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Course", x => x.UniqueId);
-                    table.ForeignKey(
-                        name: "FK_Course_CourseCategories_CourseCategoryID",
-                        column: x => x.CourseCategoryID,
-                        principalTable: "CourseCategories",
-                        principalColumn: "UniqueId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "students",
-                columns: table => new
-                {
-                    UniqueId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AadhaarNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PanNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AadharName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PanName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CourseCategoryID = table.Column<int>(type: "int", nullable: false),
-                    Fees = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_students", x => x.UniqueId);
-                    table.ForeignKey(
-                        name: "FK_students_CourseCategories_CourseCategoryID",
-                        column: x => x.CourseCategoryID,
-                        principalTable: "CourseCategories",
-                        principalColumn: "UniqueId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Batchs",
                 columns: table => new
                 {
@@ -388,18 +334,11 @@ namespace BpstEducation.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BatchFee = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdatedBy = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Batchs", x => x.UniqueId);
-                    table.ForeignKey(
-                        name: "FK_Batchs_CourseCategories_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "CourseCategories",
-                        principalColumn: "UniqueId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Batchs_employees_TrainerId",
                         column: x => x.TrainerId,
@@ -486,8 +425,8 @@ namespace BpstEducation.Migrations
                     AnswerLine1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AnswerLine2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AnswerText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AnswerObjectJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnswerObjectJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
@@ -524,24 +463,43 @@ namespace BpstEducation.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fees",
+                name: "students",
                 columns: table => new
                 {
                     UniqueId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    FeeInstallment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FeeSubmittingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AadhaarNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PanNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AadharName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PanName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseCategoryID = table.Column<int>(type: "int", nullable: false),
+                    MyTrainingFee = table.Column<int>(type: "int", nullable: false),
+                    MyDiscount = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BatchId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fees", x => x.UniqueId);
+                    table.PrimaryKey("PK_students", x => x.UniqueId);
                     table.ForeignKey(
-                        name: "FK_Fees_RegistrationForm_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "RegistrationForm",
+                        name: "FK_students_Batchs_BatchId",
+                        column: x => x.BatchId,
+                        principalTable: "Batchs",
+                        principalColumn: "UniqueId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_students_CourseCategories_CourseCategoryID",
+                        column: x => x.CourseCategoryID,
+                        principalTable: "CourseCategories",
                         principalColumn: "UniqueId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -610,6 +568,30 @@ namespace BpstEducation.Migrations
                         column: x => x.StateId,
                         principalTable: "States",
                         principalColumn: "UniqueId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fees",
+                columns: table => new
+                {
+                    UniqueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    BatchId = table.Column<int>(type: "int", nullable: false),
+                    SubmittedFee = table.Column<int>(type: "int", nullable: false),
+                    FeeSubmittingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fees", x => x.UniqueId);
+                    table.ForeignKey(
+                        name: "FK_Fees_students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "students",
+                        principalColumn: "UniqueId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -715,11 +697,6 @@ namespace BpstEducation.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Batchs_CourseId",
-                table: "Batchs",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Batchs_TrainerId",
                 table: "Batchs",
                 column: "TrainerId");
@@ -733,11 +710,6 @@ namespace BpstEducation.Migrations
                 name: "IX_CodeHelpers_SubjectId",
                 table: "CodeHelpers",
                 column: "SubjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Course_CourseCategoryID",
-                table: "Course",
-                column: "CourseCategoryID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fees_StudentId",
@@ -775,6 +747,11 @@ namespace BpstEducation.Migrations
                 column: "RegistrationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_students_BatchId",
+                table: "students",
+                column: "BatchId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_students_CourseCategoryID",
                 table: "students",
                 column: "CourseCategoryID");
@@ -808,9 +785,6 @@ namespace BpstEducation.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Course");
-
-            migrationBuilder.DropTable(
                 name: "EducationBoardsMaster");
 
             migrationBuilder.DropTable(
@@ -829,9 +803,6 @@ namespace BpstEducation.Migrations
                 name: "StudentBatch");
 
             migrationBuilder.DropTable(
-                name: "students");
-
-            migrationBuilder.DropTable(
                 name: "Cities");
 
             migrationBuilder.DropTable(
@@ -841,10 +812,10 @@ namespace BpstEducation.Migrations
                 name: "AppUser");
 
             migrationBuilder.DropTable(
-                name: "Subject");
+                name: "students");
 
             migrationBuilder.DropTable(
-                name: "Batchs");
+                name: "Subject");
 
             migrationBuilder.DropTable(
                 name: "RegistrationForm");
@@ -853,7 +824,7 @@ namespace BpstEducation.Migrations
                 name: "States");
 
             migrationBuilder.DropTable(
-                name: "employees");
+                name: "Batchs");
 
             migrationBuilder.DropTable(
                 name: "CourseCategories");
@@ -863,6 +834,9 @@ namespace BpstEducation.Migrations
 
             migrationBuilder.DropTable(
                 name: "Countries");
+
+            migrationBuilder.DropTable(
+                name: "employees");
         }
     }
 }
