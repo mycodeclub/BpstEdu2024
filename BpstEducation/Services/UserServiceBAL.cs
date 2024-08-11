@@ -13,12 +13,12 @@ namespace BpstEducation.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
         private readonly UserManager<AppUser> _userManager;
-        private readonly object ModelState;
-        private object modelState;
 
-        //  private readonly AppUser user;
-
-        public UserServiceBAL(AppDbContext dbContext, IHttpContextAccessor httpContextAccessor, ITempDataDictionaryFactory tempDataDictionaryFactory, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public UserServiceBAL(AppDbContext dbContext,
+            IHttpContextAccessor httpContextAccessor,
+            ITempDataDictionaryFactory tempDataDictionaryFactory,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager)
         {
             _dbContext = dbContext;
             _httpContextAccessor = httpContextAccessor;
@@ -43,40 +43,24 @@ namespace BpstEducation.Services
         {
             var roles = _httpContextAccessor.HttpContext.User.FindAll(ClaimTypes.Role).Select(roleClaim => roleClaim.Value).ToList();
             return roles;
-        }
-
+        } 
         public async Task<string> GetLayout()
         {
             var roles = GetLoggedInUserRoles();
             return roles.Contains("Admin") ? "~/Views/Shared/_AdminLayout.cshtml" : "~/Views/Shared/_StaffLayout.cshtml";
-        }
-
+        } 
         public async Task<bool> IsUserExist(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             return user != null;
         }
-
         public async Task<IdentityResult> AddUser(AppUser user, List<string> role)
         {
-            var appUser = new AppUser()
-            {
-                UserName = user.Email,
-                Email = user.Email,
-                Password = "123Bpst@" + user.UserName,
-                ConfirmPassword = user.Email,
-                PhoneNumber = user.PhoneNumber
-            };
-
-            var result = await _userManager.CreateAsync(appUser, appUser.Password);
-
+            var result = await _userManager.CreateAsync(user, user.Password);
             if (result.Succeeded && role != null && role.Any())
-            {
-                await _userManager.AddToRolesAsync(appUser, role).ConfigureAwait(false);
-            }
+                await _userManager.AddToRolesAsync(user, role).ConfigureAwait(false);
             return result;
         }
-
         public async Task<IdentityResult> UpldateLoggedInUserEmail(string oldEmail, string newEmail)
         {
             // Fetch the user from the database
@@ -98,7 +82,6 @@ namespace BpstEducation.Services
             // Return the result of the email update
             return emailUpdateResult;
         }
-
         public async Task<IdentityResult> UpldateLoggedInUserPassword(string newEmail, string oldPassword, string newPassword)
         {
             // Get the logged-in user
@@ -136,7 +119,5 @@ namespace BpstEducation.Services
 
             return IdentityResult.Success;
         }
-
-
     }
 }

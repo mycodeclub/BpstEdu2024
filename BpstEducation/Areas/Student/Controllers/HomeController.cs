@@ -16,15 +16,12 @@ namespace BpstEducation.Areas.Student.Controllers
         private Students student;
         private readonly UserManager<AppUser> _userManager;
 
-      
-            
         public HomeController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
-        _userManager = userManager;
-
-    }
-    public IActionResult DashBoard()
+            _userManager = userManager; 
+        }
+        public IActionResult DashBoard()
         {
             return View();
         }
@@ -167,7 +164,7 @@ namespace BpstEducation.Areas.Student.Controllers
         }
         public async Task<IActionResult> Course()
         {
-            var stu = await GetLoggedInUser(); 
+            var stu = await GetLoggedInUser();
             return View(stu.CourseCategory);
         }
         public async Task<IActionResult> Fees()
@@ -179,7 +176,7 @@ namespace BpstEducation.Areas.Student.Controllers
 
         private async Task<Students> GetLoggedInUser()
         {
-            return null; 
+            return null;
         }
     }
 }
