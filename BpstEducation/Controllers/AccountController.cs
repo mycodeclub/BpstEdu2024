@@ -54,7 +54,7 @@ namespace BpstEducation.Controllers
             {
                 var result = await _signInManager.PasswordSignInAsync(model.LoginName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
-                    await ReDirectIfLoggedIn();
+                    return await ReDirectIfLoggedIn();
                 else { ModelState.AddModelError("", "Invalid Email Id or Password"); }
             }
             return View(model);
@@ -132,7 +132,7 @@ namespace BpstEducation.Controllers
         {
             var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "admin@bpst.com", true, lockoutOnFailure: false);
             if (result.Succeeded)
-           return     await ReDirectIfLoggedIn();
+                return await ReDirectIfLoggedIn();
             else
                 return RedirectToAction("CreateMasterUser");
             return RedirectToAction("Index", "Home");

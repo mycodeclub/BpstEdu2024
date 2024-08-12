@@ -55,7 +55,7 @@ namespace BpstEducation.Models
         public int? ApplicationFor { get; set; }
 
         [ForeignKey("ApplicationFor")]
-        public CourseCategory? Course { get; set; }
+        public Course? Course { get; set; }
  
         [Display(Name = "Message")]
         public string Message { get; set; }

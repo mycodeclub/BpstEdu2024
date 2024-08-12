@@ -26,7 +26,7 @@ namespace BpstEducation.Models
 
 
         [NotMapped]
-        public string? FullName { get; set; }
+        public string? FullName { get { return FirstName + LastName; } }
 
 
 
@@ -39,7 +39,6 @@ namespace BpstEducation.Models
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
-
         public DateTime DateOfBirth { get; set; }
 
         [Phone]
@@ -51,19 +50,13 @@ namespace BpstEducation.Models
 
         [Required]
         [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid Aadhaar number. It must be a 12-digit number.")]
-
-
         [Display(Name = "Aadhaar Num.")]
         public string AadhaarNumber { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-Z]{5}\d{4}[A-Z]{1}$", ErrorMessage = "Invalid PAN number. Format should be: XXXXX1234X.")]
         [Display(Name = "Pan Num.")]
-
-        public string PanNumber
-        {
-            get; set;
-        }
+        public string PanNumber { get; set; }
         [NotMapped]
 
         [DataType(DataType.Upload)]
@@ -80,13 +73,13 @@ namespace BpstEducation.Models
 
         public string? PanName { get; set; } = string.Empty;
 
+
         [Display(Name = "Course Category")]
-        public int CourseCategoryID { get; set; }
-        [ForeignKey("CourseCategoryID")]
-        public CourseCategory? CourseCategory { get; set; }
+        public int CourseOfInterestId { get; set; }
+        [ForeignKey("CourseOfInterestId")]
+        public Course? CourseOfInterest { get; set; }
         public int MyTrainingFee { get; set; }
         public int MyDiscount { get; set; }
-        public int CourseId { get; set; }
         public List<StudentFee>? MySubmittedFeeTillNow { get; set; }
         //--------------------------------------------------------------
         [Display(Name = "My Remaining Fee")]
@@ -102,15 +95,8 @@ namespace BpstEducation.Models
             }
         }
         [Display(Name = "Registration Date")]
-
         public DateTime RegistrationDate { get; internal set; }
         public DateTime CreatedDate { get; internal set; }
         public DateTime LastUpdatedDate { get; internal set; }
-
-
-        public int BatchId { get; set; }
-      //  [ForeignKey("BatchId")]
-
-        public Batch? Batch { get; set; }
     }
 }

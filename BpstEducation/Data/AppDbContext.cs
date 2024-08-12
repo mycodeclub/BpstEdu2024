@@ -19,32 +19,32 @@ namespace BpstEducation.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.SeedRoles();
             modelBuilder.SeedRegistrationStatusTypes();
-          //  modelBuilder.SeedEducationBoard(); Not required for now
             modelBuilder.SeedCourseCategory();
-            modelBuilder.SeedQualificationCategory();
             modelBuilder.Entity<AppUser>().ToTable("AppUser");
         }
 
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<Country> Countries { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Batch> Batchs { get; set; }
-        public DbSet<BatchStudent> StudentBatch { get; set; }
+        public DbSet<BatchStudent> BatchStudents { get; set; }
         public DbSet<Qualification> Qualification { get; set; }
-        public DbSet<CourseCategory> CourseCategories { get; set; }
-        
-        public DbSet<EducationBoardsMaster> EducationBoards { get; set; }
-        public DbSet<Enquiry> Enquiries { get; set; }
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<RegistrationStatusMaster> RegistrationMasters { get; set; }
-        public DbSet<State> States { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<CodeHelper> CodeHelpers { get; set; }
         public DbSet<StudentFee> Fees { get; set; }
         public DbSet<Employees> employees { get; set; }
         public DbSet<Students> students { get; set; }
+
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        public DbSet<EducationBoardsMaster> EducationBoards { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Enquiry> Enquiries { get; set; }
 
     }
 }

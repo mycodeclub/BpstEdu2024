@@ -165,7 +165,7 @@ namespace BpstEducation.Areas.Student.Controllers
         public async Task<IActionResult> Course()
         {
             var stu = await GetLoggedInUser();
-            return View(stu.CourseCategory);
+            return View(stu.CourseOfInterest);
         }
         public async Task<IActionResult> Fees()
         {

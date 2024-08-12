@@ -25,20 +25,20 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: Admin/CourseCategories
         public async Task<IActionResult> Index()
         {
-            ViewBag.activeTabName = "Courses"; 
-            return View(await _context.CourseCategories.ToListAsync());
+            ViewBag.activeTabName = "Courses";
+            return View(await _context.Courses.ToListAsync());
         }
 
         // GET: Admin/CourseCategories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            ViewBag.activeTabName = "Courses"; 
+            ViewBag.activeTabName = "Courses";
             if (id == null)
             {
                 return NotFound();
             }
 
-            var courseCategory = await _context.CourseCategories
+            var courseCategory = await _context.Courses
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (courseCategory == null)
             {
@@ -51,8 +51,8 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: Admin/CourseCategories/Create
         public async Task<IActionResult> Create(int id)
         {
-            var course = await _context.CourseCategories.FindAsync(id);
-            course ??= new CourseCategory();
+            var course = await _context.Courses.FindAsync(id);
+            course ??= new Course() { };
             ViewBag.activeTabName = "Courses"; return View();
         }
 
@@ -61,12 +61,12 @@ namespace BpstEducation.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniqueId,Name")] CourseCategory courseCategory)
+        public async Task<IActionResult> Create([Bind("UniqueId,Name")] Course courseCategory)
         {
             ViewBag.activeTabName = "Courses";
             if (ModelState.IsValid)
             {
-                if(courseCategory.UniqueId == 0)
+                if (courseCategory.UniqueId == 0)
                 {
                     _context.Add(courseCategory);
                 }
@@ -74,7 +74,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 {
                     _context.Update(courseCategory);
                 }
-                
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -83,7 +83,7 @@ namespace BpstEducation.Areas.Admin.Controllers
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
+
 
         // GET: Admin/CourseCategories/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -94,7 +94,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var courseCategory = await _context.CourseCategories
+            var courseCategory = await _context.Courses
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (courseCategory == null)
             {
@@ -110,15 +110,15 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             ViewBag.activeTabName = "Courses";
-            var courseCategory = await _context.CourseCategories.FindAsync(id);
-            _context.CourseCategories.Remove(courseCategory);
+            var courseCategory = await _context.Courses.FindAsync(id);
+            _context.Courses.Remove(courseCategory);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CourseCategoryExists(int id)
         {
-            return _context.CourseCategories.Any(e => e.UniqueId == id);
+            return _context.Courses.Any(e => e.UniqueId == id);
         }
     }
 }

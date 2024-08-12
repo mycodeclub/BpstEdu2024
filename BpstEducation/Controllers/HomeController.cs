@@ -148,7 +148,7 @@ namespace BpstEducation.Controllers
             {
                 ViewBag.RegistrationSaved = false;
             }
-            ViewData["ApplicationFor"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
+            ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["Qualification"] = new SelectList(_context.Set<Qualification>(), "UniqueId", "Name");
             return View(course);
         }
@@ -189,7 +189,7 @@ namespace BpstEducation.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ViewData["ApplicationFor"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
+            ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["Qualification"] = new SelectList(_context.Set<Qualification>(), "UniqueId", "Name");
             return View(registration);
         }

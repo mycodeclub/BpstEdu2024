@@ -25,7 +25,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         // GET: StudentBatches
         public async Task<IActionResult> Index()
         {
-            var appDbContext = await _context.StudentBatch.Include(s => s.Batch).Include(s => s.Registration).ToListAsync();
+            var appDbContext = await _context.BatchStudents.Include(s => s.Batch).Include(s => s.Registration).ToListAsync();
 
             ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(appDbContext);
@@ -39,7 +39,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var studentBatch = await _context.StudentBatch
+            var studentBatch = await _context.BatchStudents
                 .Include(s => s.Batch)
                 .Include(s => s.Registration)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
@@ -85,7 +85,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var studentBatch = await _context.StudentBatch.FindAsync(id);
+            var studentBatch = await _context.BatchStudents.FindAsync(id);
             if (studentBatch == null)
             {
                 return NotFound();
@@ -140,7 +140,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var studentBatch = await _context.StudentBatch
+            var studentBatch = await _context.BatchStudents
                 .Include(s => s.Batch)
                 .Include(s => s.Registration)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
@@ -157,10 +157,10 @@ namespace BpstEducation.Areas.Staff.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var studentBatch = await _context.StudentBatch.FindAsync(id);
+            var studentBatch = await _context.BatchStudents.FindAsync(id);
             if (studentBatch != null)
             {
-                _context.StudentBatch.Remove(studentBatch);
+                _context.BatchStudents.Remove(studentBatch);
             }
 
             await _context.SaveChangesAsync();
@@ -169,7 +169,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
         private bool StudentBatchExists(int id)
         {
-            return _context.StudentBatch.Any(e => e.UniqueId == id);
+            return _context.BatchStudents.Any(e => e.UniqueId == id);
         }
     }
 }

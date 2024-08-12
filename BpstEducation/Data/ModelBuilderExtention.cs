@@ -5,14 +5,14 @@ using BpstEducation.Models;
 namespace BpstEducation.Data
 {
     public static class ModelBuilderExtention
-    { 
+    {
         public static void SeedRoles(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IdentityRole>().HasData(
-               new IdentityRole() { Id = "afa7a44a-e339-453a-8890-c48355bae2ae", Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = "afa7a44a-e339-453a-8890-c48355bae2ae" }, 
-               new IdentityRole() { Id = "f7d29f7b-d49f-43b9-834e-7de644eccbcf", Name = "Staff", NormalizedName = "STAFF", ConcurrencyStamp = "f7d29f7b-d49f-43b9-834e-7de644eccbcf" }, 
-               new IdentityRole() { Id = "7fd3a789-e48b-4ba5-941a-11cbc3b47f39", Name = "Student", NormalizedName = "STUDENT", ConcurrencyStamp = "a8388c90-9c2b-4260-8cb7-f4250d503afd" } 
-               ); 
+               new IdentityRole() { Id = "afa7a44a-e339-453a-8890-c48355bae2ae", Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = "afa7a44a-e339-453a-8890-c48355bae2ae" },
+               new IdentityRole() { Id = "f7d29f7b-d49f-43b9-834e-7de644eccbcf", Name = "Staff", NormalizedName = "STAFF", ConcurrencyStamp = "f7d29f7b-d49f-43b9-834e-7de644eccbcf" },
+               new IdentityRole() { Id = "7fd3a789-e48b-4ba5-941a-11cbc3b47f39", Name = "Student", NormalizedName = "STUDENT", ConcurrencyStamp = "a8388c90-9c2b-4260-8cb7-f4250d503afd" }
+               );
         }
         public static void SeedRegistrationStatusTypes(this ModelBuilder modelBuilder)
         {
@@ -23,28 +23,14 @@ namespace BpstEducation.Data
         }
         public static void SeedCourseCategory(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CourseCategory>().HasData(
-            //    new CourseCategory() { UniqueId = 1, Name = "Basic Computer Course" },
-                new CourseCategory() { UniqueId = 2, Name = "Programming Classes (for Rising Stars - IX - XII )" },
-                new CourseCategory() { UniqueId = 3, Name = ".Net Internship " },
-                new CourseCategory() { UniqueId = 4, Name = " Game Development" },
-                new CourseCategory() { UniqueId = 5, Name = "Cyber Security" },
-                new CourseCategory() { UniqueId = 6, Name = "Hardware/Networking" },
-                new CourseCategory() { UniqueId = 7, Name = " Software Engineering Internship - 6 months " }, 
-                new CourseCategory() { UniqueId = 8, Name = "Software Engineering Internship -  45 days " } ,
-                new CourseCategory() { UniqueId = 9, Name = "others" } 
-                );
-        }
-        public static void SeedQualificationCategory(this ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Qualification>().HasData(
-                new CourseCategory() { UniqueId = 1, Name = "Under Graduate " },
-                new CourseCategory() { UniqueId = 2, Name = "Polytechnic / Diploma" },
-                new CourseCategory() { UniqueId = 3, Name = "BCA" },
-                new CourseCategory() { UniqueId = 4, Name = "B.Tech" },
-                new CourseCategory() { UniqueId = 5, Name = "MCA" },
-                new CourseCategory() { UniqueId = 6, Name = "Other" },
-                new CourseCategory() { UniqueId = 7, Name = "N/A  " }
+            modelBuilder.Entity<Course>().HasData(
+                new Course() { UniqueId = 1, Name = "Programming Classes (for Rising Stars - IX - XII )" },
+                new Course() { UniqueId = 2, Name = "Software Engineering .Net Internship - 6 months " },
+                new Course() { UniqueId = 3, Name = "Software Engineering .Net Internship  -  45 days " },
+                new Course() { UniqueId = 4, Name = "Cyber Security" },
+                new Course() { UniqueId = 5, Name = " Game Development" },
+                new Course() { UniqueId = 6, Name = "Hardware / Networking" },
+                new Course() { UniqueId = 7, Name = "Others" }
                 );
         }
 

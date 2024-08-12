@@ -22,8 +22,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var batchs = await _context.Batchs.Include(b => b.Course).Include(b => b.Trainer).ToListAsync();
-            //    var batchesGroup = batchs.GroupBy(b => b.StartDate > System.DateTime.Now.AddDays(-5));
-            return View(batchs);
+             return View(batchs);
         }
 
         // GET: Admin/Batche/Details/5
@@ -54,7 +53,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             var batch = await _context.Batchs.FindAsync(id);
             batch ??= new Batch() { StartDate = DateTime.Now.AddMonths(2) };
 
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "FullName");
             return View(batch);
         }
@@ -78,7 +77,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseCategories, "UniqueId", "UniqueId", batch.CourseId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", batch.CourseId);
             ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
             return View(batch);
         }

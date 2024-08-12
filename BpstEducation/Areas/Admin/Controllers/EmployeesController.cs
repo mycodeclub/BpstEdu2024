@@ -4,23 +4,26 @@ using BpstEducation.Data;
 using BpstEducation.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using BpstEducation.Services;
 
 namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles =" Admin")]
+    [Authorize(Roles = " Admin")]
     public class EmployeesController : Controller
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-
+        private readonly IUserServiceBAL _userService;
         public EmployeesController(
             UserManager<AppUser> userManager,
-             AppDbContext context
+             AppDbContext context,
+             IUserServiceBAL userService
             )
         {
             _userManager = userManager;
             _context = context;
+            _userService = userService;
         }
 
         // GET: Admin/Employees
@@ -51,7 +54,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var employee = await _context.employees.FindAsync(id);
-            employee ??= new Employees();
+            employee ??= new Employees() { DateOfBirth = DateTime.Now.AddYears(-22) };
             return View(employee);
         }
 
@@ -131,20 +134,10 @@ namespace BpstEducation.Areas.Admin.Controllers
                 UserName = emp.Email,
                 Email = emp.Email,
                 Password = "Bpst@" + emp.FullName,
-                ConfirmPassword = emp.Email,
+                ConfirmPassword = "Bpst@" + emp.FullName,
                 PhoneNumber = emp.PhoneNumber
             };
-            var result = await _userManager.CreateAsync(appUser, appUser.Password);
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(appUser, "Staff").ConfigureAwait(false);
-                await _userManager.AddToRoleAsync(appUser, "Student").ConfigureAwait(false);
-            }
-            else
-            {
-                foreach (var error in result.Errors)
-                    ModelState.AddModelError(string.Empty, error.Description);
-            }
+            var result = await _userService.AddUser(appUser, ["Staff"]);
             return result;
         }
     }

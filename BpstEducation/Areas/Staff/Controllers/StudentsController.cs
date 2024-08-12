@@ -20,7 +20,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var appDbContext = _context.students.Include(s => s.CourseCategory);
+            var appDbContext = _context.students.Include(s => s.CourseOfInterest);
             ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(await appDbContext.ToListAsync());
         }
@@ -34,7 +34,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
 
             var students = await _context.students
-                .Include(s => s.CourseCategory)
+                .Include(s => s.CourseOfInterest)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
                 return NotFound();
@@ -46,7 +46,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             var stu = await _context.students.FindAsync(id);
             stu ??= new Students() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
-            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name");
+            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate");
             return View(stu);
         }
@@ -78,8 +78,8 @@ namespace BpstEducation.Areas.Staff.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
-            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", student.CourseCategoryID);
+          //  ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
+            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", student.CourseOfInterestId);
             return View(student);
 
         }
@@ -98,7 +98,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", students.CourseCategoryID);
+            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", students.CourseOfInterestId);
             return View(students);
         }
 
@@ -134,7 +134,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseCategoryID"] = new SelectList(_context.CourseCategories, "UniqueId", "Name", students.CourseCategoryID);
+            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", students.CourseOfInterestId);
             return View(students);
         }
 
@@ -147,7 +147,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             }
 
             var students = await _context.students
-                .Include(s => s.CourseCategory)
+                .Include(s => s.CourseOfInterest)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
             {
