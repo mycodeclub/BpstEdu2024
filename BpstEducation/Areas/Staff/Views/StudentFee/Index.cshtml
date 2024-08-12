@@ -1,4 +1,4 @@
-﻿@model BpstEducation.Models.Students
+﻿@model BpstEducation.Models.Student
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -23,7 +23,7 @@
 
                         <address>
                             <strong>Student Details </strong><br />
-                          <strong>Name:</strong>  @Model.FirstName
+                            <strong>Name:</strong>  @Model.FirstName
                             <br /> <strong>Address:</strong> @Model.Address
                             <br /> <strong>PhoneNo:</strong> @Model.PhoneNumber
                             <br /> <strong>DateOfBirth:</strong> @Model.DateOfBirth
@@ -34,7 +34,7 @@
                         <address>
                             <strong> Show Batch Details</strong><br>
                             @Model.CourseOfInterest.Name<br>
-@*                             @Model.Batch.Title<br>
+                            @*                             @Model.Batch.Title<br>
                             <strong>Fees:</strong> @Model.Batch.BatchFee<br> *@
                         </address>
                     </div>
@@ -88,7 +88,6 @@
                 <form class="needs-validation" action="/Admin/StudentFee/Create" method="post">
 
                     <input type="hidden" asp-for="UniqueId" name="StudentId" />
-                    <input type="hidden" asp-for="BatchId" />
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="form-label" for="SubmittedFee">Fees</label>
@@ -109,8 +108,7 @@
 
                     </div>
                 </form>
-            </div>
-
+            </div> 
         </div>
     </div>
 </div>

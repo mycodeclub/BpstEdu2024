@@ -65,12 +65,6 @@
                                         <div class="pull-left user-img"><img src="~/AdminTemp/dist/img/img1.jpg" class="img-responsive img-circle" alt="User"></div>
                                         <p class="text-left">  <small> @User.Identity.Name</small> </p>
                                     </li>
-                                    @*<li><a href="#"><i class="icon-profile-male"></i> My Profile</a></li>
-                                <li><a href="#"><i class="icon-wallet"></i> My Balance</a></li>
-                                <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="icon-gears"></i> Account Setting</a></li>
-                                <li role="separator" class="divider"></li>*@
                                     <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </li>
@@ -94,22 +88,26 @@
                     @if (activeTabName.Equals("HelperDash")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Staff/Home/Index"><i class="fa icon-book-open"></i> DashBoard</a></li>
 
-                    @if (activeTabName.Equals("HelperDetails")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Staff/StudentBatches/Index"><i class="fa icon-book-open"></i>Batch Student </a></li>
-                    @if (activeTabName.Equals("HelperDetails")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Staff/Registrations/Index"><i class="fa icon-book-open"></i> Register</a></li>
 
-                    @if (activeTabName.Equals("Helpercourse")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Staff/StudentFee/Index"><i class="fa icon-book-open"></i> Fee structure</a></li>
+                    @if (activeTabName.Equals("Batches")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Staff/Batches/Index"><i class="fa icon-book-open"></i>Batches </a></li>
 
-                    @if (activeTabName.Equals("Fee")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Staff/Students/Index"><i class="fa fa-money"></i>All Students</a></li>
+                    @if (activeTabName.Equals("Students")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Staff/Students/Index"><i class="fa icon-book-open"></i>Students </a></li>
+
+
+                    @if (activeTabName.Equals("BatcheStudents")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Staff/BatcheStudents/Index"><i class="fa icon-book-open"></i>Batche Students </a></li>
+
+
+
+
                     <li><a href="/Home/Index"><i class="fa fa-power-off"></i> Logout</a></li>
 
                 </ul>
             </div>
         </aside>
-       
+
         <div class="content-wrapper">
             @RenderBody()
         </div>

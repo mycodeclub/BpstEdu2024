@@ -19,15 +19,15 @@ namespace BpstEducation.Areas.Staff.Controllers
 
         public async Task<IActionResult> Index(int id)
         {
-            var stu3 = await _context.students.Where(s => s.UniqueId == id).FirstOrDefaultAsync();
+            var stu3 = await _context.Students.Where(s => s.UniqueId == id).FirstOrDefaultAsync();
             ViewBag.Layout = await _loggedInUser.GetLayout();
 
-            var stu = await _context.students
+            var stu = await _context.Students
                 .Include(f => f.MySubmittedFeeTillNow)
               //  .Include(f => f.Batch)
                 .Include(f => f.CourseOfInterest)
                 .Where(s => s.UniqueId == id).FirstOrDefaultAsync();
-            stu ??= new Students() { UniqueId = id };
+            stu ??= new Models.Student() { UniqueId = id };
             ViewBag.StudentId = id;
             return View(stu);
         }

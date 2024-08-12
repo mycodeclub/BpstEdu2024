@@ -20,7 +20,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var appDbContext = _context.students.Include(s => s.CourseOfInterest);
+            var appDbContext = _context.Students.Include(s => s.CourseOfInterest);
             ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(await appDbContext.ToListAsync());
         }
@@ -33,7 +33,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             if (id == null)
                 return NotFound();
 
-            var students = await _context.students
+            var students = await _context.Students
                 .Include(s => s.CourseOfInterest)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
@@ -44,8 +44,8 @@ namespace BpstEducation.Areas.Staff.Controllers
         // GET: Admin/Students/Create
         public async Task<IActionResult> Create(int id)
         {
-            var stu = await _context.students.FindAsync(id);
-            stu ??= new Students() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
+            var stu = await _context.Students.FindAsync(id);
+            stu ??= new Models.Student() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
             ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate");
             return View(stu);
@@ -56,7 +56,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Students student)
+        public async Task<IActionResult> Create(Models.Student student)
         {
 
             if (ModelState.IsValid)
@@ -93,7 +93,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var students = await _context.students.FindAsync(id);
+            var students = await _context.Students.FindAsync(id);
             if (students == null)
             {
                 return NotFound();
@@ -107,7 +107,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,AadharName,PanName,CourseCategoryID,Fees")] Students students)
+        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,AadharName,PanName,CourseCategoryID,Fees")] Models.Student students)
         {
             if (id != students.UniqueId)
             {
@@ -146,7 +146,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var students = await _context.students
+            var students = await _context.Students
                 .Include(s => s.CourseOfInterest)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
@@ -162,10 +162,10 @@ namespace BpstEducation.Areas.Staff.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var students = await _context.students.FindAsync(id);
+            var students = await _context.Students.FindAsync(id);
             if (students != null)
             {
-                _context.students.Remove(students);
+                _context.Students.Remove(students);
             }
 
             await _context.SaveChangesAsync();
@@ -174,7 +174,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
         private bool StudentsExists(int id)
         {
-            return _context.students.Any(e => e.UniqueId == id);
+            return _context.Students.Any(e => e.UniqueId == id);
         }
         private async Task<(string? AadhaarImagePath, string? PanImagePath)> UploadAadhaarAndPanImagesAsync(IFormFile? aadhaarFile, IFormFile? panFile)
         {

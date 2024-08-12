@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
@@ -13,9 +9,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BpstEducation.Areas.Staff.Controllers
 {
+
+
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
-    public class StudentBatchesController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL loginService) : Controller
+    public class BatcheStudentsController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL loginService) : Controller
     {
         private readonly AppDbContext _context = context;
         private readonly UserManager<AppUser> _userManager = userManager;
@@ -25,7 +23,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         // GET: StudentBatches
         public async Task<IActionResult> Index()
         {
-            var appDbContext = await _context.BatchStudents.Include(s => s.Batch).Include(s => s.Registration).ToListAsync();
+            var appDbContext = await _context.BatchStudents.Include(s => s.Batch).Include(s => s.Student).ToListAsync();
 
             ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(appDbContext);
@@ -41,21 +39,25 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             var studentBatch = await _context.BatchStudents
                 .Include(s => s.Batch)
-                .Include(s => s.Registration)
+                .Include(s => s.Student)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (studentBatch == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(studentBatch);
         }
 
         // GET: StudentBatches/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int id)
         {
-            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name");
-            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId");
+            var batchStu = await _context.BatchStudents.FindAsync(id);
+            if (batchStu == null)
+                batchStu = new BatchStudent() { DiscountFee = 0, };
+            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "BatchDisplayName");
+            ViewData["StudentId"] = new SelectList(_context.Students, "UniqueId", "StudentDisplayName");
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View();
         }
 
@@ -73,7 +75,8 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BatchId"] = new SelectList(_context.Batchs, "UniqueId", "UniqueId", studentBatch.BatchId);
-            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.RegistrationId);
+            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.StudentId);
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(studentBatch);
         }
 
@@ -91,7 +94,8 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
             ViewData["BatchId"] = new SelectList(_context.Batchs, "UniqueId", "UniqueId", studentBatch.BatchId);
-            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.RegistrationId);
+            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.StudentId);
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(studentBatch);
         }
 
@@ -128,7 +132,8 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BatchId"] = new SelectList(_context.Batchs, "UniqueId", "UniqueId", studentBatch.BatchId);
-            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.RegistrationId);
+            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.StudentId);
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(studentBatch);
         }
 
@@ -142,13 +147,14 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             var studentBatch = await _context.BatchStudents
                 .Include(s => s.Batch)
-                .Include(s => s.Registration)
+                .Include(s => s.Student)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (studentBatch == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(studentBatch);
         }
 
@@ -164,6 +170,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             }
 
             await _context.SaveChangesAsync();
+            ViewBag.Layout = await _loggedInUser.GetLayout();
             return RedirectToAction(nameof(Index));
         }
 

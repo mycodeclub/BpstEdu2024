@@ -14,7 +14,7 @@ namespace BpstEducation.Models
 
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
-        public Students? Students { get; set; }
+        public Student? Students { get; set; }
 
         public int BatchId { get; set; }
 

@@ -4,6 +4,7 @@ using BpstEducation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BpstEducation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240812035544_updatedStuStructer")]
+    partial class updatedStuStructer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,6 +211,9 @@ namespace BpstEducation.Migrations
                     b.Property<int>("DiscountFee")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RegistrationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RemainingAmt")
                         .HasColumnType("int");
 
@@ -221,7 +227,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("BatchId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("RegistrationId");
 
                     b.ToTable("BatchStudents");
                 });
@@ -776,7 +782,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("CourseOfInterestId");
 
-                    b.ToTable("Students");
+                    b.ToTable("students");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.StudentFee", b =>
@@ -1048,9 +1054,7 @@ namespace BpstEducation.Migrations
 
                     b.HasOne("BpstEducation.Models.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RegistrationId");
 
                     b.Navigation("Batch");
 
@@ -1121,7 +1125,7 @@ namespace BpstEducation.Migrations
                     b.HasOne("BpstEducation.Models.Course", "CourseOfInterest")
                         .WithMany()
                         .HasForeignKey("CourseOfInterestId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CourseOfInterest");

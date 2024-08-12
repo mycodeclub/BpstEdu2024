@@ -9,12 +9,13 @@ namespace BpstEducation.Models
     {
         [Key]
         public int UniqueId { get; set; }
-
-        [Required(ErrorMessage = "Please select Valid Course")]
-        [Display(Name = "Course")]
         public int CourseId { get; set; }
         [ForeignKey("CourseId")]
         public Course? Course { get; set; }
+
+
+        [Required(ErrorMessage = "Please select Valid Course")]
+        [Display(Name = "Course")]
         public string Title { get; set; } = string.Empty;
         public string Duration { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -35,17 +36,17 @@ namespace BpstEducation.Models
         public DateTime LastUpdatedDate { get; set; }
 
         [Display(Name = "Batch Fee")]
-
         public int BatchFee { get; set; }
         public DateTime CreatedDate { get; set; }
         public List<BatchStudent>? Students { get; set; }
 
         [NotMapped]
-        public string BatchNameWithStartDate
+        public string BatchDisplayName
         {
             get
             {
-                return Course != null ? Course.Name + "_" + StartDate.ToString("dd/MMM/yyyy") : string.Empty;
+                string _displayName = Title + " | " + Duration + " | " + StartDate.ToString("dd/MMM/yyyy");
+                return Course == null ? _displayName : _displayName + " |" + Course.Name;
             }
         }
     }

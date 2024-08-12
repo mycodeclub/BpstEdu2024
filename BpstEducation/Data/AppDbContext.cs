@@ -21,7 +21,8 @@ namespace BpstEducation.Data
             modelBuilder.SeedRegistrationStatusTypes();
             modelBuilder.SeedCourseCategory();
             modelBuilder.Entity<AppUser>().ToTable("AppUser");
-        }
+
+         }
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Batch> Batchs { get; set; }
@@ -35,7 +36,7 @@ namespace BpstEducation.Data
         public DbSet<CodeHelper> CodeHelpers { get; set; }
         public DbSet<StudentFee> Fees { get; set; }
         public DbSet<Employees> employees { get; set; }
-        public DbSet<Students> students { get; set; }
+        public DbSet<Student> Students { get; set; }
 
 
         /////////////////////////////////////////////////////////////////////////////////////

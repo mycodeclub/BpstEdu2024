@@ -13,7 +13,7 @@ namespace BpstEducation.Areas.Student.Controllers
     {
         private readonly AppDbContext _context;
         private readonly int StudentId;
-        private Students student;
+        private Models.Student student;
         private readonly UserManager<AppUser> _userManager;
 
         public HomeController(AppDbContext context, UserManager<AppUser> userManager)
@@ -32,8 +32,8 @@ namespace BpstEducation.Areas.Student.Controllers
         //---------------------------------------------------------------------------------------
         public async Task<IActionResult> Create()
         {
-            var employee = await _context.students.ToListAsync();
-            student ??= new Students();
+            var employee = await _context.Students.ToListAsync();
+            student ??= new Models.Student();
             return View(student);
         }
 
@@ -42,7 +42,7 @@ namespace BpstEducation.Areas.Student.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Students student)
+        public async Task<IActionResult> Create(Models.Student student)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace BpstEducation.Areas.Student.Controllers
 
         //-----------------------------------------------------------------------------------
 
-        private async Task<IdentityResult> AddLoginDetails(Students stu)
+        private async Task<IdentityResult> AddLoginDetails(Models.Student stu)
         {
             var appUser = new AppUser()
             {
@@ -174,7 +174,7 @@ namespace BpstEducation.Areas.Student.Controllers
             return View(stu);
         }
 
-        private async Task<Students> GetLoggedInUser()
+        private async Task<Models.Student> GetLoggedInUser()
         {
             return null;
         }

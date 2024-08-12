@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BpstEducation.Models
 {
-    public class Students
+    public class Student
     {
         [Key]
         public int UniqueId { get; set; }
@@ -77,6 +78,7 @@ namespace BpstEducation.Models
         [Display(Name = "Course Category")]
         public int CourseOfInterestId { get; set; }
         [ForeignKey("CourseOfInterestId")]
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         public Course? CourseOfInterest { get; set; }
         public int MyTrainingFee { get; set; }
         public int MyDiscount { get; set; }
@@ -98,5 +100,8 @@ namespace BpstEducation.Models
         public DateTime RegistrationDate { get; internal set; }
         public DateTime CreatedDate { get; internal set; }
         public DateTime LastUpdatedDate { get; internal set; }
+
+        [NotMapped]
+        public string StudentDisplayName { get { return FullName + "_" + RegistrationNumber; } }
     }
 }
