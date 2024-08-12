@@ -55,7 +55,7 @@ namespace BpstEducation.Services
             return user != null;
         }
         public async Task<IdentityResult> AddUser(AppUser user, List<string> role)
-        {
+        { 
             var result = await _userManager.CreateAsync(user, user.Password);
             if (result.Succeeded && role != null && role.Any())
                 await _userManager.AddToRolesAsync(user, role).ConfigureAwait(false);

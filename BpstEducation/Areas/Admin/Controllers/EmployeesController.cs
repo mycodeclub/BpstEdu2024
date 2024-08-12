@@ -137,7 +137,8 @@ namespace BpstEducation.Areas.Admin.Controllers
                 ConfirmPassword = "Bpst@" + emp.FullName,
                 PhoneNumber = emp.PhoneNumber
             };
-            var result = await _userService.AddUser(appUser, ["Staff"]);
+            var result = await _userService.AddUser(appUser, ["Staff"]); 
+            emp.LoginIdGuid = appUser.Id;
             return result;
         }
     }

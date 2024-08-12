@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.AspNetCore.Identity;
 using BpstEducation.Models;
-using System.Threading.Tasks;
 using BpstEducation.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
@@ -44,7 +42,6 @@ namespace BpstEducation.Controllers
         public async Task<IActionResult> Login()
         {
             return await ReDirectIfLoggedIn();
-
         }
 
         [HttpPost]
@@ -66,7 +63,6 @@ namespace BpstEducation.Controllers
             {
                 var user = await _userManager.GetUserAsync(User);
                 var role = await _userManager.GetRolesAsync(user);
-
                 if (role.Contains("Admin")) return RedirectToAction("Index", "Home", new { Area = "Admin" });
                 else if (role.Contains("Staff")) return RedirectToAction("Index", "Home", new { Area = "Staff" });
                 else if (role.Contains("Student")) return RedirectToAction("Index", "Home", new { Area = "Student" });
@@ -94,7 +90,8 @@ namespace BpstEducation.Controllers
             }
             return View(model);
         }
-        [HttpPost]
+
+        [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
@@ -103,7 +100,7 @@ namespace BpstEducation.Controllers
         //-------------------------- 
         public async Task<IActionResult> CreateMasterUser()
         {
-            var resultStr = string.Empty;
+            var errorStr = string.Empty;
             try
             {
                 var appUser = new AppUser()
@@ -118,15 +115,22 @@ namespace BpstEducation.Controllers
                 var result = await _userService.AddUser(appUser, userRoles);
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                    resultStr += "Some Error: " + error.Code;
+                    if (error.Code == "DuplicateUserName")
+                        return RedirectToAction("AutoLogin");
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                        errorStr += "Some Error: " + error.Code;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                resultStr = "Some Error: " + ex.Message;
+                errorStr = "Some Error: " + ex.Message;
             }
-            return RedirectToAction("AutoLogin");
+            if (string.IsNullOrWhiteSpace(errorStr))
+                return RedirectToAction("AutoLogin");
+            return RedirectToAction("Login");
         }
         public async Task<IActionResult> AutoLogin()
         {
