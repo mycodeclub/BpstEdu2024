@@ -115,8 +115,8 @@
                    @*  @if (activeTabName.Equals("Students")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Staff/Students/Index"><i class="fa fa-user"></i>All Students </a></li>
  *@
-                    @if (activeTabName.Equals("Batches")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Admin/Batches/Index"><i class="fa fa-group"></i> Batches </a></li>
+                    @if (activeTabName.Equals("Batchs")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/Batchs/Index"><i class="fa fa-group"></i> Batchs </a></li>
 
                    @*  @if (activeTabName.Equals("BatchStudent")) { activeTab = "active"; } else { activeTab = string.Empty; }
 
@@ -130,8 +130,9 @@
                     <li class="@activeTab"><a href="/Admin/Registrations/Index"><i class="fa fa-registered"></i> Registrations  </a></li> *@
 
                     <li><a href="/Manage/ChangeEmail"><i class="fa fa-user"></i>Change Email</a></li>
+                    @if (activeTabName.Equals("ChangePassword")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li><a href="/Account/ChangePassword"><i class="fa fa-user"></i>Change Password</a></li>
-                    <li><a href="/Admin"><i class="fa fa-power-off"></i> Logout</a></li>
+                    <li><a href="/Account/LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
 
                 </ul>
             </div>

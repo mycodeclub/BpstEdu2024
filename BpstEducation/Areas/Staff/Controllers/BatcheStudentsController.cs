@@ -24,7 +24,6 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Index()
         {
             var appDbContext = await _context.BatchStudents.Include(s => s.Batch).Include(s => s.Student).ToListAsync();
-
             ViewBag.Layout = await _loggedInUser.GetLayout();
             return View(appDbContext);
         }
