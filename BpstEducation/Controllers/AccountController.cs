@@ -6,6 +6,7 @@ using BpstEducation.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Services;
+using BpstEducation.Migrations;
 
 namespace BpstEducation.Controllers
 {
@@ -83,13 +84,39 @@ namespace BpstEducation.Controllers
             {
                 var result = await _userService.UpldateLoggedInUserPassword(model.NewEmail, model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
-                    return RedirectToAction("Index", "Admin");
+                    return View();
 
                 foreach (var error in result.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
             }
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ChangeEmail()
+        {
+            var emailUpdate = new UpdateEmailVM() { };
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                emailUpdate.OldEmail = user.Email;
+            }
+            ViewBag.Layout = await _userService.GetLayout();
+            return View(emailUpdate);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeEmail(UpdateEmailVM updateEmail)
+        {
+            var result = await _userService.UpldateLoggedInUserEmail(updateEmail);
+            ViewBag.Layout = await _userService.GetLayout();
+            return View(updateEmail);
+        }
+
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> LogOut()

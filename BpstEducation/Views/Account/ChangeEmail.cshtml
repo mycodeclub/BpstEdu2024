@@ -1,0 +1,41 @@
+﻿@model BpstEducation.Models.UpdateEmailVM
+@{
+    ViewData["Title"] = "ChangePassword";
+    Layout = ViewBag.Layout;
+}
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <h5>Change Password</h5>
+            <hr />
+            <form asp-controller="Account" asp-action="ChangeEmail" method="post">
+                <div>
+                    <label asp-for="OldEmail"></label>
+                    <input readonly="readonly" asp-for="OldEmail" />
+                </div>
+
+                <div>
+                    <label asp-for="NewEmail"></label>
+                    <input asp-for="NewEmail" autocomplete="off" />
+                    <span asp-validation-for="NewEmail"></span>
+                </div>
+
+
+                <div>
+                    <label asp-for="Password"></label>
+                    <input type="password" asp-for="Password" autocomplete="off" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+
+
+                <button type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
