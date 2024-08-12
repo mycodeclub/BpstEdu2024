@@ -43,28 +43,41 @@ namespace BpstEducation.Services
         {
             var roles = _httpContextAccessor.HttpContext.User.FindAll(ClaimTypes.Role).Select(roleClaim => roleClaim.Value).ToList();
             return roles;
-        } 
+        }
         public async Task<string> GetLayout()
         {
             var roles = GetLoggedInUserRoles();
             return roles.Contains("Admin") ? "~/Views/Shared/_AdminLayout.cshtml" : "~/Views/Shared/_StaffLayout.cshtml";
-        } 
+        }
         public async Task<bool> IsUserExist(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             return user != null;
         }
         public async Task<IdentityResult> AddUser(AppUser user, List<string> role)
-        { 
+        {
             var result = await _userManager.CreateAsync(user, user.Password);
             if (result.Succeeded && role != null && role.Any())
                 await _userManager.AddToRolesAsync(user, role).ConfigureAwait(false);
             return result;
         }
-        public async Task<IdentityResult> UpldateLoggedInUserEmail(string oldEmail, string newEmail)
+
+        public async Task<IdentityResult> UpldateLoggedInUserEmail(UpdateEmailVM updateEmail)
         {
+            /// check in user is valid , by validating password of cussent user . 
+            // updateEmail.Password; // error --- Incorrect pwd.
+            //             return;
+
+
+            // -- check if new email is not already taken by any other user. 
+            // --- this email is already taken by some one else, pease try with some different email.
+
+            //-- Update email successfully .
+
+
+
             // Fetch the user from the database
-            var user = await _userManager.FindByEmailAsync(oldEmail);
+            var user = await _userManager.FindByEmailAsync(updateEmail.OldEmail);
 
             // Check if the user is found
             if (user == null)
@@ -73,8 +86,8 @@ namespace BpstEducation.Services
             }
 
             // Update the user's email
-            user.Email = newEmail;
-            user.UserName = newEmail; // Uncomment this if you want to update the username as well
+            user.Email = updateEmail.NewEmail;
+            user.UserName = updateEmail.NewEmail;   // Uncomment this if you want to update the username as well
 
             // Save the changes to the database
             var emailUpdateResult = await _userManager.UpdateAsync(user);

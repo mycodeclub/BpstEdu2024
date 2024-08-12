@@ -95,6 +95,32 @@ namespace BpstEducation.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ChangeEmail()
+        {
+            var emailUpdate = new UpdateEmailVM() { };
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                emailUpdate.OldEmail = user.Email;
+            }
+            ViewBag.Layout = await _userService.GetLayout();
+            return View(emailUpdate);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeEmail(UpdateEmailVM updateEmail)
+        {
+            var result = await _userService.UpldateLoggedInUserEmail(updateEmail);
+            ViewBag.Layout = await _userService.GetLayout();
+            return View(updateEmail);
+        }
+
+
+
+
+
+        [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();

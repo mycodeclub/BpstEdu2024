@@ -752,6 +752,7 @@
     <Folder Include="Areas\Staff\Models\" />
     <Folder Include="Areas\Student\Data\" />
     <Folder Include="Areas\Student\Models\" />
+    <Folder Include="Views\Manage\" />
   </ItemGroup>
 
 </Project>

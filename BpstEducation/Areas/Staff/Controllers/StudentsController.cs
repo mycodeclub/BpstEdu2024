@@ -10,18 +10,18 @@ namespace BpstEducation.Areas.Staff.Controllers
 {
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
-    public class StudentsController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL loginService) : Controller
+    public class StudentsController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL userServiceBal) : Controller
     {
         private readonly AppDbContext _context = context;
         private readonly UserManager<AppUser> _userManager = userManager;
-        private readonly IUserServiceBAL _loggedInUser = loginService;
+        private readonly IUserServiceBAL _userServiceBal = userServiceBal;
 
         // GET: Admin/Students
         public async Task<IActionResult> Index()
         {
 
             var appDbContext = _context.Students.Include(s => s.CourseOfInterest);
-            ViewBag.Layout = await _loggedInUser.GetLayout();
+            ViewBag.Layout = await _userServiceBal.GetLayout();
             return View(await appDbContext.ToListAsync());
         }
 
@@ -75,68 +75,18 @@ namespace BpstEducation.Areas.Staff.Controllers
                     student.LastUpdatedDate = DateTime.UtcNow;
                     _context.Update(student);
                 }
+
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-          //  ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
+            //  ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
             ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", student.CourseOfInterestId);
             return View(student);
 
         }
 
-
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var students = await _context.Students.FindAsync(id);
-            if (students == null)
-            {
-                return NotFound();
-            }
-            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", students.CourseOfInterestId);
-            return View(students);
-        }
-
-        // POST: Admin/Students/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniqueId,FirstName,LastName,Email,DateOfBirth,PhoneNumber,Address,AadhaarNumber,PanNumber,AadharName,PanName,CourseCategoryID,Fees")] Models.Student students)
-        {
-            if (id != students.UniqueId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(students);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!StudentsExists(students.UniqueId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", students.CourseOfInterestId);
-            return View(students);
-        }
+         
 
         // GET: Admin/Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -183,20 +133,13 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             if (aadhaarFile != null && aadhaarFile.Length > 0)
             {
-                var aadhaarFileName = Path.GetFileName(aadhaarFile.FileName);
-
-
+                var aadhaarFileName = Path.GetFileName(aadhaarFile.FileName); 
                 var aadhaarFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
                 if (!Directory.Exists(aadhaarFilePath))
-                {
                     Directory.CreateDirectory(aadhaarFilePath);
-                }
 
                 using (var stream = new FileStream(aadhaarFilePath + aadhaarFileName, FileMode.Create))
-                {
                     await aadhaarFile.CopyToAsync(stream);
-                }
-
 
                 aadhaarImagePath = "/images/" + aadhaarFileName;
             }
