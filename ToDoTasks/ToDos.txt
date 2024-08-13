@@ -1,0 +1,21 @@
+13 Aug 2024
+-----------
+
+1. Show error message in login page if login process is failing, right now, if user is trying to login with invalid credentials - he is unable to get any error message. 
+2. In Model folder, short property by name, ascending order 
+3. Check full work flow for all areas, uncertain points its reflecting control to admin layout - FIx it , ASAP 
+4. 
+
+
+---------Status Update 13 Aug 2024
+ - Muskan 
+ - Anjali
+ - Sanjay 
+---------Status Update 14 Aug 2024 
+ - Muskan 
+ - Anjali
+ - Sanjay 
+---------Status Update 15 Aug 2024 
+ - Muskan 
+ - Anjali
+ - Sanjay 

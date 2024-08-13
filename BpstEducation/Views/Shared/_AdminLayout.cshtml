@@ -95,7 +95,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     @if (activeTabName.Contains("Helper")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab treeview">
-                        <a href="#"><i class="fa icon-book-open"></i> <span>Interview Preparation</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                        <a href="#"><i class="fa  fa-angle-right "></i> <span>Interview Preparation</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
                             @if (activeTabName.Equals("HelperSubjects")) { activeTab = "active"; } else { activeTab = string.Empty; }
                             <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa icon-book-open""></i> Subjects</a></li>
@@ -104,7 +104,7 @@
                             <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa icon-book-open"></i> Interview Questions </a></li>
 
                             @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa fa-angle-right"></i> Code Helper </a></li>
+                            <li class="@activeTab"><a href="/Admin/CodeHelpers/Index"><i class="fa icon-book-open"></i> Code Helper </a></li>
                         </ul>
                     </li>
 
