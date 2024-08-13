@@ -9,11 +9,11 @@ namespace BpstEducation.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class BatchesController : Controller
+    public class BatchsController : Controller
     {
         private readonly AppDbContext _context;
 
-        public BatchesController(AppDbContext context)
+        public BatchsController(AppDbContext context)
         {
             _context = context;
         }

@@ -6,7 +6,7 @@ using BpstEducation.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Data;
 using BpstEducation.Services;
-using BpstEducation.Migrations;
+using System;
 
 namespace BpstEducation.Controllers
 {
@@ -72,8 +72,9 @@ namespace BpstEducation.Controllers
             else
                 return View("Login");// RedirectToAction("Login", "Account");
         }
-        public IActionResult ChangePassword()
+        public async Task<IActionResult> ChangePassword()
         {
+            ViewBag.Layout = await _userService.GetLayout();
             return View();
         }
 
@@ -84,11 +85,12 @@ namespace BpstEducation.Controllers
             {
                 var result = await _userService.UpldateLoggedInUserPassword(model.NewEmail, model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
-                    return View();
+                    return RedirectToAction(ViewBag.Layout);
 
                 foreach (var error in result.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
             }
+            ViewBag.Layout = await _userService.GetLayout();
             return View(model);
         }
 
@@ -125,7 +127,7 @@ namespace BpstEducation.Controllers
             return RedirectToAction("Index", "Home");
         }
         //-------------------------- 
-        public async Task<IActionResult> CreateMasterUser()
+        public async Task<IActionResult> CreateMasterUser()        
         {
             var errorStr = string.Empty;
             try

@@ -12,10 +12,10 @@ namespace BpstEducation.Controllers
             _userService = userService;
         }
 
-        //public IActionResult ChangeEmail()
-        //{
-        //    return View();
-        //}
+        public IActionResult ChangeEmail()
+        {
+            return View();
+        }
 
    
     }

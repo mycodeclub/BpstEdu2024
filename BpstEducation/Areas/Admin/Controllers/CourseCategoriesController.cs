@@ -53,7 +53,8 @@ namespace BpstEducation.Areas.Admin.Controllers
         {
             var course = await _context.Courses.FindAsync(id);
             course ??= new Course() { };
-            ViewBag.activeTabName = "Courses"; return View();
+            ViewBag.activeTabName = "Courses";
+            return View(course);
         }
 
         // POST: Admin/CourseCategories/Create
