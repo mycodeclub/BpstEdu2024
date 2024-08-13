@@ -1,9 +1,13 @@
 ﻿using BpstEducation.Data;
 using BpstEducation.Models;
+using BpstEducation.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
+using System.Security.Claims;
 
 namespace BpstEducation.Areas.Student.Controllers
 {
@@ -14,12 +18,20 @@ namespace BpstEducation.Areas.Student.Controllers
         private readonly AppDbContext _context;
         private readonly int StudentId;
         private Models.Student student;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController(AppDbContext context, UserManager<AppUser> userManager)
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IUserServiceBAL _userService;
+
+
+        public HomeController(AppDbContext context, UserManager<AppUser> userManager, IUserServiceBAL userService, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
-            _userManager = userManager; 
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
+
+            _userService = userService;
+
         }
         public IActionResult DashBoard()
         {
@@ -29,6 +41,7 @@ namespace BpstEducation.Areas.Student.Controllers
         {
             return View();
         }
+       
         //---------------------------------------------------------------------------------------
         public async Task<IActionResult> Create()
         {
@@ -91,81 +104,28 @@ namespace BpstEducation.Areas.Student.Controllers
             return result;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
         public async Task<IActionResult> Profile()
         {
-            //  var stu = await _context.students.Where(s => s.UniqueId == StudentId).FirstOrDefaultAsync();
-            var stu = await GetLoggedInUser();
+            var StuLogInId = GetLoggedInUser();
+
+            var stu = await _context.Students.Where(s => s.LoginIdGuid == StuLogInId).FirstOrDefaultAsync();
             return View(stu);
         }
+
+
+
+        public string GetLoggedInUser()
+        {
+            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+
         public async Task<IActionResult> Course()
         {
-            var stu = await GetLoggedInUser();
-            return View(stu.CourseOfInterest);
+            var stuId = GetLoggedInUser();
+            var stu = await _context.Courses.Where(c=>c.Equals(stuId)).FirstOrDefaultAsync();
+            return View(stu);
         }
         public async Task<IActionResult> Fees()
         {
@@ -174,9 +134,6 @@ namespace BpstEducation.Areas.Student.Controllers
             return View(stu);
         }
 
-        private async Task<Models.Student> GetLoggedInUser()
-        {
-            return null;
-        }
+       
     }
 }

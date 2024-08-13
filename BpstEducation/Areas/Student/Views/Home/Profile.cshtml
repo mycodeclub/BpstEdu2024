@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_StuLayout.cshtml";
     ViewBag.ActiveTabName = "HelperDetails";
 }
-
+<h1>Profile</h1>
 
 <div class="content">
     <div class="card-body ">
@@ -14,13 +14,14 @@
             <div class="col-lg-4">
                 <div class="user-profile-box m-b-3">
                     <div class="box-profile text-white">
-@*                         <img class="profile-user-img img-responsive img-circle m-b-2" src="dist/img/img1.jpg" alt="User profile picture">
- *@                        <div class="pull-left-top user-img"><img src="~/AdminTemp/dist/img/img1.jpg" class="img-responsive img-circle" alt="User"></div>
+                        @*                         <img class="profile-user-img img-responsive img-circle m-b-2" src="dist/img/img1.jpg" alt="User profile picture">
+                        *@ 
+                        <div class="pull-left-top user-img"><img src="~/AdminTemp/dist/img/img1.jpg" class="img-responsive img-circle" alt="User"></div>
 
-                       <p class="pull-right-3"> @Model.Email</p>
+                        <p class="pull-right-3"> @Model.Email</p>
                     </div>
                 </div>
-               
+
             </div>
             <div class="col-lg-8 ">
                 <div class="info-box ">
@@ -66,23 +67,25 @@
                                         <dd class="col-sm-10">
                                             @Html.DisplayFor(model => model.Address)
                                         </dd>
-                                          <dt class="col-sm-2">
+                                        <dt class="col-sm-2">
                                             @Html.DisplayNameFor(model => model.AadhaarNumber)
                                         </dt>
                                         <dd class="col-sm-10">
                                             @Html.DisplayFor(model => model.AadhaarNumber)
-                                        </dd>  <dt class="col-sm-2">
+                                        </dd>
+                                        <dt class="col-sm-2">
                                             @Html.DisplayNameFor(model => model.PanName)
                                         </dt>
                                         <dd class="col-sm-10">
                                             @Html.DisplayFor(model => model.PanName)
-                                        </dd>  <dt class="col-sm-2">
+                                        </dd>
+                                        <dt class="col-sm-2">
                                             @Html.DisplayNameFor(model => model.RegistrationDate)
                                         </dt>
                                         <dd class="col-sm-10">
                                             @Html.DisplayFor(model => model.RegistrationDate)
                                         </dd>
-                                        
+
 
                                     </dl>
                                 </div>
@@ -97,6 +100,7 @@
 
     </div>
 </div>
+
 
 
 

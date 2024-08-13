@@ -29,7 +29,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: Admin/Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.employees.ToListAsync());
+            return View(await _context.Employees.ToListAsync());
         }
 
         // GET: Admin/Employees/Details/5
@@ -40,7 +40,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.employees
+            var employees = await _context.Employees
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (employees == null)
             {
@@ -53,7 +53,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: Admin/Employees/Create
         public async Task<IActionResult> Create(int id)
         {
-            var employee = await _context.employees.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(id);
             employee ??= new Employees() { DateOfBirth = DateTime.Now.AddYears(-22) };
             return View(employee);
         }
@@ -97,7 +97,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var employees = await _context.employees
+            var employees = await _context.Employees
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (employees == null)
             {
@@ -112,10 +112,10 @@ namespace BpstEducation.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employees = await _context.employees.FindAsync(id);
+            var employees = await _context.Employees.FindAsync(id);
             if (employees != null)
             {
-                _context.employees.Remove(employees);
+                _context.Employees.Remove(employees);
             }
 
             await _context.SaveChangesAsync();
@@ -124,7 +124,7 @@ namespace BpstEducation.Areas.Admin.Controllers
 
         private bool EmployeesExists(int id)
         {
-            return _context.employees.Any(e => e.UniqueId == id);
+            return _context.Employees.Any(e => e.UniqueId == id);
         }
 
         private async Task<IdentityResult> AddLoginDetails(Employees emp)

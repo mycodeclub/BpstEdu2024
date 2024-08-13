@@ -16,10 +16,10 @@
         <div class="card-header">
 <div class="row">
     <div class="col-md-4">
+        
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="UniqueId" />
-            <div class="form-group">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+                 <input type="hidden" asp-for="UniqueId" />
                 <label asp-for="BatchId" class="control-label"></label>
                 <select asp-for="BatchId" class="form-control" asp-items="ViewBag.BatchId"></select>
                 <span asp-validation-for="BatchId" class="text-danger"></span>

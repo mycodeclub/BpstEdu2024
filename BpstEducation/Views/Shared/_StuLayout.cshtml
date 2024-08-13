@@ -92,16 +92,25 @@
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
                     @if (activeTabName.Equals("HelperDash")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Students/Home/DashBoard"><i class="fa icon-book-open"></i> DashBoard</a></li>
+                    <li class="@activeTab"><a href="/Student/Home/Index"><i class="fa icon-book-open"></i> DashBoard</a></li>
 
                     @if (activeTabName.Equals("HelperDetails")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Students/Home/Profile"><i class="fa icon-book-open"></i> My Profile</a></li>
+                    <li class="@activeTab"><a href="/Student/Home/Profile"><i class="fa icon-book-open"></i> My Profile</a></li>
 
                     @if (activeTabName.Equals("Helpercourse")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Students/Home/Course"><i class="fa icon-book-open"></i> My courses</a></li>
+                    <li class="@activeTab"><a href="/Student/Home/Course"><i class="fa icon-book-open"></i> My courses</a></li>
 
                     @if (activeTabName.Equals("Fee")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Students/Home/Fees"><i class="fa fa-money"></i> Fee Stucture</a></li>
+                    <li class="@activeTab"><a href="/Student/Home/Fees"><i class="fa fa-money"></i> Fee Stucture</a></li>
+                    
+                    @if (activeTabName.Equals("ChangeEmail")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Account/ChangeEmail"><i class="fa fa-user"></i>Change Email</a></li>
+                   
+                    @if (activeTabName.Equals("ChangePassword")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Account/ChangePassword"><i class="fa fa-user"></i>Change Password</a></li>
+                  
+                    
+                    
                     <li><a href="/Home/Index"><i class="fa fa-power-off"></i> Logout</a></li>
 
                 </ul>

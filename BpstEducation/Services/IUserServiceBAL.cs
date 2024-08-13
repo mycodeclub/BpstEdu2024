@@ -9,7 +9,7 @@ namespace BpstEducation.Services
         public string GetLoggedInUserId();
         public string GetLoggedInUserEmail();
         public List<string> GetLoggedInUserRoles();
-        public Task<string> GetLayout();
+        public string GetLayout();
 
         public Task<bool> IsUserExist(string email);
         public Task<IdentityResult> AddUser(AppUser user, List<string> role); 

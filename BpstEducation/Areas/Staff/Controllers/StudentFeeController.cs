@@ -20,7 +20,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var stu3 = await _context.Students.Where(s => s.UniqueId == id).FirstOrDefaultAsync();
-            ViewBag.Layout = await _loggedInUser.GetLayout();
+            ViewBag.Layout =  _loggedInUser.GetLayout();
 
             var stu = await _context.Students
                 .Include(f => f.MySubmittedFeeTillNow)

@@ -98,9 +98,9 @@
                         <a href="#"><i class="fa  fa-angle-right "></i> <span>Interview Preparation</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
                             @if (activeTabName.Equals("HelperSubjects")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                            <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa icon-book-open""></i> Subjects</a></li>
+                            <li class="@activeTab"><a href="/Admin/subjects/Index"><i class="fa icon-book-open" "></i> Subjects</a></li>
 
-                            @if (activeTabName.Equals("HelperQuestions")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                                    @if (activeTabName.Equals("HelperQuestions")) { activeTab = "active"; } else { activeTab = string.Empty; }
                             <li class="@activeTab"><a href="/Admin/Questions/Index"><i class="fa fa icon-book-open"></i> Interview Questions </a></li>
 
                             @if (activeTabName.Equals("CodeHelper")) { activeTab = "active"; } else { activeTab = string.Empty; }
@@ -109,29 +109,33 @@
                     </li>
 
                     @if (activeTabName.Equals("Employees")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                     
-                    <li class="@activeTab"><a href="/Admin/Employees/Index"><i class ="fa fa-user"></i>Employees </a></li>
 
-                   @*  @if (activeTabName.Equals("Students")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Admin/Employees/Index"><i class="fa fa-user"></i>Employees </a></li>
+
+                    @*  @if (activeTabName.Equals("Students")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Staff/Students/Index"><i class="fa fa-user"></i>All Students </a></li>
- *@
+                    *@
                     @if (activeTabName.Equals("Batchs")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Admin/Batchs/Index"><i class="fa fa-group"></i> Batchs </a></li>
 
-                   @*  @if (activeTabName.Equals("BatchStudent")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    @*  @if (activeTabName.Equals("BatchStudent")) { activeTab = "active"; } else { activeTab = string.Empty; }
 
 
                     <li class="@activeTab"><a href="/Staff/StudentBatches/Index"><i class="fa fa-group"></i> Batch Student </a></li>
- *@
-                     
+                    *@
+
                     @if (activeTabName.Equals("Courses")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Admin/CourseCategories/Index"><i class="fa fa-registered"></i> Courses  </a></li>
-                   @*  @if (activeTabName.Equals("Registrations")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    @*  @if (activeTabName.Equals("Registrations")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Admin/Registrations/Index"><i class="fa fa-registered"></i> Registrations  </a></li> *@
+
+                    @if (activeTabName.Equals("ChangeEmail")) { activeTab = "active"; } else { activeTab = string.Empty; }
 
                     <li><a href="/Account/ChangeEmail"><i class="fa fa-user"></i>Change Email</a></li>
                     @if (activeTabName.Equals("ChangePassword")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li><a href="/Account/ChangePassword"><i class="fa fa-user"></i>Change Password</a></li>
+
+
                     <li><a href="/Account/LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
 
                 </ul>

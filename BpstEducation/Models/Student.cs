@@ -103,5 +103,8 @@ namespace BpstEducation.Models
 
         [NotMapped]
         public string StudentDisplayName { get { return FullName + "_" + RegistrationNumber; } }
+        public string LoginIdGuid { get; set; } = string.Empty;
+
+
     }
 }

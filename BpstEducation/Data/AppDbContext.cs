@@ -35,7 +35,7 @@ namespace BpstEducation.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<CodeHelper> CodeHelpers { get; set; }
         public DbSet<StudentFee> Fees { get; set; }
-        public DbSet<Employees> employees { get; set; }
+        public DbSet<Employees> Employees { get; set; }
         public DbSet<Student> Students { get; set; }
 
 

@@ -54,7 +54,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             batch ??= new Batch() { StartDate = DateTime.Now.AddMonths(2) };
 
             ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "Name");
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "FullName");
+            ViewData["TrainerId"] = new SelectList(_context.Employees, "UniqueId", "FullName");
             return View(batch);
         }
 
@@ -78,7 +78,7 @@ namespace BpstEducation.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", batch.CourseId);
-            ViewData["TrainerId"] = new SelectList(_context.employees, "UniqueId", "UniqueId", batch.TrainerId);
+            ViewData["TrainerId"] = new SelectList(_context.Employees, "UniqueId", "UniqueId", batch.TrainerId);
             return View(batch);
         }
         // To protect from overposting attacks, enable the specific properties you want to bind to.

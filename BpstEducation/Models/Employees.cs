@@ -8,7 +8,12 @@ namespace BpstEducation.Models
     {
         [Key]
         public int UniqueId { get; set; }
-        public string FullName { get; set; } = string.Empty;
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        [NotMapped]
+        public string? FullName { get { return FirstName + LastName; } }
         public string JobRole { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }

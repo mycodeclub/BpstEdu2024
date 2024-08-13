@@ -11,6 +11,9 @@ using System;
 namespace BpstEducation.Controllers
 {
     [AllowAnonymous]
+
+    //[Authorize(Roles = "Staff,Admin,Student")]
+
     public class AccountController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
@@ -27,11 +30,7 @@ namespace BpstEducation.Controllers
             _context = context;
             _userService = userService;
 
-        }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        } 
 
         [HttpGet]
         public IActionResult Register()
@@ -51,13 +50,13 @@ namespace BpstEducation.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.LoginName, model.Password, model.RememberMe, lockoutOnFailure: false);
+                
                 if (result.Succeeded)
                     return await ReDirectIfLoggedIn();
                 else { ModelState.AddModelError("", "Invalid Email Id or Password"); }
             }
             return View(model);
         }
-
         public async Task<IActionResult> ReDirectIfLoggedIn()
         {
             if (_signInManager.IsSignedIn(User))
@@ -72,11 +71,15 @@ namespace BpstEducation.Controllers
             else
                 return View("Login");// RedirectToAction("Login", "Account");
         }
+
+        [Authorize(Roles = "Staff,Admin,Student")]
+
         public async Task<IActionResult> ChangePassword()
         {
-            ViewBag.Layout = await _userService.GetLayout();
+            ViewBag.Layout =  _userService.GetLayout();
             return View();
         }
+        [Authorize(Roles = "Staff,Admin,Student")]
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(UpdatePassword model)
@@ -90,9 +93,10 @@ namespace BpstEducation.Controllers
                 foreach (var error in result.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
             }
-            ViewBag.Layout = await _userService.GetLayout();
+            ViewBag.Layout =  _userService.GetLayout();
             return View(model);
         }
+        [Authorize(Roles = "Staff,Admin,Student")]
 
         [HttpGet]
         public async Task<IActionResult> ChangeEmail()
@@ -103,16 +107,16 @@ namespace BpstEducation.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 emailUpdate.OldEmail = user.Email;
             }
-            ViewBag.Layout = await _userService.GetLayout();
+            ViewBag.Layout =  _userService.GetLayout();
             return View(emailUpdate);
         }
-
+        [Authorize(Roles = "Staff,Admin,Student")]
 
         [HttpPost]
         public async Task<IActionResult> ChangeEmail(UpdateEmailVM updateEmail)
         {
             var result = await _userService.UpldateLoggedInUserEmail(updateEmail);
-            ViewBag.Layout = await _userService.GetLayout();
+            ViewBag.Layout =  _userService.GetLayout();
             return View(updateEmail);
         }
 
@@ -126,7 +130,8 @@ namespace BpstEducation.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        //-------------------------- 
+
+
         public async Task<IActionResult> CreateMasterUser()        
         {
             var errorStr = string.Empty;

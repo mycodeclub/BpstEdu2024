@@ -44,10 +44,23 @@ namespace BpstEducation.Services
             var roles = _httpContextAccessor.HttpContext.User.FindAll(ClaimTypes.Role).Select(roleClaim => roleClaim.Value).ToList();
             return roles;
         }
-        public async Task<string> GetLayout()
+        public string GetLayout()
         {
+            var _layout = string.Empty;
             var roles = GetLoggedInUserRoles();
-            return roles.Contains("Admin") ? "~/Views/Shared/_AdminLayout.cshtml" : "~/Views/Shared/_StaffLayout.cshtml";
+            if (roles.Contains("Admin"))
+            {
+                _layout = "~/Views/Shared/_AdminLayout.cshtml";
+            }
+            else if (roles.Contains("Staff"))
+            {
+                _layout = "~/Views/Shared/_StaffLayout.cshtml";
+            }
+            else if (roles.Contains("Student"))
+            { 
+                _layout = "~/Views/Shared/_StuLayout.cshtml";
+            }
+            return _layout;
         }
         public async Task<bool> IsUserExist(string email)
         {

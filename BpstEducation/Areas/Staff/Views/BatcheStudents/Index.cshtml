@@ -1,17 +1,14 @@
-﻿@model IEnumerable<BpstEducation.Models.BatchStudent>
-
-@{
-    ViewData["Title"] = "Index";
-    Layout = ViewBag.Layout;
-
-    ViewBag.ActiveTabName = "BatchStudent";
+﻿@model IEnumerable<BpstEducation.Models.BatchStudent> 
+@{ 
+    Layout = ViewBag.Layout; 
+    ViewBag.ActiveTabName = "BatcheStudents";
 }
 <link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
 <div class="content">
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="h3">StudentBatch List</h1>
+                <h1 >StudentBatch List</h1>
                 <a asp-action="Create" class="btn btn-primary">New Student Batch</a>
             </div>
 

@@ -6,22 +6,31 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using System;
 namespace BpstEducation.Areas.Staff.Controllers
 {
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
-    public class StudentsController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL userServiceBal) : Controller
+    public class StudentsController : Controller
     {
-        private readonly AppDbContext _context = context;
-        private readonly UserManager<AppUser> _userManager = userManager;
-        private readonly IUserServiceBAL _userServiceBal = userServiceBal;
+
+        private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IUserServiceBAL _userServiceBal;
+
+        public StudentsController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL userServiceBal)
+        {
+            _context = context;
+            _userManager = userManager;
+            _userServiceBal = userServiceBal;
+        }
 
         // GET: Admin/Students
         public async Task<IActionResult> Index()
         {
 
             var appDbContext = _context.Students.Include(s => s.CourseOfInterest);
-            ViewBag.Layout = await _userServiceBal.GetLayout();
+            ViewBag.Layout =  _userServiceBal.GetLayout();
             return View(await appDbContext.ToListAsync());
         }
 
@@ -67,26 +76,45 @@ namespace BpstEducation.Areas.Staff.Controllers
 
                 if (student.UniqueId == 0)
                 {
-                    student.CreatedDate = DateTime.UtcNow;
+                    student.LastUpdatedDate = student.CreatedDate = DateTime.UtcNow;
                     _context.Add(student);
+                    var result = await AddLoginDetails(student);
+                    if (!result.Succeeded)
+                        ModelState.AddModelError("Login Creation Error", string.Join(",", result.Errors.Select(e => { return e.Code + " : " + e.Description; }).ToList()));
+
                 }
                 else
                 {
                     student.LastUpdatedDate = DateTime.UtcNow;
                     _context.Update(student);
                 }
-
-
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
+
+
             //  ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
             ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", student.CourseOfInterestId);
             return View(student);
 
         }
+        private async Task<IdentityResult> AddLoginDetails(Models.Student student)
+        {
+            var appUser = new AppUser()
+            {
+                UserName = student.Email,
+                Email = student.Email,
+                Password = "Bpst@" + student.FirstName,
+                ConfirmPassword = "Bpst@" + student.FirstName,
+                PhoneNumber = student.PhoneNumber
+            };
+            var result = await _userServiceBal.AddUser(appUser, ["Student"]);
+            student.LoginIdGuid = appUser.Id;
+            return result;
+        }
 
-         
+
 
         // GET: Admin/Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -133,7 +161,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             if (aadhaarFile != null && aadhaarFile.Length > 0)
             {
-                var aadhaarFileName = Path.GetFileName(aadhaarFile.FileName); 
+                var aadhaarFileName = Path.GetFileName(aadhaarFile.FileName);
                 var aadhaarFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
                 if (!Directory.Exists(aadhaarFilePath))
                     Directory.CreateDirectory(aadhaarFilePath);
