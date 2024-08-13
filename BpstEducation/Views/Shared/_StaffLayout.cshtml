@@ -85,16 +85,15 @@
                     </div>
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
-                    @if (activeTabName.Equals("HelperDash")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Staff/Home/Index"><i class="fa icon-book-open"></i> My Profile</a></li>
-
-
-                    @if (activeTabName.Equals("Batchs")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a href="/Staff/Batchs/Index"><i class="fa icon-book-open"></i>Batches </a></li>
+                    @if (activeTabName.Equals("Profile")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Staff/Home/ViewProfile"><i class="fa icon-book-open"></i> My Profile</a></li>
 
                     @if (activeTabName.Equals("Students")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Staff/Students/Index"><i class="fa icon-book-open"></i>Add Students </a></li>
 
+
+                    @if (activeTabName.Equals("Batchs")) { activeTab = "active"; } else { activeTab = string.Empty; }
+                    <li class="@activeTab"><a href="/Staff/Batchs/Index"><i class="fa icon-book-open"></i>Batchs </a></li>
 
                     @if (activeTabName.Equals("BatcheStudents")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Staff/BatcheStudents/Index"><i class="fa icon-book-open"></i>Batch Students </a></li>
@@ -103,7 +102,6 @@
 
                     @if (activeTabName.Equals("ChangePassword")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab"><a href="/Account/ChangePassword"><i class="fa icon-book-open"></i>Change Password</a></li>
-
 
                     <li><a href="/Account/LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
 

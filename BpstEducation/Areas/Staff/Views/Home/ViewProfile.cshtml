@@ -1,12 +1,9 @@
 ﻿@model BpstEducation.Models.Employees
-
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.ActiveTabName = "Employees";
-
+    ViewData["Title"] = "ViewProfile";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+    ViewBag.ActiveTabName = "Profile";
 }
-
 <div class="content">
     <div class="card">
         <div class="card-body">
@@ -57,9 +54,10 @@
                         @Html.DisplayFor(model => model.Address)
                     </dd>
                 </dl>
-                <a asp-action="Create" asp-route-id="@Model.UniqueId">Edit</a> |
-                <a asp-action="Index">Back to List</a>
+                <a asp-action="Create" asp-route-id="@Model.UniqueId">Edit</a>
             </div>
         </div>
     </div>
 </div>
+
+

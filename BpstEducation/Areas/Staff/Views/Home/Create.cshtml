@@ -1,11 +1,9 @@
 ﻿@model BpstEducation.Models.Employees
-
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.ActiveTabName = "Employees";
-
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
 }
+
 <div class="content">
     <div class="card">
         <div class="card-body">
@@ -13,33 +11,29 @@
             <hr />
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-                <h6 class="card-header bg-primary text-light mb-2">Personal Info</h6>
                 <div class="row">
                     <input type="hidden" asp-for="UniqueId" />
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                        <label asp-for="FirstName" class="form-label">First Name</label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-
-                    </div>
-                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                        <label asp-for="LastName" class="form-label">Last Name</label>
-                        <input asp-for="LastName" class="form-control" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
+                        <label asp-for="FullName" class="form-label">Full Name</label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
 
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
                         <label asp-for="JobRole" class="form-label">Job Role</label>
                         <input asp-for="JobRole" class="form-control" />
                         <span asp-validation-for="JobRole" class="text-danger"></span>
+
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
 
                         <label asp-for="Email" class="form-label"></label>
-                        <input asp-for="Email" class="form-control" />
+                        <input asp-for="Email" class="form-control" readonly />
                         <span asp-validation-for="Email" class="text-danger"></span>
+
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
@@ -47,38 +41,29 @@
                         <label asp-for="DateOfBirth" class="form-label"></label>
                         <input asp-for="DateOfBirth" class="form-control" />
                         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
                         <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
                         <input asp-for="PhoneNumber" class="form-control" />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
+
                         <label asp-for="Experience" class="form-label"></label>
                         <input asp-for="Experience" class="form-control" />
                         <span asp-validation-for="Experience" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                        <label asp-for="AadhaarNumber" class="form-label"></label>
-                        <input asp-for="AadhaarNumber" class="form-control" />
-                        <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                        <label asp-for="PanNumber" class="form-label"></label>
-                        <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" />
-                        <span asp-validation-for="PanNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                        <label asp-for="Qualification" class="form-label"></label>
-                        <input asp-for="Qualification" class="form-control" placeholder="Enter Qualification" />
-                        <span asp-validation-for="Qualification" class="text-danger"></span>
+
                     </div>
 
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6 col-sm-8 col-lg-5">
+
                         <label asp-for="Address" class="form-label"></label>
-                        <textarea asp-for="Address" class="form-control" rows="2" ></textarea>
+                        <textarea asp-for="Address" class="form-control" rows="2"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
 
                     </div>
@@ -87,7 +72,7 @@
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-4 mb-2">
-                        <input type="submit" value="Create" class="btn btn-primary w-75" />
+                        <input type="submit" value="Create" class="btn btn-primary w-50" />
                     </div>
                     <div class="col-md-4 mb-2">
                         <a asp-action="Index">Back to List</a>
@@ -105,3 +90,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+

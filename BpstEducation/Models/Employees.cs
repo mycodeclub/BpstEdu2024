@@ -12,6 +12,11 @@ namespace BpstEducation.Models
 
         public string LastName { get; set; }
 
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
+     
+
+
         [NotMapped]
         public string? FullName { get { return FirstName + LastName; } }
         public string JobRole { get; set; } = string.Empty;
@@ -21,5 +26,17 @@ namespace BpstEducation.Models
         public int? Experience { get; set; }
         public string Address { get; set; } = string.Empty;
         public string LoginIdGuid { get; set; } = string.Empty;
+
+        [Required]
+        [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid Aadhaar number. It must be a 12-digit number.")]
+        [Display(Name = "Aadhaar Num.")]
+        public string AadhaarNumber { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[A-Z]{5}\d{4}[A-Z]{1}$", ErrorMessage = "Invalid PAN number. Format should be: XXXXX1234X.")]
+        [Display(Name = "Pan Num.")]
+        public string PanNumber { get; set; }
+
+        public string Qualification {  get; set; } = string.Empty;
     }
 }
