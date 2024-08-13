@@ -68,6 +68,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Create(Models.Student student)
         {
 
+            ValidateFileUploads(student);
             if (ModelState.IsValid)
             {
                 var (aadhaarImagePath, panImagePath) = await UploadAadhaarAndPanImagesAsync(student.Aadhar, student.Pan);
@@ -187,7 +188,32 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             return (aadhaarImagePath, panImagePath);
         }
+        private void ValidateFileUploads(Models.Student student)
+        {
+            if (student.Aadhar != null)
+            {
+                if (student.Aadhar.Length > 2 * 1024 * 1024)  
+                {
+                    ModelState.AddModelError("Aadhar", "Aadhaar file size must not exceed 2 MB.");
+                }
+                else if (!new[] { ".jpg", ".jpeg", ".png" }.Contains(Path.GetExtension(student.Aadhar.FileName).ToLower()))
+                {
+                    ModelState.AddModelError("Aadhar", "Only JPG, JPEG, and PNG formats are allowed for Aadhaar.");
+                }
+            }
 
+            if (student.Pan != null)
+            {
+                if (student.Pan.Length > 2 * 1024 * 1024) 
+                {
+                    ModelState.AddModelError("Pan", "PAN file size must not exceed 2 MB.");
+                }
+                else if (!new[] { ".jpg", ".jpeg", ".png" }.Contains(Path.GetExtension(student.Pan.FileName).ToLower()))
+                {
+                    ModelState.AddModelError("Pan", "Only JPG, JPEG, and PNG formats are allowed for PAN.");
+                }
+            }
+        }
 
     }
 }
