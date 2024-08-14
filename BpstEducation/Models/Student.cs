@@ -61,20 +61,23 @@ namespace BpstEducation.Models
         public string PanNumber { get; set; }
         [NotMapped]
 
+
+         ///<summary>
+         ///
+         /// Aadhar update 
+         /// </summary>
         [DataType(DataType.Upload)]
-        //[MaxFileSize(3 * 1024 * 1024)] // 3 MB
-        //[AllowedExtensions(new string[] { ".pdf",".image"})]
         [Display(Name = "Upload Aadhar")]
         public IFormFile? Aadhar { get; set; }
-
+        public string? AadharFileUrl { get; set; }
         public string? AadharName { get; set; }
 
         [NotMapped]
         [Display(Name = "Upload Pan")]
-        public IFormFile? Pan { get; set; }
-
+        public IFormFile? Pan { get; set; } 
         public string? PanName { get; set; } = string.Empty;
 
+        public string? PanFileUrl { get; set; }
 
         [Display(Name = "Course Category")]
         public int CourseOfInterestId { get; set; }
@@ -110,6 +113,6 @@ namespace BpstEducation.Models
         [NotMapped]
         public string StudentDisplayName { get { return FullName + "_" + RegistrationNumber; } }
 
-        public string LoginIdGuid { get; internal set; }
+        public string? LoginIdGuid { get; internal set; }
     }
 }

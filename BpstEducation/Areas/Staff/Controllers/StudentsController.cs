@@ -71,10 +71,6 @@ namespace BpstEducation.Areas.Staff.Controllers
             ValidateFileUploads(student);
             if (ModelState.IsValid)
             {
-                var (aadhaarImagePath, panImagePath) = await UploadAadhaarAndPanImagesAsync(student.Aadhar, student.Pan);
-                student.AadharName = aadhaarImagePath;
-                student.PanName = panImagePath;
-
                 if (student.UniqueId == 0)
                 {
                     student.LastUpdatedDate = student.CreatedDate = DateTime.UtcNow;
@@ -89,7 +85,18 @@ namespace BpstEducation.Areas.Staff.Controllers
                     student.LastUpdatedDate = DateTime.UtcNow;
                     _context.Update(student);
                 }
+
                 await _context.SaveChangesAsync();
+                if (student.Aadhar != null && student.Aadhar.Length > 0)
+                {
+                    student.AadharFileUrl = await Common.CommonFuntions.UploadFile(student.Aadhar, "Student", student.UniqueId, "Aadhar");
+                    await _context.SaveChangesAsync();
+                }
+                if (student.Pan != null && student.Pan.Length > 0)
+                {
+                    student.PanFileUrl = await Common.CommonFuntions.UploadFile(student.Pan, "Student", student.UniqueId, "Pan");
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
 
             }
@@ -121,12 +128,12 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-                return NotFound(); 
+                return NotFound();
             var students = await _context.Students
                 .Include(s => s.CourseOfInterest)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
-                return NotFound(); 
+                return NotFound();
             return View(students);
         }
 
