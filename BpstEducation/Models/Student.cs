@@ -69,13 +69,16 @@ namespace BpstEducation.Models
         [DataType(DataType.Upload)]
         [Display(Name = "Upload Aadhar")]
         public IFormFile? Aadhar { get; set; }
+
         public string? AadharFileUrl { get; set; }
-        public string? AadharName { get; set; }
+
+      //public string? AadharName { get; set; }
 
         [NotMapped]
         [Display(Name = "Upload Pan")]
         public IFormFile? Pan { get; set; } 
-        public string? PanName { get; set; } = string.Empty;
+
+      //public string? PanName { get; set; } = string.Empty;
 
         public string? PanFileUrl { get; set; }
 
