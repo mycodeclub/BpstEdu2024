@@ -9,13 +9,13 @@ namespace BpstEducation.Models
         [Key]
         public int UniqueId { get; set; }
 
-        [Display(Name = "Batch Id")]
+        [Display(Name = "Batch")]
         public int BatchId { get; set; }
         [ForeignKey("BatchId")]
         public Batch? Batch { get; set; }
 
 
-        [Display(Name = "Student Id")]
+        [Display(Name = "Student")]
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public Student? Student { get; set; } 

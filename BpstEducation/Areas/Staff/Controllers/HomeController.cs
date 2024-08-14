@@ -30,14 +30,11 @@ namespace BpstEducation.Areas.Faculty.Controllers
 
         public async Task<IActionResult> ViewProfile()
         {
-            var employees = await _context.Employees
-                .FirstOrDefaultAsync();
-            if (employees == null)
-            {
-                return NotFound();
-            }
-            return View(employees);
-
+            var userId = _loginManager.GetLoggedInUserId();
+            var emp = await _context.Employees.Where(e => e.LoginIdGuid == userId).FirstOrDefaultAsync();
+            if (emp == null)
+                return NotFound(); 
+            return View(emp); 
         }
 
         public async Task<IActionResult> Create(int id)

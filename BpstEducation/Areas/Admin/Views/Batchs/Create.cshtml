@@ -17,46 +17,40 @@
                 <div class="row">
                     <input type="hidden" asp-for="UniqueId" />
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="CourseId" class="control-label">Course</label>
-                            <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">
-                                <option value="-1">--Select--</option>
-                            </select>
+                        <label asp-for="CourseId" class="control-label">Course</label>
+                        <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">
+                            <option value="-1">--Select--</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="Title" class="control-label">Batch Title</label>
-                            <input asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>                 
+                        <label asp-for="Title" class="control-label">Batch Title</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="Duration" class="control-label">Duration</label>
-                            <input asp-for="Duration" class="form-control" />
-                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        <label asp-for="Duration" class="control-label">Duration</label>
+                        <input asp-for="Duration" class="form-control" />
+                        <span asp-validation-for="Duration" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="StartDate" class="control-label">Start Date</label>
-                            <input asp-for="StartDate" type="date" class="form-control" />
-                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        <label asp-for="StartDate" class="control-label">Start Date</label>
+                        <input asp-for="StartDate" type="date" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
 
-                    
-                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                 
-                            <label asp-for="TrainerId" class="control-label">Trainer</label>
-                            <select asp-for="TrainerId" class="form-control" asp-items="ViewBag.TrainerId"></select>
-       
+                        <label asp-for="TrainerId" class="control-label">Trainer</label>
+                        <select asp-for="TrainerId" class="form-control" asp-items="ViewBag.TrainerId"></select>
                     </div>
-                    <div class="col-md-4 mb-1">
-                        <div class="form-group">
-                            <label asp-for="AssisTrainer" class="control-label"></label>
-                            <select asp-for="AssisTrainer" class="form-control" asp-items="ViewBag.TrainerId"></select>
-                        </div>
-                    </div>
-
                     <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="BatchFee" class="control-label">Batch Fee</label>
-                            <input asp-for="BatchFee" type="number" class="form-control" />
-                            <span asp-validation-for="BatchFee" class="text-danger"></span>
+                        <label asp-for="AssisTrainer" class="control-label"></label>
+                        <select asp-for="AssisTrainer" class="form-control" asp-items="ViewBag.TrainerId"></select>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                        <label asp-for="BatchFee" class="control-label">Batch Fee</label>
+                        <input asp-for="BatchFee" type="number" class="form-control" />
+                        <span asp-validation-for="BatchFee" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-12">
                         <label asp-for="Description" class="control-label">Description</label>
@@ -65,13 +59,14 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-2"></div>
                     <div class="col-md-4 mb-2">
-                        <input type="submit" value="Save" class="btn btn-primary " />
+                        <input type="submit" value="Create" class="btn btn-primary w-50" />
                     </div>
-                    
-                </div>
-                <div class="col-md-4 mb-2">
-                    <a asp-action="Index">Back to List</a>
+                    <div class="col-md-4 mb-2">
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+                    <div class="col-md-2"></div>
                 </div>
 
             </form>
