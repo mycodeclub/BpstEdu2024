@@ -30,7 +30,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
 
             var appDbContext = _context.Students.Include(s => s.CourseOfInterest);
-            ViewBag.Layout =  _userServiceBal.GetLayout();
+            ViewBag.Layout = _userServiceBal.GetLayout();
             return View(await appDbContext.ToListAsync());
         }
 
@@ -106,8 +106,8 @@ namespace BpstEducation.Areas.Staff.Controllers
             {
                 UserName = student.Email,
                 Email = student.Email,
-                Password = "Bpst@" + student.FirstName,
-                ConfirmPassword = "Bpst@" + student.FirstName,
+                Password = Common.CommonFuntions.GetDefaultPassword(student.DateOfBirth),
+                ConfirmPassword = Common.CommonFuntions.GetDefaultPassword(student.DateOfBirth),
                 PhoneNumber = student.PhoneNumber
             };
             var result = await _userServiceBal.AddUser(appUser, ["Student"]);
@@ -121,18 +121,12 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
-
+                return NotFound(); 
             var students = await _context.Students
                 .Include(s => s.CourseOfInterest)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
-            {
-                return NotFound();
-            }
-
+                return NotFound(); 
             return View(students);
         }
 
@@ -192,7 +186,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             if (student.Aadhar != null)
             {
-                if (student.Aadhar.Length > 2 * 1024 * 1024)  
+                if (student.Aadhar.Length > 2 * 1024 * 1024)
                 {
                     ModelState.AddModelError("Aadhar", "Aadhaar file size must not exceed 2 MB.");
                 }
@@ -204,7 +198,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             if (student.Pan != null)
             {
-                if (student.Pan.Length > 2 * 1024 * 1024) 
+                if (student.Pan.Length > 2 * 1024 * 1024)
                 {
                     ModelState.AddModelError("Pan", "PAN file size must not exceed 2 MB.");
                 }

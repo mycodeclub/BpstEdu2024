@@ -7,6 +7,7 @@ namespace BpstEducation.Models
 {
     public class Student
     {
+
         [Key]
         public int UniqueId { get; set; }
 
@@ -101,10 +102,14 @@ namespace BpstEducation.Models
         public DateTime CreatedDate { get; internal set; }
         public DateTime LastUpdatedDate { get; internal set; }
 
+
+        public bool IsDeleted { get; set; } = false;
+
+        [NotMapped]
+        public bool IncludingToBatch { get; set; }
         [NotMapped]
         public string StudentDisplayName { get { return FullName + "_" + RegistrationNumber; } }
-        public string LoginIdGuid { get; set; } = string.Empty;
 
-
+        public string LoginIdGuid { get; internal set; }
     }
 }

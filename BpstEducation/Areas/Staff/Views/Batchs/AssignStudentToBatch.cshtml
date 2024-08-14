@@ -1,0 +1,16 @@
+﻿@model List<BpstEducation.Models.BatchStudent>
+@{
+    ViewData["Title"] = "AssignStudentToBatch";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+    List<BpstEducation.Models.Student> students = ViewBag.UnassignedStudents;
+}
+
+<h1>AssignStudentToBatch</h1>
+<ul>
+
+    @foreach (var stu in students)
+    {
+        <li>@stu.StudentDisplayName <input type="checkbox" asp-for="@stu.IncludingToBatch" /> </li>
+
+    }
+</ul>
