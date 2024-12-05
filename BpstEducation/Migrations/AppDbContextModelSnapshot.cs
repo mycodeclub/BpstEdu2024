@@ -74,7 +74,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Address", (string)null);
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.AppUser", b =>
@@ -191,7 +191,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("TrainerId");
 
-                    b.ToTable("Batchs", (string)null);
+                    b.ToTable("Batchs");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.BatchStudent", b =>
@@ -223,7 +223,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("BatchStudents", (string)null);
+                    b.ToTable("BatchStudents");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.City", b =>
@@ -245,7 +245,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.CodeHelper", b =>
@@ -292,7 +292,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("CodeHelpers", (string)null);
+                    b.ToTable("CodeHelpers");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Contact", b =>
@@ -321,7 +321,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Contacts", (string)null);
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Country", b =>
@@ -338,7 +338,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Course", b =>
@@ -355,7 +355,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
 
                     b.HasData(
                         new
@@ -419,7 +419,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("EducationBoardsMaster", (string)null);
+                    b.ToTable("EducationBoardsMaster");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Employees", b =>
@@ -478,7 +478,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Enquiry", b =>
@@ -522,7 +522,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Enquiry", (string)null);
+                    b.ToTable("Enquiry");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Qualification", b =>
@@ -539,7 +539,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Qualification", (string)null);
+                    b.ToTable("Qualification");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Question", b =>
@@ -592,7 +592,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Registration", b =>
@@ -668,7 +668,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("RegistrationForm", (string)null);
+                    b.ToTable("RegistrationForm");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.RegistrationStatusMaster", b =>
@@ -688,7 +688,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("RegistrationStatusMaster", (string)null);
+                    b.ToTable("RegistrationStatusMaster");
 
                     b.HasData(
                         new
@@ -724,7 +724,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("States", (string)null);
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Student", b =>
@@ -740,9 +740,6 @@ namespace BpstEducation.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AadharFileUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AadharName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address")
@@ -767,6 +764,9 @@ namespace BpstEducation.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -787,9 +787,6 @@ namespace BpstEducation.Migrations
                     b.Property<string>("PanFileUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PanName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PanNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -805,7 +802,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("CourseOfInterestId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.StudentFee", b =>
@@ -838,7 +835,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Fees", (string)null);
+                    b.ToTable("Fees");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Subject", b =>
@@ -868,7 +865,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Subject", (string)null);
+                    b.ToTable("Subject");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

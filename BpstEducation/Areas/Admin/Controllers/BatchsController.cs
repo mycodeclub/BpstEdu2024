@@ -22,7 +22,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var batchs = await _context.Batchs.Include(b => b.Course).Include(b => b.Trainer).ToListAsync();
-             return View(batchs);
+            return View(batchs);
         }
 
         // GET: Admin/Batche/Details/5
@@ -53,7 +53,7 @@ namespace BpstEducation.Areas.Admin.Controllers
             var batch = await _context.Batchs.FindAsync(id);
             batch ??= new Batch() { StartDate = DateTime.Now.AddMonths(2) };
 
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "Name");
+            ViewData["CourseId"] = await _context.Courses.ToListAsync();// new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["TrainerId"] = new SelectList(_context.Employees, "UniqueId", "FullName");
             return View(batch);
         }
@@ -83,7 +83,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         }
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-       
+
         // GET: Admin/Batche/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

@@ -6,8 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BpstEducation.Models
 {
     public class Student
-    {
-
+    { 
         [Key]
         public int UniqueId { get; set; }
 

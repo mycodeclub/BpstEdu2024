@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BpstEducation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240812100432_AddedInIsDeletedProp")]
-    partial class AddedInIsDeletedProp
+    [Migration("20241204104530_reset")]
+    partial class reset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -433,6 +433,10 @@ namespace BpstEducation.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
 
+                    b.Property<string>("AadhaarNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -447,7 +451,7 @@ namespace BpstEducation.Migrations
                     b.Property<int?>("Experience")
                         .HasColumnType("int");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -455,7 +459,15 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LoginIdGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PanNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -463,9 +475,13 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Qualification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UniqueId");
 
-                    b.ToTable("employees");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Enquiry", b =>
@@ -726,7 +742,7 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AadharName")
+                    b.Property<string>("AadharFileUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address")
@@ -762,13 +778,16 @@ namespace BpstEducation.Migrations
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LoginIdGuid")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MyDiscount")
                         .HasColumnType("int");
 
                     b.Property<int>("MyTrainingFee")
                         .HasColumnType("int");
 
-                    b.Property<string>("PanName")
+                    b.Property<string>("PanFileUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PanNumber")
