@@ -10,50 +10,50 @@
 <div class="content">
     <div class="card">
         <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="h3">Course List</h1>
-                    <a asp-action="Create" class="btn btn-primary btn-sm">Create New Course</a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover" id="example1">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>S. No.</th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Name)
-                                </th>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="h3">Course List</h1>
+                <a asp-action="Create" class="btn btn-primary btn-sm">Create New Course</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover" id="example1">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>S. No.</th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.IntershipAvailable)
                             </th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                            @foreach (var item in Model)
-                            {
-                                sno++;                              
-                                <tr>
-                                    <td>@sno .</td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            sno++;
+                            <tr>
+                                <td>@sno .</td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td>
+                                    @*                                    <input type="checkbox" value="@item.IntershipAvailable" UniqueId="@item.UniqueId" onclick="UpdateAvailability(this)" />
+ *@ 
                                     @Html.DisplayFor(modelItem => item.IntershipAvailable)
                                 </td>
-                                    <td>
-                                        <a href="/Admin/CourseCategories/Create/@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
-                                        <a href="/Admin/CourseCategories/Details/@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
-                                        <a href="/Admin/CourseCategories/Delete/@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                <td>
+                                    <a href="/Admin/CourseCategories/Create/@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+                                    <a href="/Admin/CourseCategories/Details/@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+                                    <a href="/Admin/CourseCategories/Delete/@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
 </div>
 @section Scripts {
@@ -64,6 +64,22 @@
         $(document).ready(function () {
             $('#example1').DataTable();
         });
+
+
+        UpdateAvailability(thisObj)
+        {
+            alert(thisObj);
+          // $.ajax({
+          //   url: '/CoursCourseCategoriese/UpdateCourseAvilibility', // Endpoint to fetch courses
+          //   type: 'POST',
+          //   data:{}
+          //   success: function (data) {
+          //   }
+          // });
+
+
+        }
     </script>
+
 }
->>>>>>> Stashed changes
+
