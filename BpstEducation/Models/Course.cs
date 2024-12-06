@@ -13,7 +13,7 @@ namespace BpstEducation.Models
         public int UniqueId { get; set; }
         [Required]
         public string Name { get; set; }
-        [NotMapped]
-        public bool IsEnabled { get; set; }
+        
+        public bool IntershipAvailable { get; set; }
     }
 }

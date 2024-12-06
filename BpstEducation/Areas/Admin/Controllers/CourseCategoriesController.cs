@@ -62,7 +62,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UniqueId,Name")] Course courseCategory)
+        public async Task<IActionResult> Create(Course courseCategory)
         {
             ViewBag.activeTabName = "Courses";
             if (ModelState.IsValid)

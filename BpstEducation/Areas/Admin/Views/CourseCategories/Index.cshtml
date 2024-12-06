@@ -22,6 +22,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Name)
                                 </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IntershipAvailable)
+                            </th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -35,6 +38,9 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IntershipAvailable)
+                                </td>
                                     <td>
                                         <a href="/Admin/CourseCategories/Create/@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
                                         <a href="/Admin/CourseCategories/Details/@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
@@ -48,9 +54,7 @@
             </div>
         </div>
     </div>
-<<<<<<< Updated upstream
 
-=======
 </div>
 @section Scripts {
     <!-- DataTable -->

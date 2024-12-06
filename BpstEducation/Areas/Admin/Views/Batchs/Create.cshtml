@@ -22,7 +22,7 @@
                             <option value="-1">--Select--</option>
                             @foreach (var cource in cources)
                             {
-                                if (cource.IsEnabled)
+                                if (cource.IntershipAvailable)
                                 {
                                     <option value="@cource.UniqueId"> @cource.Name </option>
                                 }

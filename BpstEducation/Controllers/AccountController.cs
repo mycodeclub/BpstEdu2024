@@ -119,19 +119,15 @@ namespace BpstEducation.Controllers
             ViewBag.Layout =  _userService.GetLayout();
             return View(updateEmail);
         }
-
-
-
-
-
+         
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
-        }
-
-
+        } 
+        
+        // --- @ToDo : NOTE : Remove following methods while release.
         public async Task<IActionResult> CreateMasterUser()        
         {
             var errorStr = string.Empty;
@@ -165,7 +161,7 @@ namespace BpstEducation.Controllers
             if (string.IsNullOrWhiteSpace(errorStr))
                 return RedirectToAction("AutoLogin");
             return RedirectToAction("Login");
-        }
+        } 
         public async Task<IActionResult> AutoLogin()
         {
             var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "admin@bpst.com", true, lockoutOnFailure: false);
