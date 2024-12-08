@@ -121,5 +121,13 @@ namespace BpstEducation.Areas.Admin.Controllers
         {
             return _context.Courses.Any(e => e.UniqueId == id);
         }
+        [HttpPost]
+        public async Task<bool> UpdateCourseAvilibility(bool isChecked, int uniqueId)
+        {
+            var _course = await _context.Courses.FindAsync(uniqueId);
+            _course.IntershipAvailable = isChecked;
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

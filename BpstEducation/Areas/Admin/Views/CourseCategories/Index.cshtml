@@ -19,12 +19,8 @@
                     <thead class="thead-light">
                         <tr>
                             <th>S. No.</th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IntershipAvailable)
-                            </th>
+                            <th> @Html.DisplayNameFor(model => model.Name) </th>
+                            <th> @Html.DisplayNameFor(model => model.IntershipAvailable) </th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,9 +33,12 @@
                                 <td>@sno .</td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
                                 <td>
-                                    @*                                    <input type="checkbox" value="@item.IntershipAvailable" UniqueId="@item.UniqueId" onclick="UpdateAvailability(this)" />
- *@ 
-                                    @Html.DisplayFor(modelItem => item.IntershipAvailable)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="@item.IntershipAvailable" UniqueId="@item.UniqueId" onchange="UpdateAvailability(this)" id="IntershipAvailableChkBox_@item.UniqueId" />
+                                        <label class="form-check-label" for="IntershipAvailableChkBox_@item.UniqueId">
+                                            Allow Intership
+                                        </label>
+                                    </div> 
                                 </td>
                                 <td>
                                     <a href="/Admin/CourseCategories/Create/@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
@@ -54,31 +53,32 @@
         </div>
     </div>
 </div>
-
-</div>
+ 
 @section Scripts {
     <!-- DataTable -->
     <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
     <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#example1').DataTable();
-        });
+                $(document).ready(function () {
+                    $('#example1').DataTable();
+                });
 
-
-        UpdateAvailability(thisObj)
-        {
-            alert(thisObj);
-          // $.ajax({
-          //   url: '/CoursCourseCategoriese/UpdateCourseAvilibility', // Endpoint to fetch courses
-          //   type: 'POST',
-          //   data:{}
-          //   success: function (data) {
-          //   }
-          // });
-
-
-        }
+        function UpdateAvailability(thisObj)
+                { 
+                  $.ajax({
+                    url: '/Admin/CourseCategories/UpdateCourseAvilibility', // Endpoint to fetch courses
+                    type: 'POST',
+                    dataType: "json", 
+                    data:{
+                        isChecked: $(thisObj).prop('checked'),
+                        uniqueId:$(thisObj).attr('UniqueId')
+                    },
+                    success: function (data) { },
+                    Error:function(data) {
+                        $(thisObj).prop('checked', false);
+                    },
+                   });
+                }
     </script>
 
 }
