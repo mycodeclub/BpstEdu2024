@@ -7,7 +7,7 @@ namespace BpstEducation.Models
 
     [Display(Name = "Registration")]
     [Table("RegistrationForm")]
-    public class Registration
+    public class RegistrationOld
     {
         [Key]
         public int UniqueId { get; set; }
@@ -39,7 +39,7 @@ namespace BpstEducation.Models
         public string FatherName { get; set; }
 
         [Display(Name = "Address")]
-        public string Address { get; set; }
+        public Address Address { get; set; }
 
         [Display(Name = "College Name")]
         public string CollegeName { get; set; }

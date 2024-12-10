@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics.Contracts;
+using BpstEducation.NewModels;
 
 namespace BpstEducation.Controllers
 {
@@ -125,38 +126,16 @@ namespace BpstEducation.Controllers
 
 
 
-        public async Task<IActionResult> StudentRegistration(int Id)
+        public async Task<IActionResult> StudentRegistration()
         {
-            Registration course = null;
-            if (Id != 0)
-            {
-                course = await _context.Registrations.Include(a => a.Qualification).Include(a => a.Course).Where(a => a.UniqueId.Equals(Id)).FirstOrDefaultAsync().ConfigureAwait(false);
-            }
-            if (course == null)
-            {
-                course = new Registration() { };
-            }
-            if (TempData["Message"] != null)
-            {
-                if ((bool)TempData["Message"] == true)
-                {
-                    ViewBag.RegId = TempData["RegId"];
-                    ViewBag.RegistrationSaved = true;
-                }
-            }
-            else
-            {
-                ViewBag.RegistrationSaved = false;
-            }
-            ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "Name");
-            ViewData["Qualification"] = new SelectList(_context.Set<Qualification>(), "UniqueId", "Name");
-            return View(course);
+            ViewData["courses"] = await _context.Courses.ToListAsync();
+            return View(new StudentRegistration() { RegistrationId = "test" });
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StudentRegistration(Registration registration)
+        public async Task<IActionResult> StudentRegistration(StudentRegistration registration)
         {
             if (ModelState.IsValid)
             {
@@ -165,7 +144,7 @@ namespace BpstEducation.Controllers
                     if (registration.UniqueId.Equals(0))
                     {
                         registration.StatusId = 1;
-                        var id = _context.Registrations.Count();
+                        var id = _context.Registration.Count();
                         registration.RegistrationId = "BPST0" + (id + 1); // Increment id to avoid duplicate ID
                         TempData["RegId"] = registration.RegistrationId;
                         registration.CreateDate = DateTime.UtcNow.AddMinutes(750); // Use UTC for consistency
@@ -175,7 +154,7 @@ namespace BpstEducation.Controllers
                     else
                         _context.Update(registration);
                     await _context.SaveChangesAsync();
-                    TempData["Message"] = true;
+                    TempData["SaveSuccess"] = true;
                     return RedirectToAction(nameof(StudentRegistration));
                 }
                 catch (Exception ex)
@@ -191,6 +170,7 @@ namespace BpstEducation.Controllers
             // If we got this far, something failed, redisplay form
             ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["Qualification"] = new SelectList(_context.Set<Qualification>(), "UniqueId", "Name");
+            ViewData["courses"] = await _context.Courses.ToListAsync();
             return View(registration);
         }
     }

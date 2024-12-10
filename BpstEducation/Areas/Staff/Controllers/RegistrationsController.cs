@@ -78,7 +78,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Registration registration)
+        public async Task<IActionResult> Edit(RegistrationOld registration)
         {
             ViewBag.activeTabName = "Registrations";
             if (ModelState.IsValid)
@@ -144,7 +144,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             return _context.Registrations.Any(e => e.UniqueId == id);
         }
 
-        public async Task<IActionResult> GetStudentFilter(int BoardId, int ApplicationFor, Registration registration)
+        public async Task<IActionResult> GetStudentFilter(int BoardId, int ApplicationFor, RegistrationOld registration)
         {
             ViewBag.activeTabName = "Registrations";
             var students = await _context.Registrations

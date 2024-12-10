@@ -1,4 +1,5 @@
 ﻿using BpstEducation.Models;
+using BpstEducation.NewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,7 +30,8 @@ namespace BpstEducation.Data
         public DbSet<BatchStudent> BatchStudents { get; set; }
         public DbSet<Qualification> Qualification { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Registration> Registrations { get; set; }
+        public DbSet<RegistrationOld> Registrations { get; set; }
+        public DbSet<StudentRegistration> Registration{ get; set; }
         public DbSet<RegistrationStatusMaster> RegistrationMasters { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Question> Questions { get; set; }
