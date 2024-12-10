@@ -171,5 +171,35 @@ namespace BpstEducation.Controllers
                 return RedirectToAction("CreateMasterUser");
             return RedirectToAction("Index", "Home");
         }
+
+        //------------api ..........................
+
+        // GET: api/Cities 
+        [HttpGet("GetAllCities")]
+        public async Task<ActionResult<IEnumerable<City>>> GetCities()
+        {
+            return await _context.Cities.ToListAsync();
+        }
+
+        // GET: api/Cities/5
+        [HttpGet("GetCitiesByStateId/{id}")]
+        public async Task<ActionResult<IEnumerable<City>>> GetCitiesByStateId(int id)
+        {
+            var cities = await _context.Cities.Where(c => c.StateId == id).ToListAsync();
+            if (cities == null)
+                return NotFound();
+            return cities;
+        }
+
+        // GET: api/Cities/5
+        [HttpGet("GetCityByCityId/{id}")]
+        public async Task<ActionResult<City>> GetCity(int id)
+        {
+            var city = await _context.Cities.FindAsync(id);
+            if (city == null)
+                return NotFound();
+            return city;
+        }
+
     }
 }
