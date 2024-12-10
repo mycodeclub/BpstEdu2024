@@ -12,7 +12,7 @@ namespace BpstEducation.NewModels
         [Required]
         public string FullName { get; set; }
         public string FatherName { get; set; }
-        public string Address { get; set; }
+        public Address Address { get; set; }
         public int StatusId { get; set; }
         public string RegistrationId { get; set; }
         public DateTime CreateDate { get; set; }
@@ -25,7 +25,7 @@ namespace BpstEducation.NewModels
         public string CollegeName { get; set; }
 
         [Required]
-        public string Qualification  { get; set; }
+        public string Qualification { get; set; }
 
         [Required]
         public int CourseId { get; set; }

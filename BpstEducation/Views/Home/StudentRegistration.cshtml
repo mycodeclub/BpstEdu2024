@@ -43,7 +43,7 @@
                     </div>
                 }
                 <div class="row form-group">
-                    
+
                     <div class="form-group col-md-6">
                         <label asp-for="FullName">Full Name </label>
                         <input type="text" asp-for="FullName" placeholder="Student Full Name" class="form-control" required />
@@ -112,81 +112,139 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                }            
+                }
                 <div class="row form-group">
                     <label class="control-label col-sm-2" asp-for="FullName"></label>
                     <div class="col-sm-10">
                         <input type="text" asp-for="FullName" class="form-control" required />
                         <span asp-validation-for="FullName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="control-label col-sm-2" asp-for="FatherName"></label>
-                    <div class="col-sm-10">
-                        <input type="text" asp-for="FatherName" class="form-control" />
-                        <span asp-validation-for="FatherName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="control-label col-sm-2" asp-for="MobileNumber"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="MobileNumber" class="form-control" />
-                        <span asp-validation-for="MobileNumber"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="control-label col-sm-2" asp-for="EmailId"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="EmailId" class="form-control" required />
-                        <span asp-validation-for="EmailId"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="control-label col-sm-2" asp-for="CollegeName"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="CollegeName" class="form-control" />
-                        <span asp-validation-for="CollegeName"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
+                        <div class="card-body">
+                            <form asp-action="StudentRegistration">
+                                <input asp-for="UniqueId" hidden />
+                                <input asp-for="RegistrationId" hidden />
+                                @*                             <span asp-validation-for="RegistrationId"  class="text-danger"></span>
+ *@                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <input asp-for="FullName" required placeholder="*Full Name" class="form-control" />
+                                        <span asp-validation-for="FullName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input asp-for="FatherName" placeholder="*Father Name" class="form-control" />
+                                        <span asp-validation-for="FatherName" class="text-danger"></span>
+                                    </div>
 
-                    <label class="control-label col-sm-2" asp-for="Qualification" required></label>
-                    <div class="col-sm-10">
-                        <input asp-for="Qualification" class="form-control" />
-                        <span asp-validation-for="Qualification"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="control-label col-sm-2" asp-for="Course"></label>
 
-                    <div class="col-sm-10">
-                        <select asp-for="CourseId" class="form-control">
-                            <option value="-1">--Select--</option>
-                            @foreach (var cource in ApplicationFor)
-                            {
-                                <option value="@cource.UniqueId"> @cource.Name </option>
-                            }
-                        </select>
-                        <span asp-validation-for="CourseId"></span>
-                    </div>
-                </div>
+                                    <div class="form-group col-md-6">
+                                        <select asp-for="Qualification" class="form-control" asp-items="ViewBag.Qualification">
+                                            <option value="">--Select One--</option>
+                                        </select>
 
-                <div class="row form-group">
-                    <label class="control-label col-sm-2" asp-for="Message"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="Message" class="form-control" />
-                        <span asp-validation-for="Message"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="control-label col-sm-2" asp-for="Address"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="Address" class="form-control" />
-                        <span asp-validation-for="Address"></span>
-                    </div>
-                </div>
+                                        <span asp-validation-for="Qualification" class="text-danger"></span>
+                                    </div>
 
-                @*   <div class="card">
+                                    <div class="form-group col-md-6">
+                                        <select asp-for="Course" class="form-control" asp-items="ViewBag.ApplicationFor">
+                                            <option value="">--Select Course--</option>
+                                        </select>
+                                        <span asp-validation-for="Course" class="text-danger"></span>
+                                    </div>
+
+
+
+                                    <div class="form-group col-md-6">
+                                        <input asp-for="MobileNumber" placeholder="*Mobile Number" required class="form-control" />
+                                        <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <input asp-for="EmailId" type="email" placeholder="Email (xyz@gmail.com)" class="form-control" />
+                                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <input asp-for="CollegeName" placeholder="College Name" class="form-control" />
+                                        <span asp-validation-for="CollegeName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <textarea rows="5" asp-for="Message" class="form-control" id="exampleInputPassword1" placeholder="Message"></textarea>
+                                        <span asp-validation-for="Message" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="submit" value="Submit Registration" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" asp-for="FatherName"></label>
+                        <div class="col-sm-10">
+                            <input type="text" asp-for="FatherName" class="form-control" />
+                            <span asp-validation-for="FatherName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" asp-for="MobileNumber"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="MobileNumber" class="form-control" />
+                            <span asp-validation-for="MobileNumber"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" asp-for="EmailId"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="EmailId" class="form-control" required />
+                            <span asp-validation-for="EmailId"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" asp-for="CollegeName"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="CollegeName" class="form-control" />
+                            <span asp-validation-for="CollegeName"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+
+                        <label class="control-label col-sm-2" asp-for="Qualification" required></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Qualification" class="form-control" />
+                            <span asp-validation-for="Qualification"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" asp-for="Course"></label>
+
+                        <div class="col-sm-10">
+                            <select asp-for="CourseId" class="form-control">
+                                <option value="-1">--Select--</option>
+                                @foreach (var cource in ApplicationFor)
+                                {
+                                    <option value="@cource.UniqueId"> @cource.Name </option>
+                                }
+                            </select>
+                            <span asp-validation-for="CourseId"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" asp-for="Message"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Message" class="form-control" />
+                            <span asp-validation-for="Message"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-sm-2" asp-for="Address"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address"></span>
+                        </div>
+                    </div>
+
+                    @*   <div class="card">
                     <div class="card-header">Address Details</div>
                     <div class="card-body row">
                         <div class="form-group col-sm-12 col-md-6  col-lg-4">
@@ -236,14 +294,14 @@
 
 
 
-                <div class="row form-group">
-                    <div class="col-sm-2"> </div>
-                    <div class="col-sm-10">
+                    <div class="row form-group">
+                        <div class="col-sm-2"> </div>
+                        <div class="col-sm-10">
 
-                        <button type="submit" class="btn btn-primary" asp-controller="Home" asp-action="StudentRegistration">SignUp </button>
-                        <div asp-validation-summary="All" class="text-danger"></div>
+                            <button type="submit" class="btn btn-primary" asp-controller="Home" asp-action="StudentRegistration">SignUp </button>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </div>
                     </div>
-                </div>
 
             </form>
         </div>
@@ -255,8 +313,60 @@
                 <section>
                 </section>
             </div>
+
+            <div class="card">
+                <div class="card-header">Address Details</div>
+                <div class="card-body row">
+                    <div class="form-group col-sm-12 col-md-6  col-lg-4">
+                        <label asp-for="Address.CountryId" class="text-bold">  </label><small>  <i>(required)</i></small>
+                        <select asp-for="@Model.Address.CountryId" class="custom-select form-control" asp-items="ViewBag.CountryId"></select>
+                        <span asp-validation-for="Address.CountryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-sm-12 com-md-6 col-lg-4">
+                        <label asp-for="Address.StateId" class="control-label"></label><small>  <i>(required)</i></small>
+                        <select asp-for="Address.StateId" onchange="Address.GetCitiesByStateId($(this).children('option:selected').val())" class="custom-select form-control" asp-items="ViewBag.StateId">
+                            <option id="0"> -- Select State -- </option>
+                        </select>
+                        <span asp-validation-for="Address.StateId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-sm-12 com-md-6 col-lg-4">
+                        <label asp-for="Address.CityId" class="control-label"></label><small>  <i>(required)</i></small>
+                        <select asp-for="Address.CityId" class="custom-select form-control" asp-items="ViewBag.CityId"></select>
+                        <span asp-validation-for="Address.CityId" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                        <label class="control-label" asp-for="Address.AddressLine1"></label>
+                        <input asp-for="Address.AddressLine1" class="form-control" placeholder="Address Line 1" />
+                        <span asp-validation-for="Address.AddressLine1" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                        <label class="control-label" asp-for="Address.AddressLine2"></label>
+                        <input asp-for="Address.AddressLine2" class="form-control" placeholder="Address Line 2" />
+                        <span asp-validation-for="Address.AddressLine2" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                        <label class="control-label" asp-for="Address.AddressLine3"></label>
+                        <input asp-for="Address.AddressLine3" class="form-control" placeholder="Address Line 3" />
+                        <span asp-validation-for="Address.AddressLine3" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                        <label class="control-label" asp-for="Address.NearestLandMark"></label>
+                        <input asp-for="Address.NearestLandMark" class="form-control" placeholder="Nearest Land Mark" />
+                        <span asp-validation-for="Address.NearestLandMark" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                        <label class="control-label" asp-for="Address.PinCode"></label>
+                        <input asp-for="Address.PinCode" class="form-control" placeholder="Pin Code" />
+                        <span asp-validation-for="Address.PinCode" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 </div>
 
-
+ 
+@section Scripts {
+    <script src="~/AppJs/Address.js"></script>
+} 

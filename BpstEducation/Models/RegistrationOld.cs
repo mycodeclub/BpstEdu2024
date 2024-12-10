@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace BpstEducation.Models
 {
@@ -37,9 +38,9 @@ namespace BpstEducation.Models
         [Required]
         [Display(Name = "Father Name")]
         public string FatherName { get; set; }
-
-        [Display(Name = "Address")]
-        public Address Address { get; set; }
+         [Display(Name = "Address")]
+         [ForeignKey("AddressId")]
+         public Address Address { get; set; }
 
         [Display(Name = "College Name")]
         public string CollegeName { get; set; }
@@ -56,7 +57,7 @@ namespace BpstEducation.Models
 
         [ForeignKey("ApplicationFor")]
         public Course? Course { get; set; }
- 
+
         [Display(Name = "Message")]
         public string Message { get; set; }
 
@@ -78,10 +79,36 @@ namespace BpstEducation.Models
 
         public DateTime CreateDate { get; set; }
 
-        public bool IsReview {  get; set; }
+        public bool IsReview { get; set; }
 
-        public string? feedback {  get; set; }
+        public string? feedback { get; set; }
 
+        [Display(Name = "Address")]
+        public string OneLineAddress
+        {
+            get
+            {
+                StringBuilder _address = new StringBuilder();
+                if (Address != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(Address.AddressLine1))
+                        _address.Append(Address.AddressLine1);
+                    if (!string.IsNullOrWhiteSpace(Address.AddressLine2))
+                        _address.Append(" " + Address.AddressLine2);
+                    if (!string.IsNullOrWhiteSpace(Address.AddressLine3))
+                        _address.Append(" " + Address.AddressLine3);
+                    if ((Address.City != null))
+                        _address.Append(" " + Address.City.Name);
+                    if (Address.State != null)
+                        _address.Append(" " + Address.State.Name);
+                    if (Address.Country != null)
+                        _address.Append(" " + Address.Country.Name);
+                    if (!string.IsNullOrWhiteSpace(Address.PinCode))
+                        _address.Append(" " + Address.PinCode);
+                }
+                return _address.ToString();
+            }
+        }
 
     }
 }

@@ -21,8 +21,11 @@ namespace BpstEducation.Data
             modelBuilder.SeedRoles();
             modelBuilder.SeedRegistrationStatusTypes();
             modelBuilder.SeedCourseCategory();
-            modelBuilder.Entity<AppUser>().ToTable("AppUser");
+            modelBuilder.Entity<AppUser>().ToTable("AppUser"); 
 
+            modelBuilder.SeedCountry();
+            modelBuilder.SeedState();
+            modelBuilder.SeedCities(); 
          }
 
         public DbSet<Contact> Contacts { get; set; }
