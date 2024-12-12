@@ -20,10 +20,10 @@
     <div class="card">
         <div class="card-header text-center bg-dark text-white text-bold">Student Registration</div>
         <div class="card-body">
-            <form class="form-horizontal" asp-action="Register" asp-controller="Account" method="post">
+            <form class="form-horizontal" asp-action="StudentRegistration" asp-controller="Home" method="post">
                 <input type="hidden" asp-for="RegistrationId" class="form-control" />
                 <input type="hidden" asp-for="UniqueId" class="form-control" />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="All" class="text-danger"></div>
 
                 @if (isSaved)
                 {
@@ -65,7 +65,18 @@
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label asp-for="Qualification">  </label>
+                        <input type="text" asp-for="Qualification" placeholder="Your Highest Qualification" class="form-control" required />
+                        <span asp-validation-for="Qualification" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="CollegeName">  </label>
+                        <input type="text" asp-for="CollegeName" placeholder="Enter your College Name & Board" class="form-control" required />
+                        <span asp-validation-for="CollegeName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label asp-for="Course">Course Applying For </label>
                         <select asp-for="CourseId" class="form-control" required>
                             <option value="-1">--Select--</option>
@@ -77,12 +88,6 @@
                         <span asp-validation-for="CourseId" class="text-danger"></span>
                     </div>
 
-
-                    <div class="form-group col-md-6">
-                        <label asp-for="CollegeName">  </label>
-                        <input type="text" asp-for="CollegeName" placeholder="Enter your College Name & Board" class="form-control" required />
-                        <span asp-validation-for="CollegeName" class="text-danger"></span>
-                    </div>
 
                     <div class="form-group col-md-12">
                         <label asp-for="Message">  </label>

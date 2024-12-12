@@ -1,0 +1,98 @@
+﻿@model IEnumerable<BpstEducation.NewModels.StudentRegistration>
+@{
+    int SNo = 1;
+    List<Course> Courses = ViewBag.Courses;
+    List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
+}
+
+
+
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Course </th>
+                                <th>  Application Counts</th>
+                            </tr>
+                        </thead>  @foreach (var item in applicationsByCourse.OrderByDescending(kvp=>kvp.Value))
+                        {
+                            <tr>
+                                <td>@item.Key</td>
+                                <td>@item.Value</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class=" col-12">
+
+                    <h2> Review Registration </h2>
+                    <div class="text-right">
+                        <select onchange="return ReloadForSpecificCourse(this)">
+                            @foreach (var c in Courses)
+                            {
+                                <option value="@c.UniqueId">@c.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th> S. No</th>
+                                <th> Student Name</th>
+                                <th> Qualification</th>
+                                <th> Course</th>
+                                <th> Contact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td> @SNo .</td>
+                                    <td> @item.FullName</td>
+                                    <td> @item.Qualification</td>
+                                    <td> @item.Course.Name</td>
+                                    <td> @item.MobileNumber</td>
+                                </tr>
+
+                                SNo = SNo + 1;
+
+                            }
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+               let initialLoad = true; // Flag to prevent execution on page load
+           function ReloadForSpecificCourse(thisObj)
+           {
+
+               if(!initialLoad)
+               {
+                   debugger;
+                   const selectedValue = $(thisObj).val(); // Get the value
+                   const url = `/Staff/ReviewRegistration/Index/${selectedValue}`; // Construct the URL
+                   window.location.href = url; // Redirect
+                     // window.location.href='/Staff/ReviewRegistration/Index/'+   $(thisObj).val();
+               }
+                initialLoad = false; // Set flag to false after the first interaction
+        }
+    </script>
+
+
+}

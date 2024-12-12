@@ -12,7 +12,7 @@ namespace BpstEducation.NewModels
         [Required]
         public string FullName { get; set; }
         public string FatherName { get; set; }
-        public Address Address { get; set; }
+        public string Address { get; set; }
         public int StatusId { get; set; }
         public string RegistrationId { get; set; }
         public DateTime CreateDate { get; set; }
@@ -31,7 +31,7 @@ namespace BpstEducation.NewModels
         public int CourseId { get; set; }
 
         [ForeignKey("CourseId")]
-        public Course? Course { get; set; }
+        public virtual Course? Course { get; set; }
         public string Message { get; set; }
 
 
