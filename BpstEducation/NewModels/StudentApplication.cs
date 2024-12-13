@@ -4,18 +4,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BpstEducation.NewModels
 {
-    public class StudentRegistration
+    public class StudentApplication
     {
         [Key]
         public int UniqueId { get; set; }
-
+        public string ApplicationId { get; set; }
         [Required]
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName { get { return $" {FirstName}  {LastName}"; } }
         public string FatherName { get; set; }
         public string Address { get; set; }
         public int StatusId { get; set; }
-        public string RegistrationId { get; set; }
-        public DateTime CreateDate { get; set; }
+        [ForeignKey("StatusId")]
+        public ApplicationStatus ApplicationStatus { get; set; }
+        public DateTime AppliedOn { get; set; }
 
         [Required]
         public string MobileNumber { get; set; }
@@ -25,7 +28,7 @@ namespace BpstEducation.NewModels
         public string CollegeName { get; set; }
 
         [Required]
-        public string Qualification { get; set; }
+        public string HighestQualification { get; set; }
 
         [Required]
         public int CourseId { get; set; }

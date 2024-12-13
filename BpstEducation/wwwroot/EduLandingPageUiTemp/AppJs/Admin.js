@@ -1,4 +1,4 @@
-﻿var StudentRegistration = {
+﻿var StudentApplications = {
     GetStudentByCourseOrBoardName: function () {
         var BoardId = $("#BoardId").val();
         var ApplicationFor = $("#ApplicationFor").val();

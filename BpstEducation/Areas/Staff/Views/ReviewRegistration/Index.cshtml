@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BpstEducation.NewModels.StudentRegistration>
+﻿@model IEnumerable<BpstEducation.NewModels.StudentApplication>
 @{
     int SNo = 1;
     List<Course> Courses = ViewBag.Courses;
@@ -56,7 +56,7 @@
                                 <tr>
                                     <td> @SNo .</td>
                                     <td> @item.FullName</td>
-                                    <td> @item.Qualification</td>
+                                    <td> @item.HighestQualification</td>
                                     <td> @item.Course.Name</td>
                                     <td> @item.MobileNumber</td>
                                 </tr>

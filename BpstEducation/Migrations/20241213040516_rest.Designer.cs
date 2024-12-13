@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BpstEducation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241212065151_nwe")]
-    partial class nwe
+    [Migration("20241213040516_rest")]
+    partial class rest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,6 +144,52 @@ namespace BpstEducation.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AppUser", (string)null);
+                });
+
+            modelBuilder.Entity("BpstEducation.Models.ApplicationStatus", b =>
+                {
+                    b.Property<int>("UniqueId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RegistrationStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UniqueId");
+
+                    b.ToTable("ApplicationStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            UniqueId = 1,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegistrationStatus = "Applied"
+                        },
+                        new
+                        {
+                            UniqueId = 2,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegistrationStatus = "Reviewed"
+                        },
+                        new
+                        {
+                            UniqueId = 3,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegistrationStatus = "Admission Taken"
+                        },
+                        new
+                        {
+                            UniqueId = 4,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegistrationStatus = "Not Interested Anymore"
+                        });
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Batch", b =>
@@ -7907,117 +7953,6 @@ namespace BpstEducation.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("BpstEducation.Models.RegistrationOld", b =>
-                {
-                    b.Property<int>("UniqueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AlternateMobileNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ApplicationFor")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CollegeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Discount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmailId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FatherName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsReview")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MobileNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Qualification")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegistrationId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StatusId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TotalFees")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("feedback")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UniqueId");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("ApplicationFor");
-
-                    b.HasIndex("StatusId");
-
-                    b.ToTable("RegistrationForm");
-                });
-
-            modelBuilder.Entity("BpstEducation.Models.RegistrationStatusMaster", b =>
-                {
-                    b.Property<int>("UniqueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RegistrationStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UniqueId");
-
-                    b.ToTable("RegistrationStatusMaster");
-
-                    b.HasData(
-                        new
-                        {
-                            UniqueId = 1,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RegistrationStatus = "Applied"
-                        },
-                        new
-                        {
-                            UniqueId = 2,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RegistrationStatus = "Reviewed"
-                        });
-                });
-
             modelBuilder.Entity("BpstEducation.Models.State", b =>
                 {
                     b.Property<int>("UniqueId")
@@ -8387,7 +8322,7 @@ namespace BpstEducation.Migrations
                     b.ToTable("Subject");
                 });
 
-            modelBuilder.Entity("BpstEducation.NewModels.StudentRegistration", b =>
+            modelBuilder.Entity("BpstEducation.NewModels.StudentApplication", b =>
                 {
                     b.Property<int>("UniqueId")
                         .ValueGeneratedOnAdd()
@@ -8399,15 +8334,19 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ApplicationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("AppliedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("CollegeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("EmailId")
                         .IsRequired()
@@ -8417,7 +8356,15 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighestQualification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -8429,14 +8376,6 @@ namespace BpstEducation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Qualification")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegistrationId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
@@ -8444,7 +8383,2068 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Registration");
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Applications");
+
+                    b.HasData(
+                        new
+                        {
+                            UniqueId = 1,
+                            Address = "Test Address",
+                            ApplicationId = "Test_01",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir1",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 2,
+                            Address = "Test Address",
+                            ApplicationId = "Test_02",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir2",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 3,
+                            Address = "Test Address",
+                            ApplicationId = "Test_03",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir3",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 4,
+                            Address = "Test Address",
+                            ApplicationId = "Test_04",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir4",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 5,
+                            Address = "Test Address",
+                            ApplicationId = "Test_05",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir5",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 6,
+                            Address = "Test Address",
+                            ApplicationId = "Test_06",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir6",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 7,
+                            Address = "Test Address",
+                            ApplicationId = "Test_07",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir7",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 8,
+                            Address = "Test Address",
+                            ApplicationId = "Test_08",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir8",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 9,
+                            Address = "Test Address",
+                            ApplicationId = "Test_09",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir9",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 10,
+                            Address = "Test Address",
+                            ApplicationId = "Test_010",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir10",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 11,
+                            Address = "Test Address",
+                            ApplicationId = "Test_011",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir11",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 12,
+                            Address = "Test Address",
+                            ApplicationId = "Test_012",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir12",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 13,
+                            Address = "Test Address",
+                            ApplicationId = "Test_013",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir13",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 14,
+                            Address = "Test Address",
+                            ApplicationId = "Test_014",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir14",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 15,
+                            Address = "Test Address",
+                            ApplicationId = "Test_015",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir15",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 16,
+                            Address = "Test Address",
+                            ApplicationId = "Test_016",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir16",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 17,
+                            Address = "Test Address",
+                            ApplicationId = "Test_017",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir17",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 18,
+                            Address = "Test Address",
+                            ApplicationId = "Test_018",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir18",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 19,
+                            Address = "Test Address",
+                            ApplicationId = "Test_019",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir19",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 20,
+                            Address = "Test Address",
+                            ApplicationId = "Test_020",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir20",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 21,
+                            Address = "Test Address",
+                            ApplicationId = "Test_021",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir21",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 22,
+                            Address = "Test Address",
+                            ApplicationId = "Test_022",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir22",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 23,
+                            Address = "Test Address",
+                            ApplicationId = "Test_023",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir23",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 24,
+                            Address = "Test Address",
+                            ApplicationId = "Test_024",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir24",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 25,
+                            Address = "Test Address",
+                            ApplicationId = "Test_025",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir25",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 26,
+                            Address = "Test Address",
+                            ApplicationId = "Test_026",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir26",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 27,
+                            Address = "Test Address",
+                            ApplicationId = "Test_027",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir27",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 28,
+                            Address = "Test Address",
+                            ApplicationId = "Test_028",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir28",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 29,
+                            Address = "Test Address",
+                            ApplicationId = "Test_029",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir29",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 30,
+                            Address = "Test Address",
+                            ApplicationId = "Test_030",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir30",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 31,
+                            Address = "Test Address",
+                            ApplicationId = "Test_031",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir31",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 32,
+                            Address = "Test Address",
+                            ApplicationId = "Test_032",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir32",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 33,
+                            Address = "Test Address",
+                            ApplicationId = "Test_033",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir33",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 34,
+                            Address = "Test Address",
+                            ApplicationId = "Test_034",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir34",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 35,
+                            Address = "Test Address",
+                            ApplicationId = "Test_035",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir35",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 36,
+                            Address = "Test Address",
+                            ApplicationId = "Test_036",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir36",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 37,
+                            Address = "Test Address",
+                            ApplicationId = "Test_037",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir37",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 38,
+                            Address = "Test Address",
+                            ApplicationId = "Test_038",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir38",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 39,
+                            Address = "Test Address",
+                            ApplicationId = "Test_039",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir39",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 40,
+                            Address = "Test Address",
+                            ApplicationId = "Test_040",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir40",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 41,
+                            Address = "Test Address",
+                            ApplicationId = "Test_041",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir41",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 42,
+                            Address = "Test Address",
+                            ApplicationId = "Test_042",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir42",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 43,
+                            Address = "Test Address",
+                            ApplicationId = "Test_043",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir43",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 44,
+                            Address = "Test Address",
+                            ApplicationId = "Test_044",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir44",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 45,
+                            Address = "Test Address",
+                            ApplicationId = "Test_045",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir45",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 46,
+                            Address = "Test Address",
+                            ApplicationId = "Test_046",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir46",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 47,
+                            Address = "Test Address",
+                            ApplicationId = "Test_047",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir47",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 48,
+                            Address = "Test Address",
+                            ApplicationId = "Test_048",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir48",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 49,
+                            Address = "Test Address",
+                            ApplicationId = "Test_049",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir49",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 50,
+                            Address = "Test Address",
+                            ApplicationId = "Test_050",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir50",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 51,
+                            Address = "Test Address",
+                            ApplicationId = "Test_051",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir51",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 52,
+                            Address = "Test Address",
+                            ApplicationId = "Test_052",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir52",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 53,
+                            Address = "Test Address",
+                            ApplicationId = "Test_053",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir53",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 54,
+                            Address = "Test Address",
+                            ApplicationId = "Test_054",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir54",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 55,
+                            Address = "Test Address",
+                            ApplicationId = "Test_055",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir55",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 56,
+                            Address = "Test Address",
+                            ApplicationId = "Test_056",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir56",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 57,
+                            Address = "Test Address",
+                            ApplicationId = "Test_057",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir57",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 58,
+                            Address = "Test Address",
+                            ApplicationId = "Test_058",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir58",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 59,
+                            Address = "Test Address",
+                            ApplicationId = "Test_059",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir59",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 60,
+                            Address = "Test Address",
+                            ApplicationId = "Test_060",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir60",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 61,
+                            Address = "Test Address",
+                            ApplicationId = "Test_061",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir61",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 62,
+                            Address = "Test Address",
+                            ApplicationId = "Test_062",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir62",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 63,
+                            Address = "Test Address",
+                            ApplicationId = "Test_063",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir63",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 64,
+                            Address = "Test Address",
+                            ApplicationId = "Test_064",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir64",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 65,
+                            Address = "Test Address",
+                            ApplicationId = "Test_065",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir65",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 66,
+                            Address = "Test Address",
+                            ApplicationId = "Test_066",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir66",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 67,
+                            Address = "Test Address",
+                            ApplicationId = "Test_067",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir67",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 68,
+                            Address = "Test Address",
+                            ApplicationId = "Test_068",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir68",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 69,
+                            Address = "Test Address",
+                            ApplicationId = "Test_069",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir69",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 70,
+                            Address = "Test Address",
+                            ApplicationId = "Test_070",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir70",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 71,
+                            Address = "Test Address",
+                            ApplicationId = "Test_071",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir71",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 72,
+                            Address = "Test Address",
+                            ApplicationId = "Test_072",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir72",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 73,
+                            Address = "Test Address",
+                            ApplicationId = "Test_073",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir73",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 74,
+                            Address = "Test Address",
+                            ApplicationId = "Test_074",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir74",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 75,
+                            Address = "Test Address",
+                            ApplicationId = "Test_075",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir75",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 76,
+                            Address = "Test Address",
+                            ApplicationId = "Test_076",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir76",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 77,
+                            Address = "Test Address",
+                            ApplicationId = "Test_077",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir77",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 78,
+                            Address = "Test Address",
+                            ApplicationId = "Test_078",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir78",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 79,
+                            Address = "Test Address",
+                            ApplicationId = "Test_079",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir79",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 80,
+                            Address = "Test Address",
+                            ApplicationId = "Test_080",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir80",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 81,
+                            Address = "Test Address",
+                            ApplicationId = "Test_081",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir81",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 82,
+                            Address = "Test Address",
+                            ApplicationId = "Test_082",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir82",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 83,
+                            Address = "Test Address",
+                            ApplicationId = "Test_083",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir83",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 84,
+                            Address = "Test Address",
+                            ApplicationId = "Test_084",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir84",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 85,
+                            Address = "Test Address",
+                            ApplicationId = "Test_085",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir85",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 86,
+                            Address = "Test Address",
+                            ApplicationId = "Test_086",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir86",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 87,
+                            Address = "Test Address",
+                            ApplicationId = "Test_087",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir87",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 88,
+                            Address = "Test Address",
+                            ApplicationId = "Test_088",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir88",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 89,
+                            Address = "Test Address",
+                            ApplicationId = "Test_089",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir89",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 90,
+                            Address = "Test Address",
+                            ApplicationId = "Test_090",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir90",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 91,
+                            Address = "Test Address",
+                            ApplicationId = "Test_091",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir91",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 92,
+                            Address = "Test Address",
+                            ApplicationId = "Test_092",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir92",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 93,
+                            Address = "Test Address",
+                            ApplicationId = "Test_093",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir93",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 94,
+                            Address = "Test Address",
+                            ApplicationId = "Test_094",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir94",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 95,
+                            Address = "Test Address",
+                            ApplicationId = "Test_095",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir95",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 96,
+                            Address = "Test Address",
+                            ApplicationId = "Test_096",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir96",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 97,
+                            Address = "Test Address",
+                            ApplicationId = "Test_097",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir97",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 98,
+                            Address = "Test Address",
+                            ApplicationId = "Test_098",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir98",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 99,
+                            Address = "Test Address",
+                            ApplicationId = "Test_099",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir99",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 100,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0100",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir100",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 101,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0101",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir101",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 102,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0102",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir102",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 103,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0103",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir103",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 104,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0104",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir104",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 105,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0105",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir105",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 106,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0106",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir106",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 107,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0107",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir107",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 108,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0108",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir108",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 109,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0109",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir109",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 110,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0110",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir110",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 111,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0111",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir111",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 112,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0112",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir112",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 113,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0113",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir113",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 114,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0114",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir114",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 115,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0115",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir115",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 116,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0116",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir116",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 117,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0117",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir117",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 118,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0118",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir118",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 119,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0119",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir119",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 120,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0120",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir120",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 121,
+                            Address = "Test Address",
+                            ApplicationId = "Test_0121",
+                            AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CollegeName = "UPTU",
+                            CourseId = 1,
+                            EmailId = "email@gmail.com",
+                            FatherName = "Mr. Sanjay Singhania",
+                            FirstName = "User",
+                            HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                            LastName = "Sir121",
+                            Message = "I am dying to get this course at any cost.",
+                            MobileNumber = "999999999",
+                            StatusId = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -8695,29 +10695,6 @@ namespace BpstEducation.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("BpstEducation.Models.RegistrationOld", b =>
-                {
-                    b.HasOne("BpstEducation.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BpstEducation.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("ApplicationFor");
-
-                    b.HasOne("BpstEducation.Models.RegistrationStatusMaster", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId");
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Status");
-                });
-
             modelBuilder.Entity("BpstEducation.Models.State", b =>
                 {
                     b.HasOne("BpstEducation.Models.Country", "Country")
@@ -8751,13 +10728,21 @@ namespace BpstEducation.Migrations
                     b.Navigation("Students");
                 });
 
-            modelBuilder.Entity("BpstEducation.NewModels.StudentRegistration", b =>
+            modelBuilder.Entity("BpstEducation.NewModels.StudentApplication", b =>
                 {
                     b.HasOne("BpstEducation.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BpstEducation.Models.ApplicationStatus", "ApplicationStatus")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationStatus");
 
                     b.Navigation("Course");
                 });

@@ -40,9 +40,9 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var registration = await _context.Registrations
+            var registration = await _context.Applications
                 .Include(r => r.Course)
-                .Include(r => r.Status)
+                .Include(r => r.StatusId)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (registration == null)
             {
@@ -63,7 +63,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var registration = await _context.Registrations
+            var registration = await _context.Applications
                 .Include(r => r.Course)
                 .Where(r => r.UniqueId == id).FirstOrDefaultAsync();
             if (registration == null)
@@ -102,7 +102,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return RedirectToAction(nameof(Index));
             }
             //   ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "CourseName", registration.ApplicationFor);
-            ViewData["StatusId"] = new SelectList(_context.RegistrationMasters, "UniqueId", "RegistrationStatus", registration.StatusId);
+            ViewData["StatusId"] = new SelectList(_context.ApplicationStatus, "UniqueId", "RegistrationStatus", registration.StatusId);
             return View(registration);
         }
 
@@ -115,7 +115,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            var registration = await _context.Registrations
+            var registration = await _context.Applications
                 .Include(r => r.Course)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (registration == null)
@@ -132,8 +132,8 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             ViewBag.activeTabName = "Registrations";
-            var registration = await _context.Registrations.FindAsync(id);
-            _context.Registrations.Remove(registration);
+            var registration = await _context.Applications.FindAsync(id);
+            _context.Applications.Remove(registration);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -141,16 +141,16 @@ namespace BpstEducation.Areas.Staff.Controllers
         private bool RegistrationExists(int id)
         {
             ViewBag.activeTabName = "Registrations";
-            return _context.Registrations.Any(e => e.UniqueId == id);
+            return _context.Applications.Any(e => e.UniqueId == id);
         }
 
         public async Task<IActionResult> GetStudentFilter(int BoardId, int ApplicationFor, RegistrationOld registration)
         {
             ViewBag.activeTabName = "Registrations";
-            var students = await _context.Registrations
-               .Include(a => a.Status)
+            var students = await _context.Applications
+               .Include(a => a.ApplicationStatus)
                .Include(a => a.Course)
-               .Where(a => ApplicationFor.Equals(0) || a.ApplicationFor.Equals(ApplicationFor))
+             //  .Where(a => ApplicationFor.Equals(0) || a.ApplicationFor.Equals(ApplicationFor))
                .ToListAsync()
                .ConfigureAwait(false);
             ViewBag.Dem = "aa";

@@ -1,7 +1,7 @@
-﻿@model BpstEducation.NewModels.StudentRegistration
+﻿@model BpstEducation.NewModels.StudentApplication
 
 @{
-    ViewData["Title"] = "StudentRegistration";
+    ViewData["Title"] = "StudentApplications";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     ViewBag.ActiveTabName = "Registration";
     var isSaved = false;
@@ -20,8 +20,8 @@
     <div class="card">
         <div class="card-header text-center bg-dark text-white text-bold">Student Registration</div>
         <div class="card-body">
-            <form class="form-horizontal" asp-action="StudentRegistration" asp-controller="Home" method="post">
-                <input type="hidden" asp-for="RegistrationId" class="form-control" />
+            <form class="form-horizontal" asp-action="StudentApplications" asp-controller="Home" method="post">
+                <input type="hidden" asp-for="ApplicationId" class="form-control" />
                 <input type="hidden" asp-for="UniqueId" class="form-control" />
                 <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -66,9 +66,9 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label asp-for="Qualification">  </label>
-                        <input type="text" asp-for="Qualification" placeholder="Your Highest Qualification" class="form-control" required />
-                        <span asp-validation-for="Qualification" class="text-danger"></span>
+                        <label asp-for="HighestQualification">  </label>
+                        <input type="text" asp-for="HighestQualification" placeholder="Your Highest Qualification" class="form-control" required />
+                        <span asp-validation-for="HighestQualification" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-4">

@@ -15,7 +15,7 @@ namespace BpstEducation.Models
 
         public int? StatusId { get; set; }
         [ForeignKey("StatusId")]
-        public RegistrationStatusMaster? Status { get; set; }
+        public ApplicationStatus? Status { get; set; }
 
         [Display(Name = "Total Fees")]
         public string? TotalFees { get; set; }

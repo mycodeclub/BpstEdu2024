@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BpstEducation.Models
 {
     [Display(Name = "Status")]
-    [Table("RegistrationStatusMaster")]
-    public class RegistrationStatusMaster
+    [Table("ApplicationStatus")]
+    public class ApplicationStatus
     {
         [Key]
         public int UniqueId { get; set; }

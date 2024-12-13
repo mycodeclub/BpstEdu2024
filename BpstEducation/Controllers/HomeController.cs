@@ -126,36 +126,36 @@ namespace BpstEducation.Controllers
 
 
 
-        public async Task<IActionResult> StudentRegistration()
+        public async Task<IActionResult> StudentApplications()
         {
             ViewData["courses"] = await _context.Courses.ToListAsync();
-            return View(new StudentRegistration() { RegistrationId = "test" });
+            return View(new StudentApplication() { ApplicationId = "test" });
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StudentRegistration(StudentRegistration registration)
+        public async Task<IActionResult> StudentApplications(StudentApplication application)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (registration.UniqueId.Equals(0))
+                    if (application.UniqueId.Equals(0))
                     {
-                        registration.StatusId = 1;
-                        var id = _context.Registration.Count();
-                        registration.RegistrationId = "BPST0" + (id + 1); // Increment id to avoid duplicate ID
-                        TempData["RegId"] = registration.RegistrationId;
-                        registration.CreateDate = DateTime.UtcNow.AddMinutes(750); // Use UTC for consistency
-                        _context.Add(registration);
+                        application.StatusId = 1;
+                        var id = _context.Applications.Count();
+                        application.ApplicationId = "BPST0" + (id + 1); // Increment id to avoid duplicate ID
+                        TempData["RegId"] = application.ApplicationId;
+                        application.AppliedOn = DateTime.UtcNow.AddMinutes(750); // Use UTC for consistency
+                        _context.Add(application);
 
                     }
                     else
-                        _context.Update(registration);
+                        _context.Update(application);
                     await _context.SaveChangesAsync();
                     TempData["SaveSuccess"] = true;
-                    return RedirectToAction(nameof(StudentRegistration));
+                    return RedirectToAction(nameof(StudentApplications));
                 }
                 catch (Exception ex)
                 {
@@ -171,7 +171,7 @@ namespace BpstEducation.Controllers
             ViewData["ApplicationFor"] = new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["Qualification"] = new SelectList(_context.Set<Qualification>(), "UniqueId", "Name");
             ViewData["courses"] = await _context.Courses.ToListAsync();
-            return View(registration);
+            return View(application);
         }
     }
 

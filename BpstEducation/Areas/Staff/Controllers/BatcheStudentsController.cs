@@ -74,7 +74,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BatchId"] = new SelectList(_context.Batchs, "UniqueId", "UniqueId", studentBatch.BatchId);
-            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.StudentId);
+            ViewData["RegistraionId"] = new SelectList(_context.Applications, "UniqueId", "EmailId", studentBatch.StudentId);
             ViewBag.Layout =  _loggedInUser.GetLayout();
             return View(studentBatch);
         }
@@ -93,7 +93,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
             }
             ViewData["BatchId"] = new SelectList(_context.Batchs, "UniqueId", "UniqueId", studentBatch.BatchId);
-            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.StudentId);
+            ViewData["RegistraionId"] = new SelectList(_context.Applications, "UniqueId", "EmailId", studentBatch.StudentId);
             ViewBag.Layout =  _loggedInUser.GetLayout();
             return View(studentBatch);
         }
@@ -131,7 +131,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BatchId"] = new SelectList(_context.Batchs, "UniqueId", "UniqueId", studentBatch.BatchId);
-            ViewData["RegistraionId"] = new SelectList(_context.Registrations, "UniqueId", "EmailId", studentBatch.StudentId);
+            ViewData["RegistraionId"] = new SelectList(_context.Applications, "UniqueId", "EmailId", studentBatch.StudentId);
             ViewBag.Layout =  _loggedInUser.GetLayout();
             return View(studentBatch);
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.Models;
+using BpstEducation.NewModels;
 
 namespace BpstEducation.Data
 {
@@ -14,11 +15,13 @@ namespace BpstEducation.Data
                new IdentityRole() { Id = "7fd3a789-e48b-4ba5-941a-11cbc3b47f39", Name = "Student", NormalizedName = "STUDENT", ConcurrencyStamp = "a8388c90-9c2b-4260-8cb7-f4250d503afd" }
                );
         }
-        public static void SeedRegistrationStatusTypes(this ModelBuilder modelBuilder)
+        public static void SeedApplicationStatus(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<RegistrationStatusMaster>().HasData(
-                new RegistrationStatusMaster() { UniqueId = 1, RegistrationStatus = "Applied" },
-                new RegistrationStatusMaster() { UniqueId = 2, RegistrationStatus = "Reviewed" }
+            modelBuilder.Entity<ApplicationStatus>().HasData(
+                new ApplicationStatus() { UniqueId = 1, RegistrationStatus = "Applied" },
+                new ApplicationStatus() { UniqueId = 2, RegistrationStatus = "Reviewed" },
+                new ApplicationStatus() { UniqueId = 3, RegistrationStatus = "Admission Taken" },
+                new ApplicationStatus() { UniqueId = 4, RegistrationStatus = "Not Interested Anymore" }
                 );
         }
         public static void SeedCourseCategory(this ModelBuilder modelBuilder)
@@ -32,7 +35,7 @@ namespace BpstEducation.Data
                 new Course() { UniqueId = 6, Name = "Hardware / Networking" },
                 new Course() { UniqueId = 7, Name = "Others" }
                 );
-        } 
+        }
         public static void SeedEducationBoard(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EducationBoardsMaster>().HasData(
@@ -50,7 +53,6 @@ namespace BpstEducation.Data
                 new EducationBoardsMaster() { UniqueId = 12, Name = "Bihar School Examination Board (BSEB)", ShortName = "BSEB" }
                 );
         }
-
         public static void SeedCountry(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Country>().HasData(
@@ -1316,6 +1318,36 @@ namespace BpstEducation.Data
                  new City() { UniqueId = 1215, StateId = 32, Name = "Zaidpur" },
                  new City() { UniqueId = 1216, StateId = 32, Name = "Zamania" }
                  );
+        }
+        public static void SeedSampleApplicationsRecords(this ModelBuilder modelBuilder)
+        {
+            int cId = 1;
+            var applications = new List<StudentApplication>();
+            for (int i = 1; i < 122; i++)
+            {
+                cId = (cId == 8) ? cId = 1 : cId++;
+                applications.Add(
+                    new StudentApplication()
+                    {
+                        UniqueId = i,
+                        ApplicationId = $"Test_0{i}",
+                        FirstName = $"User",
+                        LastName = $"Sir{i}",
+                        StatusId = 1,
+                        MobileNumber = $"999999999",
+                        Address = "Test Address",
+                        CourseId = cId,
+                        CollegeName = "UPTU",
+                        EmailId = "email@gmail.com",
+                        FatherName = "Mr. Sanjay Singhania",
+                        Message = "I am dying to get this course at any cost.",
+                        HighestQualification = "B.Tech - Coumputer Science & Engineering",
+                        AppliedOn = new DateTime(2024, 12, 26),
+                    });
+            }
+
+            modelBuilder.Entity<StudentApplication>().HasData(applications);
+
         }
     }
 }

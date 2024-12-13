@@ -1,24 +1,23 @@
 ﻿using BpstEducation.Data;
-using BpstEducation.Models;
-using BpstEducation.NewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Packaging;
-using System.Collections.Generic;
 
-namespace BpstEducation.Areas.Staff.Controllers
+namespace BpstEducation.Areas.Staff
 {
     [Area("Staff")]
-    public class ReviewRegistrationController : Controller
+    public class ApplicationsController : Controller
     {
-
         private readonly AppDbContext _context;
 
-        public ReviewRegistrationController(AppDbContext context)
+        public ApplicationsController(AppDbContext context)
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int id)
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public async Task< IActionResult> Dashboard(int id)
         {
             var allRegistrations = await _context.Applications.Include(r => r.Course).ToListAsync();
             var registrations = (id == 0) ? allRegistrations : allRegistrations.Where(r => r.CourseId == id);
@@ -33,6 +32,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             ViewBag.Courses = _courses;
             ViewBag.applicationsByCourse = applicationsByCourse;
             return View(registrations);
+            return View();
         }
     }
 }

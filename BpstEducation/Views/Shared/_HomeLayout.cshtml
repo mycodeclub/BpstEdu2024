@@ -51,7 +51,7 @@
 
 
                     @if (activeTabName.Equals("Registration")) { activeTab = "active"; } else { activeTab = string.Empty; }
-                    <li class="@activeTab"><a asp-action="StudentRegistration" asp-controller="Home">Student Registration </a></li>
+                    <li class="@activeTab"><a asp-action="StudentApplications" asp-controller="Home">Student Registration </a></li>
 
                     @if (activeTabName.Contains("Learning")) { activeTab = "active"; } else { activeTab = string.Empty; }
                     <li class="@activeTab drop-down">

@@ -8,11 +8,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BpstEducation.Migrations
 {
     /// <inheritdoc />
-    public partial class reset : Migration
+    public partial class rest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ApplicationStatus",
+                columns: table => new
+                {
+                    UniqueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RegistrationStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationStatus", x => x.UniqueId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AppUser",
                 columns: table => new
@@ -169,20 +183,6 @@ namespace BpstEducation.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RegistrationStatusMaster",
-                columns: table => new
-                {
-                    UniqueId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RegistrationStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RegistrationStatusMaster", x => x.UniqueId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Subject",
                 columns: table => new
                 {
@@ -321,6 +321,43 @@ namespace BpstEducation.Migrations
                         name: "FK_States_Countries_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Countries",
+                        principalColumn: "UniqueId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Applications",
+                columns: table => new
+                {
+                    UniqueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    AppliedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CollegeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HighestQualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Applications", x => x.UniqueId);
+                    table.ForeignKey(
+                        name: "FK_Applications_ApplicationStatus_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "ApplicationStatus",
+                        principalColumn: "UniqueId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Applications_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
                         principalColumn: "UniqueId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -561,85 +598,15 @@ namespace BpstEducation.Migrations
                         principalColumn: "UniqueId");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Registration",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "ApplicationStatus",
+                columns: new[] { "UniqueId", "CreateDate", "RegistrationStatus" },
+                values: new object[,]
                 {
-                    UniqueId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressUniqueId = table.Column<int>(type: "int", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    RegistrationId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CollegeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Qualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Registration", x => x.UniqueId);
-                    table.ForeignKey(
-                        name: "FK_Registration_Address_AddressUniqueId",
-                        column: x => x.AddressUniqueId,
-                        principalTable: "Address",
-                        principalColumn: "UniqueId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Registration_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "UniqueId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RegistrationForm",
-                columns: table => new
-                {
-                    UniqueId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusId = table.Column<int>(type: "int", nullable: true),
-                    TotalFees = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Discount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RegistrationId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    CollegeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Qualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationFor = table.Column<int>(type: "int", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AlternateMobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsReview = table.Column<bool>(type: "bit", nullable: false),
-                    feedback = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RegistrationForm", x => x.UniqueId);
-                    table.ForeignKey(
-                        name: "FK_RegistrationForm_Address_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Address",
-                        principalColumn: "UniqueId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RegistrationForm_Courses_ApplicationFor",
-                        column: x => x.ApplicationFor,
-                        principalTable: "Courses",
-                        principalColumn: "UniqueId");
-                    table.ForeignKey(
-                        name: "FK_RegistrationForm_RegistrationStatusMaster_StatusId",
-                        column: x => x.StatusId,
-                        principalTable: "RegistrationStatusMaster",
-                        principalColumn: "UniqueId");
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Applied" },
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Reviewed" },
+                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Admission Taken" },
+                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Not Interested Anymore" }
                 });
 
             migrationBuilder.InsertData(
@@ -672,12 +639,131 @@ namespace BpstEducation.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "RegistrationStatusMaster",
-                columns: new[] { "UniqueId", "CreateDate", "RegistrationStatus" },
+                table: "Applications",
+                columns: new[] { "UniqueId", "Address", "ApplicationId", "AppliedOn", "CollegeName", "CourseId", "EmailId", "FatherName", "FirstName", "HighestQualification", "LastName", "Message", "MobileNumber", "StatusId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Applied" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Reviewed" }
+                    { 1, "Test Address", "Test_01", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir1", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 2, "Test Address", "Test_02", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir2", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 3, "Test Address", "Test_03", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir3", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 4, "Test Address", "Test_04", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir4", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 5, "Test Address", "Test_05", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir5", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 6, "Test Address", "Test_06", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir6", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 7, "Test Address", "Test_07", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir7", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 8, "Test Address", "Test_08", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir8", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 9, "Test Address", "Test_09", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir9", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 10, "Test Address", "Test_010", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir10", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 11, "Test Address", "Test_011", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir11", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 12, "Test Address", "Test_012", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir12", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 13, "Test Address", "Test_013", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir13", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 14, "Test Address", "Test_014", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir14", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 15, "Test Address", "Test_015", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir15", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 16, "Test Address", "Test_016", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir16", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 17, "Test Address", "Test_017", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir17", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 18, "Test Address", "Test_018", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir18", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 19, "Test Address", "Test_019", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir19", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 20, "Test Address", "Test_020", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir20", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 21, "Test Address", "Test_021", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir21", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 22, "Test Address", "Test_022", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir22", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 23, "Test Address", "Test_023", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir23", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 24, "Test Address", "Test_024", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir24", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 25, "Test Address", "Test_025", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir25", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 26, "Test Address", "Test_026", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir26", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 27, "Test Address", "Test_027", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir27", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 28, "Test Address", "Test_028", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir28", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 29, "Test Address", "Test_029", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir29", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 30, "Test Address", "Test_030", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir30", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 31, "Test Address", "Test_031", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir31", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 32, "Test Address", "Test_032", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir32", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 33, "Test Address", "Test_033", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir33", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 34, "Test Address", "Test_034", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir34", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 35, "Test Address", "Test_035", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir35", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 36, "Test Address", "Test_036", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir36", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 37, "Test Address", "Test_037", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir37", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 38, "Test Address", "Test_038", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir38", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 39, "Test Address", "Test_039", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir39", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 40, "Test Address", "Test_040", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir40", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 41, "Test Address", "Test_041", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir41", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 42, "Test Address", "Test_042", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir42", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 43, "Test Address", "Test_043", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir43", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 44, "Test Address", "Test_044", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir44", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 45, "Test Address", "Test_045", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir45", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 46, "Test Address", "Test_046", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir46", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 47, "Test Address", "Test_047", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir47", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 48, "Test Address", "Test_048", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir48", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 49, "Test Address", "Test_049", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir49", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 50, "Test Address", "Test_050", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir50", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 51, "Test Address", "Test_051", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir51", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 52, "Test Address", "Test_052", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir52", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 53, "Test Address", "Test_053", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir53", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 54, "Test Address", "Test_054", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir54", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 55, "Test Address", "Test_055", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir55", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 56, "Test Address", "Test_056", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir56", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 57, "Test Address", "Test_057", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir57", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 58, "Test Address", "Test_058", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir58", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 59, "Test Address", "Test_059", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir59", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 60, "Test Address", "Test_060", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir60", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 61, "Test Address", "Test_061", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir61", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 62, "Test Address", "Test_062", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir62", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 63, "Test Address", "Test_063", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir63", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 64, "Test Address", "Test_064", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir64", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 65, "Test Address", "Test_065", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir65", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 66, "Test Address", "Test_066", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir66", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 67, "Test Address", "Test_067", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir67", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 68, "Test Address", "Test_068", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir68", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 69, "Test Address", "Test_069", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir69", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 70, "Test Address", "Test_070", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir70", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 71, "Test Address", "Test_071", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir71", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 72, "Test Address", "Test_072", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir72", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 73, "Test Address", "Test_073", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir73", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 74, "Test Address", "Test_074", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir74", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 75, "Test Address", "Test_075", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir75", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 76, "Test Address", "Test_076", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir76", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 77, "Test Address", "Test_077", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir77", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 78, "Test Address", "Test_078", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir78", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 79, "Test Address", "Test_079", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir79", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 80, "Test Address", "Test_080", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir80", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 81, "Test Address", "Test_081", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir81", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 82, "Test Address", "Test_082", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir82", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 83, "Test Address", "Test_083", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir83", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 84, "Test Address", "Test_084", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir84", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 85, "Test Address", "Test_085", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir85", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 86, "Test Address", "Test_086", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir86", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 87, "Test Address", "Test_087", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir87", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 88, "Test Address", "Test_088", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir88", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 89, "Test Address", "Test_089", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir89", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 90, "Test Address", "Test_090", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir90", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 91, "Test Address", "Test_091", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir91", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 92, "Test Address", "Test_092", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir92", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 93, "Test Address", "Test_093", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir93", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 94, "Test Address", "Test_094", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir94", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 95, "Test Address", "Test_095", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir95", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 96, "Test Address", "Test_096", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir96", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 97, "Test Address", "Test_097", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir97", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 98, "Test Address", "Test_098", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir98", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 99, "Test Address", "Test_099", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir99", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 100, "Test Address", "Test_0100", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir100", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 101, "Test Address", "Test_0101", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir101", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 102, "Test Address", "Test_0102", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir102", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 103, "Test Address", "Test_0103", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir103", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 104, "Test Address", "Test_0104", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir104", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 105, "Test Address", "Test_0105", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir105", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 106, "Test Address", "Test_0106", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir106", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 107, "Test Address", "Test_0107", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir107", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 108, "Test Address", "Test_0108", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir108", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 109, "Test Address", "Test_0109", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir109", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 110, "Test Address", "Test_0110", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir110", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 111, "Test Address", "Test_0111", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir111", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 112, "Test Address", "Test_0112", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir112", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 113, "Test Address", "Test_0113", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir113", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 114, "Test Address", "Test_0114", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir114", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 115, "Test Address", "Test_0115", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir115", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 116, "Test Address", "Test_0116", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir116", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 117, "Test Address", "Test_0117", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir117", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 118, "Test Address", "Test_0118", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir118", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 119, "Test Address", "Test_0119", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir119", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 120, "Test Address", "Test_0120", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir120", "I am dying to get this course at any cost.", "999999999", 1 },
+                    { 121, "Test Address", "Test_0121", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "UPTU", 1, "email@gmail.com", "Mr. Sanjay Singhania", "User", "B.Tech - Coumputer Science & Engineering", "Sir121", "I am dying to get this course at any cost.", "999999999", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -1959,6 +2045,16 @@ namespace BpstEducation.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Applications_CourseId",
+                table: "Applications",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_StatusId",
+                table: "Applications",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AppUser",
                 column: "NormalizedEmail");
@@ -2038,31 +2134,6 @@ namespace BpstEducation.Migrations
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Registration_AddressUniqueId",
-                table: "Registration",
-                column: "AddressUniqueId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Registration_CourseId",
-                table: "Registration",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RegistrationForm_AddressId",
-                table: "RegistrationForm",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RegistrationForm_ApplicationFor",
-                table: "RegistrationForm",
-                column: "ApplicationFor");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RegistrationForm_StatusId",
-                table: "RegistrationForm",
-                column: "StatusId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_States_CountryId",
                 table: "States",
                 column: "CountryId");
@@ -2076,6 +2147,12 @@ namespace BpstEducation.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Address");
+
+            migrationBuilder.DropTable(
+                name: "Applications");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -2116,10 +2193,10 @@ namespace BpstEducation.Migrations
                 name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Registration");
+                name: "Cities");
 
             migrationBuilder.DropTable(
-                name: "RegistrationForm");
+                name: "ApplicationStatus");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -2137,22 +2214,13 @@ namespace BpstEducation.Migrations
                 name: "Subject");
 
             migrationBuilder.DropTable(
-                name: "Address");
-
-            migrationBuilder.DropTable(
-                name: "RegistrationStatusMaster");
+                name: "States");
 
             migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Courses");
-
-            migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
-                name: "States");
 
             migrationBuilder.DropTable(
                 name: "Countries");

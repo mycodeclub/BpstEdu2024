@@ -2,6 +2,7 @@
 using BpstEducation.NewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,27 +16,30 @@ namespace BpstEducation.Data
         {
 
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.SeedRoles();
-            modelBuilder.SeedRegistrationStatusTypes();
+            modelBuilder.SeedApplicationStatus();
             modelBuilder.SeedCourseCategory();
-            modelBuilder.Entity<AppUser>().ToTable("AppUser"); 
+            modelBuilder.Entity<AppUser>().ToTable("AppUser");
 
             modelBuilder.SeedCountry();
             modelBuilder.SeedState();
-            modelBuilder.SeedCities(); 
-         }
+            modelBuilder.SeedCities();
+            modelBuilder.SeedSampleApplicationsRecords();
+        }
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Batch> Batchs { get; set; }
         public DbSet<BatchStudent> BatchStudents { get; set; }
         public DbSet<Qualification> Qualification { get; set; }
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<RegistrationOld> Registrations { get; set; }
-        public DbSet<StudentRegistration> Registration{ get; set; }
-        public DbSet<RegistrationStatusMaster> RegistrationMasters { get; set; }
+        public DbSet<Course> Courses { get; set; } 
+        public DbSet<StudentApplication> Applications { get; set; }
+        public DbSet<ApplicationStatus> ApplicationStatus { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<CodeHelper> CodeHelpers { get; set; }
