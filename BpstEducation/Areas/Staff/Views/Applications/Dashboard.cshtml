@@ -5,47 +5,64 @@
     ViewBag.ActiveTabName = "ApplicationDashboard";
     int SNo = 1;
     List<Course> Courses = ViewBag.Courses;
-    List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
+    // List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
+
+    var registrationsByCourse = ViewBag.registrationsByCourse;
+    var registrationsByStatus = ViewBag.registrationsByStatus;
 
 }
 
 
 <!-- Main content -->
+
+
+
 <div class="content">
     <div class="row">
         <div class="col-lg-6">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Course </th>
-                        <th>  Applications </th>
-                    </tr>
-                </thead>  @foreach (var item in applicationsByCourse.OrderByDescending(kvp => kvp.Value))
-                {
-                    <tr>
-                        <td>@item.Key</td>
-                        <td>@item.Value</td>
-                    </tr>
-                }
-            </table>
-        </div>
-        <div class="col-lg-4 m-b-3">
-            <div class="box box-widget widget-user-2">
-                <div class="widget-user-header bg-yellow">
-                    <div class="widget-user-image"> <img class="img-circle" src="dist/img/img5.jpg" alt="User Avatar"> </div>
-                    <h3 class="widget-user-username">Nick Lampard</h3>
-                    <h5 class="widget-user-desc">Lead Developer</h5>
-                </div>
-                <div class="box-footer no-padding">
-                    <ul class="nav nav-stacked">
-                        @foreach (var item in applicationsByCourse)
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Course </th>
+                                <th>  Applications </th>
+                            </tr>
+                        </thead>  @foreach (var item in registrationsByCourse)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
                         {
-                            <li><a href="#">@item.Key  <span class="pull-right badge bg-blue">@item.Value</span></a></li>
+                            <tr>
+                                <td>@item.Key.Name</td>
+                                <td>@item.Value</td>
+                            </tr>
                         }
-                    </ul>
+                    </table>
                 </div>
             </div>
-        </div> <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 m-b-3">
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Application Status  </th>
+                                <th>  Count </th>
+                            </tr>
+                        </thead>  @foreach (var item in registrationsByStatus)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
+                        {
+                            <tr>
+                                <td>@item.Key.RegistrationStatus</td>
+                                <td>@item.Value</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 m-b-3">
             <div class="card">
                 <div class="card-body">
                     <div class="m-b-1"> <i class="icon-facebook f-30 text-blue"></i> <span class="pull-right text-muted">Likes</span> </div>

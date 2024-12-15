@@ -19,7 +19,8 @@ namespace BpstEducation.NewModels
         [ForeignKey("StatusId")]
         public ApplicationStatus ApplicationStatus { get; set; }
         public DateTime AppliedOn { get; set; }
-
+        [NotMapped]
+        public int NumberOfDays { get { return (DateTime.Now - AppliedOn).Days; } }
         [Required]
         public string MobileNumber { get; set; }
 

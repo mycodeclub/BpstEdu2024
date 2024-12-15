@@ -1321,11 +1321,14 @@ namespace BpstEducation.Data
         }
         public static void SeedSampleApplicationsRecords(this ModelBuilder modelBuilder)
         {
-            int cId = 1;
+            int cId = 1, statusId = 1;
+            string mobNum = string.Empty;
             var applications = new List<StudentApplication>();
             for (int i = 1; i < 122; i++)
             {
-                cId = (cId == 8) ? cId = 1 : cId++;
+                mobNum = $"{statusId}{i}{statusId}0{cId}7{statusId}00{cId}";
+                cId = cId != 7 ? cId + 1 : cId = 1;
+                statusId = statusId != 4 ? statusId + 1 : statusId = 1;
                 applications.Add(
                     new StudentApplication()
                     {
@@ -1333,8 +1336,8 @@ namespace BpstEducation.Data
                         ApplicationId = $"Test_0{i}",
                         FirstName = $"User",
                         LastName = $"Sir{i}",
-                        StatusId = 1,
-                        MobileNumber = $"999999999",
+                        StatusId = statusId,
+                        MobileNumber = mobNum.Substring(0, 10),
                         Address = "Test Address",
                         CourseId = cId,
                         CollegeName = "UPTU",

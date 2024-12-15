@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BpstEducation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241213040516_rest")]
-    partial class rest
+    [Migration("20241215045904_reset")]
+    partial class reset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -8395,15 +8395,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_01",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir1",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1110171001",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8412,15 +8412,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_02",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir2",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2220272002",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8429,15 +8429,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_03",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir3",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3330373003",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8446,14 +8446,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_04",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir4",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4440474004",
                             StatusId = 1
                         },
                         new
@@ -8463,15 +8463,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_05",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir5",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1510571005",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8480,15 +8480,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_06",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir6",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2620672006",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8504,8 +8504,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir7",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3730773007",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8514,14 +8514,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_08",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir8",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4840174001",
                             StatusId = 1
                         },
                         new
@@ -8531,15 +8531,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_09",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir9",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1910271002",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8548,15 +8548,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_010",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir10",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2102037200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8565,15 +8565,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_011",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir11",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3113047300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8582,14 +8582,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_012",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir12",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4124057400",
                             StatusId = 1
                         },
                         new
@@ -8599,15 +8599,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_013",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir13",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1131067100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8623,8 +8623,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir14",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2142077200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8633,15 +8633,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_015",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir15",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3153017300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8650,14 +8650,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_016",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir16",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4164027400",
                             StatusId = 1
                         },
                         new
@@ -8667,15 +8667,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_017",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir17",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1171037100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8684,15 +8684,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_018",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir18",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2182047200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8701,15 +8701,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_019",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir19",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3193057300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8718,14 +8718,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_020",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir20",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4204067400",
                             StatusId = 1
                         },
                         new
@@ -8742,8 +8742,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir21",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1211077100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8752,15 +8752,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_022",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir22",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2222017200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8769,15 +8769,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_023",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir23",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3233027300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8786,14 +8786,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_024",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir24",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4244037400",
                             StatusId = 1
                         },
                         new
@@ -8803,15 +8803,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_025",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir25",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1251047100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8820,15 +8820,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_026",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir26",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2262057200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8837,15 +8837,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_027",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir27",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3273067300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8861,7 +8861,7 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir28",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4284077400",
                             StatusId = 1
                         },
                         new
@@ -8871,15 +8871,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_029",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir29",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1291017100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8888,15 +8888,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_030",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir30",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2302027200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8905,15 +8905,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_031",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir31",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3313037300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8922,14 +8922,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_032",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir32",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4324047400",
                             StatusId = 1
                         },
                         new
@@ -8939,15 +8939,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_033",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir33",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1331057100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -8956,15 +8956,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_034",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir34",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2342067200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -8980,8 +8980,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir35",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3353077300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -8990,14 +8990,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_036",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir36",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4364017400",
                             StatusId = 1
                         },
                         new
@@ -9007,15 +9007,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_037",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir37",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1371027100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9024,15 +9024,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_038",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir38",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2382037200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9041,15 +9041,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_039",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir39",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3393047300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9058,14 +9058,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_040",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir40",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4404057400",
                             StatusId = 1
                         },
                         new
@@ -9075,15 +9075,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_041",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir41",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1411067100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9099,8 +9099,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir42",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2422077200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9109,15 +9109,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_043",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir43",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3433017300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9126,14 +9126,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_044",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir44",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4444027400",
                             StatusId = 1
                         },
                         new
@@ -9143,15 +9143,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_045",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir45",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1451037100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9160,15 +9160,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_046",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir46",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2462047200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9177,15 +9177,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_047",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir47",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3473057300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9194,14 +9194,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_048",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir48",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4484067400",
                             StatusId = 1
                         },
                         new
@@ -9218,8 +9218,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir49",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1491077100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9228,15 +9228,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_050",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir50",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2502017200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9245,15 +9245,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_051",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir51",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3513027300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9262,14 +9262,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_052",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir52",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4524037400",
                             StatusId = 1
                         },
                         new
@@ -9279,15 +9279,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_053",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir53",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1531047100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9296,15 +9296,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_054",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir54",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2542057200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9313,15 +9313,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_055",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir55",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3553067300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9337,7 +9337,7 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir56",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4564077400",
                             StatusId = 1
                         },
                         new
@@ -9347,15 +9347,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_057",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir57",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1571017100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9364,15 +9364,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_058",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir58",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2582027200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9381,15 +9381,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_059",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir59",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3593037300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9398,14 +9398,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_060",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir60",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4604047400",
                             StatusId = 1
                         },
                         new
@@ -9415,15 +9415,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_061",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir61",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1611057100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9432,15 +9432,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_062",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir62",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2622067200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9456,8 +9456,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir63",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3633077300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9466,14 +9466,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_064",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir64",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4644017400",
                             StatusId = 1
                         },
                         new
@@ -9483,15 +9483,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_065",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir65",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1651027100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9500,15 +9500,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_066",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir66",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2662037200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9517,15 +9517,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_067",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir67",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3673047300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9534,14 +9534,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_068",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir68",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4684057400",
                             StatusId = 1
                         },
                         new
@@ -9551,15 +9551,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_069",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir69",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1691067100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9575,8 +9575,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir70",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2702077200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9585,15 +9585,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_071",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir71",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3713017300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9602,14 +9602,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_072",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir72",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4724027400",
                             StatusId = 1
                         },
                         new
@@ -9619,15 +9619,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_073",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir73",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1731037100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9636,15 +9636,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_074",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir74",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2742047200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9653,15 +9653,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_075",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir75",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3753057300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9670,14 +9670,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_076",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir76",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4764067400",
                             StatusId = 1
                         },
                         new
@@ -9694,8 +9694,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir77",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1771077100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9704,15 +9704,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_078",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir78",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2782017200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9721,15 +9721,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_079",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir79",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3793027300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9738,14 +9738,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_080",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir80",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4804037400",
                             StatusId = 1
                         },
                         new
@@ -9755,15 +9755,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_081",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir81",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1811047100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9772,15 +9772,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_082",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir82",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2822057200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9789,15 +9789,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_083",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir83",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3833067300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9813,7 +9813,7 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir84",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4844077400",
                             StatusId = 1
                         },
                         new
@@ -9823,15 +9823,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_085",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir85",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1851017100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9840,15 +9840,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_086",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir86",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2862027200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9857,15 +9857,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_087",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir87",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3873037300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9874,14 +9874,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_088",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir88",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4884047400",
                             StatusId = 1
                         },
                         new
@@ -9891,15 +9891,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_089",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir89",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1891057100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9908,15 +9908,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_090",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir90",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2902067200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9932,8 +9932,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir91",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3913077300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -9942,14 +9942,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_092",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir92",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4924017400",
                             StatusId = 1
                         },
                         new
@@ -9959,15 +9959,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_093",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir93",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1931027100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -9976,15 +9976,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_094",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir94",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2942037200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -9993,15 +9993,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_095",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir95",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3953047300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -10010,14 +10010,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_096",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir96",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4964057400",
                             StatusId = 1
                         },
                         new
@@ -10027,15 +10027,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_097",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir97",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1971067100",
+                            StatusId = 2
                         },
                         new
                         {
@@ -10051,8 +10051,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir98",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2982077200",
+                            StatusId = 3
                         },
                         new
                         {
@@ -10061,15 +10061,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_099",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir99",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3993017300",
+                            StatusId = 4
                         },
                         new
                         {
@@ -10078,14 +10078,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0100",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir100",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4100402740",
                             StatusId = 1
                         },
                         new
@@ -10095,15 +10095,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0101",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir101",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1101103710",
+                            StatusId = 2
                         },
                         new
                         {
@@ -10112,15 +10112,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0102",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir102",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2102204720",
+                            StatusId = 3
                         },
                         new
                         {
@@ -10129,15 +10129,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0103",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir103",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3103305730",
+                            StatusId = 4
                         },
                         new
                         {
@@ -10146,14 +10146,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0104",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir104",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4104406740",
                             StatusId = 1
                         },
                         new
@@ -10170,8 +10170,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir105",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1105107710",
+                            StatusId = 2
                         },
                         new
                         {
@@ -10180,15 +10180,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0106",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir106",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2106201720",
+                            StatusId = 3
                         },
                         new
                         {
@@ -10197,15 +10197,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0107",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir107",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3107302730",
+                            StatusId = 4
                         },
                         new
                         {
@@ -10214,14 +10214,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0108",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir108",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4108403740",
                             StatusId = 1
                         },
                         new
@@ -10231,15 +10231,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0109",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir109",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1109104710",
+                            StatusId = 2
                         },
                         new
                         {
@@ -10248,15 +10248,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0110",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir110",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2110205720",
+                            StatusId = 3
                         },
                         new
                         {
@@ -10265,15 +10265,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0111",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir111",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3111306730",
+                            StatusId = 4
                         },
                         new
                         {
@@ -10289,7 +10289,7 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir112",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4112407740",
                             StatusId = 1
                         },
                         new
@@ -10299,15 +10299,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0113",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir113",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1113101710",
+                            StatusId = 2
                         },
                         new
                         {
@@ -10316,15 +10316,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0114",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir114",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2114202720",
+                            StatusId = 3
                         },
                         new
                         {
@@ -10333,15 +10333,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0115",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 4,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir115",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3115303730",
+                            StatusId = 4
                         },
                         new
                         {
@@ -10350,14 +10350,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0116",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 5,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir116",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4116404740",
                             StatusId = 1
                         },
                         new
@@ -10367,15 +10367,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0117",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 6,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir117",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1117105710",
+                            StatusId = 2
                         },
                         new
                         {
@@ -10384,15 +10384,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0118",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 7,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir118",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "2118206720",
+                            StatusId = 3
                         },
                         new
                         {
@@ -10408,8 +10408,8 @@ namespace BpstEducation.Migrations
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir119",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "3119307730",
+                            StatusId = 4
                         },
                         new
                         {
@@ -10418,14 +10418,14 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0120",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 2,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir120",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
+                            MobileNumber = "4120401740",
                             StatusId = 1
                         },
                         new
@@ -10435,15 +10435,15 @@ namespace BpstEducation.Migrations
                             ApplicationId = "Test_0121",
                             AppliedOn = new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CollegeName = "UPTU",
-                            CourseId = 1,
+                            CourseId = 3,
                             EmailId = "email@gmail.com",
                             FatherName = "Mr. Sanjay Singhania",
                             FirstName = "User",
                             HighestQualification = "B.Tech - Coumputer Science & Engineering",
                             LastName = "Sir121",
                             Message = "I am dying to get this course at any cost.",
-                            MobileNumber = "999999999",
-                            StatusId = 1
+                            MobileNumber = "1121102710",
+                            StatusId = 2
                         });
                 });
 
