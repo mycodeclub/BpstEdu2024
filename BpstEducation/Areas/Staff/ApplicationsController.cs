@@ -18,10 +18,11 @@ namespace BpstEducation.Areas.Staff
         {
             return View();
         }
-        public async Task<IActionResult> Dashboard(int id)
+        public async Task<IActionResult> Dashboard(int StatusId, int CourseId)
         {
             var allRegistrations = await _context.Applications.Include(r => r.Course).Include(r => r.ApplicationStatus).ToListAsync();
-            var registrations = (id == 0) ? allRegistrations : allRegistrations.Where(r => r.CourseId == id).ToList();
+            var registrations = (CourseId == 0) ? allRegistrations : allRegistrations.Where(r => r.CourseId == CourseId).ToList();
+              registrations = (StatusId == 0) ? allRegistrations : allRegistrations.Where(r => r.StatusId == StatusId).ToList();
             var coursesTask = await _context.Courses.ToListAsync();
             var applicationStatusTask = await _context.ApplicationStatus.ToListAsync();
            // await Task.WhenAll(coursesTask, applicationStatusTask);
