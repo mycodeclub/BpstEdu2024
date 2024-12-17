@@ -1,5 +1,6 @@
 ﻿using BpstEducation.Data;
 using BpstEducation.Models;
+using BpstEducation.NewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,14 +19,26 @@ namespace BpstEducation.Areas.Staff
         {
             return View();
         }
-        public async Task<IActionResult> Dashboard(int StatusId, int CourseId)
+        public async Task<IActionResult> Dashboard(int _statusId, int _courseId)
         {
             var allRegistrations = await _context.Applications.Include(r => r.Course).Include(r => r.ApplicationStatus).ToListAsync();
-            var registrations = (CourseId == 0) ? allRegistrations : allRegistrations.Where(r => r.CourseId == CourseId).ToList();
-              registrations = (StatusId == 0) ? allRegistrations : allRegistrations.Where(r => r.StatusId == StatusId).ToList();
             var coursesTask = await _context.Courses.ToListAsync();
             var applicationStatusTask = await _context.ApplicationStatus.ToListAsync();
-           // await Task.WhenAll(coursesTask, applicationStatusTask);
+
+
+
+            List<StudentApplication> registrations;
+            if (_courseId == 0 && _statusId == 0)
+                registrations = allRegistrations;
+            else if (_courseId > 0)
+            {
+                registrations = allRegistrations.Where(r => r.CourseId == _courseId).ToList();
+            }
+            else
+                registrations = allRegistrations.Where(r => r.StatusId == _statusId).ToList();
+
+
+            // await Task.WhenAll(coursesTask, applicationStatusTask);
             var registrationsByCourse = allRegistrations.GroupBy(r => r.Course).ToDictionary(g => g.Key, g => g.Count());
             var registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count());
             ViewBag.registrationsByCourse = registrationsByCourse;

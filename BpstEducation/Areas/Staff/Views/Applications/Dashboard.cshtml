@@ -30,7 +30,7 @@
                             </tr>
                         </thead>  @foreach (var item in registrationsByCourse)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
                         {
-                            <tr onclick="window.location.href='/Staff/Applications/Dashboard?CourseId=@item.Key.UniqueId'">
+                            <tr onclick="window.location.href='/Staff/Applications/Dashboard?_courseId=@item.Key.UniqueId'">
                                 <td>@item.Key.Name</td>
                                 <td>@item.Value</td>
                             </tr>
@@ -50,7 +50,7 @@
                             </tr>
                         </thead>  @foreach (var item in registrationsByStatus)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
                         {
-                            <tr onclick="window.location.href='/Staff/Applications/Dashboard?StatusId=@item.Key.UniqueId'">
+                            <tr onclick="window.location.href='/Staff/Applications/Dashboard?_statusId=@item.Key.UniqueId'">
                                 <td>@item.Key.RegistrationStatus</td>
                                 <td>@item.Value</td>
                             </tr>
@@ -67,6 +67,7 @@
                     <table class="table table-bordered table-hover">
                         <thead class="thead-light">
                             <tr>
+                                <th>Id  </th>
                                 <th>Name  </th>
                                 <th>Mobile  </th>
                                 <th>  Course </th>
@@ -77,6 +78,7 @@
                         </thead>  @foreach (var item in Model)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
                         {
                             <tr>
+                                <td>@item.UniqueId</td>
                                 <td>@item.FullName</td>
                                 <td>@item.MobileNumber</td>
                                 <td>@item.Course.Name</td>

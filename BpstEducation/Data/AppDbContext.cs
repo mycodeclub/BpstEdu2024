@@ -31,6 +31,9 @@ namespace BpstEducation.Data
             modelBuilder.SeedState();
             modelBuilder.SeedCities();
             modelBuilder.SeedSampleApplicationsRecords();
+
+            modelBuilder.SeedTranners();
+            modelBuilder.SeedBatches();
         }
 
         public DbSet<Contact> Contacts { get; set; }

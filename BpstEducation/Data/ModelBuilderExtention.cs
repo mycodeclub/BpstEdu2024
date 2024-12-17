@@ -1352,5 +1352,26 @@ namespace BpstEducation.Data
             modelBuilder.Entity<StudentApplication>().HasData(applications);
 
         }
+
+        public static void SeedTranners(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employees>().HasData(
+                new Employees() { UniqueId = 1, FirstName = "Arul", LastName = "Verma", DateOfBirth = new DateTime(1988, 10, 21), AadhaarNumber = "999999999999", Address = "Lko", Email = "arun@bpst.com", JobRole = "Full Stack .Net Dev", Experience = 13, PanNumber = "XXXXX1234X", Qualification = "MBA", PhoneNumber = "9999999999" },
+                new Employees() { UniqueId = 2, FirstName = "Manish", LastName = "Srivastava", DateOfBirth = new DateTime(1998, 18, 12), AadhaarNumber = "999999999999", Address = "Lko", Email = "manish@bpst.com", JobRole = "Solution Architech", Experience = 21, PanNumber = "XXXXX1234X", Qualification = "B. Tech", PhoneNumber = "9999999999" },
+                new Employees() { UniqueId = 3, FirstName = "Sanjay", LastName = "Kumar", DateOfBirth = new DateTime(1990, 02, 19), AadhaarNumber = "999999999999", Address = "Lko", Email = "sanjay@bpst.com", JobRole = "Junior Developer", Experience = 4, PanNumber = "XXXXX1234X", Qualification = "B.Tech", PhoneNumber = "9999999999" },
+                new Employees() { UniqueId = 4, FirstName = "Ankit", LastName = "Sahay", DateOfBirth = new DateTime(1999, 10, 2), AadhaarNumber = "999999999999", Address = "Lko", Email = "ankit@bpst.com", JobRole = "Full Stack .Net Dev", Experience = 11, PanNumber = "XXXXX1234X", Qualification = "B.Tech", PhoneNumber = "9999999999" }
+
+                );
+        }
+
+        public static void SeedBatches(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Batch>().HasData(
+                new Batch() { UniqueId = 1, CourseId = 1, BatchFee = 1000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 01, 24).AddDays(50), Title = "Rising Stars", Duration = "1 Month" },
+                new Batch() { UniqueId = 2, CourseId = 2, BatchFee = 18000, TrainerId = 1, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 02, 24).AddDays(59), Title = "Rising Stars", Duration = "6 - Months" },
+                new Batch() { UniqueId = 3, CourseId = 3, BatchFee = 3000, TrainerId = 2, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 3, 20).AddDays(43), Title = "Rising Stars", Duration = "45 Days" },
+                new Batch() { UniqueId = 4, CourseId = 7, BatchFee = 800, TrainerId = 4, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 4, 04).AddDays(7), Title = "Rising Stars", Duration = "1 Month" },
+                new Batch() { UniqueId = 5, CourseId = 2, BatchFee = 18000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 1, 2).AddDays(21), Title = "Rising Stars", Duration = "6 - Months" });
+        }
     }
 }
