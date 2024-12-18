@@ -9,6 +9,7 @@ namespace BpstEducation.Models
     {
         [Key]
         public int UniqueId { get; set; }
+
         public int CourseId { get; set; }
         [ForeignKey("CourseId")]
         public Course? Course { get; set; }

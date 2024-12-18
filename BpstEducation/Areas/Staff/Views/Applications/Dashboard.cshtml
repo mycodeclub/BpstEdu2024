@@ -7,13 +7,25 @@
     List<Course> Courses = ViewBag.Courses;
     // List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
 
+
+
     var registrationsByCourse = ViewBag.registrationsByCourse;
     var registrationsByStatus = ViewBag.registrationsByStatus;
 
+    List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
+
 }
 
-
+<style>
+    .regCount {
+        font-weight: bold; /* Make options bold */
+        font-style: italic; /* Italicize options */
+        color: #0056b3; /* Change text color */
+        padding: 5px; /* Add padding for readability */
+    }
+</style>
 <!-- Main content -->
+
 
 
 
@@ -28,7 +40,8 @@
                                 <th>Course </th>
                                 <th>  Applications </th>
                             </tr>
-                        </thead>  @foreach (var item in registrationsByCourse)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
+                        </thead>
+                        @foreach (var item in registrationsByCourse)
                         {
                             <tr onclick="window.location.href='/Staff/Applications/Dashboard?_courseId=@item.Key.UniqueId'">
                                 <td>@item.Key.Name</td>
@@ -60,6 +73,41 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right">
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="window.location.href='/Staff/Applications/Dashboard?_courseId='(thisObj).val()">
+
+                            @foreach (var item in registrationsByCourse)
+                            {
+                                <option value="@item.Key.UniqueId"> @item.Key.Name <i class="regCount"> -->  @item.Value - Registrations </i> </option>
+                            }
+
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right">
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="return ReloadForSpecificCourse(this)">
+                            @foreach (var c in Courses)
+                            {
+                                <option value="@c.UniqueId">@c.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <div class="content">
         <div class="row">
             <div class="card">
@@ -92,7 +140,7 @@
             </div>
         </div>
     </div>
-
+    ////////////////////////////////////////////////////////////////////
 
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 m-b-3">
         <div class="card">
@@ -140,6 +188,7 @@
     </div>
 </div>
 <!-- /.row -->
+
 
 <div class="row">
     <div class="col-lg-3">

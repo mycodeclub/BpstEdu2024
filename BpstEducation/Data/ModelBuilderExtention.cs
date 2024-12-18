@@ -1355,9 +1355,10 @@ namespace BpstEducation.Data
 
         public static void SeedTranners(this ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<Employees>().HasData(
                 new Employees() { UniqueId = 1, FirstName = "Arul", LastName = "Verma", DateOfBirth = new DateTime(1988, 10, 21), AadhaarNumber = "999999999999", Address = "Lko", Email = "arun@bpst.com", JobRole = "Full Stack .Net Dev", Experience = 13, PanNumber = "XXXXX1234X", Qualification = "MBA", PhoneNumber = "9999999999" },
-                new Employees() { UniqueId = 2, FirstName = "Manish", LastName = "Srivastava", DateOfBirth = new DateTime(1998, 18, 12), AadhaarNumber = "999999999999", Address = "Lko", Email = "manish@bpst.com", JobRole = "Solution Architech", Experience = 21, PanNumber = "XXXXX1234X", Qualification = "B. Tech", PhoneNumber = "9999999999" },
+                new Employees() { UniqueId = 2, FirstName = "Manish", LastName = "Srivastava", DateOfBirth = new DateTime(1998, 08, 12), AadhaarNumber = "999999999999", Address = "Lko", Email = "manish@bpst.com", JobRole = "Solution Architech", Experience = 21, PanNumber = "XXXXX1234X", Qualification = "B. Tech", PhoneNumber = "9999999999" },
                 new Employees() { UniqueId = 3, FirstName = "Sanjay", LastName = "Kumar", DateOfBirth = new DateTime(1990, 02, 19), AadhaarNumber = "999999999999", Address = "Lko", Email = "sanjay@bpst.com", JobRole = "Junior Developer", Experience = 4, PanNumber = "XXXXX1234X", Qualification = "B.Tech", PhoneNumber = "9999999999" },
                 new Employees() { UniqueId = 4, FirstName = "Ankit", LastName = "Sahay", DateOfBirth = new DateTime(1999, 10, 2), AadhaarNumber = "999999999999", Address = "Lko", Email = "ankit@bpst.com", JobRole = "Full Stack .Net Dev", Experience = 11, PanNumber = "XXXXX1234X", Qualification = "B.Tech", PhoneNumber = "9999999999" }
 

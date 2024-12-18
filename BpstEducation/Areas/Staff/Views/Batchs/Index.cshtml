@@ -1,10 +1,14 @@
-﻿@model IEnumerable<BpstEducation.Models.Batch>
+﻿@using System.Globalization
+@model IEnumerable<BpstEducation.Models.Batch>
 @{
     ViewData["Title"] = "Index";
     Layout = ViewBag.Layout;
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
     int sno = 0;
     ViewBag.ActiveTabName = "Batchs";
+    CultureInfo indianCulture = new CultureInfo("hi-IN");
+
+
 }
 <link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
 <div class="content">
@@ -22,9 +26,10 @@
                             <th>S. No.</th>
                             <th>@Html.DisplayNameFor(model => model.Title)</th>
                             <th>@Html.DisplayNameFor(model => model.Duration)</th>
-                            <th>@Html.DisplayNameFor(model => model.Description)</th>
                        
                             <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                            <th>Batch Time</th>
+
                             <th>@Html.DisplayNameFor(model => model.BatchFee)</th>
                             <th>Action</th>
                         </tr>
@@ -37,20 +42,21 @@
                                 <td>@sno</td>
                              
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
+                                    @Html.DisplayFor(modelItem => item.Course.Name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Duration)
                                 </td>
+                          
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
+                                    @item.StartDate.ToString("dd-MMM-yyyy")
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.StartDate, "{0:dd/MM/yyyy}")
+                                    @item.StartDate.ToString(" hh:mm tt")
                                 </td>
-                        
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.BatchFee, "{0:C}")
+
+                                <td style="text-align:right;">
+                                    @item.BatchFee.ToString("C", indianCulture)
                                 </td>
                                 <td>
                                     <a asp-action="Create" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
