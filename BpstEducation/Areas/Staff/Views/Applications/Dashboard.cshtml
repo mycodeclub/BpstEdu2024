@@ -35,7 +35,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
-                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="return GetApplications()" id="CourseDDL">
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="GetApplications()" id="CourseDDL">
+                            <option value="0"> -- All --</option>
                             @foreach (var item in registrationsByCourse)
                             {
                                 <option value="@item.Key.UniqueId"> @item.Key.Name <i class="regCount"> -->  @item.Value - Registrations </i> </option>
@@ -49,13 +50,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
-                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="return GetApplications()" id="RegStatusDDL">
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="GetApplications()" id="RegStatusDDL">
+                            <option value="0"> -- All --</option>
                             @foreach (var item in registrationsByStatus)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
                             {
-                                <option onclick="window.location.href='/Staff/Applications/Dashboard?_statusId=@item.Key.UniqueId'">
-                                    <td>@item.Key.RegistrationStatus</td>
-                                    <td>@item.Value</td>
-                                </option>
+                                <option value="@item.Key.UniqueId"> @item.Key.RegistrationStatus  <i class="regCount"> -->  @item.Value - Registrations </i> </option>
                             }
                         </select>
                     </div>
@@ -69,39 +68,7 @@
         </div>
 
     </div>
-<div id="applicationsDiv"></div>
-    <div class="content">
-        <div class="row">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-light">
-                            <tr>
-                                <th> Id  </th>
-                                <th> Name  </th>
-                                <th> Mobile  </th>
-                                <th> Course </th>
-                                <th> College Name </th>
-                                <th> Applied On </th>
-                                <th> Review </th>
-                            </tr>
-                        </thead>  @foreach (var item in Model)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
-                        {
-                            <tr>
-                                <td> @item.UniqueId</td>
-                                <td> @item.FullName</td>
-                                <td> @item.MobileNumber</td>
-                                <td> @item?.Course?.Name</td>
-                                <td> @item?.CollegeName</td>
-                                <td> @item?.AppliedOn.ToString("dd-MMM-yyyy") - <strong>( @item?.NumberOfDays Day's Ego) </strong> </td>
-                                <td> View  </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="applicationsDiv"></div>
 
 </div>
 
@@ -113,17 +80,18 @@
 
         let initialLoad = true; // Flag to prevent execution on page load
            function GetApplications()
-           { 
+           {
                var _data = {
-                CourseId: $('#CourseDDL').val(),
-                RegStatusId:  $('#RegStatusDDL').val()
-            };
-
+                _courseId: $('#CourseDDL').val(),
+                _statusId:  $('#RegStatusDDL').val()
+               };
+            debugger;
             // Use jQuery's $.ajax method for an asynchronous request
             $.ajax({
-                url: "your-server-endpoint-url",  // Replace with your actual server URL
-                type: "POST",  // POST request
-                data: JSON.stringify(_data),  // Send data as a JSON string
+                url: "/staff/Applications/GetApplicationPartials/",  // Replace with your actual server URL
+          //      type: "POST",  // POST request
+               // data: JSON.stringify(_data),  // Send data as a JSON string
+                 data:  _data ,  // Send data as a JSON string
                 contentType: "application/json",  // Set content type to JSON
                 dataType: "html",  // Expect HTML response from the server
                 success: function(response) {
@@ -137,12 +105,12 @@
             });
 
 
-                   const selectedValue = $(thisObj).val(); // Get the value
-                   const url = `/Staff/ReviewRegistration/Index/${selectedValue}`; // Construct the URL
-                   window.location.href = url; // Redirect
-                     // window.location.href='/Staff/ReviewRegistration/Index/'+   $(thisObj).val();
-               }
-                initialLoad = false; // Set flag to false after the first interaction
+               //     const selectedValue = $(thisObj).val(); // Get the value
+               //     const url = `/Staff/ReviewRegistration/Index/${selectedValue}`; // Construct the URL
+               //     window.location.href = url; // Redirect
+               //       // window.location.href='/Staff/ReviewRegistration/Index/'+   $(thisObj).val();
+               // }
+               //  initialLoad = false; // Set flag to false after the first interaction
            }
     </script>
 

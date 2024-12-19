@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BpstEducation.NewModels.StudentApplication>
+<div class="content">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th> Id  </th>
+                            <th> Name  </th>
+                            <th> Mobile  </th>
+                            <th> Course </th>
+                            <th> College Name </th>
+                            <th> Applied On </th>
+                            <th> Review </th>
+                        </tr>
+                    </thead>  @foreach (var item in Model)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
+                    {
+                        <tr>
+                            <td> @item.UniqueId</td>
+                            <td> @item.FullName</td>
+                            <td> @item.MobileNumber</td>
+                            <td> @item?.Course?.Name</td>
+                            <td> @item?.CollegeName</td>
+                            <td> @item?.AppliedOn.ToString("dd-MMM-yyyy") - <strong>( @item?.NumberOfDays Day's Ego) </strong> </td>
+                            <td> View  </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

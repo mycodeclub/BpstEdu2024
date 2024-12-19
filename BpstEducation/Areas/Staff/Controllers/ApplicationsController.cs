@@ -46,6 +46,38 @@ namespace BpstEducation.Areas.Staff.Controllers
             //var applicationsByStatus = applicationStatusTask.Result.Select(s => new KeyValuePair<string, int>(s.RegistrationStatus, registrationsByStatus.TryGetValue(s.UniqueId, out var count) ? count : 0)).ToList();
             return View(registrations);
         }
+
+       
+        public async Task<IActionResult> GetApplicationPartials(int _statusId, int _courseId)
+        {
+            List<StudentApplication> registrations;
+            if (_courseId > 0 && _statusId > 0)
+                registrations = await _context.Applications
+                    .Include(r => r.Course)
+                    .Include(r => r.ApplicationStatus)
+                    .Where(a => a.StatusId == _statusId && a.CourseId == _courseId)
+                    .ToListAsync();
+            else if (_courseId > 0)
+                registrations = await _context.Applications
+                 .Include(r => r.Course)
+                 .Include(r => r.ApplicationStatus)
+                 .Where(a => a.CourseId == _courseId)
+                 .ToListAsync();
+
+            else if (_statusId > 0)
+                registrations = await _context.Applications
+                 .Include(r => r.Course)
+                 .Include(r => r.ApplicationStatus)
+                 .Where(a => a.StatusId == _statusId)
+                 .ToListAsync();
+            else
+                registrations = await _context.Applications
+                 .Include(r => r.Course)
+                 .Include(r => r.ApplicationStatus)
+                 .ToListAsync();
+            return PartialView(registrations);
+        }
+
         public async Task<IActionResult> DashboardOld(int id)
         {
             var allRegistrations = await _context.Applications.Include(r => r.Course).ToListAsync();
