@@ -5,15 +5,9 @@
     ViewBag.ActiveTabName = "ApplicationDashboard";
     int SNo = 1;
     List<Course> Courses = ViewBag.Courses;
-    // List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
-
-
-
     var registrationsByCourse = ViewBag.registrationsByCourse;
     var registrationsByStatus = ViewBag.registrationsByStatus;
-
     List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
-
 }
 
 <style>
@@ -25,51 +19,14 @@
     }
 </style>
 <!-- Main content -->
-
-
-
-
 <div class="content">
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-body">
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Course </th>
-                                <th>  Applications </th>
-                            </tr>
-                        </thead>
-                        @foreach (var item in registrationsByCourse)
-                        {
-                            <tr onclick="window.location.href='/Staff/Applications/Dashboard?_courseId=@item.Key.UniqueId'">
-                                <td>@item.Key.Name</td>
-                                <td>@item.Value</td>
-                            </tr>
-                        }
-                    </table>
-                </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-body">
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Application Status  </th>
-                                <th>  Count </th>
-                            </tr>
-                        </thead>  @foreach (var item in registrationsByStatus)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
-                        {
-                            <tr onclick="window.location.href='/Staff/Applications/Dashboard?_statusId=@item.Key.UniqueId'">
-                                <td>@item.Key.RegistrationStatus</td>
-                                <td>@item.Value</td>
-                            </tr>
-                        }
-                    </table>
-                </div>
             </div>
         </div>
     </div>
@@ -78,14 +35,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
-                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="window.location.href='/Staff/Applications/Dashboard?_courseId='(thisObj).val()">
-
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="return GetApplications()" id="CourseDDL">
                             @foreach (var item in registrationsByCourse)
                             {
                                 <option value="@item.Key.UniqueId"> @item.Key.Name <i class="regCount"> -->  @item.Value - Registrations </i> </option>
                             }
-
-
                         </select>
                     </div>
                 </div>
@@ -95,10 +49,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
-                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="return ReloadForSpecificCourse(this)">
-                            @foreach (var c in Courses)
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="return GetApplications()" id="RegStatusDDL">
+                            @foreach (var item in registrationsByStatus)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
                             {
-                                <option value="@c.UniqueId">@c.Name</option>
+                                <option onclick="window.location.href='/Staff/Applications/Dashboard?_statusId=@item.Key.UniqueId'">
+                                    <td>@item.Key.RegistrationStatus</td>
+                                    <td>@item.Value</td>
+                                </option>
                             }
                         </select>
                     </div>
@@ -107,7 +64,12 @@
         </div>
 
     </div>
+    <div class="row">
+        <div class="col-lg-6">
+        </div>
 
+    </div>
+<div id="applicationsDiv"></div>
     <div class="content">
         <div class="row">
             <div class="card">
@@ -115,23 +77,23 @@
                     <table class="table table-bordered table-hover">
                         <thead class="thead-light">
                             <tr>
-                                <th>Id  </th>
-                                <th>Name  </th>
-                                <th>Mobile  </th>
-                                <th>  Course </th>
-                                <th>  College Name </th>
-                                <th>  Applied On </th>
-                                <th>   Review </th>
+                                <th> Id  </th>
+                                <th> Name  </th>
+                                <th> Mobile  </th>
+                                <th> Course </th>
+                                <th> College Name </th>
+                                <th> Applied On </th>
+                                <th> Review </th>
                             </tr>
                         </thead>  @foreach (var item in Model)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
                         {
                             <tr>
-                                <td>@item.UniqueId</td>
-                                <td>@item.FullName</td>
-                                <td>@item.MobileNumber</td>
-                                <td>@item.Course.Name</td>
-                                <td>@item.CollegeName</td>
-                                <td> @item.AppliedOn.ToString("dd-MMM-yyyy")    -  <strong>( @item.NumberOfDays Day's Ego) </strong> </td>
+                                <td> @item.UniqueId</td>
+                                <td> @item.FullName</td>
+                                <td> @item.MobileNumber</td>
+                                <td> @item?.Course?.Name</td>
+                                <td> @item?.CollegeName</td>
+                                <td> @item?.AppliedOn.ToString("dd-MMM-yyyy") - <strong>( @item?.NumberOfDays Day's Ego) </strong> </td>
                                 <td> View  </td>
                             </tr>
                         }
@@ -140,350 +102,49 @@
             </div>
         </div>
     </div>
-    ////////////////////////////////////////////////////////////////////
 
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 m-b-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="m-b-1"> <i class="icon-facebook f-30 text-blue"></i> <span class="pull-right text-muted">Likes</span> </div>
-                <div class="info-widget-text row">
-                    <div class="col-sm-6 pull-left"><span>Facebook</span></div>
-                    <div class="col-sm-6 pull-right text-right text-blue f-25">3,500</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 m-b-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="m-b-1"> <i class="icon-twitter f-30 text-blue"></i> <span class="pull-right text-muted">Tweets</span> </div>
-                <div class="info-widget-text row">
-                    <div class="col-sm-6 pull-left"><span>Twwitter</span></div>
-                    <div class="col-sm-6 pull-right text-right text-blue f-25">2,950</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 m-b-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="m-b-1"> <i class="icon-googleplus f-30 text-blue"></i> <span class="pull-right text-muted">Share</span> </div>
-                <div class="info-widget-text row">
-                    <div class="col-sm-6 pull-left"><span>Google+</span></div>
-                    <div class="col-sm-6 pull-right text-right text-blue f-25">1,750</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 m-b-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="m-b-1"> <i class="icon-rss f-30 text-blue"></i> <span class="pull-right text-muted">Posts</span> </div>
-                <div class="info-widget-text row">
-                    <div class="col-sm-6 pull-left"><span>Blog</span></div>
-                    <div class="col-sm-6 pull-right text-right text-blue f-25">2,250</div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<!-- /.row -->
 
 
-<div class="row">
-    <div class="col-lg-3">
-        <div class="tile-progress tile-pink">
-            <div class="tile-header">
-                <h5>New Orders</h5>
-                <h3>1250</h3>
-            </div>
-            <div class="tile-progressbar"> <span data-fill="65.5%" style="width: 65.5%;"></span> </div>
-            <div class="tile-footer">
-                <h4> <span class="pct-counter">65.5</span>% increase </h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="tile-progress tile-red">
-            <div class="tile-header">
-                <h5>Monthly Sales</h5>
-                <h3>850</h3>
-            </div>
-            <div class="tile-progressbar"> <span data-fill="70%" style="width: 70%;"></span> </div>
-            <div class="tile-footer">
-                <h4> <span class="pct-counter">70</span>% increase </h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="tile-progress tile-cyan">
-            <div class="tile-header">
-                <h5>New Users</h5>
-                <h3>2250</h3>
-            </div>
-            <div class="tile-progressbar"> <span data-fill="50%" style="width: 50%;"></span> </div>
-            <div class="tile-footer">
-                <h4> <span class="pct-counter">50</span>% increase </h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="tile-progress tile-aqua">
-            <div class="tile-header">
-                <h5>Feedbacks</h5>
-                <h3>530</h3>
-            </div>
-            <div class="tile-progressbar"> <span data-fill="75.5%" style="width: 75.5%;"></span> </div>
-            <div class="tile-footer">
-                <h4> <span class="pct-counter">75.5</span>% increase </h4>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.row -->
 
-<div class="row">
-    <div class="col-lg-8">
-        <div class="info-box">
-            <div class="col-12">
-                <div class="d-flex flex-wrap">
-                    <div>
-                        <h5>Yearly Earning</h5>
-                    </div>
-                    <div class="ml-auto">
-                        <ul class="list-inline">
-                            <li class="text-green"> <i class="fa fa-circle"></i> Sales</li>
-                            <li class="text-blue"> <i class="fa fa-circle"></i> Earning ($)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-9 m-b-3">
-                    <div id="earning"></div>
-                </div>
-                <div class="col-lg-3 m-t-5">
-                    <div class="m-b-5 text-center">
-                        <i class="icon-bargraph f-40 m-b-2 text-blue"></i>
-                        <h6 class="f-14">Sales</h6>
-                        <h4>5,650</h4>
-                    </div>
-                    <div class="m-b-5 text-center">
-                        <i class="icon-strategy f-40 m-b-2 text-blue"></i>
-                        <h6 class="f-14">Earning</h6>
-                        <h4>$ 13,500</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="info-box">
-            <div class="col-12">
-                <div class="d-flex flex-wrap">
-                    <div>
-                        <h5 class="m-b-15">Statistics</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-10 m-auto m-top-40 m-bot-10">
-                <div id="donut"></div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4 m-b-2 text-center">
-                    <h6 class="f-14">In Store</h6>
-                    <h4>9,500</h4>
-                </div>
-                <div class="col-xl-4 m-b-2 text-center">
-                    <h6 class="f-14">Mail Order</h6>
-                    <h4>3,500</h4>
-                </div>
-                <div class="col-xl-4 m-b-2 text-center">
-                    <h6 class="f-14">New Order</h6>
-                    <h4>1,500</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.row -->
+@section Scripts
+{
+    <script>
 
-<div class="row">
-    <div class="col-xl-8">
-        <div class="info-box">
-            <div class="card-header">
-                <h5 class="card-title">Recent Sales <a class="btn btn-sm btn-primary pull-right text-white">View all</a></h5>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Customer</th>
-                            <th>Categories</th>
-                            <th>Progress</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>iPone X</td>
-                            <td><img src="dist/img/img1.jpg" class="img-circle img-w-30" alt="User Image"></td>
-                            <td><button type="button" class="btn btn-sm btn-outline-danger btn-rounded">Mobile</button></td>
-                            <td>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </td>
-                            <td>$ 5,500</td>
-                        </tr>
-                        <tr>
-                            <td>OPPP</td>
-                            <td><img src="dist/img/img2.jpg" class="img-circle img-w-30" alt="User Image"></td>
-                            <td><button type="button" class="btn btn-sm btn-outline-success btn-rounded">Tablet</button></td>
-                            <td>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </td>
-                            <td>$ 3,450</td>
-                        </tr>
-                        <tr>
-                            <td>iPad</td>
-                            <td><img src="dist/img/img3.jpg" class="img-circle img-w-30" alt="User Image"></td>
-                            <td><button type="button" class="btn btn-sm btn-outline-danger btn-rounded">Mobile</button></td>
-                            <td>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </td>
-                            <td>$ 1,040</td>
-                        </tr>
-                        <tr>
-                            <td>OnePlus</td>
-                            <td><img src="dist/img/img1.jpg" class="img-circle img-w-30" alt="User Image"></td>
-                            <td><button type="button" class="btn btn-sm btn-outline-success btn-rounded">Tablet</button></td>
-                            <td>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </td>
-                            <td>$ 2,200</td>
-                        </tr>
-                        <tr>
-                            <td>Pixel 2</td>
-                            <td><img src="dist/img/img2.jpg" class="img-circle img-w-30" alt="User Image"></td>
-                            <td><button type="button" class="btn btn-sm btn-outline-danger btn-rounded">Mobile</button></td>
-                            <td>
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </td>
-                            <td>$ 1,500</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 m-b-3">
-        <div class="box-gradient">
-            <div class="card-body text-white">
-                <h5>Bandwidth usage</h5>
-                <h1>1,350 GB</h1>
-                <h5>April 2018</h5>
-                <div class="m-t-5 m-b-3"><span class="line">5,3,9,6,5,9,7,3,5,2</span></div>
-                <p>Lorem ipsum dolor sit amet moles tiae, consectetur adipisicing elit users.</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.row -->
+        let initialLoad = true; // Flag to prevent execution on page load
+           function GetApplications()
+           { 
+               var _data = {
+                CourseId: $('#CourseDDL').val(),
+                RegStatusId:  $('#RegStatusDDL').val()
+            };
 
-<div class="row">
+            // Use jQuery's $.ajax method for an asynchronous request
+            $.ajax({
+                url: "your-server-endpoint-url",  // Replace with your actual server URL
+                type: "POST",  // POST request
+                data: JSON.stringify(_data),  // Send data as a JSON string
+                contentType: "application/json",  // Set content type to JSON
+                dataType: "html",  // Expect HTML response from the server
+                success: function(response) {
+                    // On success, populate the DOM with the response
+                    $("#applicationsDiv").html(response);  // Insert the HTML response into the #content div
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors here
+                    console.error("AJAX Error: " + status + " - " + error);
+                }
+            });
 
-    <div class="col-lg-4 m-b-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Recent Activities</h5>
-                <div class="sl-item sl-primary">
-                    <div class="sl-content">
-                        <small class="text-muted"><i class="fa fa-user position-left"></i> 5 mins ago</small>
-                        <p>Lorem ipsum dolor sit amet conse ctetur which ascing elit users.</p>
-                    </div>
-                </div>
-                <div class="sl-item sl-danger">
-                    <div class="sl-content">
-                        <small class="text-muted"><i class="fa fa-user position-left"></i> 8 mins ago</small>
-                        <p>Lorem ipsum dolor sit ametcon the sectetur that ascing elit users.</p>
-                    </div>
-                </div>
-                <div class="sl-item sl-success">
-                    <div class="sl-content">
-                        <small class="text-muted"><i class="fa fa-user position-left"></i> 10 mins ago</small>
-                        <p>Lorem ipsum dolor sit amet cons the ecte tur and adip ascing elit users.</p>
-                    </div>
-                </div>
-                <div class="sl-item sl-warning">
-                    <div class="sl-content">
-                        <small class="text-muted"><i class="fa fa-user position-left"></i> 12 mins ago</small>
-                        <p>Lorem ipsum dolor sit amet consec tetur adip ascing elit users.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="box box-warning direct-chat direct-chat-warning">
-                    <h5 class="card-title">Recent Chats</h5>
-                    <div class="box-body">
-                        <!-- Conversations are loaded here -->
-                        <div class="direct-chat-messages">
-                            <div class="direct-chat-msg">
-                                <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-left">Alexander Pierce</span> <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span> </div>
-                                <img class="direct-chat-img" src="dist/img/img2.jpg" alt="user image">
-                                <div class="direct-chat-text"> A small river named Duden flows by their place and supplies it with the necessary. </div>
-                            </div>
-                            <div class="direct-chat-msg right">
-                                <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-right">Sarah Bullock</span> <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span> </div>
-                                <img class="direct-chat-img" src="dist/img/img3.jpg" alt="user image">
-                                <!-- /.direct-chat-img -->
-                                <div class="direct-chat-text"> You better believe it! </div>
-                            </div>
-                            <div class="direct-chat-msg">
-                                <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-left">Alexander Pierce</span> <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span> </div>
-                                <img class="direct-chat-img" src="dist/img/img4.jpg" alt="user image">
-                                <div class="direct-chat-text"> A small river named Duden flows by their place and supplies it with the necessary. </div>
-                            </div>
-                            <div class="direct-chat-msg right">
-                                <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-right">Sarah Bullock</span> <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span> </div>
-                                <img class="direct-chat-img" src="dist/img/img5.jpg" alt="user image">
-                                <div class="direct-chat-text"> I would love to. </div>
-                            </div>
-                            <div class="direct-chat-msg">
-                                <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-left">Alexander Pierce</span> <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span> </div>
-                                <img class="direct-chat-img" src="dist/img/img4.jpg" alt="user image">
-                                <div class="direct-chat-text"> A small river named Duden flows by their place and supplies it with the necessary. </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <form action="#" method="post">
-                            <div class="input-group">
-                                <input name="message" placeholder="Type Message ..." class="form-control" type="text">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-warning btn-flat">Send</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.row -->
-</div>
-<!-- /.content -->
+
+                   const selectedValue = $(thisObj).val(); // Get the value
+                   const url = `/Staff/ReviewRegistration/Index/${selectedValue}`; // Construct the URL
+                   window.location.href = url; // Redirect
+                     // window.location.href='/Staff/ReviewRegistration/Index/'+   $(thisObj).val();
+               }
+                initialLoad = false; // Set flag to false after the first interaction
+           }
+    </script>
+
+
+} 
