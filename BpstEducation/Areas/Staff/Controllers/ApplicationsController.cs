@@ -19,35 +19,16 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Dashboard(int _statusId, int _courseId)
+        public async Task<IActionResult> Dashboard()
         {
             var allRegistrations = await _context.Applications.Include(r => r.Course).Include(r => r.ApplicationStatus).ToListAsync();
-            var courses = await _context.Courses.ToListAsync();
-            var applicationStatus = await _context.ApplicationStatus.ToListAsync();
-            List<StudentApplication> registrations;
-            if (_courseId == 0 && _statusId == 0)
-                registrations = allRegistrations;
-            else if (_courseId > 0)
-            {
-                registrations = allRegistrations.Where(r => r.CourseId == _courseId).ToList();
-            }
-            else
-                registrations = allRegistrations.Where(r => r.StatusId == _statusId).ToList();
-
-
-            // await Task.WhenAll(coursesTask, applicationStatusTask);
-            var registrationsByCourse = allRegistrations.GroupBy(r => r.Course).ToDictionary(g => g.Key, g => g.Count());
-            var registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count());
-            ViewBag.registrationsByCourse = registrationsByCourse;
-            ViewBag.registrationsByStatus = registrationsByStatus;
-            ViewBag.Courses = courses;
-
-            //var applicationsByCourse = coursesTask.Result.Select(c => new KeyValuePair<string, int>(c.Name, registrationsByCourse.TryGetValue(c.UniqueId, out var count) ? count : 0)).ToList();
-            //var applicationsByStatus = applicationStatusTask.Result.Select(s => new KeyValuePair<string, int>(s.RegistrationStatus, registrationsByStatus.TryGetValue(s.UniqueId, out var count) ? count : 0)).ToList();
-            return View(registrations);
+            var batches = await _context.Batchs.ToListAsync();
+            ViewBag.registrationsByCourse = allRegistrations.GroupBy(r => r.Course).ToDictionary(g => g.Key, g => g.Count());
+            ViewBag.registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count()); 
+            return View(batches);
         }
 
-       
+
         public async Task<IActionResult> GetApplicationPartials(int _statusId, int _courseId)
         {
             List<StudentApplication> registrations;

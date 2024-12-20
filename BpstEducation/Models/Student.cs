@@ -9,7 +9,7 @@ namespace BpstEducation.Models
     { 
         [Key]
         public int UniqueId { get; set; }
-
+        
         [Display(Name = "Reg. No.")]
         public string RegistrationNumber { get { return "Edu_" + DateTime.Now.Year.ToString() + "_" + UniqueId.ToString(); } }
 
@@ -82,9 +82,11 @@ namespace BpstEducation.Models
         public string? PanFileUrl { get; set; }
 
         [Display(Name = "Course Category")]
+        [Obsolete]
         public int CourseOfInterestId { get; set; }
         [ForeignKey("CourseOfInterestId")]
         [DeleteBehavior(DeleteBehavior.Restrict)]
+        [Obsolete]
         public Course? CourseOfInterest { get; set; }
         public int MyTrainingFee { get; set; }
         public int MyDiscount { get; set; }

@@ -1,13 +1,9 @@
-﻿@model IEnumerable<BpstEducation.NewModels.StudentApplication>
+﻿@model IEnumerable<BpstEducation.Models.Batch>
 @{
-    ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
     ViewBag.ActiveTabName = "ApplicationDashboard";
-    int SNo = 1;
-    List<Course> Courses = ViewBag.Courses;
     var registrationsByCourse = ViewBag.registrationsByCourse;
     var registrationsByStatus = ViewBag.registrationsByStatus;
-    List<KeyValuePair<string, int>> applicationsByCourse = ViewBag.applicationsByCourse;
 }
 
 <style>
@@ -19,17 +15,48 @@
     }
 </style>
 <!-- Main content -->
+
+
 <div class="content">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card">
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th> Course </th>
+                             <th> StartDate </th>
+                                <th>Batch Time</th>
+                                <th>BatchFee</th>
+
+                        </tr>
+                    </thead>  
+                    <tbody> @foreach (var item in Model)
+                    {
+                        <tr>
+                                <td> @item?.Course?.Name</td>
+
+                                <td>
+                                    @item.StartDate.ToString("dd-MMM-yyyy")
+                                </td>
+                                <td>
+                                    @item.StartDate.ToString(" hh:mm tt")
+                                </td>
+                                <td>
+                                    @item.BatchFee
+                                </td>
+                        </tr>
+                    }
+                    </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="content">
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
@@ -52,7 +79,7 @@
                     <div class="text-right">
                         <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="GetApplications()" id="RegStatusDDL">
                             <option value="0"> -- All --</option>
-                            @foreach (var item in registrationsByStatus)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
+                            @foreach (var item in registrationsByStatus)
                             {
                                 <option value="@item.Key.UniqueId"> @item.Key.RegistrationStatus  <i class="regCount"> -->  @item.Value - Registrations </i> </option>
                             }
@@ -61,13 +88,8 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="row">
-        <div class="col-lg-6">
-        </div>
 
-    </div>
     <div id="applicationsDiv"></div>
 
 </div>
@@ -75,44 +97,38 @@
 
 
 @section Scripts
-{
+    {
     <script>
 
-        let initialLoad = true; // Flag to prevent execution on page load
-           function GetApplications()
-           {
-               var _data = {
-                _courseId: $('#CourseDDL').val(),
-                _statusId:  $('#RegStatusDDL').val()
-               };
-            debugger;
-            // Use jQuery's $.ajax method for an asynchronous request
-            $.ajax({
-                url: "/staff/Applications/GetApplicationPartials/",  // Replace with your actual server URL
-          //      type: "POST",  // POST request
-               // data: JSON.stringify(_data),  // Send data as a JSON string
-                 data:  _data ,  // Send data as a JSON string
-                contentType: "application/json",  // Set content type to JSON
-                dataType: "html",  // Expect HTML response from the server
-                success: function(response) {
-                    // On success, populate the DOM with the response
-                    $("#applicationsDiv").html(response);  // Insert the HTML response into the #content div
-                },
-                error: function(xhr, status, error) {
-                    // Handle errors here
-                    console.error("AJAX Error: " + status + " - " + error);
-                }
-            });
+         function GetApplications()
+        {
+
+         $.ajax({
+              url: "/staff/Applications/GetApplicationPartials/",
+              data:  { _courseId: $('#CourseDDL').val(), _statusId:  $('#RegStatusDDL').val() } ,
+            //      type: "POST",  // POST request
+            //      data: JSON.stringify(_data),  // Send data as a JSON string
+            //      contentType: "application/json",  // Set content type to JSON
+            //      dataType: "html",  // Expect HTML response from the server
+              success: function(response) {
+                 // On success, populate the DOM with the response
+                 $("#applicationsDiv").html(response);  // Insert the HTML response into the #content div
+             },
+             error: function(xhr, status, error) {
+                 // Handle errors here
+                 console.error("AJAX Error: " + status + " - " + error);
+             }
+         });
 
 
-               //     const selectedValue = $(thisObj).val(); // Get the value
-               //     const url = `/Staff/ReviewRegistration/Index/${selectedValue}`; // Construct the URL
-               //     window.location.href = url; // Redirect
-               //       // window.location.href='/Staff/ReviewRegistration/Index/'+   $(thisObj).val();
-               // }
-               //  initialLoad = false; // Set flag to false after the first interaction
-           }
+            //     const selectedValue = $(thisObj).val(); // Get the value
+            //     const url = `/Staff/ReviewRegistration/Index/${selectedValue}`; // Construct the URL
+            //     window.location.href = url; // Redirect
+            //       // window.location.href='/Staff/ReviewRegistration/Index/'+   $(thisObj).val();
+            // }
+            //  initialLoad = false; // Set flag to false after the first interaction
+        }
     </script>
 
 
-} 
+}

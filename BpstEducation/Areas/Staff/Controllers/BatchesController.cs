@@ -58,6 +58,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
 
             // selecting students who are not part of any batch.
+            
             var unassignedStudents = await _context.Students.Where(s => !_context.BatchStudents.Select(bs => bs.StudentId).Contains(s.UniqueId)).Where(s => s.IsDeleted == false).ToListAsync();
             ViewBag.UnassignedStudents = unassignedStudents;
             var batchStudents = _context.BatchStudents
