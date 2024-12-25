@@ -15,7 +15,9 @@
                             <th> Applied On </th>
                             <th> Review </th>
                         </tr>
-                    </thead>  @foreach (var item in Model)// applicationsByCourse.OrderByDescending(kvp => kvp.Value))
+                    </thead>
+
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <td> @item.UniqueId</td>

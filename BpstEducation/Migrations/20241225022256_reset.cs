@@ -782,11 +782,11 @@ namespace BpstEducation.Migrations
                 columns: new[] { "UniqueId", "AssisTrainer", "BatchFee", "CourseId", "CreatedDate", "Description", "Duration", "LastUpdatedDate", "StartDate", "Title", "TrainerId" },
                 values: new object[,]
                 {
-                    { 1, "", 1000, 1, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "1 Month", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rising Stars", 3 },
-                    { 2, "", 18000, 2, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "6 - Months", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rising Stars", 1 },
-                    { 3, "", 3000, 3, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "45 Days", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rising Stars", 2 },
-                    { 4, "", 800, 7, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "1 Month", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rising Stars", 4 },
-                    { 5, "", 18000, 2, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "6 - Months", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rising Stars", 3 }
+                    { 1, "", 3000, 3, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "45 Days", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "DotNet Internship ", 2 },
+                    { 2, "", 18000, 2, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "6 - Months", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 21, 11, 0, 0, 0, DateTimeKind.Unspecified), "DotNet Industrial Training 6 Months - Morning", 1 },
+                    { 3, "", 18000, 2, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "6 - Months", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 2, 4, 9, 0, 0, 0, DateTimeKind.Unspecified), "DotNet Industrial Training 6 Months - Evening", 3 },
+                    { 4, "", 1000, 1, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "1 Month", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rising Stars", 3 },
+                    { 5, "", 800, 7, new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "1 Month", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Other Crash Course - Per Month", 4 }
                 });
 
             migrationBuilder.InsertData(

@@ -6,6 +6,7 @@ using BpstEducation.Data;
 using BpstEducation.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BpstEducation.Areas.Admin.Controllers
 {
@@ -25,12 +26,14 @@ namespace BpstEducation.Areas.Admin.Controllers
             _context = context;
             _loginManager = user;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var userId = _loginManager.GetLoggedInUserId();
-            var email = _loginManager.GetLoggedInUserEmail();
-            var roles = _loginManager.GetLoggedInUserRoles();
-            return View();
+            var _batches = await _context.Batchs.Include(b=>b.Course).Include(b => b.Students).Include(b => b.Trainer).ToListAsync();
+
+            //var userId = _loginManager.GetLoggedInUserId();
+            //var email = _loginManager.GetLoggedInUserEmail();
+            //var roles = _loginManager.GetLoggedInUserRoles();
+            return View(_batches);
         }
     }
 }

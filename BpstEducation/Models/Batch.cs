@@ -50,5 +50,12 @@ namespace BpstEducation.Models
                 return Course == null ? _displayName : _displayName + " |" + Course.Name;
             }
         }
+
+        [NotMapped]
+        public int RemaningDays
+        {
+            get { return (int)(StartDate - DateTime.Now).TotalDays; }
+        }
+
     }
 }

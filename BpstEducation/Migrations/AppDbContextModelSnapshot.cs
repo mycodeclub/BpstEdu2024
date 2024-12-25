@@ -244,6 +244,48 @@ namespace BpstEducation.Migrations
                         {
                             UniqueId = 1,
                             AssisTrainer = "",
+                            BatchFee = 3000,
+                            CourseId = 3,
+                            CreatedDate = new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            Duration = "45 Days",
+                            LastUpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2025, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "DotNet Internship ",
+                            TrainerId = 2
+                        },
+                        new
+                        {
+                            UniqueId = 2,
+                            AssisTrainer = "",
+                            BatchFee = 18000,
+                            CourseId = 2,
+                            CreatedDate = new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            Duration = "6 - Months",
+                            LastUpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2025, 1, 21, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "DotNet Industrial Training 6 Months - Morning",
+                            TrainerId = 1
+                        },
+                        new
+                        {
+                            UniqueId = 3,
+                            AssisTrainer = "",
+                            BatchFee = 18000,
+                            CourseId = 2,
+                            CreatedDate = new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            Duration = "6 - Months",
+                            LastUpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2025, 2, 4, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "DotNet Industrial Training 6 Months - Evening",
+                            TrainerId = 3
+                        },
+                        new
+                        {
+                            UniqueId = 4,
+                            AssisTrainer = "",
                             BatchFee = 1000,
                             CourseId = 1,
                             CreatedDate = new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -256,35 +298,7 @@ namespace BpstEducation.Migrations
                         },
                         new
                         {
-                            UniqueId = 2,
-                            AssisTrainer = "",
-                            BatchFee = 18000,
-                            CourseId = 2,
-                            CreatedDate = new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            Duration = "6 - Months",
-                            LastUpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "DotNet Industrial Training 6 Months - Morning",
-                            TrainerId = 1
-                        },
-                        new
-                        {
-                            UniqueId = 3,
-                            AssisTrainer = "",
-                            BatchFee = 3000,
-                            CourseId = 3,
-                            CreatedDate = new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            Duration = "45 Days",
-                            LastUpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "DotNet Internship ",
-                            TrainerId = 2
-                        },
-                        new
-                        {
-                            UniqueId = 4,
+                            UniqueId = 5,
                             AssisTrainer = "",
                             BatchFee = 800,
                             CourseId = 7,
@@ -295,20 +309,6 @@ namespace BpstEducation.Migrations
                             StartDate = new DateTime(2025, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Other Crash Course - Per Month",
                             TrainerId = 4
-                        },
-                        new
-                        {
-                            UniqueId = 5,
-                            AssisTrainer = "",
-                            BatchFee = 18000,
-                            CourseId = 2,
-                            CreatedDate = new DateTime(2024, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            Duration = "6 - Months",
-                            LastUpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2025, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "DotNet Industrial Training 6 Months - Evening",
-                            TrainerId = 3
                         });
                 });
 
