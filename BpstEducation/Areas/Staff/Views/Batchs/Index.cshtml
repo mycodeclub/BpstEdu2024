@@ -19,49 +19,36 @@
                 <a asp-action="Create" class="btn btn-primary btn-sm">New Batch</a>
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive table-hover">
                 <table class="table" id="example1">
                     <thead>
                         <tr>
                             <th>S. No.</th>
-                            <th>@Html.DisplayNameFor(model => model.Title)</th>
-                            <th>@Html.DisplayNameFor(model => model.Duration)</th>
-                       
-                            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
-                            <th>Batch Time</th>
+                            <th>Course</th>
+                            <th>Starting From</th>
+                            <th>Timing</th>
+                            <th>Remaning Days</th>
+                            <th>Students</th>
+                            <th>Fee</th>
 
-                            <th>@Html.DisplayNameFor(model => model.BatchFee)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var b in Model)
                         {
                             sno++;
                             <tr>
                                 <td>@sno</td>
-                             
+                                <td>@b.Course.Name</td>
+                                <td>@b.StartDate.ToString("dd-MMM-yyyy")</td>
+                                <td>@b.StartDate.ToString("hh:mm:tt")</td>
+                                <td>@b.RemaningDays </td>
+                                <td>@b.Students.Count() </td>
+                                <td style="text-align:right;"> @b.BatchFee.ToString("C", indianCulture) </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Course.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Duration)
-                                </td>
-                          
-                                <td>
-                                    @item.StartDate.ToString("dd-MMM-yyyy")
-                                </td>
-                                <td>
-                                    @item.StartDate.ToString(" hh:mm tt")
-                                </td>
-
-                                <td style="text-align:right;">
-                                    @item.BatchFee.ToString("C", indianCulture)
-                                </td>
-                                <td>
-                                    <a asp-action="Create" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
-                                    <a asp-action="Details" asp-route-id="@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
-
+                                    <a asp-action="Create" asp-route-id="@b.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+                                    <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
                                 </td>
                             </tr>
                         }

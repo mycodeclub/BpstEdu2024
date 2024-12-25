@@ -24,7 +24,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             var allRegistrations = await _context.Applications.Include(r => r.Course).Include(r => r.ApplicationStatus).ToListAsync();
             var batches = await _context.Batchs.ToListAsync();
             ViewBag.registrationsByCourse = allRegistrations.GroupBy(r => r.Course).ToDictionary(g => g.Key, g => g.Count());
-            ViewBag.registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count()); 
+            ViewBag.registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count());
             return View(batches);
         }
 
@@ -82,6 +82,16 @@ namespace BpstEducation.Areas.Staff.Controllers
             ViewBag.applicationsByCourse = applicationsByCourse;
             return View(registrations);
             return View();
+        }
+
+        public async Task<IActionResult> EnrollToBatch(int _statusId, int _courseId, int _batchId)
+        {
+            var _applications = await _context.Applications
+                    .Include(r => r.Course)
+                    .Include(r => r.ApplicationStatus)
+                    .Where(a => a.StatusId == _statusId && a.CourseId == _courseId)
+                    .ToListAsync();
+            return View(_applications);
         }
     }
 }

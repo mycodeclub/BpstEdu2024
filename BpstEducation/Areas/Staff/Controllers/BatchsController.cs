@@ -22,7 +22,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         // GET: Staff/Batchs
         public async Task<IActionResult> Index()
         {
-            var batchs = await _context.Batchs.Include(b => b.Course).Include(b => b.Trainer).ToListAsync();
+            var batchs = await _context.Batchs.Include(b => b.Course).Include(b => b.Trainer).Include(b => b.Students).ToListAsync();
             return View(batchs);
         }
 
@@ -123,7 +123,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             if (batchId == null)
                 return NotFound();
             var batch = await _context.Batchs.FirstOrDefaultAsync(m => m.UniqueId == batchId);
-        //      batch.Students = await _context.Students.ToListAsync();
+            //      batch.Students = await _context.Students.ToListAsync();
             if (batch == null)
                 return NotFound();
             return View(batch);
