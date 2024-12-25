@@ -1,86 +1,80 @@
 ﻿@model BpstEducation.Models.Batch
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
     ViewBag.ActiveTabName = "Batchs";
-
+    int sno = 0;
 }
 <div class="content">
     <div class="card">
         <div class="card-body">
-            <h1>Details</h1>
-            <a class="pull-right" href="/Staff/Batches/AssignStudentToBatch?batchId=@Model.UniqueId">Add Student </a>
-            <div>
-                <h4>Batch</h4>
-                <hr />
-                <dl class="row">
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Course)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Course.Name)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Title)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Title)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Duration)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Duration)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Description)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Description)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Trainer)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Trainer.UniqueId)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.AssisTrainer)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.AssisTrainer)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.StartDate)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.StartDate)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.LastUpdatedDate)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.LastUpdatedDate)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.BatchFee)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.BatchFee)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.CreatedDate)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.CreatedDate)
-                    </dd>
-                </dl>
+            <table class="table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th> Start From </th>
+                        <th>Timing </th>
+                        <th>Remaing Days </th>
+                        <th>Fee </th>
+                        <th>Students </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.Course.Name</td>
+                        <td> @Model.StartDate.ToString("dd-MMM-yyyy")</td>
+                        <td>@Model.StartDate.ToString("hh:mm tt")</td>
+                        <td>@Model.RemaningDays</td>
+                        <td> @Model.BatchFee</td>
+                        <td> @Model.Students.Count()</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive table-hover">
+                <table class="table" id="example1">
+                    <thead>
+                        <tr>
+                            <th>S. No.</th>
+                            <th>Course</th>
+                            <th>Starting From</th>
+                            <th>Timing</th>
+                            <th>Remaning Days</th>
+                            <th>Students</th>
+                            <th>Fee</th>
+
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var stu in Model.Students)
+                        {
+                            sno++;
+                            <tr>
+                                <td>@sno</td>
+                                <td>@stu. b. Cour se.Name</td>
+                                <td>@b.StartDate.ToString("dd-MMM-yyyy")</td>
+                                <td>@b.StartDate.ToString("hh:mm:tt")</td>
+                                <td>@b.RemaningDays </td>
+                                <td>@b.Students.Count() </td>
+                                <td style="text-align:right;"> @b.BatchFee.ToString("C", indianCulture) </td>
+                                <td>
+                                    <a asp-action="Create" asp-route-id="@b.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+                                    <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model.UniqueId">Edit</a> |
-                <a asp-action="Index">Back to List</a>
-            </div>
+
         </div>
     </div>
 </div>

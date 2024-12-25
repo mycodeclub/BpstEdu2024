@@ -35,6 +35,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             var batch = await _context.Batchs
                 .Include(b => b.Course)
                 .Include(b => b.Trainer)
+                .Include(b => b.Students)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (batch == null)
                 return NotFound();
