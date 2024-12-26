@@ -16,13 +16,12 @@
                         <div class="col-md-8">
                             <form asp-action="Create" asp-controller="StudentFee" class="needs-validation" >
                                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                                <input type="hidden" asp-for="StudentId" />
-                                
-                                <div class="form-group mb-3">
+                                 
+@*                                 <div class="form-group mb-3">
                                     <label asp-for="SubmittedFee" class="form-label"></label>
                                     <input asp-for="SubmittedFee" class="form-control" placeholder="SubmittedFee" />
                                     <span asp-validation-for="SubmittedFee" class="text-danger"></span>
-                                </div>
+                                </div> *@
                                
                                 <div class="form-group mb-3">
                                     <label asp-for="FeeSubmittingDate" class="form-label"></label>

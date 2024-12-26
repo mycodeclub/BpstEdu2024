@@ -53,7 +53,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             var batchStu = await _context.BatchStudents.FindAsync(id);
             if (batchStu == null)
-                batchStu = new BatchStudent() { DiscountFee = 0, };
+                batchStu = new BatchStudent() { DiscountedFeeAmount = 0, };
             ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "BatchDisplayName");
             ViewData["StudentId"] = new SelectList(_context.Students, "UniqueId", "StudentDisplayName");
             ViewBag.Layout =  _loggedInUser.GetLayout();

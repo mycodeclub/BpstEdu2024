@@ -17,9 +17,9 @@
                     <thead>
                         <tr>
                             <th> @Html.DisplayNameFor(model => model.Batch) </th>
-                            <th> @Html.DisplayNameFor(model => model.DiscountFee) </th>
-                            <th> @Html.DisplayNameFor(model => model.TotalAmt) </th>
-                            <th> @Html.DisplayNameFor(model => model.RemainingAmt) </th>
+                            <th> @Html.DisplayNameFor(model => model.DiscountedFeeAmount) </th>
+                            <th> @Html.DisplayNameFor(model => model.TotalFees) </th>
+                            <th> @Html.DisplayNameFor(model => model.RemainingFees) </th>
                             <th> Actions</th>
                         </tr>
                     </thead>
@@ -28,9 +28,9 @@
                         {
                             <tr>
                                 <td> @Html.DisplayFor(modelItem => item.Batch.UniqueId) </td>
-                                <td> @Html.DisplayFor(modelItem => item.DiscountFee) </td>
-                                <td> @Html.DisplayFor(modelItem => item.TotalAmt) </td>
-                                <td> @Html.DisplayFor(modelItem => item.RemainingAmt) </td>
+                                <td> @Html.DisplayFor(modelItem => item.DiscountedFeeAmount) </td>
+                                <td> @Html.DisplayFor(modelItem => item.TotalFees) </td>
+                                <td> @Html.DisplayFor(modelItem => item.RemainingFees) </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
                                     <a asp-action="Details" asp-route-id="@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |

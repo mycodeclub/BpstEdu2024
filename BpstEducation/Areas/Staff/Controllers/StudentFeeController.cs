@@ -34,7 +34,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
         public IActionResult Create(int id)
         {
-            StudentFee studentfee = new StudentFee() { StudentId = id, CreatedDate = DateTime.UtcNow, FeeSubmittingDate = DateTime.Now };
+            StudentFee studentfee = new StudentFee() {   CreatedDate = DateTime.UtcNow, FeeSubmittingDate = DateTime.Now };
             return View(studentfee);
         }
 
@@ -45,7 +45,7 @@ namespace BpstEducation.Areas.Staff.Controllers
             {
                 _context.Fees.Add(studentfee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new { id = studentfee.StudentId });
+                return RedirectToAction(nameof(Index), new { id = 1});
             }
 
             return View(studentfee);

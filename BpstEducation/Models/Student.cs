@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BpstEducation.NewModels;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +14,9 @@ namespace BpstEducation.Models
         [Display(Name = "Reg. No.")]
         public string RegistrationNumber { get { return "Edu_" + DateTime.Now.Year.ToString() + "_" + UniqueId.ToString(); } }
 
-        public Guid ?LoginUserGuidId { get; set; }
+        public int? StuApplicationId { get; set; }
+        [ForeignKey(nameof(StuApplicationId))]
+        public StudentApplication? StuApplication { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
@@ -49,7 +52,7 @@ namespace BpstEducation.Models
 
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public Address ?Address { get; set; }
+        public Address? Address { get; set; }
 
         [Required]
         [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid Aadhaar number. It must be a 12-digit number.")]
@@ -92,16 +95,18 @@ namespace BpstEducation.Models
         public Course? CourseOfInterest { get; set; }
         public int MyTrainingFee { get; set; }
         public int MyDiscount { get; set; }
+        [Obsolete]
         public List<StudentFee>? MySubmittedFeeTillNow { get; set; }
         //--------------------------------------------------------------
         [Display(Name = "My Remaining Fee")]
+        [Obsolete]
         public int MyRemainingFee
         {
             get
             {
                 int _remainingFee = MyTrainingFee - MyDiscount;
-                if (MySubmittedFeeTillNow != null && MySubmittedFeeTillNow.Count > 0)
-                    _remainingFee = MySubmittedFeeTillNow.Sum(f => f.SubmittedFee) - MyDiscount;
+                //if (MySubmittedFeeTillNow != null && MySubmittedFeeTillNow.Count > 0)
+                //    _remainingFee = MySubmittedFeeTillNow.Sum(f => f.SubmittedFee) - MyDiscount;
                 return _remainingFee;
             }
         }
@@ -118,6 +123,7 @@ namespace BpstEducation.Models
         [NotMapped]
         public string StudentDisplayName { get { return FullName + "_" + RegistrationNumber; } }
 
-        public string? LoginIdGuid { get; internal set; }
+        public string? LoginIdGuid { get; set; }
+
     }
 }

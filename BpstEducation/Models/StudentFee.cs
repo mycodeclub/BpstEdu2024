@@ -12,20 +12,15 @@ namespace BpstEducation.Models
         [Key]
         public int UniqueId { get; set; }
 
-        public int StudentId { get; set; }
-        [ForeignKey("StudentId")]
-        public Student? Students { get; set; }
+        /// <summary>
+        /// ForeignKey For BatchStudent Table 
+        /// </summary>
+        public int BatchStudentId { get; set; }
 
-        public int BatchId { get; set; }
-
- 
-        public int SubmittedFee { get; set; }     
-        
-
-            
-       
+        public int SubmittedFeeAmount { get; set; }
+        public string Description { get; set; }
         public DateTime FeeSubmittingDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public DateTime LastUpdatedDate { get; set; } 
     }
 }

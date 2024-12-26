@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BpstEducation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241226022422_ReEditedModule2")]
-    partial class ReEditedModule2
+    [Migration("20241226195718_reset")]
+    partial class reset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -326,16 +326,10 @@ namespace BpstEducation.Migrations
                     b.Property<int>("BatchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DiscountFee")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RemainingAmt")
+                    b.Property<int>("DiscountedFeeAmount")
                         .HasColumnType("int");
 
                     b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalAmt")
                         .HasColumnType("int");
 
                     b.HasKey("UniqueId");
@@ -8334,10 +8328,10 @@ namespace BpstEducation.Migrations
                     b.Property<string>("AadharFileUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AddressUniqueId")
+                    b.Property<int?>("AddressUniqueId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseOfInterestId")
+                    b.Property<int?>("CourseOfInterestId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -8389,11 +8383,16 @@ namespace BpstEducation.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("StuApplicationId")
+                        .HasColumnType("int");
+
                     b.HasKey("UniqueId");
 
                     b.HasIndex("AddressUniqueId");
 
                     b.HasIndex("CourseOfInterestId");
+
+                    b.HasIndex("StuApplicationId");
 
                     b.ToTable("Students");
                 });
@@ -8406,11 +8405,15 @@ namespace BpstEducation.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
 
-                    b.Property<int>("BatchId")
+                    b.Property<int>("BatchStudentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FeeSubmittingDate")
                         .HasColumnType("datetime2");
@@ -8418,15 +8421,17 @@ namespace BpstEducation.Migrations
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentUniqueId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubmittedFee")
+                    b.Property<int>("SubmittedFeeAmount")
                         .HasColumnType("int");
 
                     b.HasKey("UniqueId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("BatchStudentId");
+
+                    b.HasIndex("StudentUniqueId");
 
                     b.ToTable("Fees");
                 });
@@ -10849,30 +10854,35 @@ namespace BpstEducation.Migrations
                 {
                     b.HasOne("BpstEducation.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressUniqueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressUniqueId");
 
                     b.HasOne("BpstEducation.Models.Course", "CourseOfInterest")
                         .WithMany()
                         .HasForeignKey("CourseOfInterestId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("BpstEducation.NewModels.StudentApplication", "StuApplication")
+                        .WithMany()
+                        .HasForeignKey("StuApplicationId");
 
                     b.Navigation("Address");
 
                     b.Navigation("CourseOfInterest");
+
+                    b.Navigation("StuApplication");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.StudentFee", b =>
                 {
-                    b.HasOne("BpstEducation.Models.Student", "Students")
-                        .WithMany("MySubmittedFeeTillNow")
-                        .HasForeignKey("StudentId")
+                    b.HasOne("BpstEducation.Models.BatchStudent", null)
+                        .WithMany("SubmittedFees")
+                        .HasForeignKey("BatchStudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Students");
+                    b.HasOne("BpstEducation.Models.Student", null)
+                        .WithMany("MySubmittedFeeTillNow")
+                        .HasForeignKey("StudentUniqueId");
                 });
 
             modelBuilder.Entity("BpstEducation.NewModels.StudentApplication", b =>
@@ -10948,6 +10958,11 @@ namespace BpstEducation.Migrations
             modelBuilder.Entity("BpstEducation.Models.Batch", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("BpstEducation.Models.BatchStudent", b =>
+                {
+                    b.Navigation("SubmittedFees");
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Student", b =>

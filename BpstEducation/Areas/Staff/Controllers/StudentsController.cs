@@ -43,10 +43,14 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
 
             var students = await _context.Students
-                .Include(s => s.CourseOfInterest)
-                .FirstOrDefaultAsync(m => m.UniqueId == id);
+                 .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
                 return NotFound();
+            var _studentBatches = await _context.BatchStudents.Where(s => s.StudentId == id).ToListAsync();
+            foreach (var sb in _studentBatches)
+            {
+               // sb.DiscountFee
+            }
             return View(students);
         }
 
@@ -57,19 +61,16 @@ namespace BpstEducation.Areas.Staff.Controllers
             stu ??= new Models.Student() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
             //ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name");
             //ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate"); 
-            ViewData["CountryId"] = new SelectList(_context.Countries, "UniqueId", "Name", 1); 
-            ViewData["StateId"] = new SelectList(_context.States, "UniqueId", "Name", 32); 
-            ViewData["CityId"] = new SelectList(_context.Cities.Where(c => c.StateId.Equals(32)), "UniqueId", "Name", 1056); 
+            ViewData["CountryId"] = new SelectList(_context.Countries, "UniqueId", "Name", 1);
+            ViewData["StateId"] = new SelectList(_context.States, "UniqueId", "Name", 32);
+            ViewData["CityId"] = new SelectList(_context.Cities.Where(c => c.StateId.Equals(32)), "UniqueId", "Name", 1056);
             return View(stu);
         }
 
-        // POST: Admin/Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Models.Student student)
-        { 
+        {
             ValidateFileUploads(student);
             if (ModelState.IsValid)
             {
@@ -79,7 +80,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                     _context.Add(student);
                     var result = await AddLoginDetails(student);
                     if (!result.Succeeded)
-                        ModelState.AddModelError("Login Creation Error", string.Join(",", result.Errors.Select(e => { return e.Code + " : " + e.Description; }).ToList())); 
+                        ModelState.AddModelError("Login Creation Error", string.Join(",", result.Errors.Select(e => { return e.Code + " : " + e.Description; }).ToList()));
                 }
                 else
                 {
@@ -104,7 +105,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
 
             //  ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
-//            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", student.CourseOfInterestId);
+            //            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", student.CourseOfInterestId);
             ViewData["CountryId"] = new SelectList(_context.Countries, "UniqueId", "Name", 1);
             ViewData["StateId"] = new SelectList(_context.States, "UniqueId", "Name", 32);
             ViewData["CityId"] = new SelectList(_context.Cities.Where(c => c.StateId.Equals(32)), "UniqueId", "Name", 1056);
@@ -121,12 +122,11 @@ namespace BpstEducation.Areas.Staff.Controllers
                 ConfirmPassword = Common.CommonFuntions.GetDefaultPassword(student.DateOfBirth),
                 PhoneNumber = student.PhoneNumber
             };
+
             var result = await _userServiceBal.AddUser(appUser, ["Student"]);
             student.LoginIdGuid = appUser.Id;
             return result;
         }
-
-
 
         // GET: Admin/Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
