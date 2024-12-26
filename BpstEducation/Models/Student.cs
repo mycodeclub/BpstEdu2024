@@ -47,7 +47,7 @@ namespace BpstEducation.Models
 
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public string Address { get; set; }
+        public Address Address { get; set; }
 
         [Required]
         [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid Aadhaar number. It must be a 12-digit number.")]
@@ -92,8 +92,7 @@ namespace BpstEducation.Models
         public int MyDiscount { get; set; }
         public List<StudentFee>? MySubmittedFeeTillNow { get; set; }
         //--------------------------------------------------------------
-        [Display(Name = "My Remaining Fee")]
-
+        [Display(Name = "My Remaining Fee")] 
         public int MyRemainingFee
         {
             get

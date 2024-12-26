@@ -51,7 +51,7 @@ namespace BpstEducation.Areas.Admin.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var batch = await _context.Batchs.FindAsync(id);
-            batch ??= new Batch() { StartDate = DateTime.Now.AddMonths(2) };
+            batch ??= new Batch() { StartDateTime = DateTime.Now.AddMonths(2) };
 
             ViewData["CourseId"] = await _context.Courses.ToListAsync();// new SelectList(_context.Courses, "UniqueId", "Name");
             ViewData["TrainerId"] = new SelectList(_context.Employees, "UniqueId", "FullName");

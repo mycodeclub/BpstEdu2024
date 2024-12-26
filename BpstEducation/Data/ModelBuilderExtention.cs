@@ -18,7 +18,7 @@ namespace BpstEducation.Data
         public static void SeedApplicationStatus(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ApplicationStatus>().HasData(
-                new ApplicationStatus() { UniqueId = 1, RegistrationStatus = "Applied" },
+                new ApplicationStatus() { UniqueId = 1, RegistrationStatus = "New Application" },
                 new ApplicationStatus() { UniqueId = 2, RegistrationStatus = "Reviewed" },
                 new ApplicationStatus() { UniqueId = 3, RegistrationStatus = "Admission Taken" },
                 new ApplicationStatus() { UniqueId = 4, RegistrationStatus = "Not Interested Anymore" }
@@ -1368,11 +1368,11 @@ namespace BpstEducation.Data
         public static void SeedBatches(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Batch>().HasData(
-                new Batch() { UniqueId = 1, CourseId = 3, BatchFee = 3000, TrainerId = 2, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 2, 4).AddDays(43), Title = "DotNet Internship ", Duration = "45 Days" },
-                new Batch() { UniqueId = 2, CourseId = 2, BatchFee = 18000, TrainerId = 1, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 1, 21).AddHours(11), Title = "DotNet Industrial Training 6 Months - Morning", Duration = "6 - Months" },
-                new Batch() { UniqueId = 3, CourseId = 2, BatchFee = 18000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 2, 4).AddHours(9), Title = "DotNet Industrial Training 6 Months - Evening", Duration = "6 - Months" },
-                new Batch() { UniqueId = 4, CourseId = 1, BatchFee = 1000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 01, 24).AddDays(50), Title = "Rising Stars", Duration = "1 Month" },
-                new Batch() { UniqueId = 5, CourseId = 7, BatchFee = 800, TrainerId = 4, CreatedDate = new DateTime(2024, 12, 24), StartDate = new DateTime(2025, 4, 04).AddDays(7), Title = "Other Crash Course - Per Month", Duration = "1 Month" });
+                new Batch() { UniqueId = 1, CourseId = 3, BatchFee = 3000, TrainerId = 2, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 2, 4).AddDays(43), Title = "DotNet Internship ", Duration = "45 Days" },
+                new Batch() { UniqueId = 2, CourseId = 2, BatchFee = 18000, TrainerId = 1, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 1, 21).AddHours(11), Title = "DotNet Industrial Training 6 Months - Morning", Duration = "6 - Months" },
+                new Batch() { UniqueId = 3, CourseId = 2, BatchFee = 18000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 2, 4).AddHours(9), Title = "DotNet Industrial Training 6 Months - Evening", Duration = "6 - Months" },
+                new Batch() { UniqueId = 4, CourseId = 1, BatchFee = 1000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 01, 24).AddDays(50), Title = "Rising Stars", Duration = "1 Month" },
+                new Batch() { UniqueId = 5, CourseId = 7, BatchFee = 800, TrainerId = 4, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 4, 04).AddDays(7), Title = "Other Crash Course - Per Month", Duration = "1 Month" });
         }
     }
 }

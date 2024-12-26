@@ -26,7 +26,7 @@
                             *@
                             <th>@Html.DisplayNameFor(model => model.Title)</th>
                             <th>@Html.DisplayNameFor(model => model.Duration)</th>
-                            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.StartDateTime)</th>
                             <th>@Html.DisplayNameFor(model => model.BatchFee)</th>
                             <th>Actions</th>
                         </tr>
@@ -40,7 +40,7 @@
                                 @*  <td>@Html.DisplayFor(modelItem => item.Course.UniqueId)</td> *@
                                 <td>@Html.DisplayFor(modelItem => item.Title)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Duration)</td>
-                                <td>@Html.DisplayFor(modelItem => item.StartDate, "{0:dd/MM/yyyy}")</td>
+                                <td>@Html.DisplayFor(modelItem => item.StartDateTime, "{0:dd/MM/yyyy}")</td>
                                 <td>@Html.DisplayFor(modelItem => item.BatchFee, "{0:C}")</td>
                                 <td>
                                     <a asp-action="Create" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |

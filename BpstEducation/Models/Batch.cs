@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace BpstEducation.Models
 {
@@ -33,7 +34,7 @@ namespace BpstEducation.Models
 
         [Display(Name = "Start Date")]
 
-        public DateTime StartDate { get; set; }
+        public DateTime StartDateTime { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
         [Display(Name = "Batch Fee")]
@@ -46,15 +47,22 @@ namespace BpstEducation.Models
         {
             get
             {
-                string _displayName = Title + " | " + Duration + " | " + StartDate.ToString("dd/MMM/yyyy");
-                return Course == null ? _displayName : _displayName + " |" + Course.Name;
+                var _displayName = new StringBuilder();
+                if (!string.IsNullOrEmpty(Title))
+                    _displayName.Append(Title + " | ");
+                if (!string.IsNullOrEmpty(Description))
+                    _displayName.Append(Description + " | ");
+                _displayName.Append(StartDateTime.ToString("dd-MMM-yyyy") + " | ");
+                _displayName.Append(StartDateTime.ToString("hh:mm:tt"));
+
+                return _displayName.ToString();
             }
         }
 
         [NotMapped]
         public int RemaningDays
         {
-            get { return (int)(StartDate - DateTime.Now).TotalDays; }
+            get { return (int)(StartDateTime - DateTime.Now).TotalDays; }
         }
 
     }

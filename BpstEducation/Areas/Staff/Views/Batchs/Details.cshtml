@@ -3,6 +3,7 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
     ViewBag.ActiveTabName = "Batchs";
+    CultureInfo indianCulture = new CultureInfo("hi-IN");
     int sno = 0;
 }
 <div class="content">
@@ -22,8 +23,8 @@
                 <tbody>
                     <tr>
                         <td>@Model.Course.Name</td>
-                        <td> @Model.StartDate.ToString("dd-MMM-yyyy")</td>
-                        <td>@Model.StartDate.ToString("hh:mm tt")</td>
+                        <td> @Model.StartDateTime.ToString("dd-MMM-yyyy")</td>
+                        <td>@Model.StartDateTime.ToString("hh:mm tt")</td>
                         <td>@Model.RemaningDays</td>
                         <td> @Model.BatchFee</td>
                         <td> @Model.Students.Count()</td>
@@ -58,16 +59,16 @@
                         {
                             sno++;
                             <tr>
-                                <td>@sno</td>
-                                <td>@stu. b. Cour se.Name</td>
-                                <td>@b.StartDate.ToString("dd-MMM-yyyy")</td>
-                                <td>@b.StartDate.ToString("hh:mm:tt")</td>
-                                <td>@b.RemaningDays </td>
-                                <td>@b.Students.Count() </td>
-                                <td style="text-align:right;"> @b.BatchFee.ToString("C", indianCulture) </td>
+                                <td> sno</td>
+                                <td> stu. b. Cour se.Name</td>
+                                <td> StartDate.ToString("dd-MMM-yyyy")</td>
+                                <td> b.StartDate.ToString("hh:mm:tt")</td>
+                                <td> b.RemaningDays </td>
+                                <td> b.Students.Count() </td>
+                                <td style="text-align:right;">  b.BatchFee.ToString("C", indianCulture) </td>
                                 <td>
-                                    <a asp-action="Create" asp-route-id="@b.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
-                                    <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+                                    <a asp-action="Create" asp-route-id="  UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+                                    <a asp-action="Details" asp-route-id=" b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
                                 </td>
                             </tr>
                         }
