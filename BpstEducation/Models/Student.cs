@@ -6,12 +6,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BpstEducation.Models
 {
     public class Student
-    { 
+    {
         [Key]
         public int UniqueId { get; set; }
-        
+
         [Display(Name = "Reg. No.")]
         public string RegistrationNumber { get { return "Edu_" + DateTime.Now.Year.ToString() + "_" + UniqueId.ToString(); } }
+
+        public Guid ?LoginUserGuidId { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
@@ -47,7 +49,7 @@ namespace BpstEducation.Models
 
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public Address Address { get; set; }
+        public Address ?Address { get; set; }
 
         [Required]
         [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid Aadhaar number. It must be a 12-digit number.")]
@@ -61,29 +63,29 @@ namespace BpstEducation.Models
         [NotMapped]
 
 
-         ///<summary>
-         ///
-         /// Aadhar update 
-         /// </summary>
+        ///<summary>
+        ///
+        /// Aadhar update 
+        /// </summary>
         [DataType(DataType.Upload)]
         [Display(Name = "Upload Aadhar")]
         public IFormFile? Aadhar { get; set; }
 
         public string? AadharFileUrl { get; set; }
 
-      //public string? AadharName { get; set; }
+        //public string? AadharName { get; set; }
 
         [NotMapped]
         [Display(Name = "Upload Pan")]
-        public IFormFile? Pan { get; set; } 
+        public IFormFile? Pan { get; set; }
 
-      //public string? PanName { get; set; } = string.Empty;
+        //public string? PanName { get; set; } = string.Empty;
 
         public string? PanFileUrl { get; set; }
 
         [Display(Name = "Course Category")]
         [Obsolete]
-        public int CourseOfInterestId { get; set; }
+        public int? CourseOfInterestId { get; set; }
         [ForeignKey("CourseOfInterestId")]
         [DeleteBehavior(DeleteBehavior.Restrict)]
         [Obsolete]
@@ -92,7 +94,7 @@ namespace BpstEducation.Models
         public int MyDiscount { get; set; }
         public List<StudentFee>? MySubmittedFeeTillNow { get; set; }
         //--------------------------------------------------------------
-        [Display(Name = "My Remaining Fee")] 
+        [Display(Name = "My Remaining Fee")]
         public int MyRemainingFee
         {
             get

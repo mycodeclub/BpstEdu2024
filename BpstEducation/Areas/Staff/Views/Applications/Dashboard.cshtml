@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
-                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="GetApplications()" id="CourseDDL">
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="common.GetApplications()" id="CourseDDL">
                             <option value="0"> -- All --</option>
                             @foreach (var item in registrationsByCourse)
                             {
@@ -40,7 +40,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
-                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="GetApplications()" id="RegStatusDDL">
+                        <select class="form-control" style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" onchange="common.GetApplications()" id="RegStatusDDL">
                             <option value="0"> -- All --</option>
                             @foreach (var item in registrationsByStatus)
                             {
@@ -51,14 +51,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        @*         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
                         <div class="input-group">
                             <select class="form-control"
                                     style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-                                    onchange="GetApplications()"
+                                    onchange="common.GetApplications()"
                                     id="BatchDDL">
                                 <option value="0">-- Batches --</option>
                                 @foreach (var item in Model)
@@ -67,11 +67,27 @@
                                     <option value="@item.UniqueId">@batch</option>
                                 }
                             </select>
-                            <button type="button" onclick="EnrollToBatch()" class="btn-primary">InRole</button>
+                            <button type="button" onclick="common.EnrollToBatch()" class="btn-primary">InRole</button>
                         </div>
                     </div>
 
                 </div>
+            </div>
+        </div>
+ *@
+
+
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body"> 
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Select All
+                        </label>
+                    </div>
+                    <a href="#" class="btn btn-link bx-align-right">Apply</a> 
             </div>
         </div>
     </div>
@@ -84,7 +100,10 @@
 
 @section Scripts
 {
-    <script>
+    <script src="~/appjs/common.js"></script>
+
+}
+@*     <script>
         function jsonToQueryString(json) {
             return Object.keys(json)
                 .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
@@ -120,6 +139,5 @@
         }
 
     </script>
+ *@
 
-
-}

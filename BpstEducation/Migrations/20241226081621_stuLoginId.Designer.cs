@@ -4,6 +4,7 @@ using BpstEducation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BpstEducation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241226081621_stuLoginId")]
+    partial class stuLoginId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -8331,10 +8334,10 @@ namespace BpstEducation.Migrations
                     b.Property<string>("AadharFileUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("AddressUniqueId")
+                    b.Property<int>("AddressUniqueId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CourseOfInterestId")
+                    b.Property<int>("CourseOfInterestId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -10849,12 +10852,15 @@ namespace BpstEducation.Migrations
                 {
                     b.HasOne("BpstEducation.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressUniqueId");
+                        .HasForeignKey("AddressUniqueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BpstEducation.Models.Course", "CourseOfInterest")
                         .WithMany()
                         .HasForeignKey("CourseOfInterestId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Address");
 

@@ -30,7 +30,7 @@ namespace BpstEducation.Controllers
             _context = context;
             _userService = userService;
 
-        } 
+        }
 
         [HttpGet]
         public IActionResult Register()
@@ -50,7 +50,7 @@ namespace BpstEducation.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.LoginName, model.Password, model.RememberMe, lockoutOnFailure: false);
-                
+
                 if (result.Succeeded)
                     return await ReDirectIfLoggedIn();
                 else { ModelState.AddModelError("", "Invalid Email Id or Password"); }
@@ -76,7 +76,7 @@ namespace BpstEducation.Controllers
 
         public async Task<IActionResult> ChangePassword()
         {
-            ViewBag.Layout =  _userService.GetLayout();
+            ViewBag.Layout = _userService.GetLayout();
             return View();
         }
         [Authorize(Roles = "Staff,Admin,Student")]
@@ -93,7 +93,7 @@ namespace BpstEducation.Controllers
                 foreach (var error in result.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
             }
-            ViewBag.Layout =  _userService.GetLayout();
+            ViewBag.Layout = _userService.GetLayout();
             return View(model);
         }
         [Authorize(Roles = "Staff,Admin,Student")]
@@ -107,7 +107,7 @@ namespace BpstEducation.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 emailUpdate.OldEmail = user.Email;
             }
-            ViewBag.Layout =  _userService.GetLayout();
+            ViewBag.Layout = _userService.GetLayout();
             return View(emailUpdate);
         }
         [Authorize(Roles = "Staff,Admin,Student")]
@@ -116,19 +116,19 @@ namespace BpstEducation.Controllers
         public async Task<IActionResult> ChangeEmail(UpdateEmailVM updateEmail)
         {
             var result = await _userService.UpldateLoggedInUserEmail(updateEmail);
-            ViewBag.Layout =  _userService.GetLayout();
+            ViewBag.Layout = _userService.GetLayout();
             return View(updateEmail);
         }
-         
+
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
-        } 
-        
+        }
+
         // --- @ToDo : NOTE : Remove following methods while release.
-        public async Task<IActionResult> CreateMasterUser()        
+        public async Task<IActionResult> CreateMasterUser()
         {
             var errorStr = string.Empty;
             try
@@ -161,7 +161,7 @@ namespace BpstEducation.Controllers
             if (string.IsNullOrWhiteSpace(errorStr))
                 return RedirectToAction("AutoLogin");
             return RedirectToAction("Login");
-        } 
+        }
         public async Task<IActionResult> AutoLogin()
         {
             var result = await _signInManager.PasswordSignInAsync("admin@bpst.com", "admin@bpst.com", true, lockoutOnFailure: false);
@@ -174,31 +174,18 @@ namespace BpstEducation.Controllers
 
         //------------api ..........................
 
-        // GET: api/Cities 
-        [HttpGet("GetAllCities")]
-        public async Task<ActionResult<IEnumerable<City>>> GetCities()
+
+        public async Task<List<City>> GetCities()
         {
             return await _context.Cities.ToListAsync();
         }
-
-        // GET: api/Cities/5
-        [HttpGet("GetCitiesByStateId/{id}")]
-        public async Task<ActionResult<IEnumerable<City>>> GetCitiesByStateId(int id)
+        public async Task<List<City>> GetCitiesByStateId(int id)
         {
-            var cities = await _context.Cities.Where(c => c.StateId == id).ToListAsync();
-            if (cities == null)
-                return NotFound();
-            return cities;
+            return await _context.Cities.Where(c => c.StateId == id).ToListAsync();
         }
-
-        // GET: api/Cities/5
-        [HttpGet("GetCityByCityId/{id}")]
-        public async Task<ActionResult<City>> GetCity(int id)
+        public async Task<City> GetCity(int id)
         {
-            var city = await _context.Cities.FindAsync(id);
-            if (city == null)
-                return NotFound();
-            return city;
+            return await _context.Cities.FindAsync(id);
         }
 
     }

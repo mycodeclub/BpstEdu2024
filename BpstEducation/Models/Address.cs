@@ -21,18 +21,30 @@ namespace BpstEducation.Models
         [Display(Name = "Nearest Landmark")]
         public string NearestLandMark { get; set; }
 
-        [Display(Name = "State")]
+
+
+        [Display(Name = "State")]  
         public int? StateId { get; set; }
-        public State State { get; set; }
+        [ForeignKey("StateId")]
+        public State? State { get; set; }
+
+
+
 
         [Display(Name = "City")]
         public int? CityId { get; set; }
 
-        public City City { get; set; }
+        [ForeignKey("CityId")]
+        public City? City { get; set; }
+
+
 
         [Display(Name = "Country")]
         public int? CountryId { get; set; }
-        public Country Country { get; set; }
+        [ForeignKey("CountryId")]
+        public Country? Country { get; set; }
+
+
 
         [Required]
         [MaxLength(6, ErrorMessage = "Only Six Digits Allowed")]

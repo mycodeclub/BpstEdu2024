@@ -55,8 +55,11 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             var stu = await _context.Students.FindAsync(id);
             stu ??= new Models.Student() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
-            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name");
-            ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate");
+            //ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name");
+            //ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate"); 
+            ViewData["CountryId"] = new SelectList(_context.Countries, "UniqueId", "Name", 1); 
+            ViewData["StateId"] = new SelectList(_context.States, "UniqueId", "Name", 32); 
+            ViewData["CityId"] = new SelectList(_context.Cities.Where(c => c.StateId.Equals(32)), "UniqueId", "Name", 1056); 
             return View(stu);
         }
 
@@ -66,8 +69,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Models.Student student)
-        {
-
+        { 
             ValidateFileUploads(student);
             if (ModelState.IsValid)
             {
@@ -77,8 +79,7 @@ namespace BpstEducation.Areas.Staff.Controllers
                     _context.Add(student);
                     var result = await AddLoginDetails(student);
                     if (!result.Succeeded)
-                        ModelState.AddModelError("Login Creation Error", string.Join(",", result.Errors.Select(e => { return e.Code + " : " + e.Description; }).ToList()));
-
+                        ModelState.AddModelError("Login Creation Error", string.Join(",", result.Errors.Select(e => { return e.Code + " : " + e.Description; }).ToList())); 
                 }
                 else
                 {
@@ -103,7 +104,10 @@ namespace BpstEducation.Areas.Staff.Controllers
 
 
             //  ViewData["BatchId"] = new SelectList(_context.Batchs.Include(b => b.Course), "UniqueId", "Course.Name", student.BatchId);
-            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", student.CourseOfInterestId);
+//            ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name", student.CourseOfInterestId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "UniqueId", "Name", 1);
+            ViewData["StateId"] = new SelectList(_context.States, "UniqueId", "Name", 32);
+            ViewData["CityId"] = new SelectList(_context.Cities.Where(c => c.StateId.Equals(32)), "UniqueId", "Name", 1056);
             return View(student);
 
         }

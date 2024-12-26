@@ -13,7 +13,7 @@
                             <th> Course </th>
                             <th> College Name </th>
                             <th> Applied On </th>
-                            <th> Review </th>
+                            <th> <input type="checkbox" />  Add Student To Batch </th>
                         </tr>
                     </thead>
 
@@ -26,7 +26,9 @@
                             <td> @item?.Course?.Name</td>
                             <td> @item?.CollegeName</td>
                             <td> @item?.AppliedOn.ToString("dd-MMM-yyyy") - <strong>( @item?.NumberOfDays Day's Ego) </strong> </td>
-                            <td> View  </td>
+                            <td>
+                                <input type="checkbox" /> <a class="link" href="#"> En-Roll</a>
+                            </td>
                         </tr>
                     }
                 </table>
