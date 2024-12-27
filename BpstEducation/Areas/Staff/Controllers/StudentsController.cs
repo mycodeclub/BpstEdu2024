@@ -51,14 +51,15 @@ namespace BpstEducation.Areas.Staff.Controllers
             if (students == null)
                 return NotFound();
             var _studentBatches = await _context.BatchStudents
-                .Include(bs=>bs.Student)
-                .Include(bs=>bs.Batch)
-                .Include(bs=>bs.SubmittedFeeList)
+                .Include(bs => bs.Student)
+                .Include(bs => bs.Batch)
+                .Include(bs => bs.SubmittedFeeList)
                 .Where(s => s.StudentId == id).ToListAsync();
             foreach (var sb in _studentBatches)
             {
             }
             ViewBag.StudentBatches = _studentBatches;
+
             return View(students);
         }
 
@@ -67,11 +68,10 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             var stu = await _context.Students.FindAsync(id);
             stu ??= new Models.Student() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
-            //ViewData["CourseCategoryID"] = new SelectList(_context.Courses, "UniqueId", "Name");
-            //ViewData["BatchId"] = new SelectList(_context.Batchs.Include(c => c.Course), "UniqueId", "BatchNameWithStartDate"); 
             ViewData["CountryId"] = new SelectList(_context.Countries, "UniqueId", "Name", 1);
             ViewData["StateId"] = new SelectList(_context.States, "UniqueId", "Name", 32);
             ViewData["CityId"] = new SelectList(_context.Cities.Where(c => c.StateId.Equals(32)), "UniqueId", "Name", 1056);
+            ViewBag.Batches = await _context.Batchs.Include(b => b.Course).ToListAsync();
             return View(stu);
         }
 
@@ -87,6 +87,11 @@ namespace BpstEducation.Areas.Staff.Controllers
                     student.LastUpdatedDate = student.CreatedDate = DateTime.UtcNow;
                     _context.Add(student);
                     var result = await AddLoginDetails(student);
+                    await _context.BatchStudents.AddAsync(new BatchStudent()
+                    {
+                        BatchId = student.SelectedBatchId,
+                        StudentId = student.UniqueId
+                    });
                     if (!result.Succeeded)
                         ModelState.AddModelError("Login Creation Error", string.Join(",", result.Errors.Select(e => { return e.Code + " : " + e.Description; }).ToList()));
                 }

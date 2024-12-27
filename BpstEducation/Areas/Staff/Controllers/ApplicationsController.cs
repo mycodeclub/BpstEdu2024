@@ -22,7 +22,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         public async Task<IActionResult> Dashboard()
         {
             var allRegistrations = await _context.Applications.Include(r => r.Course).Include(r => r.ApplicationStatus).ToListAsync();
-            var batches = await _context.Batchs.ToListAsync();
+            var batches = await _context.Batchs.Include(b => b.Course).ToListAsync();
             ViewBag.registrationsByCourse = allRegistrations.GroupBy(r => r.Course).ToDictionary(g => g.Key, g => g.Count());
             ViewBag.registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count());
             return View(batches);

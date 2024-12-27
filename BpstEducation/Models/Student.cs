@@ -156,5 +156,8 @@ namespace BpstEducation.Models
 
         public string? LoginIdGuid { get; set; }
 
+        [NotMapped]
+        public int SelectedBatchId { get; set; }
+
     }
 }
