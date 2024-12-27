@@ -43,14 +43,22 @@ namespace BpstEducation.Areas.Staff.Controllers
                 return NotFound();
 
             var students = await _context.Students
-                 .FirstOrDefaultAsync(m => m.UniqueId == id);
+                .Include(s => s.Address)
+                .Include(a => a.Address.Country)
+                .Include(s => s.Address.State)
+                .Include(s => s.Address.City)
+                  .FirstOrDefaultAsync(m => m.UniqueId == id);
             if (students == null)
                 return NotFound();
-            var _studentBatches = await _context.BatchStudents.Where(s => s.StudentId == id).ToListAsync();
+            var _studentBatches = await _context.BatchStudents
+                .Include(bs=>bs.Student)
+                .Include(bs=>bs.Batch)
+                .Include(bs=>bs.SubmittedFeeList)
+                .Where(s => s.StudentId == id).ToListAsync();
             foreach (var sb in _studentBatches)
             {
-               // sb.DiscountFee
             }
+            ViewBag.StudentBatches = _studentBatches;
             return View(students);
         }
 

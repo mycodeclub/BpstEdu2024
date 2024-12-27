@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
+using System.Text;
 
 namespace BpstEducation.Models
 {
@@ -53,6 +55,35 @@ namespace BpstEducation.Models
         public string PhoneNumber { get; set; } = string.Empty;
 
         public Address? Address { get; set; }
+        [NotMapped]
+        public string FullAddress
+        {
+            get
+            {
+                StringBuilder _address = new StringBuilder();
+                if (Address != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(Address.AddressLine1))
+                        _address.Append($"{Address.AddressLine1} - ");
+                    if (!string.IsNullOrWhiteSpace(Address.AddressLine2))
+                        _address.Append($"{Address.AddressLine2} - ");
+                    if (!string.IsNullOrWhiteSpace(Address.AddressLine3))
+                        _address.Append($"{Address.AddressLine3} - ");
+                    if (!string.IsNullOrWhiteSpace(Address.NearestLandMark))
+                        _address.Append($"{Address.NearestLandMark} - ");
+
+                    if (Address.State != null && !string.IsNullOrWhiteSpace(Address.State.Name))
+                        _address.Append($"{Address.State.Name} - ");
+                    if (Address.City != null && !string.IsNullOrWhiteSpace(Address.City.Name))
+                        _address.Append($"{Address.City.Name} - ");
+
+                    if (!string.IsNullOrWhiteSpace(Address.PinCode))
+                        _address.Append($"{Address.PinCode}");
+
+                }
+                return _address.ToString();
+            }
+        }
 
         [Required]
         [RegularExpression(@"^\d{12}$", ErrorMessage = "Invalid Aadhaar number. It must be a 12-digit number.")]

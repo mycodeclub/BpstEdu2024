@@ -1,88 +1,71 @@
-﻿@model BpstEducation.Models.Student 
+﻿@model BpstEducation.Models.Student
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
-    ViewBag.ActiveTabName = "Students"; 
+    ViewBag.ActiveTabName = "Students";
+    List<BatchStudent> batchStudents = ViewBag.StudentBatches;
 }
 
 
 
 <div class="content">
     <div class="card">
-        <div class="card-body"> 
+        <div class="card-body">
             <h2>Students Details</h2>
             <div class="content">
                 <div class="card">
                     <div class="card-body">
-                        <dl class="row">
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.FirstName)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.FirstName)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.LastName)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.LastName)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.Email)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Email)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.DateOfBirth)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.DateOfBirth)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.PhoneNumber)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.PhoneNumber)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.Address)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Address)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.AadhaarNumber)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.AadhaarNumber)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.PanNumber)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.PanNumber)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.CourseOfInterest)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.CourseOfInterest.UniqueId)
-                            </dd>
-                            <dt class="col-sm-2">
-                                @Html.DisplayNameFor(model => model.MyTrainingFee)
-                            </dt>
-                            <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.MyTrainingFee)
-                            </dd>
-                        </dl>
-                    </div>
+                        <div class="row">
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Name </label>
+                                <p class="">@Model.FullName  </p>
+                            </div>
 
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@Model.UniqueId">Edit</a> |
-                        <a asp-action="Index">Back to List</a>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3  col-xl-2">
+                                <label class="text-bold"> Email Id </label>
+                                <p class="">@Model.Email  </p>
+                            </div>
+
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3  col-xl-2">
+                                <label class="text-bold"> Phone </label>
+                                <p class="">@Model.PhoneNumber  </p>
+                            </div>
+
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3  col-xl-2">
+                                <label class="text-bold"> PAN </label>
+                                <p class="">@Model.PanNumber  </p>
+                            </div>
+
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Aadhar </label>
+                                <p class="">@Model.AadhaarNumber  </p>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label class="text-bold"> Full Address </label>
+                                <p class="">@Model.FullAddress  </p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header bg-light-blue-gradient"> Batch </div>
+
+                @foreach (var bs in batchStudents)
+                {
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                    <label class="text-bold"> Name </label>
+                                    <p class=""> @bs.Batch.BatchFee   </p>
+                                </div>
+                             </div>
+
+                        </div>
+                }
+                    </div>
+
             </div>
         </div>
     </div>

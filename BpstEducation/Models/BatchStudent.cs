@@ -34,7 +34,7 @@ namespace BpstEducation.Models
 
         [Display(Name = "Total Fees After Discount")]
         public int TotalFeesAfterDiscount { get { return TotalFees - DiscountedFeeAmount; } }
-        public List<StudentFee>? SubmittedFees { get; set; }
+        public List<StudentFee>? SubmittedFeeList { get; set; }
 
         [NotMapped]
         [Display(Name = "Remaining Fees")]
@@ -43,7 +43,7 @@ namespace BpstEducation.Models
             get
             {
                 int _remainingFees = TotalFeesAfterDiscount;
-                foreach (var fee in SubmittedFees)
+                foreach (var fee in SubmittedFeeList)
                 {
                     _remainingFees -= fee.SubmittedFeeAmount;
                 }
