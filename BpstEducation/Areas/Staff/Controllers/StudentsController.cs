@@ -41,26 +41,18 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             if (id == null)
                 return NotFound();
-
-            var students = await _context.Students
-                .Include(s => s.Address)
-                .Include(a => a.Address.Country)
-                .Include(s => s.Address.State)
-                .Include(s => s.Address.City)
-                  .FirstOrDefaultAsync(m => m.UniqueId == id);
-            if (students == null)
-                return NotFound();
             var _studentBatches = await _context.BatchStudents
-                .Include(bs => bs.Student)
-                .Include(bs => bs.Batch)
-                .Include(bs => bs.SubmittedFeeList)
+                .Include(s => s.Student)
+                .Include(sa => sa.Student.Address.Country)
+                .Include(sa => sa.Student.Address.State)
+                .Include(sa => sa.Student.Address.City)
+                .Include(sb => sb.Batch)
+                .Include(sb => sb.Batch.Course)
+                .Include(sb => sb.Batch.Trainer)
+                .Include(sb => sb.SubmittedFeeList)
                 .Where(s => s.StudentId == id).ToListAsync();
-            foreach (var sb in _studentBatches)
-            {
-            }
-            ViewBag.StudentBatches = _studentBatches;
 
-            return View(students);
+            return View(_studentBatches);
         }
 
         // GET: Admin/Students/Create

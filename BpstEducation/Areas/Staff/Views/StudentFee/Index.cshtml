@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
-    var stuId = ViewBag.StudentId;
+    var stuId = 0;
 }
 <div class="content">
     <div class="card">
@@ -33,9 +33,9 @@
                     <div class="col-sm-4 invoice-col">
                         <address>
                             <strong> Show Batch Details</strong><br>
-                            @Model.CourseOfInterest.Name<br>
-                            @*                             @Model.Batch.Title<br>
-                            <strong>Fees:</strong> @Model.Batch.BatchFee<br> *@
+                            Model.CourseOfInterest.Name<br>
+                            Model.Batch.Title<br>
+                            <strong>Fees:</strong>  Model.Batch.BatchFee<br>
                         </address>
                     </div>
 
@@ -52,16 +52,27 @@
                                     <th>Remaining Fees</th>
                                 </tr>
                             </thead>
-                            @foreach (var fee in Model.MySubmittedFeeTillNow)
-                            {
-                                <tbody>
-                                    <tr>
-                                        <td>@fee.FeeSubmittingDate</td>
-                                        @* <td>@fee.SubmittedFee</td>
- *@
-                                    </tr>
-                                </tbody>
-                            }
+
+                            <tbody>
+                                <tr>
+                                    <td> @DateTime.Now.AddDays(-25).ToShortDateString() </td>
+                                    <td> 2,000/-</td>
+                                </tr>
+                                <tr>
+                                    <td> @DateTime.Now.AddDays(-35).ToShortDateString() </td>
+                                    <td> 5,000/-</td>
+                                </tr>
+
+                                <tr>
+                                    <td> @DateTime.Now.AddDays(-62).ToShortDateString() </td>
+                                    <td> 5,000/-</td>
+                                </tr>
+                                <tr>
+                                    <td> @DateTime.Now.AddDays(-89).ToShortDateString() </td>
+                                    <td> 8,000/-</td>
+                                </tr>
+                            </tbody>
+
                         </table>
                     </div>
                     <!-- /.col -->
@@ -108,7 +119,7 @@
 
                     </div>
                 </form>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
