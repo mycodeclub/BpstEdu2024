@@ -18,7 +18,7 @@ namespace BpstEducation.Models
         public int BatchStudentId { get; set; }
 
         public int SubmittedFeeAmount { get; set; }
-        public string Description { get; set; }
+        public string ?Description { get; set; }
         public DateTime FeeSubmittingDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; } 

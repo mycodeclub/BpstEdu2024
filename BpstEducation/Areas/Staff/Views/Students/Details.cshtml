@@ -6,9 +6,7 @@
     var student = Model.FirstOrDefault().Student;
     int sNo = 0;
 }
-
-
-
+<script src="~/appjs/common.js"></script>
 <div class="content">
     <div class="card">
         <div class="card-body">
@@ -81,7 +79,7 @@
                         </div>
                         <div class="card-header bg-gray-light">
                             Fees
-                            <button type="button" class="btn btn-sm btn-outline-primary  pull-right" data-toggle="modal" data-target="#exampleModal">Pay Fees </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary  pull-right" data-toggle="modal" data-target="#FeeModalPopUp" onclick="common.loadFeePartial(@Model.FirstOrDefault().BatchId,@Model.FirstOrDefault().StudentId)">Pay Fees </button>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -99,8 +97,9 @@
                                     }
                                     @foreach (var fee in bs.SubmittedFeeList)
                                     {
-                                        <tr>
-                                            <td> @sNo++; .   </td>
+                                        sNo = sNo + 1;
+                                         <tr>
+                                            <td> @sNo .    </td>
                                             <td> @fee.Description </td>
                                             <td> @fee.SubmittedFeeAmount </td>
                                             <td> @fee.FeeSubmittingDate </td>
@@ -131,47 +130,37 @@
                             </div>
                         </div>
                     }
-                </div>
-
+                </div> 
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="FeeModalPopUp" tabindex="-1" role="dialog" aria-labelledby="FeeModalPopUpLabel" aria-hidden="true"> </div>
 
 
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="needs-validation" action="/Admin/StudentFee/Create" method="post">
-
-                    <input type="hidden" asp-for="@Model.FirstOrDefault().UniqueId" />
-                    <input type="hidden" asp-for="@Model.FirstOrDefault().StudentId" />
-                    <input type="hidden" asp-for="@Model.FirstOrDefault().BatchId" />
-                    <input type="hidden" />
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="form-label" for="SubmittedFee">Fees</label>
-                            <input class="form-control valid" asp-for="@Model.FirstOrDefault().RemainingFees" id="SubmittedFee" name="SubmittedFee" aria-invalid="false">
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-2">
-                            <input type="submit" value="Save" class="btn btn-primary ">
-                        </div>
-
-                    </div>
-                </form>
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
             </div>
         </div>
     </div>
