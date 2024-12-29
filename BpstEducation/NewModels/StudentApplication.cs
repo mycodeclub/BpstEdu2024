@@ -10,33 +10,33 @@ namespace BpstEducation.NewModels
         public int UniqueId { get; set; }
         public string ApplicationId { get; set; }
         [Required]
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
         public string FullName { get { return $" {FirstName}  {LastName}"; } }
-        public string FatherName { get; set; }
-        public string Address { get; set; }
+        public string FatherName { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
         public int StatusId { get; set; }
         [ForeignKey("StatusId")]
-        public ApplicationStatus ApplicationStatus { get; set; }
+        public ApplicationStatus? ApplicationStatus { get; set; }
         public DateTime AppliedOn { get; set; }
         [NotMapped]
         public int NumberOfDays { get { return (AppliedOn - DateTime.Now).Days; } }
         [Required]
-        public string MobileNumber { get; set; }
+        public string MobileNumber { get; set; } = string.Empty;
 
         [Required]
-        public string EmailId { get; set; }
-        public string CollegeName { get; set; }
+        public string EmailId { get; set; } = string.Empty;
+        public string CollegeName { get; set; } = string.Empty;
 
         [Required]
-        public string HighestQualification { get; set; }
+        public string HighestQualification { get; set; } = string.Empty;
 
         [Required]
         public int CourseId { get; set; }
 
         [ForeignKey("CourseId")]
         public virtual Course? Course { get; set; }
-        public string? Message { get; set; } = string.Empty; 
+        public string? Message { get; set; } = string.Empty;
         public string? ErrorLogDuringStudentGenration { get; set; } = string.Empty;
     }
 }

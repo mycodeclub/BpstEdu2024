@@ -23,6 +23,7 @@
             <form class="form-horizontal" asp-action="StudentApplications" asp-controller="Home" method="post">
                 <input type="hidden" asp-for="ApplicationId" class="form-control" />
                 <input type="hidden" asp-for="UniqueId" class="form-control" />
+                <input type="hidden" asp-for="StatusId" value="1" class="form-control" />
                 <div asp-validation-summary="All" class="text-danger"></div>
 
                 @if (isSaved)
@@ -35,13 +36,18 @@
                     </div>
                 }
                 <div class="row form-group">
-                    <div class="form-group col-md-6">
-                        <label asp-for="FullName">Full Name </label>
-                        <input type="text" asp-for="FullName" placeholder="Student Full Name" class="form-control" required />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    <div class="form-group col-md-4">
+                        <label asp-for="FirstName"> First Name</label>
+                        <input type="text" asp-for="FirstName" placeholder="Student First Name" class="form-control" required />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="LastName"> Last Name </label>
+                        <input type="text" asp-for="LastName" placeholder="Student Last Name" class="form-control" required />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label asp-for="FatherName">Father Name </label>
                         <input type="text" asp-for="FatherName" placeholder="Father Name" class="form-control" required />
                         <span asp-validation-for="FatherName" class="text-danger"></span>

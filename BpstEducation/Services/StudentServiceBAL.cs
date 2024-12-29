@@ -31,7 +31,7 @@ namespace BpstEducation.Services
                 {
                     var sbErrorDetail = new StringBuilder();
                     foreach (var error in _stuLoginAccountResult.Errors)
-                        sbErrorDetail.Append(error);
+                        sbErrorDetail.Append(error.Description+" | "+ error.Description);
                     newStudent.ErrorLogDuringLoginGenration = sbErrorDetail.ToString();
                 }
                 await _dbContext.SaveChangesAsync();

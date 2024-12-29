@@ -1,31 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using BpstEducation.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.IO;
-using BpstEducation.Data;
-using System.Text;
+using Microsoft.AspNetCore.Mvc; 
+using BpstEducation.Data; 
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Diagnostics.Contracts;
 using BpstEducation.NewModels;
 
 namespace BpstEducation.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger, AppDbContext context) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly AppDbContext _context;
-        public HomeController(ILogger<HomeController> logger, AppDbContext context)
-        {
-            _context = context;
-            _logger = logger;
-        }
+        private readonly ILogger<HomeController> _logger = logger;
+        private readonly AppDbContext _context = context;
 
         public IActionResult Index()
         {
