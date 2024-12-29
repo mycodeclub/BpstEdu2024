@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        @*         <div class="col-lg-4">
+                <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="text-right">
@@ -74,11 +74,11 @@
                 </div>
             </div>
         </div>
- *@
 
 
 
-        <div class="col-lg-4">
+
+@*         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="form-check">
@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        <div id="applicationsDiv"></div>
+ *@        <div id="applicationsDiv"></div>
 
     </div>
 </div>
@@ -101,44 +101,6 @@
 
 @section Scripts
 {
-    <script src="~/appjs/common.js"></script>
-
+    <script src="~/appjs/common.js"></script> 
 }
-@*     <script>
-        function jsonToQueryString(json) {
-            return Object.keys(json)
-                .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
-                .join('&');
-        }
-
-        function GetApplications()
-        {
-            $.ajax({
-                url: "/staff/Applications/GetApplicationPartials/",
-                data:  { _courseId: $('#CourseDDL').val(), _statusId:  $('#RegStatusDDL').val() } ,
-                success: function(response) {
-                    $("#applicationsDiv").html(response);  // Insert the HTML response into the #content div
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error: " + status + " - " + error);
-                    }
-            });
-        }
-
-        function EnrollToBatch()
-        {
-            var _data = {
-                _courseId: $('#CourseDDL').val(),
-                _statusId: $('#RegStatusDDL').val(),
-                _batchId: $('#BatchDDL').val()
-            };
-             var _parameter = jsonToQueryString(_data);
-
-
-        var _url = '/staff/Applications/EnrollToBatch?' + _parameter; 
-        window.location.href=_url;
-        }
-
-    </script>
- *@
 

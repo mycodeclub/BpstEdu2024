@@ -27,7 +27,7 @@
                             <td> @item?.CollegeName</td>
                             <td> @item?.AppliedOn.ToString("dd-MMM-yyyy") - <strong>( @item?.NumberOfDays Day's Ego) </strong> </td>
                             <td>
-                                <input type="checkbox" /> <a class="link" href="#"> En-Roll</a>
+                                <a  href="#" onclick="common.EnrollToBatch(@item.UniqueId)">Enroll To Batch</a>
                             </td>
                         </tr>
                     }

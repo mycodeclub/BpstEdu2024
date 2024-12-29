@@ -28,7 +28,7 @@ namespace BpstEducation.Models
         public int DiscountedFeeAmount { get; set; }
 
 
-
+        [NotMapped]
         [Display(Name = "Total Fees")]
         public int TotalFees { get { return Batch != null ? Batch.BatchFee : 0; } }
 
@@ -51,6 +51,9 @@ namespace BpstEducation.Models
                 return _remainingFees;
             }
         }
+
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? LastUpdatedDate { get; set; }
 
     }
 }

@@ -16,19 +16,6 @@
             }
         });
     },
-    EnrollToBatch: function () {
-        debugger;
-        var _data = {
-            _courseId: $('#CourseDDL').val(),
-            _statusId: $('#RegStatusDDL').val(),
-            _batchId: $('#BatchDDL').val()
-        };
-        var _parameter = common.jsonToQueryString(_data);
-       
-
-        var _url = '/staff/Applications/EnrollToBatch?' + _parameter;
-        window.location.href = _url;
-    },
     loadFeePartial: function (_batchId, _studentId) {
         $.ajax({
             url: "/staff/FeeSubmission/Create/",
@@ -40,5 +27,16 @@
                 console.error("AJAX Error: " + status + " - " + error);
             }
         });
+    },
+    EnrollToBatch: function (_appId) {
+        if ($('#BatchDDL').val() == 0) {
+            alert("Select Batch First.");
+            return;
+        }
+
+        var _data = { _applicationId: _appId, _batchId: $('#BatchDDL').val(), };
+        var _parameter = common.jsonToQueryString(_data);
+        var _url = '/staff/Applications/EnrollToBatch?' + _parameter;
+        window.location.href = _url;
     }
 }

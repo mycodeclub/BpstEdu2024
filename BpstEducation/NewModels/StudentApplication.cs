@@ -36,8 +36,7 @@ namespace BpstEducation.NewModels
 
         [ForeignKey("CourseId")]
         public virtual Course? Course { get; set; }
-        public string Message { get; set; }
-
-
+        public string? Message { get; set; } = string.Empty; 
+        public string? ErrorLogDuringStudentGenration { get; set; } = string.Empty;
     }
 }

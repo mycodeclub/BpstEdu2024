@@ -1,6 +1,7 @@
 ﻿using BpstEducation.Data;
 using BpstEducation.Models;
 using BpstEducation.NewModels;
+using BpstEducation.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,12 @@ namespace BpstEducation.Areas.Staff.Controllers
     public class ApplicationsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IStudentServiceBAL _studentBal;
 
-        public ApplicationsController(AppDbContext context)
+        public ApplicationsController(AppDbContext context, IStudentServiceBAL studentBal)
         {
             _context = context;
+            _studentBal = studentBal;
         }
         public IActionResult Index()
         {
@@ -84,14 +87,10 @@ namespace BpstEducation.Areas.Staff.Controllers
             return View();
         }
 
-        public async Task<IActionResult> EnrollToBatch(int _statusId, int _courseId, int _batchId)
+        public async Task<IActionResult> EnrollToBatch(int _applicationId, int _batchId)
         {
-            var _applications = await _context.Applications
-                    .Include(r => r.Course)
-                    .Include(r => r.ApplicationStatus)
-                    .Where(a => a.StatusId == _statusId && a.CourseId == _courseId)
-                    .ToListAsync();
-            return View(_applications);
+            var r = await _studentBal.MoveApplicationToBatch(_applicationId, _batchId);
+            return View(r);
         }
     }
 }
