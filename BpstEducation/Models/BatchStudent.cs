@@ -43,10 +43,11 @@ namespace BpstEducation.Models
             get
             {
                 int _remainingFees = TotalFeesAfterDiscount;
-                foreach (var fee in SubmittedFeeList)
-                {
-                    _remainingFees -= fee.SubmittedFeeAmount;
-                }
+                if (SubmittedFeeList != null && SubmittedFeeList.Count > 0)
+                    foreach (var fee in SubmittedFeeList)
+                    {
+                        _remainingFees -= fee.SubmittedFeeAmount;
+                    }
                 return _remainingFees;
             }
         }

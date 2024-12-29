@@ -79,7 +79,8 @@
                         </div>
                         <div class="card-header bg-gray-light">
                             Fees
-                            <button type="button" class="btn btn-sm btn-outline-primary  pull-right" data-toggle="modal" data-target="#FeeModalPopUp" onclick="common.loadFeePartial(@Model.FirstOrDefault().BatchId,@Model.FirstOrDefault().StudentId)">Pay Fees </button>
+                            @* <button type="button" class="btn btn-sm btn-outline-primary  pull-right" data-toggle="modal" data-target="#FeeModalPopUp" onclick="common.loadFeePartial(@Model.FirstOrDefault().BatchId,@Model.FirstOrDefault().StudentId)">Pay Fees </button> *@         
+                            <a href="/staff/FeeSubmission/create/?batchId=@Model.FirstOrDefault().BatchId&studentId=@Model.FirstOrDefault().StudentId" class="btn btn-sm btn-outline-primary  pull-right">Pay Fees </a>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -98,13 +99,13 @@
                                     @foreach (var fee in bs.SubmittedFeeList)
                                     {
                                         sNo = sNo + 1;
-                                         <tr>
+                                        <tr>
                                             <td> @sNo .    </td>
                                             <td> @fee.Description </td>
                                             <td> @fee.SubmittedFeeAmount </td>
                                             <td> @fee.FeeSubmittingDate </td>
                                         </tr>
-                                    }
+                                    } 
                                     <tfoot>
                                         <tr><th colspan="4" class="box-gradient-1"></th></tr>
                                         <tr>
@@ -130,7 +131,7 @@
                             </div>
                         </div>
                     }
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -142,26 +143,3 @@
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-        </div>
-    </div>
-</div>

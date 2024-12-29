@@ -10,7 +10,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 {
     [Area("Staff")]
     [Authorize(Roles = "Staff,Admin")]
-
+    [Obsolete]
     public class StudentFeeController(UserManager<AppUser> userManager, AppDbContext context, IUserServiceBAL loginService) : Controller
     {
         private readonly AppDbContext _context = context;

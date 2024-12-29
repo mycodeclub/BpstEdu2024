@@ -1,47 +1,119 @@
-﻿@model BpstEducation.Models.BatchStudent
+﻿@model BpstEducation.Models.StudentFee
 @{
-    Layout = null;
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+    ViewBag.ActiveTabName = "Students";
+    BpstEducation.Models.BatchStudent stuFeeDetails = ViewBag.stuFeeDetails;
+    int sNo = 0;
 }
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-bs-dismiss="modal">X</button>
+<script src="~/appjs/common.js"></script>
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <div class="content">
+                <div class="card">
+                    <div class="card-header bg-light-blue-gradient"> Student Batch & Fee Details </div>
 
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form class="needs-validation" asp-action="Create" asp-controller="FeeSubmission" asp-area="Staff" method="post"> 
-                <input type="hidden" asp-for="@Model.UniqueId" name="BatchStudentId" />
-                <input type="hidden" asp-for="@Model.StudentId"  />
-                <input type="hidden" asp-for="@Model.BatchId" />
-                <input type="hidden" asp-for="SubmittedFeeList.FirstOrDefault().UniqueId" />
-                <input type="hidden" asp-for="SubmittedFeeList.FirstOrDefault().BatchStudentId" />
-
-                <div class="row">
-
-                    <div class="form-group col-md-12">
-                        <label asp-for="@Model.RemainingFees" class="form-label"></label>
-                        <input asp-for="@Model.RemainingFees" name="SubmittedFeeAmount" class="form-control" placeholder="Fees Amount " />
-                        <span asp-validation-for="@Model.RemainingFees" class="text-danger"></span>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group  col-sm-6 col-md-4">
+                                <label class="text-bold"> Course </label>
+                                <p class=""> @stuFeeDetails.Batch.Course.Name   </p>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Duration </label>
+                                <p class=""> @stuFeeDetails.Batch.Duration   </p>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Start Date </label>
+                                <p class=""> @stuFeeDetails.Batch.StartDateTime.ToString("dd-MMM-yyyy")   </p>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Timing </label>
+                                <p class=""> @stuFeeDetails.Batch.StartDateTime.ToString("hh:mm:tt")   </p>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Batch Fee </label>
+                                <p class=""> @stuFeeDetails.Batch.BatchFee   </p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="card-header bg-light-blue-active">
+                        Fees
 
-                    <div class="form-group col-sm-12">
-                        <label asp-for="SubmittedFeeList.FirstOrDefault().Description" class="form-label">Description</label>
-                        <textarea asp-for="SubmittedFeeList.FirstOrDefault().Description" class="form-control" rows="5" placeholder="Any Description for fee" />
-                        <span asp-validation-for="SubmittedFeeList.FirstOrDefault().Description" class="text-danger"></span>
+                        <a asp-action="Create" class="btn btn-sm btn-secoundry  pull-right" asp-route-batchId="@stuFeeDetails.BatchId" asp-route-studentId="@stuFeeDetails.StudentId">Pay Now</a>
                     </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th> S. No. </th>
+                                        <th> Description</th>
+                                        <th>  Amount</th>
+                                        <th>Submitted On  </th>
+                                    </tr>
+                                </thead>
+                                @{
+                                    sNo = 0;
+                                }
+                                @foreach (var fee in stuFeeDetails.SubmittedFeeList)
+                                {
+                                    sNo = sNo + 1;
+                                    <tr>
+                                        <td> @sNo .    </td>
+                                        <td> @fee.Description </td>
+                                        <td> @fee.SubmittedFeeAmount </td>
+                                        <td> @fee.FeeSubmittingDate.ToString("dd-MMM-yyyy hh:mm  tt") </td>
+                                    </tr>
+                                }
 
+                                <tr>
+                                    <td colspan="4">
+                                        <form action="Create" method="post">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <input type="hidden" asp-for="CreatedDate" />
+                                                        <input type="hidden" asp-for="LastUpdatedDate" />
+                                                        <input type="hidden" asp-for="FeeSubmittingDate" />
+                                                        <input type="hidden" asp-for="UniqueId" />
+                                                        <input type="hidden" asp-for="BatchStudentId" />
+                                                        <input type="text" asp-for="SubmittedFeeAmount" class="form-control" placeholder="Fees Amount" aria-label="First Input">
+                                                        <input type="text" asp-for="Description" class="form-control" placeholder="Fees Description" aria-label="Second Input">
+                                                        <button class="btn btn-primary" type="submit">Pay</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tfoot>
+                                    <tr><th colspan="4" class="box-gradient-1"></th></tr>
+                                    <tr>
+                                        <th>Discount <i>(if any )</i> </th>
+                                        <td> @stuFeeDetails.DiscountedFeeAmount  </td>
+                                        <th>Total Fees </th>
+                                        <td>  @stuFeeDetails.TotalFeesAfterDiscount </td>
+                                    </tr>
+                                    <tr>
+                                        <th> </th>
+                                        <th> </th>
+                                        <th>  Submitted Till Now</th>
+                                        <td> @stuFeeDetails.SubmittedFeeList.Sum(f => f.SubmittedFeeAmount) </td>
+                                    </tr>
+                                    <tr>
+                                        <th> </th>
+                                        <th> </th>
+                                        <th> Remaining </th>
+                                        <td> @stuFeeDetails.RemainingFees </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <input type="submit" value="Submit Fee" class="btn btn-primary ">
-                    </div>
-
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
