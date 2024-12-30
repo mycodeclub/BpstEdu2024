@@ -27,21 +27,7 @@ namespace BpstEducation.Areas.Staff.Controllers
         }
 
         // GET: Staff/Batchs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var batch = await _context.Batchs
-                .Include(b => b.Course)
-                .Include(b => b.Trainer)
-                .Include(b => b.Students)
-                .FirstOrDefaultAsync(m => m.UniqueId == id);
-            if (batch == null)
-                return NotFound();
-            return View(batch);
-        }
-
+        
         public async Task<IActionResult> Create(int id)
         {
             var batch = await _context.Batchs.FindAsync(id);
@@ -128,6 +114,32 @@ namespace BpstEducation.Areas.Staff.Controllers
             if (batch == null)
                 return NotFound();
             return View(batch);
+        }
+
+
+
+        
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+            Batch batch = await GetBatchById(id);
+            if (batch == null)
+                return NotFound();
+            return View(batch);
+        }
+
+        private async Task<Batch> GetBatchById(int? id)
+        {
+            var batch = await _context.Batchs
+                           .Include(b => b.Course)
+                           .Include(b => b.Trainer)
+                           .Include(b => b.Students).ThenInclude(s => s.Student)
+                           .Include(b => b.Students).ThenInclude(s => s.SubmittedFeeList)
+                           .FirstOrDefaultAsync(m => m.UniqueId == id);
+
+            var bs = await _context.BatchStudents.Include(b => b.SubmittedFeeList).Where(b => b.BatchId == id).ToListAsync();
+            return batch;
         }
     }
 }

@@ -30,52 +30,60 @@
                         <td> @Model.Students.Count()</td>
                     </tr>
                 </tbody>
-
             </table>
         </div>
     </div>
-</div>
 
-<div class="content">
     <div class="card">
+        <div class="card-header bg-maroon-active">Students -header-pills</div>
         <div class="card-body">
             <div class="table-responsive table-hover">
                 <table class="table" id="example1">
                     <thead>
                         <tr>
                             <th>S. No.</th>
-                            <th>Course</th>
-                            <th>Starting From</th>
-                            <th>Timing</th>
-                            <th>Remaning Days</th>
-                            <th>Students</th>
-                            <th>Fee</th>
-
-                            <th>Action</th>
+                            <th>Student Name </th>
+                            <th> Mobile No. </th>
+                            <th style="text-align:right;">Any Discount</th>
+                            <th style="text-align:right;">  Fee  </th>
+                            <th style="text-align:right;">Submitted  Fees</th>
+                            <th style="text-align:right;"> Remaining Balance</th>
+                            <th style="text-align:right;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var stu in Model.Students)
                         {
-                            sno++;
+                            sno = sno + 1;
                             <tr>
-                                <td> sno</td>
-                                <td> stu. b. Cour se.Name</td>
-                                <td> StartDate.ToString("dd-MMM-yyyy")</td>
-                                <td> b.StartDate.ToString("hh:mm:tt")</td>
-                                <td> b.RemaningDays </td>
-                                <td> b.Students.Count() </td>
-                                <td style="text-align:right;">  b.BatchFee.ToString("C", indianCulture) </td>
-                                <td>
-                                    <a asp-action="Create" asp-route-id="  UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
-                                    <a asp-action="Details" asp-route-id=" b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+                                <td> @sno . </td>
+                                <td> @stu.Student.FullName </td>
+                                <td> @stu.Student.PhoneNumber </td>
+                                <td style="text-align:right;">  @stu.DiscountedFeeAmount.ToString("C", indianCulture) </td>
+                                <td style="text-align:right;">  @stu.TotalFeesAfterDiscount.ToString("C", indianCulture) </td>
+                                <td style="text-align:right;">  @stu.SubmittedFeeList.Sum(f => f.SubmittedFeeAmount).ToString("C", indianCulture) </td>
+                                <td style="text-align:right;">   @stu.RemainingFees.ToString("C", indianCulture) </td>
+                                <td style="text-align:right;">
+                                    <a asp-action="Create" asp-controller="Students" asp-route-id="@stu.StudentId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+                                    <a asp-action="Details" asp-controller="Students" asp-route-id="@stu.StudentId" title="Details"><i class="fa fa-eye text-success"></i></a> |
                                 </td>
                             </tr>
                         }
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th> </th>
+                            <th>  </th>
+                            <th> Total :  </th>
+                            <th style="text-align:right;">  @Model.Students.Sum(stu => stu.DiscountedFeeAmount).ToString("C", indianCulture) </th>
+                            <th style="text-align:right;">  @Model.Students.Sum(stu => stu.TotalFeesAfterDiscount).ToString("C", indianCulture) </th>
+                            <th style="text-align:right;">  @Model.Students.Sum(stu => stu.SubmittedFeeList.Sum(f => f.SubmittedFeeAmount)).ToString("C", indianCulture) </th>
+                            <th style="text-align:right;">   @Model.Students.Sum(stu => stu.RemainingFees).ToString("C", indianCulture) </th> 
+                            <th style="text-align:right;"> </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
-
         </div>
     </div>
 </div>

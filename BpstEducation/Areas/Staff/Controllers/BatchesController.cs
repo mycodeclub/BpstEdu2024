@@ -10,6 +10,7 @@ using BpstEducation.Models;
 
 namespace BpstEducation.Areas.Staff.Controllers
 {
+    [Obsolete]
     [Area("Staff")]
     public class BatchesController : Controller
     {
@@ -43,9 +44,11 @@ namespace BpstEducation.Areas.Staff.Controllers
             var batch = await _context.Batchs
                            .Include(b => b.Course)
                            .Include(b => b.Trainer)
-                           .Include(b => b.Students)
+                           .Include(b => b.Students).ThenInclude(s => s.Student)
+                           .Include(b => b.Students).ThenInclude(s => s.SubmittedFeeList)
                            .FirstOrDefaultAsync(m => m.UniqueId == id);
 
+            var bs = await _context.BatchStudents.Include(b => b.SubmittedFeeList).Where(b => b.BatchId == id).ToListAsync();
             return batch;
         }
 
@@ -53,17 +56,17 @@ namespace BpstEducation.Areas.Staff.Controllers
         // GET: Staff/Batches/Details/5 --@ToDo -- in progress ...
         public async Task<IActionResult> AssignStudentToBatch(int batchId)
         {
-            var batch = GetBatchById(batchId);
+            var batch = await GetBatchById(batchId);
             if (batch == null)
                 return NotFound();
 
             // selecting students who are not part of any batch.
-            
+
             var unassignedStudents = await _context.Students.Where(s => !_context.BatchStudents.Select(bs => bs.StudentId).Contains(s.UniqueId)).Where(s => s.IsDeleted == false).ToListAsync();
             ViewBag.UnassignedStudents = unassignedStudents;
             var batchStudents = _context.BatchStudents
                 .Include(b => b.Student)
-                .Where(s => s.BatchId == batchId).ToListAsync(); 
+                .Where(s => s.BatchId == batchId).ToListAsync();
             return View(batchStudents);
         }
     }
