@@ -16,9 +16,9 @@ namespace BpstEducation.Models
         [Display(Name = "Reg. No.")]
         public string RegistrationNumber { get { return "Edu_" + DateTime.Now.Year.ToString() + "_" + UniqueId.ToString(); } }
 
-        public int? StuApplicationId { get; set; }
-        [ForeignKey(nameof(StuApplicationId))]
-        public StudentApplication? StuApplication { get; set; }
+        //public int? StuApplicationId { get; set; }
+        //[ForeignKey(nameof(StuApplicationId))]
+        //public StudentApplication? StuApplication { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
@@ -125,23 +125,10 @@ namespace BpstEducation.Models
         [Obsolete]
         public Course? CourseOfInterest { get; set; }
         [Obsolete]
-        public int MyTrainingFee { get; set; }
-        public int MyDiscount { get; set; }
-        [Obsolete]
         public List<StudentFee>? MySubmittedFeeTillNow { get; set; }
         //--------------------------------------------------------------
-        [Display(Name = "My Remaining Fee")]
         [Obsolete]
-        public int MyRemainingFee
-        {
-            get
-            {
-                int _remainingFee = MyTrainingFee - MyDiscount;
-                //if (MySubmittedFeeTillNow != null && MySubmittedFeeTillNow.Count > 0)
-                //    _remainingFee = MySubmittedFeeTillNow.Sum(f => f.SubmittedFee) - MyDiscount;
-                return _remainingFee;
-            }
-        }
+       
         [Display(Name = "Registration Date")]
         public DateTime RegistrationDate { get; internal set; }
         public DateTime CreatedDate { get; internal set; }

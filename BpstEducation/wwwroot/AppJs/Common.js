@@ -28,7 +28,8 @@
             }
         });
     },
-    EnrollToBatch: function (_appId) {
+    
+    : function (_appId) {
         if ($('#BatchDDL').val() == 0) {
             alert("Select Batch First.");
             return;

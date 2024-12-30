@@ -16,8 +16,8 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="h3">Batch List</h1>
-                <a asp-action="Create" class="btn btn-primary btn-sm">New Batch</a>
-            </div>
+@*                 <a asp-action="Create" class="btn btn-primary btn-sm">New Batch</a>
+ *@            </div>
 
             <div class="table-responsive table-hover">
                 <table class="table" id="example1">
@@ -47,8 +47,8 @@
                                 <td>@b.Students.Count() </td>
                                 <td style="text-align:right;"> @b.BatchFee.ToString("C", indianCulture) </td>
                                 <td>
-                                    <a asp-action="Create" asp-route-id="@b.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
-                                    <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+@*                                     <a asp-action="Create" asp-route-id="@b.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
+ *@                                    <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
                                 </td>
                             </tr>
                         }
