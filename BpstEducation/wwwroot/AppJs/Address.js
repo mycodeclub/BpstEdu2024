@@ -13,6 +13,5 @@
                 $('#Address_CityId').html(items);
             }
         });
-    },
-
-}
+    }
+    }

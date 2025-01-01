@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
 using BpstEducation.Models;
-using Microsoft.AspNetCore.Mvc; 
-using BpstEducation.Data; 
+using Microsoft.AspNetCore.Mvc;
+using BpstEducation.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.NewModels;
+using System.Xml;
 
 namespace BpstEducation.Controllers
 {
@@ -107,9 +108,18 @@ namespace BpstEducation.Controllers
             return View();
         }
 
-
-
-
+        [HttpGet]
+        public async Task<IActionResult> GetBatchesByCourseId(int courseId)
+        {
+            var batches = await _context.Batchs.Include(b => b.Course)
+                .Where(b => b.CourseId == courseId)
+                .Select(b => new
+                {
+                    Id = b.UniqueId,
+                    Value = $"{b.RemaningDays} Days To Go -  {b.Course.Name}_{b.StartDateTime:dd-MMM-yyyy}_{b.StartDateTime:hh:mm: tt}"
+                }).ToListAsync();
+            return Json(batches);
+        }
 
 
         public async Task<IActionResult> StudentApplications()
