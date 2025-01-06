@@ -4,7 +4,7 @@
     <div class="row">
         <div class="card">
             <div class="card-body">
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th> Id  </th>
@@ -13,7 +13,8 @@
                             <th> Course </th>
                             <th> College Name </th>
                             <th> Applied On </th>
-                            <th> <input type="checkbox" />  Add Student To Batch </th>
+                            <th> Student Detail </th>
+                            <th>   Enroll </th>
                         </tr>
                     </thead>
 
@@ -26,8 +27,10 @@
                             <td> @item?.Course?.Name</td>
                             <td> @item?.CollegeName</td>
                             <td> @item?.AppliedOn.ToString("dd-MMM-yyyy") - <strong>( @item?.NumberOfDays Day's Ego) </strong> </td>
+                            <td> <a target="_blank" href="/Staff/Applications/details/@item.UniqueId">  <i class="fa-fa-eye"></i>View</a></td>
+                         
                             <td>
-                                <a  href="#" onclick="common.EnrollToBatch(@item.UniqueId)">Enroll To Batch</a>
+                                <a href="#" onclick="common.EnrollToBatch(@item.UniqueId)">Enroll </a>
                             </td>
                         </tr>
                     }

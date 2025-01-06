@@ -155,11 +155,13 @@ namespace BpstEducation.Controllers
                 }
                 catch (Exception ex)
                 {
+                    if (application.CourseId == 0)
+                        ModelState.AddModelError("Course", "Please select course ");
                     // Log the error (uncomment ex variable name and write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-                    ModelState.AddModelError("", ex.Message);
-                    ModelState.AddModelError("", ex.InnerException.Message);
-                    ModelState.AddModelError("", ex.StackTrace);
+                    ModelState.AddModelError("", "Some thing wrong with Data, unable to save changes. Call To 82-9910-1616 for Registration.");
+                    //ModelState.AddModelError("", ex.Message);
+                    //ModelState.AddModelError("", ex.InnerException.Message);
+                    //ModelState.AddModelError("", ex.StackTrace);
                 }
             }
 

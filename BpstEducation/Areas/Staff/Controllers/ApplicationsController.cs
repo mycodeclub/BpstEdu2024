@@ -22,10 +22,43 @@ namespace BpstEducation.Areas.Staff.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Dashboard(int courseId=3, int statusId=1)
+
+        //public async Task<IActionResult> Details(int id)
+        //{
+
+        //    var data = await _context.Applications.Where(a=>a.UniqueId == id);
+        //    return View();
+        //}
+        [HttpGet]
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id > 0)
+            {
+                var appls = await _context.Applications.Include(b => b.Course).Where(c => c.UniqueId == id).FirstOrDefaultAsync();
+                return View(appls);
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateApplication(StudentApplication stuApp)
+        {
+            var result = false;
+            var stuAppDb = await _context.Applications.FindAsync(stuApp.UniqueId);
+            stuAppDb.StatusId = stuApp.StatusId;
+            stuAppDb.HRComment = stuApp.HRComment;
+
+            await _context.SaveChangesAsync();
+            result = true;
+            ViewBag.SaveResult = result;
+            return View("Details", stuAppDb);
+        }
+        public async Task<IActionResult> Dashboard(int courseId = 2, int statusId = 1)
         {
             var allRegistrations = await _context.Applications.Include(r => r.Course).Include(r => r.ApplicationStatus).ToListAsync();
             var batches = await _context.Batchs.Include(b => b.Course).ToListAsync();
+
+            var _courses = await _context.Courses.ToListAsync();
+
             ViewBag.registrationsByCourse = allRegistrations.GroupBy(r => r.Course).ToDictionary(g => g.Key, g => g.Count());
             ViewBag.registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count());
             ViewBag.SelectedCourseId = courseId;

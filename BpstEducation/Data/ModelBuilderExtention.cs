@@ -27,13 +27,13 @@ namespace BpstEducation.Data
         public static void SeedCourseCategory(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>().HasData(
-                new Course() { UniqueId = 1, Name = "Programming Classes (for Rising Stars - IX - XII )" },
-                new Course() { UniqueId = 2, Name = "Software Engineering .Net Internship - 6 months " },
-                new Course() { UniqueId = 3, Name = "Software Engineering .Net Internship  -  45 days " },
-                new Course() { UniqueId = 4, Name = "Cyber Security" },
-                new Course() { UniqueId = 5, Name = " Game Development" },
-                new Course() { UniqueId = 6, Name = "Hardware / Networking" },
-                new Course() { UniqueId = 7, Name = "Others" }
+                new Course() { UniqueId = 1, Name = "Programming Classes (for Rising Stars - IX - XII )", IntershipAvailable = true },
+                new Course() { UniqueId = 2, Name = "Software Engineering .Net Internship - 6 months ", IntershipAvailable = true },
+                new Course() { UniqueId = 3, Name = "Software Engineering .Net Internship  -  45 days ", IntershipAvailable = true },
+                new Course() { UniqueId = 4, Name = "Cyber Security", IntershipAvailable = true },
+                new Course() { UniqueId = 5, Name = " Game Development", IntershipAvailable = true },
+                new Course() { UniqueId = 6, Name = "Hardware / Networking", IntershipAvailable = true },
+                new Course() { UniqueId = 7, Name = "Others", IntershipAvailable = true }
                 );
         }
         public static void SeedEducationBoard(this ModelBuilder modelBuilder)

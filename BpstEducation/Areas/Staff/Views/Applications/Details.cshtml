@@ -1,0 +1,94 @@
+﻿@model BpstEducation.NewModels.StudentApplication
+
+@{
+    bool result = false;
+    if (ViewBag.SaveResult != null)
+    {
+        result = ViewBag.SaveResult;
+    }
+}
+<div class="content">
+
+    <div class="card">
+        <div class="card-body">
+            
+            @if (result == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    Updates save successfully.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <div class="card-header bg-light-blue-gradient"> Student Details  </div>
+
+            <div class="card-body">
+                
+                <div class="row">
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Student Name </label>
+                        <p class=""> @Model.FullName    </p>
+                    </div>
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Email</label>
+                        <p class=""> @Model.EmailId  </p>
+                    </div>
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Father Name </label>
+                        <p class=""> @Model.FatherName   </p>
+                    </div>
+
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Address</label>
+                        <p class=""> @Model.Address  </p>
+                    </div>
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Clg Name </label>
+                        <p class=""> @Model.CollegeName   </p>
+                    </div>
+
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Course </label>
+                        <p class=""> @Model?.Course?.Name </p>
+                    </div>
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Phone Number </label>
+                        <p class=""> @Model.MobileNumber   </p>
+                    </div>
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Qualification </label>
+                        <p class=""> @Model.HighestQualification  </p>
+                    </div>
+                    <div class=" col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                        <label class="text-bold"> Message </label>
+                        <p class=""> @Model.Message   </p>
+                    </div>
+                </div>
+                <form  asp-action="UpdateApplication" asp-controller="Applications" method="post">
+                    <div class="row">
+                        <div class="col-6">
+                            <input hidden asp-for="UniqueId" />
+                            <label class="text-bold"> HR Feedback / Comment  </label>
+                            <textarea rows="5" type="text" class="form-control" asp-for="HRComment"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <label class="text-bold">  Select Status  </label>
+                            <select class="form-control" asp-for="StatusId">
+                                <option value="1">  Reviewed </option>
+                                <option value="4"> Not Interested Anymore </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
