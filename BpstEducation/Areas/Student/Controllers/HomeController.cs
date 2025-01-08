@@ -41,7 +41,27 @@ namespace BpstEducation.Areas.Student.Controllers
         {
             return View();
         }
-       
+      
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var student = await _context.Students.Where(s => s.UniqueId == id).FirstOrDefaultAsync();
+                if (student == null)
+                {
+                    return NotFound();
+                }
+                return View(student);
+
+            }
+
+        }
+        
+
         //---------------------------------------------------------------------------------------
         public async Task<IActionResult> Create()
         {
@@ -57,6 +77,7 @@ namespace BpstEducation.Areas.Student.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Models.Student student)
         {
+            
             if (ModelState.IsValid)
             {
                 if (student.UniqueId == 0)
@@ -104,7 +125,7 @@ namespace BpstEducation.Areas.Student.Controllers
             return result;
         }
 
-    //------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
         public async Task<IActionResult> Profile()
         {
             var StuLogInId = GetLoggedInUser();
@@ -121,11 +142,17 @@ namespace BpstEducation.Areas.Student.Controllers
         }
 
 
+
         public async Task<IActionResult> Course()
         {
-            var stuId = GetLoggedInUser();
-            var stu = await _context.Courses.Where(c=>c.Equals(stuId)).FirstOrDefaultAsync();
-            return View(stu);
+            var LogInGetid = GetLoggedInUser();
+            var student = await _context.Students.Where(s => s.LoginIdGuid.Equals(LogInGetid)).FirstOrDefaultAsync();
+            var stucourse = await _context.BatchStudents
+                .Include(b => b.Batch)
+                .ThenInclude(b => b.Course)
+                .Where(bs => bs.StudentId == student.UniqueId)
+                .ToListAsync();
+            return View(stucourse);
         }
         public async Task<IActionResult> Fees()
         {
@@ -134,6 +161,6 @@ namespace BpstEducation.Areas.Student.Controllers
             return View(stu);
         }
 
-       
+
     }
 }

@@ -1,35 +1,25 @@
-﻿@model BpstEducation.Models.Course
+﻿@model List< BpstEducation.Models.BatchStudent>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_StuLayout.cshtml";
     ViewBag.ActiveTabName = "Helpercourse";
-}
-
-<h1>Course</h1>
-
-
+} 
 <div class="content">
     <div class="card">
-
-    <div class="card-body ">
-
-        <dl class="row">
-            <dt class="col-md-4 col-sm-6 col-lg-3">
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd class="col-sm-12">
-                @Html.DisplayFor(model => model.Name)
-                </dd>
-           
-            
-        </dl>
-
-
-
-
-
-    </div>
+        @foreach (var batch in Model)
+        {
+            <div class="card-body ">
+                <dl class="row">
+                    <dt class="col-md-4 col-sm-6 col-lg-3">
+                        Course 
+                    </dt>
+                    <dd class="col-sm-12">
+                        @batch.Batch.Course.Name
+                    </dd>
+                </dl>
+            </div>
+        }
     </div>
 </div>
 

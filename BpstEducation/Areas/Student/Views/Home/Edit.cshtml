@@ -1,0 +1,84 @@
+﻿@model BpstEducation.Models.Student
+
+@{
+    Layout = "~/Views/Shared/_StuLayout.cshtml";
+
+}
+
+
+
+
+<h4>StudentEdit</h4>
+<hr />
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+@*                 <div class="col-md-10">
+ *@                    <form asp-area="Student" asp-controller="Home" asp-action="Edit" >
+                    <div class="row">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger">
+                            <input type="hidden" asp-for="UniqueId" />
+                           @*  <label asp-for="RegistrationNumber" ></label>
+                            <select asp-for="RegistrationNumber" class="form-control" ></select>
+                            <span asp-validation-for="RegistrationNumber" class="text-danger"></span> *@
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control"></input>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control"></input>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="PhoneNumber" class="control-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" ></input>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" ></input>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="AadhaarNumber" class="form-label"></label>
+                            <input asp-for="AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" />
+                            <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="PanNumber" class="form-label"></label>
+                            <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" />
+                            <span asp-validation-for="PanNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="Aadhar" class="form-label"></label>
+                            <input asp-for="Aadhar" type="file" class="form-control" id="aadharInput" />
+                            <span asp-validation-for="Aadhar" class="text-danger"></span>
+                            <img id="aadharPreview" style="display: none; max-width: 100px; margin-top: 10px;" />
+                        </div>
+                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                            <label asp-for="Pan" class="form-label"></label>
+                            <input asp-for="Pan" type="file" id="panInput" class="form-control" />
+                            <span asp-validation-for="Pan" class="text-danger"></span>
+                            <img id="panPreview" style="display: none; max-width: 100px; margin-top: 10px;" />
+                        </div>
+                        </div>
+
+                        <div class="text-center">
+                        <button type="submit" asp-area="Student" asp-controller="Home" asp-action="Create"  class="btn btn-primary ">Save</button>
+                        </div>
+                    </form>
+@*                 </div>
+ *@            </div>
+        </div>
+    </div>
+</div>

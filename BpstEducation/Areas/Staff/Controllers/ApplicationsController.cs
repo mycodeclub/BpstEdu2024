@@ -59,6 +59,7 @@ namespace BpstEducation.Areas.Staff.Controllers
 
             var _courses = await _context.Courses.ToListAsync();
 
+
             ViewBag.registrationsByCourse = allRegistrations.GroupBy(r => r.Course).ToDictionary(g => g.Key, g => g.Count());
             ViewBag.registrationsByStatus = allRegistrations.GroupBy(r => r.ApplicationStatus).ToDictionary(g => g.Key, g => g.Count());
             ViewBag.SelectedCourseId = courseId;

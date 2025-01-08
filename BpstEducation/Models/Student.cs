@@ -91,16 +91,15 @@ namespace BpstEducation.Models
         public string? AadhaarNumber { get; set; } = string.Empty;
 
         [Required]
-        [RegularExpression(@"^[A-Z]{5}\d{4}[A-Z]{1}$", ErrorMessage = "Invalid PAN number. Format should be: XXXXX1234X.")]
+        [RegularExpression(@"^[A-Z]{5}\d{4}[A-Z]{1}$", ErrorMessage = "Invalid PA" +
+            "N number. Format should be: XXXXX1234X.")]
         [Display(Name = "Pan Num.")]
         public string? PanNumber { get; set; } = string.Empty;
         [NotMapped]
 
 
-        ///<summary>
-        ///
-        /// Aadhar update 
-        /// </summary>
+       
+        
         [DataType(DataType.Upload)]
         [Display(Name = "Upload Aadhar")]
         public IFormFile? Aadhar { get; set; }
