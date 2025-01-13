@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using System.Security.Claims;
@@ -41,7 +42,7 @@ namespace BpstEducation.Areas.Student.Controllers
         {
             return View();
         }
-      
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -60,14 +61,20 @@ namespace BpstEducation.Areas.Student.Controllers
             }
 
         }
-        
+
 
         //---------------------------------------------------------------------------------------
         public async Task<IActionResult> Create()
         {
-            var employee = await _context.Students.ToListAsync();
-            student ??= new Models.Student();
-            return View(student);
+            var StuLogInId = GetLoggedInUser();
+            var stu = await _context.Students.Where(s => s.LoginIdGuid == StuLogInId).FirstOrDefaultAsync();
+            stu ??= new Models.Student() { RegistrationDate = DateTime.UtcNow, DateOfBirth = DateTime.Now.AddYears(-18) };
+            ViewData["CountryId"] = new SelectList(_context.Countries, "UniqueId", "Name", 1);
+            ViewData["StateId"] = new SelectList(_context.States, "UniqueId", "Name", 32);
+            ViewData["CityId"] = new SelectList(_context.Cities.Where(c => c.StateId.Equals(32)), "UniqueId", "Name", 1056);
+            ViewBag.Batches = await _context.Batchs.Include(b => b.Course).ToListAsync();
+            return View(stu);
+
         }
 
         // POST: Admin/Employees/Create
@@ -77,9 +84,10 @@ namespace BpstEducation.Areas.Student.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Models.Student student)
         {
-            
+
             if (ModelState.IsValid)
             {
+
                 if (student.UniqueId == 0)
                 {
                     _context.Add(student);

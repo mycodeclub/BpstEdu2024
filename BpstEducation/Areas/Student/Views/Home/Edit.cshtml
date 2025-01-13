@@ -1,84 +1,182 @@
 ﻿@model BpstEducation.Models.Student
-
 @{
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_StuLayout.cshtml";
-
+    ViewBag.ActiveTabName = "Students";
+    List<BpstEducation.Models.Batch> Batches = ViewBag.Batches;
 }
 
-
-
-
-<h4>StudentEdit</h4>
-<hr />
 <div class="content">
     <div class="card">
-        <div class="card-header">
-            <div class="row">
-@*                 <div class="col-md-10">
- *@                    <form asp-area="Student" asp-controller="Home" asp-action="Edit" >
-                    <div class="row">
-
-                        <div asp-validation-summary="ModelOnly" class="text-danger">
+        <div class="card-body">
+            <form asp-action="Create" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <div class="label-danger" asp-validation-summary="All"></div>
+                <div class="card">
+                    <div class="card-header bg-light">Student Details</div>
+                    <div class="card-body">
+                        <div class="row">
                             <input type="hidden" asp-for="UniqueId" />
-                           @*  <label asp-for="RegistrationNumber" ></label>
-                            <select asp-for="RegistrationNumber" class="form-control" ></select>
-                            <span asp-validation-for="RegistrationNumber" class="text-danger"></span> *@
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="FirstName" class="control-label"></label>
-                            <input asp-for="FirstName" class="form-control" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="LastName" class="control-label"></label>
-                            <input asp-for="LastName" class="form-control"></input>
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input asp-for="Email" class="form-control"></input>
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="PhoneNumber" class="control-label"></label>
-                            <input asp-for="PhoneNumber" class="form-control" ></input>
-                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="Address" class="control-label"></label>
-                            <input asp-for="Address" class="form-control" ></input>
-                            <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="AadhaarNumber" class="form-label"></label>
-                            <input asp-for="AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" />
-                            <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="PanNumber" class="form-label"></label>
-                            <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" />
-                            <span asp-validation-for="PanNumber" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="Aadhar" class="form-label"></label>
-                            <input asp-for="Aadhar" type="file" class="form-control" id="aadharInput" />
-                            <span asp-validation-for="Aadhar" class="text-danger"></span>
-                            <img id="aadharPreview" style="display: none; max-width: 100px; margin-top: 10px;" />
-                        </div>
-                        <div class="form-group col-md-4 col-sm-6 col-lg-3">
-                            <label asp-for="Pan" class="form-label"></label>
-                            <input asp-for="Pan" type="file" id="panInput" class="form-control" />
-                            <span asp-validation-for="Pan" class="text-danger"></span>
-                            <img id="panPreview" style="display: none; max-width: 100px; margin-top: 10px;" />
-                        </div>
-                        </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="RegistrationDate" class="form-label"></label>
+                                <input asp-for="RegistrationDate" class="form-control" />
+                                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="FirstName" class="form-label"></label>
+                                <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="LastName" class="form-label"></label>
+                                <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="Email" class="form-label"></label>
+                                <input asp-for="Email" class="form-control" placeholder="Enter Email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="DateOfBirth" class="form-label"></label>
+                                <input asp-for="DateOfBirth" class="form-control" type="date" />
+                                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="PhoneNumber" class="form-label"></label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="AadhaarNumber" class="form-label"></label>
+                                <input asp-for="AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" required />
+                                <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="PanNumber" class="form-label"></label>
+                                <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" required />
+                                <span asp-validation-for="PanNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="Aadhar" class="form-label"></label>
+                                <input asp-for="Aadhar" type="file" class="form-control" id="aadharInput" required />
+                                <span asp-validation-for="Aadhar" class="text-danger"></span>
+                                <img id="aadharPreview" style="display: none; max-width: 100px; margin-top: 10px;" />
+                            </div>
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3">
+                                <label asp-for="Pan" class="form-label"></label>
+                                <input asp-for="Pan" type="file" id="panInput" class="form-control" required />
+                                <span asp-validation-for="Pan" class="text-danger"></span>
+                                <img id="panPreview" style="display: none; max-width: 100px; margin-top: 10px;" />
+                            </div>
+                            @if (Batches != null)
+                            {
+                                <div class="form-group col-sm-6">
+                                    <label asp-for="SelectedBatchId" class="form-label">Select Batch </label>
+                                    <select asp-for="SelectedBatchId" class="form-control"
+                                            style="max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                            onchange="common.GetApplications()"
+                                            id="BatchDDL">
+                                        <option value="0">-- Batches --</option>
+                                        @foreach (var item in Batches)
+                                        {
+                                            string batch = $"{@item?.Course?.Name}_in_{item.RemaningDays}_Days_{@item.StartDateTime.ToString("dd-MMM-yyyy")}_{@item.StartDateTime.ToString(" hh:mm tt")}";
+                                            <option value="@item.UniqueId">@batch</option>
+                                        }
+                                    </select>
+                                </div>
+                            }
+                            <div class="card">
+                                <div class="card-header bg-light">Address Details</div>
+                                <div class="card-body row">
+                                    <div class="form-group col-sm-12 col-md-6  col-lg-4">
+                                        <label asp-for="Address.CountryId" class="text-bold">  </label><small>  <i>(required)</i></small>
+                                        <select asp-for="Address.CountryId" asp-items="ViewBag.CountryId" style="height:2em" class="custom-select form-control"></select>
+                                        <span asp-validation-for="Address.CountryId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-sm-12 com-md-6 col-lg-4">
+                                        <label asp-for="Address.StateId" class="control-label"></label><small>  <i>(required)</i></small>
+                                        <select asp-for="Address.StateId" asp-items="ViewBag.StateId" style="height:2em" onchange="Address.GetCitiesByStateId($(this).children('option:selected').val())" class="custom-select form-control"> <option id="0"> -- Select State -- </option> </select>
+                                        <span asp-validation-for="Address.StateId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-sm-12 com-md-6 col-lg-4">
+                                        <label asp-for="Address.CityId" class="control-label"></label><small>  <i>(required)</i></small>
+                                        <select asp-for="Address.CityId" asp-items="ViewBag.CityId" style="height:2em" class="custom-select form-control"></select>
+                                        <span asp-validation-for="Address.CityId" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                                        <label class="control-label" asp-for="Address.AddressLine1"></label>
+                                        <input asp-for="Address.AddressLine1" class="form-control" placeholder="Address Line 1" />
+                                        <span asp-validation-for="Address.AddressLine1" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                                        <label class="control-label" asp-for="Address.AddressLine2"></label>
+                                        <input asp-for="Address.AddressLine2" class="form-control" placeholder="Address Line 2" />
+                                        <span asp-validation-for="Address.AddressLine2" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                                        <label class="control-label" asp-for="Address.AddressLine3"></label>
+                                        <input asp-for="Address.AddressLine3" class="form-control" placeholder="Address Line 3" />
+                                        <span asp-validation-for="Address.AddressLine3" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                                        <label class="control-label" asp-for="Address.NearestLandMark"></label>
+                                        <input asp-for="Address.NearestLandMark" class="form-control" placeholder="Nearest Land Mark" />
+                                        <span asp-validation-for="Address.NearestLandMark" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6  col-lg-4 form-group">
+                                        <label class="control-label" asp-for="Address.PinCode"></label>
+                                        <input asp-for="Address.PinCode" class="form-control" placeholder="Pin Code" />
+                                        <span asp-validation-for="Address.PinCode" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-12 d-flex justify-content-center">
+                                        <input type="submit" value="Save" class="btn btn-primary btn-sm" />
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="text-center">
-                        <button type="submit" asp-area="Student" asp-controller="Home" asp-action="Create"  class="btn btn-primary ">Save</button>
                         </div>
-                    </form>
-@*                 </div>
- *@            </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+@section Style {
+    <style>
+    </style>
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/appjs/address.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var aadharInput = document.getElementById('aadharInput');
+            var panInput = document.getElementById('panInput');
+            var aadharPreview = document.getElementById('aadharPreview');
+            var panPreview = document.getElementById('panPreview');
+
+            function handleFileSelect(input, preview) {
+                input.addEventListener('change', function () {
+                    var file = input.files[0];
+                    if (file) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            preview.src = e.target.result;
+                            preview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.style.display = 'none';
+                    }
+                });
+            }
+
+            handleFileSelect(aadharInput, aadharPreview);
+            handleFileSelect(panInput, panPreview);
+        });
+
+    </script>
+}
