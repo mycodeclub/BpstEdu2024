@@ -431,9 +431,13 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
     width: 100%;
     height: 100vh;
-    /*    background: url("../img/hero-bg.jpg") top center;*/
-/*    background-image: url('../../../images/homepage.jpg');*/
-    background-image: url('../../../images/landingpagebanner.jpg');
+<<<<<<< Updated upstream
+/*      background: url("../img/hero-bg.jpg") top center;*/
+    background-image: url('../../../../images/homepage.jpg') top center;
+=======
+    /*  background: url("../img/hero-bg.jpg") top center;*/
+    background: url("../img/BPST Software Banner.jpg") top center;
+>>>>>>> Stashed changes
     background-size: cover;
     position: relative;
 }
