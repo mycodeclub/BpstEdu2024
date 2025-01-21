@@ -28,7 +28,7 @@
             }
         });
     },
-    
+
     EnrollToBatch: function (_appId) {
         if ($('#BatchDDL').val() == 0) {
             alert("Select Batch First.");
@@ -41,19 +41,24 @@
         window.location.href = _url;
     },
     GetBatchesByCourseId: function (ddl) {
-    var courseId =  $(ddl).val();
+        var courseId = $(ddl).val();
         $.ajax({
             type: "GET",
             url: '/Home/GetBatchesByCourseId?courseId=' + courseId,
             cache: false,
-            success: function (data) { 
-                var items = '<select class="custom-select form-control">';
-                $.each(data, function (i, batch) {
-                    items += '<option value="' + batch.id + '">' +  batch.value+ '</option>'
-                });
-                items += '</select>';
-                $('#BatchDDL').html(items);
-                $('#BatchDDL').parent().show();
+            success: function (data) {
+                if ($.isEmptyObject(data)) {
+                    $('#BatchDDL').parent().hide();
+                }
+                else {
+                    var items = '<select class="custom-select form-control">';
+                    $.each(data, function (i, batch) {
+                        items += '<option value="' + batch.id + '">' + batch.value + '</option>'
+                    });
+                    items += '</select>';
+                    $('#BatchDDL').html(items);
+                    $('#BatchDDL').parent().show();
+                }
             }
         });
     },

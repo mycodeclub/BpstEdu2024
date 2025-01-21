@@ -18,10 +18,9 @@ namespace BpstEducation.Controllers
 
 
         public async Task<IActionResult> Index()
-        { 
-            var appDbContext = _context.CodeHelpers.Include(q => q.Subject);
+        {
             ViewBag.Subjects = await _context.Subjects.ToListAsync().ConfigureAwait(false);
-            var CodeHelpers = await appDbContext.ToListAsync();
+            var CodeHelpers = await _context.CodeHelpers.Include(q => q.Subject).ToListAsync();
             var ch = CodeHelpers.GroupBy(q => q.Subject.Name);
             return View(ch);
         }

@@ -1,13 +1,8 @@
 ﻿using BpstEducation.Data;
 using BpstEducation.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Identity; 
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using BpstEducation.NewModels;
-using System;
 using System.Text;
 
 namespace BpstEducation.Services
@@ -31,7 +26,7 @@ namespace BpstEducation.Services
                 {
                     var sbErrorDetail = new StringBuilder();
                     foreach (var error in _stuLoginAccountResult.Errors)
-                        sbErrorDetail.Append(error.Description+" | "+ error.Description);
+                        sbErrorDetail.Append(error.Description + " | " + error.Description);
                     newStudent.ErrorLogDuringLoginGenration = sbErrorDetail.ToString();
                 }
                 await _dbContext.SaveChangesAsync();
