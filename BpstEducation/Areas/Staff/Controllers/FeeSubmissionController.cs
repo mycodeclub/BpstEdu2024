@@ -74,7 +74,11 @@ namespace BpstEducation.Areas.Staff.Controllers
                 .FirstOrDefaultAsync();
             return _batchStu;
         }
-
+        public async Task<IActionResult> Invoice()
+        {
+            
+            return View();
+        }
 
     }
 }
