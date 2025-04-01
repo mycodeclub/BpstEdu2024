@@ -13,7 +13,7 @@ using BpstEducation.Services;
 namespace BpstEducation.Areas.Staff.Controllers
 {
     [Area("Staff")]
-    [Authorize(Roles = "Staff,Admin")]
+    //[Authorize(Roles = "Staff,Admin")]
     public class BatchsController(AppDbContext context, IUserServiceBAL loginService) : Controller
     {
         private readonly AppDbContext _context = context;

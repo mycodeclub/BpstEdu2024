@@ -8413,7 +8413,13 @@ namespace BpstEducation.Migrations
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("StudentUniqueId")
+                    b.Property<string>("PaymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentProofPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubmittedFeeAmount")
@@ -8423,7 +8429,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("BatchStudentId");
 
-                    b.HasIndex("StudentUniqueId");
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Fees");
                 });
@@ -11116,7 +11122,7 @@ namespace BpstEducation.Migrations
 
                     b.HasOne("BpstEducation.Models.Student", null)
                         .WithMany("MySubmittedFeeTillNow")
-                        .HasForeignKey("StudentUniqueId");
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("BpstEducation.NewModels.StudentApplication", b =>

@@ -5,7 +5,6 @@ using BpstEducation.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BpstEducation.NewModels;
-using System.Xml;
 
 namespace BpstEducation.Controllers
 {

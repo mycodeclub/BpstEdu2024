@@ -1,119 +1,125 @@
-﻿@model BpstEducation.Models.StudentFee
+﻿@model BpstEducation.Models.Student
+
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Create Student";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
     ViewBag.ActiveTabName = "Students";
-    BpstEducation.Models.BatchStudent stuFeeDetails = ViewBag.stuFeeDetails;
-    int sNo = 0;
+    List<BpstEducation.Models.Batch> Batches = ViewBag.Batches;
 }
-<script src="~/appjs/common.js"></script>
-<div class="content">
-    <div class="card">
-        <div class="card-body">
-            <div class="content">
-                <div class="card">
-                    <div class="card-header bg-light-blue-gradient"> Student Batch & Fee Details </div>
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="form-group  col-sm-6 col-md-4">
-                                <label class="text-bold"> Course </label>
-                                <p class=""> @stuFeeDetails.Batch.Course.Name   </p>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center fw-bold fs-4 py-3">
+            Student Registration
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Create" enctype="multipart/form-data" class="needs-validation" novalidate>
+
+                <div class="alert alert-danger" asp-validation-summary="All"></div>
+
+                <div class="row g-4">
+                    <input type="hidden" asp-for="UniqueId" />
+
+                    <div class="col-md-6">
+                        <label asp-for="RegistrationDate" class="form-label fw-bold">Registration Date</label>
+                        <input asp-for="RegistrationDate" type="date" class="form-control" required />
+                        <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="FirstName" class="form-label fw-bold">First Name</label>
+                        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" required />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="LastName" class="form-label fw-bold">Last Name</label>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" required />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label fw-bold">Email</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Enter Email" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="DateOfBirth" class="form-label fw-bold">Date of Birth</label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" required />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="PhoneNumber" class="form-label fw-bold">Phone Number</label>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" required pattern="[6-9]\d{9}" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="AadhaarNumber" class="form-label fw-bold">Aadhaar Number</label>
+                        <input asp-for="AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" required pattern="\d{12}" />
+                        <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="PanNumber" class="form-label fw-bold">PAN Number</label>
+                        <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" required pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" />
+                        <span asp-validation-for="PanNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="SelectedBatchId" class="form-label fw-bold">Select Batch</label>
+                        <select asp-for="SelectedBatchId" class="form-select">
+                            <option value="0">-- Select Batch --</option>
+                            @foreach (var item in Batches)
+                            {
+                                string batch = $"{@item?.Course?.Name} - {item.RemaningDays} Days - {item.StartDateTime:dd-MMM-yyyy hh:mm tt}";
+                                <option value="@item.UniqueId">@batch</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Payment Method</label>
+                        <select class="form-select" name="PaymentMethod" required>
+                            <option value="">-- Select Payment Method --</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="UPI">UPI</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Upload Payment Proof</label>
+                        <input type="file" class="form-control" name="PaymentProof" accept="image/*" required />
+                    </div>
+
+                    <div class="card mt-4 border-0">
+                        <div class="card-header bg-light fw-bold py-2">Address Details</div>
+                        <div class="card-body row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Address.AddressLine1" class="fw-bold">Address</label>
+                                <input asp-for="Address.AddressLine1" class="form-control" required />
                             </div>
-                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
-                                <label class="text-bold"> Duration </label>
-                                <p class=""> @stuFeeDetails.Batch.Duration   </p>
+
+                            <div class="col-md-6">
+                                <label asp-for="Address.NearestLandMark" class="fw-bold">Landmark (Optional)</label>
+                                <input asp-for="Address.NearestLandMark" class="form-control" />
                             </div>
-                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
-                                <label class="text-bold"> Start Date </label>
-                                <p class=""> @stuFeeDetails.Batch.StartDateTime.ToString("dd-MMM-yyyy")   </p>
-                            </div>
-                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
-                                <label class="text-bold"> Timing </label>
-                                <p class=""> @stuFeeDetails.Batch.StartDateTime.ToString("hh:mm:tt")   </p>
-                            </div>
-                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
-                                <label class="text-bold"> Batch Fee </label>
-                                <p class=""> @stuFeeDetails.Batch.BatchFee   </p>
+
+                            <div class="col-md-6">
+                                <label asp-for="Address.PinCode" class="fw-bold">Pin Code</label>
+                                <input asp-for="Address.PinCode" class="form-control" required pattern="\d{6}" />
                             </div>
                         </div>
                     </div>
-                    <div class="card-header bg-light-blue-active">
-                        Fees
 
-                        <a asp-action="Create" class="btn btn-sm btn-secoundry  pull-right" asp-route-batchId="@stuFeeDetails.BatchId" asp-route-studentId="@stuFeeDetails.StudentId">Pay Now</a>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th> S. No. </th>
-                                        <th> Description</th>
-                                        <th>  Amount</th>
-                                        <th>Submitted On  </th>
-                                    </tr>
-                                </thead>
-                                @{
-                                    sNo = 0;
-                                }
-                                @foreach (var fee in stuFeeDetails.SubmittedFeeList)
-                                {
-                                    sNo = sNo + 1;
-                                    <tr>
-                                        <td> @sNo .    </td>
-                                        <td> @fee.Description </td>
-                                        <td> @fee.SubmittedFeeAmount </td>
-                                        <td> @fee.FeeSubmittingDate.ToString("dd-MMM-yyyy hh:mm  tt") </td>
-                                    </tr>
-                                }
-
-                                <tr>
-                                    <td colspan="4">
-                                        <form action="Create" method="post">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="input-group input-group-sm mb-3">
-                                                        <input type="hidden" asp-for="CreatedDate" />
-                                                        <input type="hidden" asp-for="LastUpdatedDate" />
-                                                        <input type="hidden" asp-for="FeeSubmittingDate" />
-                                                        <input type="hidden" asp-for="UniqueId" />
-                                                        <input type="hidden" asp-for="BatchStudentId" />
-                                                        <input type="text" asp-for="SubmittedFeeAmount" class="form-control" placeholder="Fees Amount" aria-label="First Input">
-                                                        <input type="text" asp-for="Description" class="form-control" placeholder="Fees Description" aria-label="Second Input">
-                                                        <button class="btn btn-primary" type="submit">Pay</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tfoot>
-                                    <tr><th colspan="4" class="box-gradient-1"></th></tr>
-                                    <tr>
-                                        <th>Discount <i>(if any )</i> </th>
-                                        <td> @stuFeeDetails.DiscountedFeeAmount  </td>
-                                        <th>Total Fees </th>
-                                        <td>  @stuFeeDetails.TotalFeesAfterDiscount </td>
-                                    </tr>
-                                    <tr>
-                                        <th> </th>
-                                        <th> </th>
-                                        <th>  Submitted Till Now</th>
-                                        <td> @stuFeeDetails.SubmittedFeeList.Sum(f => f.SubmittedFeeAmount) </td>
-                                    </tr>
-                                    <tr>
-                                        <th> </th>
-                                        <th> </th>
-                                        <th> Remaining </th>
-                                        <td> @stuFeeDetails.RemainingFees </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                    <div class="col-12 text-center">
+                        <a asp-action="DownloadInvoice" asp-route-studentId="@Model.UniqueId" class="btn btn-success btn-lg mt-4 px-5">Download Invoice</a>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
