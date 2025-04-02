@@ -93,10 +93,10 @@ namespace BpstEducation.Models
                 {
                     if (!string.IsNullOrWhiteSpace(Address.AddressLine1))
                         _address.Append(Address.AddressLine1);
-                    if (!string.IsNullOrWhiteSpace(Address.AddressLine2))
-                        _address.Append(" " + Address.AddressLine2);
-                    if (!string.IsNullOrWhiteSpace(Address.AddressLine3))
-                        _address.Append(" " + Address.AddressLine3);
+                    //if (!string.IsNullOrWhiteSpace(Address.AddressLine2))
+                    //    _address.Append(" " + Address.AddressLine2);
+                    //if (!string.IsNullOrWhiteSpace(Address.AddressLine3))
+                    //    _address.Append(" " + Address.AddressLine3);
                     if ((Address.City != null))
                         _address.Append(" " + Address.City.Name);
                     if (Address.State != null)

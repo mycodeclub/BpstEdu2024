@@ -1,5 +1,6 @@
 ﻿using BpstEducation.Data;
 using BpstEducation.Models;
+using BpstEducation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -18,19 +19,32 @@ namespace BpstEducation.Areas.Staff.Controllers
 
         public async Task<IActionResult> Create(int studentId, int batchId)
         {
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.UniqueId == studentId);
             var stuBatchDetails = await GetBatchStudent(batchId, studentId);
-            var fee = new StudentFee()
+            var batches = await _context.Batchs.ToListAsync();
+
+            if (student == null || stuBatchDetails == null)
             {
-                SubmittedFeeAmount = stuBatchDetails.TotalFeesAfterDiscount - stuBatchDetails.SubmittedFeeList.Sum(f => f.SubmittedFeeAmount),
-                CreatedDate = DateTime.Now,
-                LastUpdatedDate = DateTime.Now,
-                FeeSubmittingDate = DateTime.Now,
-                BatchStudentId = stuBatchDetails.UniqueId,
+                return NotFound("Student or Batch-Student details not found.");
+            }
+
+            var model = new StudentFeeViewModel
+            {
+                Student = student,
+                Batchs = batches,
+                StudentFee = new StudentFee
+                {
+                    SubmittedFeeAmount = stuBatchDetails.TotalFeesAfterDiscount - stuBatchDetails.SubmittedFeeList.Sum(f => f.SubmittedFeeAmount),
+                    CreatedDate = DateTime.Now,
+                    LastUpdatedDate = DateTime.Now,
+                    FeeSubmittingDate = DateTime.Now,
+                    BatchStudentId = stuBatchDetails.UniqueId,
+                }
             };
 
-            ViewBag.stuFeeDetails = stuBatchDetails;
-            return View(fee);
+            return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Create(StudentFee fee)

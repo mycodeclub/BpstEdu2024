@@ -17,7 +17,7 @@ namespace BpstEducation.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -31,14 +31,6 @@ namespace BpstEducation.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UniqueId"));
 
                     b.Property<string>("AddressLine1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddressLine2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddressLine3")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -74,7 +66,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.AppUser", b =>
@@ -160,7 +152,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("ApplicationStatus");
+                    b.ToTable("ApplicationStatus", (string)null);
 
                     b.HasData(
                         new
@@ -237,7 +229,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("TrainerId");
 
-                    b.ToTable("Batchs");
+                    b.ToTable("Batchs", (string)null);
 
                     b.HasData(
                         new
@@ -341,7 +333,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("BatchStudents");
+                    b.ToTable("BatchStudents", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.City", b =>
@@ -363,7 +355,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasData(
                         new
@@ -7697,7 +7689,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("CodeHelpers");
+                    b.ToTable("CodeHelpers", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Contact", b =>
@@ -7726,7 +7718,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Country", b =>
@@ -7743,7 +7735,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
 
                     b.HasData(
                         new
@@ -7770,7 +7762,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
 
                     b.HasData(
                         new
@@ -7841,7 +7833,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("EducationBoardsMaster");
+                    b.ToTable("EducationBoardsMaster", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Employees", b =>
@@ -7900,7 +7892,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
 
                     b.HasData(
                         new
@@ -8010,7 +8002,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Enquiry");
+                    b.ToTable("Enquiry", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Qualification", b =>
@@ -8027,7 +8019,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Qualification");
+                    b.ToTable("Qualification", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Question", b =>
@@ -8080,7 +8072,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.State", b =>
@@ -8102,7 +8094,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("States");
+                    b.ToTable("States", (string)null);
 
                     b.HasData(
                         new
@@ -8387,7 +8379,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("CourseOfInterestId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.StudentFee", b =>
@@ -8413,13 +8405,7 @@ namespace BpstEducation.Migrations
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethod")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentProofPath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubmittedFeeAmount")
@@ -8431,7 +8417,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Fees");
+                    b.ToTable("Fees", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.Models.Subject", b =>
@@ -8461,7 +8447,7 @@ namespace BpstEducation.Migrations
 
                     b.HasKey("UniqueId");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Subject", (string)null);
                 });
 
             modelBuilder.Entity("BpstEducation.NewModels.StudentApplication", b =>
@@ -8533,7 +8519,7 @@ namespace BpstEducation.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("Applications");
+                    b.ToTable("Applications", (string)null);
 
                     b.HasData(
                         new
@@ -11122,7 +11108,9 @@ namespace BpstEducation.Migrations
 
                     b.HasOne("BpstEducation.Models.Student", null)
                         .WithMany("MySubmittedFeeTillNow")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BpstEducation.NewModels.StudentApplication", b =>

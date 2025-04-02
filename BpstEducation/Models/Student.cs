@@ -65,10 +65,10 @@ namespace BpstEducation.Models
                 {
                     if (!string.IsNullOrWhiteSpace(Address.AddressLine1))
                         _address.Append($"{Address.AddressLine1} - ");
-                    if (!string.IsNullOrWhiteSpace(Address.AddressLine2))
-                        _address.Append($"{Address.AddressLine2} - ");
-                    if (!string.IsNullOrWhiteSpace(Address.AddressLine3))
-                        _address.Append($"{Address.AddressLine3} - ");
+                    //if (!string.IsNullOrWhiteSpace(Address.AddressLine2))
+                    //    _address.Append($"{Address.AddressLine2} - ");
+                    //if (!string.IsNullOrWhiteSpace(Address.AddressLine3))
+                    //    _address.Append($"{Address.AddressLine3} - ");
                     if (!string.IsNullOrWhiteSpace(Address.NearestLandMark))
                         _address.Append($"{Address.NearestLandMark} - ");
 
@@ -117,16 +117,14 @@ namespace BpstEducation.Models
         public string? PanFileUrl { get; set; }
 
         [Display(Name = "Course Category")]
-        [Obsolete]
+       
         public int? CourseOfInterestId { get; set; }
         [ForeignKey("CourseOfInterestId")]
         [DeleteBehavior(DeleteBehavior.Restrict)]
-        [Obsolete]
         public Course? CourseOfInterest { get; set; }
         [Obsolete]
         public List<StudentFee>? MySubmittedFeeTillNow { get; set; }
         //--------------------------------------------------------------
-        [Obsolete]
        
         [Display(Name = "Registration Date")]
         public DateTime RegistrationDate { get; internal set; }

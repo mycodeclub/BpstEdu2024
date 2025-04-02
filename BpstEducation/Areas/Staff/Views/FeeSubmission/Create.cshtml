@@ -1,10 +1,10 @@
-﻿@model BpstEducation.Models.Student
+﻿@model BpstEducation.ViewModels.StudentFeeViewModel
 
 @{
     ViewData["Title"] = "Create Student";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
     ViewBag.ActiveTabName = "Students";
-    List<BpstEducation.Models.Batch> Batches = ViewBag.Batches;
+    List<BpstEducation.Models.Batch> b = ViewBag.Batches;
 }
 
 <div class="container mt-5">
@@ -18,65 +18,69 @@
                 <div class="alert alert-danger" asp-validation-summary="All"></div>
 
                 <div class="row g-4">
-                    <input type="hidden" asp-for="UniqueId" />
+                    <input type="hidden" asp-for="Student.UniqueId" />
 
                     <div class="col-md-6">
-                        <label asp-for="RegistrationDate" class="form-label fw-bold">Registration Date</label>
-                        <input asp-for="RegistrationDate" type="date" class="form-control" required />
-                        <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                        <label asp-for="Student.RegistrationDate" class="form-label fw-bold">Registration Date</label>
+                        <input asp-for="Student.RegistrationDate" type="date" class="form-control" required />
+                        <span asp-validation-for="Student.RegistrationDate" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="FirstName" class="form-label fw-bold">First Name</label>
-                        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" required />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                        <label asp-for="Student.FirstName" class="form-label fw-bold">First Name</label>
+                        <input asp-for="Student.FirstName" class="form-control" placeholder="Enter First Name" required />
+                        <span asp-validation-for="Student.FirstName" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="LastName" class="form-label fw-bold">Last Name</label>
-                        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" required />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
+                        <label asp-for="Student.LastName" class="form-label fw-bold">Last Name</label>
+                        <input asp-for="Student.LastName" class="form-control" placeholder="Enter Last Name" required />
+                        <span asp-validation-for="Student.LastName" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="Email" class="form-label fw-bold">Email</label>
-                        <input asp-for="Email" type="email" class="form-control" placeholder="Enter Email" required />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <label asp-for="Student.Email" class="form-label fw-bold">Email</label>
+                        <input asp-for="Student.Email" type="email" class="form-control" placeholder="Enter Email" required />
+                        <span asp-validation-for="Student.Email" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="DateOfBirth" class="form-label fw-bold">Date of Birth</label>
-                        <input asp-for="DateOfBirth" type="date" class="form-control" required />
-                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        <label asp-for="Student.DateOfBirth" class="form-label fw-bold">Date of Birth</label>
+                        <input asp-for="Student.DateOfBirth" type="date" class="form-control" required />
+                        <span asp-validation-for="Student.DateOfBirth" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="PhoneNumber" class="form-label fw-bold">Phone Number</label>
-                        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" required pattern="[6-9]\d{9}" />
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        <span asp-validation-for="Student.DateOfBirth" class="text-danger"></span>
+                        <label asp-for="Student.PhoneNumber" class="form-label fw-bold">Phone Number</label>
+                        <input asp-for="Student.PhoneNumber" class="form-control" placeholder="Enter Phone Number" required pattern="[6-9]\d{9}" />
+                        <span asp-validation-for="Student.PhoneNumber" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="AadhaarNumber" class="form-label fw-bold">Aadhaar Number</label>
-                        <input asp-for="AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" required pattern="\d{12}" />
-                        <span asp-validation-for="AadhaarNumber" class="text-danger"></span>
+                        <label asp-for="Student.AadhaarNumber" class="form-label fw-bold">Aadhaar Number</label>
+                        <input asp-for="Student.AadhaarNumber" class="form-control" placeholder="Enter Aadhaar Number" required pattern="\d{12}" />
+                        <span asp-validation-for="Student.AadhaarNumber" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="PanNumber" class="form-label fw-bold">PAN Number</label>
-                        <input asp-for="PanNumber" class="form-control" placeholder="Enter PAN Number" required pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" />
-                        <span asp-validation-for="PanNumber" class="text-danger"></span>
+                        <label asp-for="Student.PanNumber" class="form-label fw-bold">PAN Number</label>
+                        <input asp-for="Student.PanNumber" class="form-control" placeholder="Enter PAN Number" required pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" />
+                        <span asp-validation-for="Student.PanNumber" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="SelectedBatchId" class="form-label fw-bold">Select Batch</label>
-                        <select asp-for="SelectedBatchId" class="form-select">
+                        <label asp-for="Student.SelectedBatchId" class="form-label fw-bold">Select Batch</label>
+                        <select asp-for="Student.SelectedBatchId" class="form-select">
                             <option value="0">-- Select Batch --</option>
-                            @foreach (var item in Batches)
+                           @if(Model.Batchs != null)
+                            {
+                                @foreach (var item in Model.Batchs)
                             {
                                 string batch = $"{@item?.Course?.Name} - {item.RemaningDays} Days - {item.StartDateTime:dd-MMM-yyyy hh:mm tt}";
                                 <option value="@item.UniqueId">@batch</option>
                             }
+                           }
                         </select>
                     </div>
 
@@ -99,24 +103,24 @@
                         <div class="card-header bg-light fw-bold py-2">Address Details</div>
                         <div class="card-body row g-3">
                             <div class="col-md-6">
-                                <label asp-for="Address.AddressLine1" class="fw-bold">Address</label>
-                                <input asp-for="Address.AddressLine1" class="form-control" required />
+                                <label asp-for="Student.Address.AddressLine1" class="fw-bold">Address</label>
+                                <input asp-for="Student.Address.AddressLine1" class="form-control" required />
                             </div>
 
                             <div class="col-md-6">
-                                <label asp-for="Address.NearestLandMark" class="fw-bold">Landmark (Optional)</label>
-                                <input asp-for="Address.NearestLandMark" class="form-control" />
+                                <label asp-for="Student.Address.NearestLandMark" class="fw-bold">Landmark (Optional)</label>
+                                <input asp-for="Student.Address.NearestLandMark" class="form-control" />
                             </div>
 
                             <div class="col-md-6">
-                                <label asp-for="Address.PinCode" class="fw-bold">Pin Code</label>
-                                <input asp-for="Address.PinCode" class="form-control" required pattern="\d{6}" />
+                                <label asp-for="Student.Address.PinCode" class="fw-bold">Pin Code</label>
+                                <input asp-for="Student.Address.PinCode" class="form-control" required pattern="\d{6}" />
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 text-center">
-                        <a asp-action="DownloadInvoice" asp-route-studentId="@Model.UniqueId" class="btn btn-success btn-lg mt-4 px-5">Download Invoice</a>
+                        <a asp-action="DownloadInvoice" asp-route-studentId="@Model.Student.UniqueId" class="btn btn-success btn-lg mt-4 px-5">Download Invoice</a>
                     </div>
                 </div>
             </form>

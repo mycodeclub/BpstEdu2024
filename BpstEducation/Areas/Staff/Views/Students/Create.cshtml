@@ -72,11 +72,14 @@
                     <div class="col-md-6">
                         <label asp-for="SelectedBatchId" class="form-label fw-bold">Select Batch</label>
                         <select asp-for="SelectedBatchId" class="form-select">
-                            <option value="0">-- Select Batch --</option>
-                            @foreach (var item in Batches)
+
+                            @if (Batches != null && Batches.Any())
                             {
-                                string batch = $"{@item?.Course?.Name} - {item.RemaningDays} Days - {item.StartDateTime:dd-MMM-yyyy hh:mm tt}";
-                                <option value="@item.UniqueId">@batch</option>
+                                @foreach (var item in Batches)
+                                {
+                                    string batch = $"{item?.Course?.Name} - {item.RemaningDays} Days - {item.StartDateTime:dd-MMM-yyyy hh:mm tt}";
+                                    <option value="@item.UniqueId">@batch</option>
+                                }
                             }
                         </select>
                     </div>

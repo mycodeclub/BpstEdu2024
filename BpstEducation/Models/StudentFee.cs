@@ -23,9 +23,9 @@ namespace BpstEducation.Models
         public DateTime FeeSubmittingDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
-        public string? PaymentMethod { get; set; }
-        public IFormFile? PaymentProof { get; set; }
-        public string? PaymentProofPath{get; set;}
+        //public string? PaymentMethod { get; set; }
+        //public IFormFile? PaymentProof { get; set; }
+        //public string? PaymentProofPath{get; set;}
 
         
     }
