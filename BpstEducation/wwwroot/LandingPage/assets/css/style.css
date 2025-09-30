@@ -486,11 +486,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (min-width: 1024px) {
-  #hero {
-    background-attachment: fixed;
-  }
+    #hero {
+        /* Force hero background to scroll */
+        background-attachment: scroll !important;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
-
 @media (max-width: 768px) {
   #hero {
     text-align: center;
