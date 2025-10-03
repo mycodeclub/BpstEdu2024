@@ -19,19 +19,18 @@
 @*                 <a asp-action="Create" class="btn btn-primary btn-sm">New Batch</a>
  *@            </div>
 
-            <div class="table-responsive table-hover">
+            <div class="table table-responsive table-hover">
                 <table class="table" id="example1">
                     <thead>
                         <tr>
-                            <th>S. No.</th>
-                            <th>Course</th>
+                            <th>S.No.</th>
+                            <th style="text-align:center">Course</th>
                             <th>Starting From</th>
                             <th>Timing</th>
-                            <th>Remaning Days</th>
+                            <th>Remaning Days</th> 
                             <th>Students</th>
                             <th>Fee</th>
-
-                            <th>Action</th>
+                            <th style="text-align:right">Action</th> 
                         </tr>
                     </thead>
                     <tbody>
@@ -43,12 +42,12 @@
                                 <td>@b.Course.Name</td>
                                 <td>@b.StartDateTime.ToString("dd-MMM-yyyy")</td>
                                 <td>@b.StartDateTime.ToString("hh:mm:tt")</td>
-                                <td>@b.RemaningDays </td>
+                                <td>@b.RemainingDays</td>
                                 <td>@b.Students.Count() </td>
                                 <td style="text-align:right;"> @b.BatchFee.ToString("C", indianCulture) </td>
-                                <td>
+                                <td style="text-align:end">
 @*                                     <a asp-action="Create" asp-route-id="@b.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
- *@                                    <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
+ *@                                    <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> 
                                 </td>
                             </tr>
                         }

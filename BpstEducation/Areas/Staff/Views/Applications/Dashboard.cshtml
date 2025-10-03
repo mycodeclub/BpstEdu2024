@@ -79,7 +79,7 @@
                                 <option value="0">-- Batches --</option>
                                 @foreach (var item in Model)
                                 {
-                                    string batch = $"{@item?.Course?.Name}_in_{item.RemaningDays}_Days_{@item.StartDateTime.ToString("dd-MMM-yyyy")}_{@item.StartDateTime.ToString(" hh:mm tt")}";
+                                    string batch = $"{@item?.Course?.Name}_in_{item.RemainingDays}_Days_{@item.StartDateTime.ToString("dd-MMM-yyyy")}_{@item.StartDateTime.ToString(" hh:mm tt")}";
                                     <option value="@item.UniqueId">@batch</option>
                                 }
                             </select>

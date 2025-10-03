@@ -30,7 +30,7 @@ namespace BpstEducation.Migrations
                 column: "StudentId",
                 principalTable: "Students",
                 principalColumn: "UniqueId",
-                onDelete: ReferentialAction.Cascade);
+              onDelete: ReferentialAction.Restrict); // ✅ FIX
         }
 
         /// <inheritdoc />

@@ -115,7 +115,7 @@ namespace BpstEducation.Controllers
                 .Select(b => new
                 {
                     Id = b.UniqueId,
-                    Value = $"{b.RemaningDays} Days To Go -  {b.Course.Name}_{b.StartDateTime:dd-MMM-yyyy}_{b.StartDateTime:hh:mm: tt}"
+                    Value = $"{b.RemainingDays} Days To Go -  {b.Course.Name}_{b.StartDateTime:dd-MMM-yyyy}_{b.StartDateTime:hh:mm: tt}"
                 }).ToListAsync();
             return Json(batches);
         }

@@ -59,10 +59,32 @@ namespace BpstEducation.Models
             }
         }
 
+
         [NotMapped]
-        public int RemaningDays
+        public string RemainingDays
         {
-            get { return (int)(StartDateTime - DateTime.Now).TotalDays; }
+            get
+            {
+                int durationDays = 0;
+                if (!int.TryParse(Duration.Split(' ')[0], out durationDays))
+                    durationDays = 0;
+                var now = DateTime.Now;
+                var endDate = StartDateTime.AddDays(durationDays);
+                if (now < StartDateTime)
+                {
+                    var untilStart = Math.Ceiling((StartDateTime - now).TotalDays);
+                    return $"Starts in {untilStart} day{(untilStart > 1 ? "s" : "")} ({StartDateTime:dd-MMM-yyyy})";
+                }
+                else if (now >= StartDateTime && now < endDate)
+                {
+                    var remaining = Math.Ceiling((endDate - now).TotalDays);
+                    return $"In Progress → {remaining} day{(remaining > 1 ? "s" : "")} remaining (till {endDate:dd-MMM-yyyy})";
+                }
+                else // now >= endDate
+                {
+                    return $"Completed ({endDate:dd-MMM-yyyy})";
+                }
+            }
         }
 
     }

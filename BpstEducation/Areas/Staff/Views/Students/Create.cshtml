@@ -77,7 +77,7 @@
                             {
                                 @foreach (var item in Batches)
                                 {
-                                    string batch = $"{item?.Course?.Name} - {item.RemaningDays} Days - {item.StartDateTime:dd-MMM-yyyy hh:mm tt}";
+                                    string batch = $"{item?.Course?.Name} - {item.RemainingDays} Days - {item.StartDateTime:dd-MMM-yyyy hh:mm tt}";
                                     <option value="@item.UniqueId">@batch</option>
                                 }
                             }

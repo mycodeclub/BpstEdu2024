@@ -27,13 +27,14 @@ namespace BpstEducation.Data
         public static void SeedCourseCategory(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>().HasData(
-                new Course() { UniqueId = 1, Name = "Programming Classes (for Rising Stars - IX - XII )", IntershipAvailable = true },
-                new Course() { UniqueId = 2, Name = "Software Engineering .Net Internship - 6 months ", IntershipAvailable = true },
-                new Course() { UniqueId = 3, Name = "Software Engineering .Net Internship  -  45 days ", IntershipAvailable = true },
-                new Course() { UniqueId = 4, Name = "Cyber Security", IntershipAvailable = true },
-                new Course() { UniqueId = 5, Name = " Game Development", IntershipAvailable = true },
-                new Course() { UniqueId = 6, Name = "Hardware / Networking", IntershipAvailable = true },
-                new Course() { UniqueId = 7, Name = "Others", IntershipAvailable = true }
+                  new Course { UniqueId = 1, Name = "Programming Classes (for Rising Stars - IX - XII )", IntershipAvailable = true },
+            new Course { UniqueId = 2, Name = "Full Stack Development - Internship 6 months ", IntershipAvailable = true },
+            new Course { UniqueId = 3, Name = "Full Stack Development - Industrial Training  45 days ", IntershipAvailable = true },
+            new Course { UniqueId = 4, Name = "Cyber Security - 45 Days", IntershipAvailable = true },
+            new Course { UniqueId = 5, Name = "Game Development - 45 Days", IntershipAvailable = true },
+            new Course { UniqueId = 6, Name = "App Development - 45 Days", IntershipAvailable = true },
+            new Course { UniqueId = 7, Name = "Networking Class - 45 Days", IntershipAvailable = true },
+            new Course { UniqueId = 8, Name = "Others", IntershipAvailable = true }
                 );
         }
         public static void SeedEducationBoard(this ModelBuilder modelBuilder)
@@ -1365,14 +1366,18 @@ namespace BpstEducation.Data
                 );
         }
 
-        public static void SeedBatches(this ModelBuilder modelBuilder)
+         public static void SeedBatches(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Batch>().HasData(
-                new Batch() { UniqueId = 1, CourseId = 3, BatchFee = 3000, TrainerId = 2, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 2, 4).AddDays(43), Title = "DotNet Internship ", Duration = "45 Days" },
-                new Batch() { UniqueId = 2, CourseId = 2, BatchFee = 18000, TrainerId = 1, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 1, 21).AddHours(11), Title = "DotNet Industrial Training 6 Months - Morning", Duration = "6 - Months" },
-                new Batch() { UniqueId = 3, CourseId = 2, BatchFee = 18000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 2, 4).AddHours(9), Title = "DotNet Industrial Training 6 Months - Evening", Duration = "6 - Months" },
-                new Batch() { UniqueId = 4, CourseId = 1, BatchFee = 1000, TrainerId = 3, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 01, 24).AddDays(50), Title = "Rising Stars", Duration = "1 Month" },
-                new Batch() { UniqueId = 5, CourseId = 7, BatchFee = 800, TrainerId = 4, CreatedDate = new DateTime(2024, 12, 24), StartDateTime = new DateTime(2025, 4, 04).AddDays(7), Title = "Other Crash Course - Per Month", Duration = "1 Month" });
+                new Batch { UniqueId = 1, CourseId = 1, BatchFee = 3000, TrainerId = 2, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 8, 14, 10, 0, 0), Title = "Rising Stars Programming", Duration ="45 Days"},
+                new Batch { UniqueId = 2, CourseId = 2, BatchFee = 18000, TrainerId = 1, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 1, 21, 11, 0, 0), Title = "Full Stack Dev Internship 6 Months - Morning", Duration = "180 Days"},
+                new Batch { UniqueId = 3, CourseId = 3, BatchFee = 18000, TrainerId = 3, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 2, 4, 9, 0, 0), Title = "Full Stack Dev Industrial Training 45 Days - Evening", Duration = "45 Days" },
+                new Batch { UniqueId = 4, CourseId = 4, BatchFee = 10000, TrainerId = 3, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 1, 24, 9, 0, 0), Title = "Cyber Security 45 Days", Duration = "45 Days" },
+                new Batch { UniqueId = 5, CourseId = 5, BatchFee = 12000, TrainerId = 4, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 4, 4, 9, 0, 0), Title = "Game Development 45 Days", Duration = "45 Days" },
+                new Batch { UniqueId = 6, CourseId = 6, BatchFee = 12000, TrainerId = 4, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 5, 1, 10, 0, 0), Title = "App Development 45 Days", Duration = "45 Days" },
+                new Batch { UniqueId = 7, CourseId = 7, BatchFee = 8000, TrainerId = 2, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 6, 1, 9, 0, 0), Title = "Networking Class 45 Days", Duration= "45 Days" },
+                new Batch { UniqueId = 8, CourseId = 8, BatchFee = 5000, TrainerId = 3, CreatedDate = new DateTime(2025, 12, 24), StartDateTime = new DateTime(2025, 7, 1, 10, 0, 0), Title = "Other Courses", Duration =" 30 Days"}
+            );
         }
     }
 }

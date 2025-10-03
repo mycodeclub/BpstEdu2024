@@ -22,7 +22,9 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstName)
                             </th>
-
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                         </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Email)
                             </th>
@@ -32,13 +34,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.PhoneNumber)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Address)
-                            </th>
 
-                            <th>
-                                @Html.DisplayNameFor(model => model.CourseOfInterest)
-                            </th>
 
                             <th>Action</th>
                         </tr>
@@ -62,19 +58,15 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Address)
-                                </td>
+                              
 
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CourseOfInterest.Name)
-                                </td>
+                               
 
                                 <td>
                                     <a asp-action="Create" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
                                     <a asp-action="Details" asp-route-id="@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
-                                    <a asp-action="Delete" asp-route-id="@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>  |
                                     <a asp-action="Index" asp-controller="StudentFee" asp-route-id="@item.UniqueId">Fee</a>
                                 </td>
                             </tr>

@@ -32,13 +32,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var b in Model.OrderBy(b=>b.RemaningDays))
+                            @foreach (var b in Model.OrderBy(b=>b.RemainingDays))
                             {
                                 <tr>
                                     <td>@b.Course.Name</td>
                                     <td>@b.StartDateTime.ToString("dd-MMM-yyyy")</td>
                                     <td>@b.StartDateTime.ToString("hh:mm:tt")</td>
-                                    <td>@b.RemaningDays </td>
+                                    <td>@b.RemainingDays </td>
                                     <td>@b.Students.Count() </td>
                                 </tr>
                             }
