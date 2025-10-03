@@ -23,11 +23,19 @@ namespace BpstEducation.NewModels
         public DateTime AppliedOn { get; set; }
         [NotMapped]
         public int NumberOfDays { get { return (AppliedOn - DateTime.Now).Days; } }
-        [Required]
+
+        [Required(ErrorMessage = "Mobile number is required")]
+        [RegularExpression(@"^[6-9]\d{9}$", ErrorMessage = "Enter a valid 10-digit mobile number")]
+        [Display(Name = "Mobile Number")]
         public string MobileNumber { get; set; } = string.Empty;
+
         public string HRComment { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Enter a valid email address")]
+        [Display(Name = "Email ID")]
         public string EmailId { get; set; } = string.Empty;
+
         public string CollegeName { get; set; } = string.Empty;
 
         public string HighestQualification { get; set; } = string.Empty;

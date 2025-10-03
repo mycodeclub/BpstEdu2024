@@ -108,6 +108,16 @@
                         </ul>
                     </li>
 
+
+                    @if (activeTabName.Equals("Students")) { activeTab = "active"; } else { activeTab = string.Empty; }
+
+                    <li class="@activeTab"><a href="/Admin/Students/Index"><i class="fa fa-user"></i>All Students </a></li>
+
+
+
+
+
+
                     @if (activeTabName.Equals("Employees")) { activeTab = "active"; } else { activeTab = string.Empty; }
 
                     <li class="@activeTab"><a href="/Admin/Employees/Index"><i class="fa fa-user"></i>Employees </a></li>

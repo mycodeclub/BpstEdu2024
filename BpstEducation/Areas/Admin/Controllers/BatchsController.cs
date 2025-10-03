@@ -21,10 +21,9 @@ namespace BpstEducation.Areas.Admin.Controllers
         // GET: Admin/Batche
         public async Task<IActionResult> Index()
         {
-            var batchs = await _context.Batchs.Include(b => b.Course).Include(b => b.Trainer).ToListAsync();
+            var batchs = await _context.Batchs.Include(b => b.Course).Include(b => b.Trainer).Include(b => b.Students).ToListAsync();
             return View(batchs);
         }
-
         // GET: Admin/Batche/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -1,0 +1,79 @@
+﻿@using System.Globalization
+@model IEnumerable<BpstEducation.Models.Batch>
+
+@{
+    int sno = 0;
+    CultureInfo indianCulture = new CultureInfo("hi-IN");
+}
+
+<link href="~/admintemp/dist/plugins/datatables/css/datatables.bootstrap.min.css" rel="stylesheet" />
+
+<div class="table table-responsive table-hover">
+    <table class="table" id="example1">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th style="text-align:center">Course</th>
+                <th>Starting From</th>
+                <th>Timing</th>
+                <th>Remaining Days</th>
+                <th style="text-align:center">Students</th>
+                <th>Fee</th>
+                <th style="text-align:right">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var b in Model)
+                {
+                    sno++;
+                    <tr>
+                        <td>@sno</td>
+                        <td>@b.Course?.Name</td>   @* safe null check *@
+                        <td>@b.StartDateTime.ToString("dd-MMM-yyyy")</td>
+                        <td>@b.StartDateTime.ToString("hh:mm tt")</td>
+                        <td>@b.RemainingDays</td>
+                        <td style="text-align:center">
+                            @if (b.Students != null && b.Students.Any())
+                            {
+                                <a asp-controller="Students" asp-action="Index" asp-route-batchId="@b.UniqueId">
+                                    @b.Students.Count()
+                                </a>
+                            }
+                            else
+                            {
+                                
+                            }
+                        </td>
+                        <td>
+                            @b.BatchFee.ToString("C", indianCulture)
+                        </td>
+                        <td style="text-align:center">
+                            <a asp-action="Details" asp-route-id="@b.UniqueId" title="Details">
+                                <i class="fa fa-eye text-success"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center text-muted">No batches found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/admintemp/dist/plugins/datatables/jquery.datatables.min.js"></script>
+    <script src="~/admintemp/dist/plugins/datatables/datatables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example1').DataTable();
+        });
+    </script>
+}
+

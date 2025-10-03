@@ -17,41 +17,7 @@
                 <a asp-action="Create" class="btn btn-primary btn-sm">New Batch</a>
             </div>
 
-            <div class="table-responsive">
-                <table class="table" id="example1">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>S. No.</th>
-                            @* <th>@Html.DisplayNameFor(model => model.Course.UniqueId)</th>
-                            *@
-                            <th>@Html.DisplayNameFor(model => model.Title)</th>
-                            <th>@Html.DisplayNameFor(model => model.Duration)</th>
-                            <th>@Html.DisplayNameFor(model => model.StartDateTime)</th>
-                            <th>@Html.DisplayNameFor(model => model.BatchFee)</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            sno++;
-                            <tr>
-                                <td>@sno .</td>
-                                @*  <td>@Html.DisplayFor(modelItem => item.Course.UniqueId)</td> *@
-                                <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Duration)</td>
-                                <td>@Html.DisplayFor(modelItem => item.StartDateTime, "{0:dd/MM/yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.BatchFee, "{0:C}")</td>
-                                <td>
-                                    <a asp-action="Create" asp-route-id="@item.UniqueId" title="Edit"><i class="fa fa-pencil text-secondary"></i></a> |
-                                    <a asp-action="Details" asp-route-id="@item.UniqueId" title="Details"><i class="fa fa-eye text-success"></i></a> |
-                                    <a asp-action="Delete" asp-route-id="@item.UniqueId" title="Delete"><i class="fa fa-trash text-danger"></i></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+            @await Html.PartialAsync("_BatchListPartial", Model)
         </div>
     </div>
 </div>

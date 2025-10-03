@@ -1,0 +1,145 @@
+﻿@model List< BpstEducation.Models.BatchStudent>
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+    ViewBag.ActiveTabName = "Students";
+    var student = Model.FirstOrDefault().Student;
+    int sNo = 0;
+}
+<script src="~/appjs/common.js"></script>
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <h2>Students Details</h2>
+            <div class="content">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Name </label>
+                                <p class="">@student.FullName  </p>
+                            </div>
+
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3  col-xl-2">
+                                <label class="text-bold"> Email Id </label>
+                                <p class="">@student.Email  </p>
+                            </div>
+
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3  col-xl-2">
+                                <label class="text-bold"> Phone </label>
+                                <p class="">@student.PhoneNumber  </p>
+                            </div>
+
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3  col-xl-2">
+                                <label class="text-bold"> PAN </label>
+                                <p class="">@student.Pan  </p>
+                            </div>
+
+                            <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                <label class="text-bold"> Aadhar </label>
+                                <p class="">@student.  </p>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label class="text-bold"> Full Address </label>
+                                <p class="">@student.FullAddress  </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-light-blue-gradient"> Batch </div>
+
+                    @foreach (var bs in Model)
+                    {
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group  col-sm-6 col-md-4">
+                                    <label class="text-bold"> Course </label>
+                                    <p class=""> @bs.Batch.Course.Name   </p>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                    <label class="text-bold"> Duration </label>
+                                    <p class=""> @bs.Batch.Duration   </p>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                    <label class="text-bold"> Start Date </label>
+                                    <p class=""> @bs.Batch.StartDateTime.ToString("dd-MMM-yyyy")   </p>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                    <label class="text-bold"> Timing </label>
+                                    <p class=""> @bs.Batch.StartDateTime.ToString("hh:mm:tt")   </p>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-6 col-lg-3 col-xl-2">
+                                    <label class="text-bold"> Batch Fee </label>
+                                    <p class=""> @bs.Batch.BatchFee   </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header bg-gray-light">
+                            Fees
+                            @* <button type="button" class="btn btn-sm btn-outline-primary  pull-right" data-toggle="modal" data-target="#FeeModalPopUp" onclick="common.loadFeePartial(@Model.FirstOrDefault().BatchId,@Model.FirstOrDefault().StudentId)">Pay Fees </button> *@         
+                                <a href="/staff/FeeSubmission/create/?batchId=@Model.FirstOrDefault().BatchId&studentId=@Model.FirstOrDefault().StudentId" class="btn btn-sm btn-outline-primary  pull-right">Pay Fees </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> S. No. </th>
+                                            <th> Description</th>
+                                            <th>  Amount</th>
+                                            <th> Date </th>
+                                        </tr>
+                                    </thead>
+                                    @{
+                                        sNo = 0;
+                                    }
+                                    @foreach (var fee in bs.SubmittedFeeList)
+                                    {
+                                        sNo = sNo + 1;
+                                        <tr>
+                                            <td> @sNo .    </td>
+                                            <td> @fee.Description </td>
+                                            <td> @fee.SubmittedFeeAmount </td>
+                                            <td> @fee.FeeSubmittingDate </td>
+                                        </tr>
+                                    }
+                                    <tfoot>
+                                        <tr><th colspan="4" class="box-gradient-1"></th></tr>
+                                        <tr>
+                                            <th>Total Fees </th>
+                                            <th> @bs.TotalFees </th>
+                                            <th>Discount <i>(if any )</i> </th>
+                                            <th> @bs.DiscountedFeeAmount </th>
+                                        </tr>
+                                        <tr>
+                                            <th>  Submitted Till Now</th>
+                                            <th> @bs.SubmittedFeeList.Sum(f => f.SubmittedFeeAmount) </th>
+                                            <th> </th>
+                                            <th> </th>
+                                        </tr>
+                                        <tr>
+                                            <th> Remaining </th>
+                                            <th> @bs.RemainingFees </th>
+                                            <th> </th>
+                                            <th> </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="FeeModalPopUp" tabindex="-1" role="dialog" aria-labelledby="FeeModalPopUpLabel" aria-hidden="true"> </div>
+
+
+
+
+
